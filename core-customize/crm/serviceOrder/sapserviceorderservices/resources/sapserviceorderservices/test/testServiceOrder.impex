@@ -1,0 +1,8 @@
+REMOVE ServiceOrder[ batchmode=true];itemtype (code)[unique=true]
+;ServiceOrder
+
+INSERT_UPDATE ServiceOrder;code[unique=true];user(uid);date[dateformat=dd.MM.yyyy HH:mm];currency(isocode);
+;test;serviceorderuser@sap.com;19.03.2016 15:10;USD;
+
+
+

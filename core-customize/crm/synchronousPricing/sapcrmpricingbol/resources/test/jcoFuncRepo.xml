@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Repository>
+    <RepositoryVersion>1.0.0</RepositoryVersion>
+    <Functions>
+        <Function functionName="SPE_CALCULATE_PRICE" executionOrder="1">
+            <Import>
+                <Structure name="IS_HEADER_INPUT" description="Pricing header level Input">
+                    <Element name="DOCUMENT_ID" description="Pricing Document GUID" fieldType="BYTE" maxLength="16">AAAAAAAAAAAAAAAAAAAAAA==</Element>
+                    <Element name="APPLICATION" description="Application" fieldType="CHAR" maxLength="3"></Element>
+                    <Element name="PRC_PROCEDURE_NAME" description="Pricing Procedure" fieldType="CHAR" maxLength="6"></Element>
+                    <Element name="DOCUMENT_CURRENCY_UNIT" description="Document Currency of Price Determination" fieldType="CHAR" maxLength="5"></Element>
+                    <Element name="LOCAL_CURRENCY_UNIT" description="Local Currency" fieldType="CHAR" maxLength="5"></Element>
+                    <Element name="SIMULATION_MODE" description="Condition Finding Simulation" fieldType="CHAR" maxLength="1"></Element>
+                    <Table tableName="/SAPCND/DET_ATTRIB_VALUES_T" name="ATTRIBUTES">
+                        <LineType name="/SAPCND/DET_ATTRIB_VALUES">
+                            <ElementMetaData name="FIELDNAME" description="Field name" fieldType="CHAR" maxLength="30"/>
+                            <TableMetaData name="VALUES">
+                                <LineType name="/SAPCND/DET_VALUE">
+                                    <ElementMetaData name="" description="Value of Field in VAKEY/VADAT" fieldType="CHAR" maxLength="50"/>
+                                </LineType>
+                            </TableMetaData>
+                        </LineType>
+                    </Table>
+                    <Element name="PERFORM_TRACE" description="Checkbox" fieldType="CHAR" maxLength="1"></Element>
+                </Structure>
+                <Table tableName="PRIT_ITEM_ADDNL_INPUT_T" name="IT_ITEM_ADDNL_INPUT">
+                    <LineType name="PRIT_ITEM_ADDNL_INPUT">
+                        <ElementMetaData name="ITEM_ID" description="Item Number" fieldType="BYTE" maxLength="16"/>
+                        <ElementMetaData name="DAYS_PER_MONTH" description="No. of Days Per Month" fieldType="INT2" maxLength="2"/>
+                        <ElementMetaData name="DAYS_PER_YEAR" description="No. of Days Per Year" fieldType="INT2" maxLength="2"/>
+                        <TableMetaData name="HOLIDAYS">
+                            <LineType>
+                                <ElementMetaData name="" fieldType="DATE" maxLength="8"/>
+                            </LineType>
+                        </TableMetaData>
+                        <TableMetaData name="VARIANT_CONDITIONS">
+                            <LineType name="PRIT_VARIANT_CONDITION">
+                                <ElementMetaData name="KEY" description="Key for Variant Condition" fieldType="CHAR" maxLength="26"/>
+                                <ElementMetaData name="FACTOR" description="Correction Factor of Variant Condition" fieldType="FLOAT" maxLength="8" BCD-Decimals="16"/>
+                                <ElementMetaData name="DESCRIPTION" description="Text for a Variant Condition" fieldType="CHAR" maxLength="50"/>
+                            </LineType>
+                        </TableMetaData>
+                    </LineType>
+                </Table>
+            </Import>
+            <Export>
+                <Structure name="ES_HEADER_RESULT" description="Return Values from Pricing at Header Level">
+                    <Element name="DOCUMENT_CURRENCY_UNIT" description="Document Currency of Price Determination" fieldType="CHAR" maxLength="5"></Element>
+                    <Element name="NET_VALUE" description="Net Value" fieldType="BCD" BCD-Decimals="9">0E-9</Element>
+                    <Element name="GROSS_VALUE" description="Gross Value" fieldType="BCD" BCD-Decimals="9">0E-9</Element>
+                    <Element name="TAX_VALUE" description="Tax Value" fieldType="BCD" BCD-Decimals="9">0E-9</Element>
+                    <Table tableName="PRIT_SUBTOTAL_T" name="SUBTOTAL">
+                        <LineType name="PRIT_SUBTOTAL">
+                            <ElementMetaData name="FLAG" description="Condition Subtotal" fieldType="CHAR" maxLength="1"/>
+                            <ElementMetaData name="VALUE" description="Subtotal Value" fieldType="BCD" maxLength="15" BCD-Decimals="9"/>
+                        </LineType>
+                    </Table>
+                    <Element name="FREIGHT" description="Freight Value" fieldType="BCD" BCD-Decimals="9">0E-9</Element>
+                    <Element name="NET_VALUE_FREIGHTLESS" description="Net Value Without Freight" fieldType="BCD" BCD-Decimals="9">0E-9</Element>
+                </Structure>
+                <Table tableName="PRIT_ITEM_ADDNL_RESULT_T" name="ET_ITEM_CALC_ADDNL_RESULT">
+                    <LineType name="PRIT_ITEM_ADDNL_RESULT">
+                        <ElementMetaData name="ITEM_ID" description="Item Number" fieldType="BYTE" maxLength="16"/>
+                        <TableMetaData name="SUBTOTAL">
+                            <LineType name="PRIT_SUBTOTAL">
+                                <ElementMetaData name="FLAG" description="Condition Subtotal" fieldType="CHAR" maxLength="1"/>
+                                <ElementMetaData name="VALUE" description="Subtotal Value" fieldType="BCD" maxLength="15" BCD-Decimals="9"/>
+                            </LineType>
+                        </TableMetaData>
+                        <TableMetaData name="COND_FUNCTION">
+                            <LineType name="PRCT_COND_FUNCTION">
+                                <ElementMetaData name="DESTINATION" description="Target Field Name in Return Structure for Cumulation" fieldType="CHAR" maxLength="30"/>
+                                <ElementMetaData name="VALUE" description="Price Determination: Condition Value" fieldType="BCD" maxLength="8" BCD-Decimals="2"/>
+                            </LineType>
+                        </TableMetaData>
+                        <TableMetaData name="DYNAMIC_RETURN">
+                            <LineType name="PRCT_ATTR_NAME_VALUE">
+                                <ElementMetaData name="ATTR_NAME" description="Attribute Name for IPC Pricing" fieldType="CHAR" maxLength="30"/>
+                                <ElementMetaData name="SEQ_NUMBER" description="Sequence Number of Given Attribute" fieldType="NUM" maxLength="2"/>
+                                <ElementMetaData name="ATTR_VALUE" description="Attribut Value for IPC Pricing" fieldType="CHAR" maxLength="50"/>
+                            </LineType>
+                        </TableMetaData>
+                    </LineType>
+                </Table>
+                <Table tableName="PRIT_ITEM_TRACE_T" name="ET_TRACE">
+                    <LineType name="PRIT_ITEM_TRACE">
+                        <ElementMetaData name="ITEM_ID" description="Item Number" fieldType="BYTE" maxLength="16"/>
+                        <ElementMetaData name="ACCESS_TRACE_XML" description="An XML String" fieldType="STRING"/>
+                    </LineType>
+                </Table>
+            </Export>
+            <Tables>
+                <Table tableName="PRIT_COND_ADDNL_RESULT_T" name="ET_COND_ADDNL_RESULT">
+                    <LineType name="PRIT_COND_ADDNL_RESULT">
+                        <ElementMetaData name="ITEM_ID" description="Item Number" fieldType="BYTE" maxLength="16"/>
+                        <ElementMetaData name="STEP_NUMBER" description="Level Number" fieldType="NUM" maxLength="3"/>
+                        <ElementMetaData name="COND_COUNTER" description="Condition Counter" fieldType="NUM" maxLength="3"/>
+                        <ElementMetaData name="COND_TYPE" description="Condition Type" fieldType="CHAR" maxLength="4"/>
+                        <ElementMetaData name="COND_TYPE_DESCR" description="Description of condition" fieldType="CHAR" maxLength="40"/>
+                        <ElementMetaData name="PURPOSE" description="Condition Function" fieldType="CHAR" maxLength="4"/>
+                        <ElementMetaData name="COND_RATE" description="Condition Rate" fieldType="BCD" maxLength="15" BCD-Decimals="9"/>
+                        <ElementMetaData name="COND_CURRENCY" description="Condition Currency" fieldType="CHAR" maxLength="5"/>
+                        <ElementMetaData name="COND_UNIT_VALUE" description="Condition Pricing Unit" fieldType="BCD" maxLength="3"/>
+                        <ElementMetaData name="COND_UNIT" description="Condition Unit" fieldType="CHAR" maxLength="3"/>
+                        <ElementMetaData name="COND_VALUE" description="Condition Value" fieldType="BCD" maxLength="15" BCD-Decimals="9"/>
+                        <ElementMetaData name="STATISTICAL" description="Condition is Statistical" fieldType="CHAR" maxLength="1"/>
+                        <ElementMetaData name="CALC_TYPE" description="Calculation Type for Condition" fieldType="CHAR" maxLength="3"/>
+                        <ElementMetaData name="VARCOND_FLAG" description="Condition for Configuration" fieldType="CHAR" maxLength="1"/>
+                        <ElementMetaData name="VARCOND_KEY" description="Variant Key of a Variant Condition" fieldType="CHAR" maxLength="26"/>
+                        <ElementMetaData name="COND_BASE" description="Condition Base" fieldType="BCD" maxLength="15" BCD-Decimals="9"/>
+                        <ElementMetaData name="COND_INACTIVE" description="Condition is Inactive" fieldType="CHAR" maxLength="1"/>
+                    </LineType>
+                </Table>
+                <Table tableName="PRIT_ITEM_MAIN_RESULT_T" name="ET_ITEM_CALC_MAIN_RESLT">
+                    <LineType name="PRIT_ITEM_MAIN_RESULT">
+                        <ElementMetaData name="ITEM_ID" description="Item Number" fieldType="BYTE" maxLength="16"/>
+                        <ElementMetaData name="DOCUMENT_CURRENCY_UNIT" description="Document Currency of Price Determination" fieldType="CHAR" maxLength="5"/>
+                        <ElementMetaData name="NET_VALUE" description="Net Value" fieldType="BCD" maxLength="15" BCD-Decimals="9"/>
+                        <ElementMetaData name="NET_PRICE" description="Net Price" fieldType="BCD" maxLength="15" BCD-Decimals="9"/>
+                        <ElementMetaData name="NET_PRICE_PR_UNIT_VALUE" description="Condition Pricing Unit" fieldType="BCD" maxLength="3"/>
+                        <ElementMetaData name="NET_PRICE_PR_UNIT_NAME" description="Condition Unit" fieldType="CHAR" maxLength="3"/>
+                        <ElementMetaData name="TAX_VALUE" description="Tax Value" fieldType="BCD" maxLength="15" BCD-Decimals="9"/>
+                        <ElementMetaData name="GROSS_VALUE" description="Gross Value" fieldType="BCD" maxLength="15" BCD-Decimals="9"/>
+                        <ElementMetaData name="GROSS_VALUE_FROM_SUBTOTAL" description="Gross Value" fieldType="BCD" maxLength="15" BCD-Decimals="9"/>
+                        <ElementMetaData name="FREIGHT" description="Freight Value" fieldType="BCD" maxLength="15" BCD-Decimals="9"/>
+                        <ElementMetaData name="NET_VALUE_FREIGHTLESS" description="Net Value Without Freight" fieldType="BCD" maxLength="15" BCD-Decimals="9"/>
+                        <ElementMetaData name="CASH_DISCOUNT_BASIS" description="Cash Discount Base" fieldType="BCD" maxLength="15" BCD-Decimals="9"/>
+                        <ElementMetaData name="CASH_DISCOUNT_VALUE" description="Cash Discount Value" fieldType="BCD" maxLength="15" BCD-Decimals="9"/>
+                    </LineType>
+                </Table>
+                <Table tableName="PRIT_MESSAGE_T" name="ET_MESSAGES">
+                    <LineType name="PRIT_MESSAGE">
+                        <ElementMetaData name="OBJECT" description="General Object" fieldType="BYTE" maxLength="16"/>
+                        <ElementMetaData name="TYPE" description="Message type: S Success, E Error, W Warning, I Info, A Abort" fieldType="CHAR" maxLength="1"/>
+                        <ElementMetaData name="ID" description="Message Class" fieldType="CHAR" maxLength="20"/>
+                        <ElementMetaData name="NUMBER" description="Message Number" fieldType="NUM" maxLength="3"/>
+                        <ElementMetaData name="MESSAGE" description="Message Text" fieldType="CHAR" maxLength="220"/>
+                        <ElementMetaData name="LOG_NO" description="Application Log: Log Number" fieldType="CHAR" maxLength="20"/>
+                        <ElementMetaData name="LOG_MSG_NO" description="Application log: Internal message serial number" fieldType="NUM" maxLength="6"/>
+                        <ElementMetaData name="MESSAGE_V1" description="Message Variable" fieldType="CHAR" maxLength="50"/>
+                        <ElementMetaData name="MESSAGE_V2" description="Message Variable" fieldType="CHAR" maxLength="50"/>
+                        <ElementMetaData name="MESSAGE_V3" description="Message Variable" fieldType="CHAR" maxLength="50"/>
+                        <ElementMetaData name="MESSAGE_V4" description="Message Variable" fieldType="CHAR" maxLength="50"/>
+                        <ElementMetaData name="PARAMETER" description="Parameter Name" fieldType="CHAR" maxLength="32"/>
+                        <ElementMetaData name="ROW" description="Lines in parameter" fieldType="INT" maxLength="4"/>
+                        <ElementMetaData name="FIELD" description="Field in parameter" fieldType="CHAR" maxLength="30"/>
+                        <ElementMetaData name="SYSTEM" description="Logical system from which message originates" fieldType="CHAR" maxLength="10"/>
+                    </LineType>
+                </Table>
+                <Table tableName="PRIT_ITEM_ATTRIBUTE_T" name="IT_ITEM_ATTRIB_INPUT">
+                    <LineType name="PRIT_ITEM_ATTRIBUTE">
+                        <ElementMetaData name="ITEM_ID" description="Item Number" fieldType="BYTE" maxLength="16"/>
+                        <ElementMetaData name="FIELDNAME" description="Field name" fieldType="CHAR" maxLength="30"/>
+                        <ElementMetaData name="FIELDVALUE" description="Value of Field in VAKEY/VADAT" fieldType="CHAR" maxLength="50"/>
+                    </LineType>
+                </Table>
+                <Table tableName="PRIT_ITEM_MAIN_INPUT_T" name="IT_ITEM_MAIN_INPUT">
+                    <LineType name="PRIT_ITEM_MAIN_INPUT">
+                        <ElementMetaData name="ITEM_ID" description="Item Number" fieldType="BYTE" maxLength="16"/>
+                        <ElementMetaData name="ITEM_ID_EXT" description="External Item Number" fieldType="NUM" maxLength="10"/>
+                        <ElementMetaData name="PARENT_ITEM_ID" description="Item Number" fieldType="BYTE" maxLength="16"/>
+                        <ElementMetaData name="PRODUCT_ID" description="Product GUID" fieldType="BYTE" maxLength="16"/>
+                        <ElementMetaData name="PRODUCT_ERP" description="Product number in ERP systems" fieldType="CHAR" maxLength="18"/>
+                        <ElementMetaData name="EXCH_RATE_TYPE" description="Exchange Rate Type" fieldType="CHAR" maxLength="4"/>
+                        <ElementMetaData name="EXCH_RATE_DATE" description="Exchange Rate Date" fieldType="DATE" maxLength="8"/>
+                        <ElementMetaData name="EXCH_RATE_EXTERNAL" description="Exchange Rate" fieldType="BCD" maxLength="5" BCD-Decimals="5"/>
+                        <ElementMetaData name="QUANTITY" description="Quantity" fieldType="BCD" maxLength="15" BCD-Decimals="9"/>
+                        <ElementMetaData name="QUANTITY_UNIT" description="Quantity Unit" fieldType="CHAR" maxLength="3"/>
+                        <ElementMetaData name="NUMERATOR" description="Numerator for Conversion into Base Quantity Unit" fieldType="INT" maxLength="4"/>
+                        <ElementMetaData name="DENOMINATOR" description="Denominator for Conversion into Base Quantity Unit" fieldType="INT" maxLength="4"/>
+                        <ElementMetaData name="EXPONENT" description="Exponent for Conversion into Base Quantity Unit" fieldType="INT2" maxLength="2"/>
+                        <ElementMetaData name="GROSS_WEIGHT" description="Gross Weight" fieldType="BCD" maxLength="15" BCD-Decimals="9"/>
+                        <ElementMetaData name="NET_WEIGHT" description="Net Weight" fieldType="BCD" maxLength="15" BCD-Decimals="9"/>
+                        <ElementMetaData name="WEIGHT_UNIT" description="Unit of Weight" fieldType="CHAR" maxLength="3"/>
+                        <ElementMetaData name="VOLUME" description="Volume" fieldType="BCD" maxLength="15" BCD-Decimals="9"/>
+                        <ElementMetaData name="VOLUME_UNIT" description="Volume Unit" fieldType="CHAR" maxLength="3"/>
+                        <ElementMetaData name="POINTS" description="Volume" fieldType="BCD" maxLength="15" BCD-Decimals="9"/>
+                        <ElementMetaData name="POINTS_UNIT" description="Volume Unit" fieldType="CHAR" maxLength="3"/>
+                        <ElementMetaData name="DATE_FROM_BASE" description="a single day" fieldType="DATE" maxLength="8"/>
+                        <ElementMetaData name="DATE_TO_BASE" description="a single day" fieldType="DATE" maxLength="8"/>
+                        <ElementMetaData name="NUM_OF_DAYS_BASE" description="Number of days" fieldType="FLOAT" maxLength="8" BCD-Decimals="16"/>
+                        <ElementMetaData name="NUM_OF_WEEKS_BASE" description="Number of weeks" fieldType="FLOAT" maxLength="8" BCD-Decimals="16"/>
+                        <ElementMetaData name="NUM_OF_MONTHS_BASE" description="number months" fieldType="FLOAT" maxLength="8" BCD-Decimals="16"/>
+                        <ElementMetaData name="NUM_OF_YEARS_BASE" description="Number of years" fieldType="FLOAT" maxLength="8" BCD-Decimals="16"/>
+                        <ElementMetaData name="DATE_FROM_SCALE" description="a single day" fieldType="DATE" maxLength="8"/>
+                        <ElementMetaData name="DATE_TO_SCALE" description="a single day" fieldType="DATE" maxLength="8"/>
+                        <ElementMetaData name="NUM_OF_DAYS_SCALE" description="Number of days" fieldType="FLOAT" maxLength="8" BCD-Decimals="16"/>
+                        <ElementMetaData name="NUM_OF_WEEKS_SCALE" description="Number of weeks" fieldType="FLOAT" maxLength="8" BCD-Decimals="16"/>
+                        <ElementMetaData name="NUM_OF_MONTHS_SCALE" description="number months" fieldType="FLOAT" maxLength="8" BCD-Decimals="16"/>
+                        <ElementMetaData name="NUM_OF_YEARS_SCALE" description="Number of years" fieldType="FLOAT" maxLength="8" BCD-Decimals="16"/>
+                    </LineType>
+                </Table>
+                <Table tableName="PRIT_ITEM_TIMESTAMP_T" name="IT_ITEM_TIMESTMP_INPUT">
+                    <LineType name="PRIT_ITEM_TIMESTAMP">
+                        <ElementMetaData name="ITEM_ID" description="Item Number" fieldType="BYTE" maxLength="16"/>
+                        <ElementMetaData name="FIELDNAME" description="Field Name for Determining Access Date" fieldType="CHAR" maxLength="30"/>
+                        <ElementMetaData name="TIMESTAMP" description="Time Stamp" fieldType="CHAR" maxLength="14"/>
+                    </LineType>
+                </Table>
+                <Table tableName="PRIT_COND_INPUT_T" name="IT_MANUAL_COND_INPUT">
+                    <LineType name="PRIT_COND_INPUT">
+                        <ElementMetaData name="ITEM_ID" description="Item Number" fieldType="BYTE" maxLength="16"/>
+                        <ElementMetaData name="COND_TYPE" description="Pricing - Condition Type" fieldType="CHAR" maxLength="4"/>
+                        <ElementMetaData name="COND_RATE" description="Condition Rate" fieldType="BCD" maxLength="15" BCD-Decimals="9"/>
+                        <ElementMetaData name="COND_CURRENCY" description="Condition Currency" fieldType="CHAR" maxLength="5"/>
+                        <ElementMetaData name="COND_UNIT_VALUE" description="Condition Pricing Unit" fieldType="BCD" maxLength="3"/>
+                        <ElementMetaData name="COND_UNIT" description="Condition Unit" fieldType="CHAR" maxLength="3"/>
+                        <ElementMetaData name="CALC_TYPE" description="Calculation Type for Condition" fieldType="CHAR" maxLength="3"/>
+                    </LineType>
+                </Table>
+            </Tables>
+        </Function>
+    </Functions>
+</Repository>

@@ -1,0 +1,56 @@
+INSERT_UPDATE IntegrationObject; code[unique = true]; 
+; OutboundReturnOrder 
+ 
+INSERT_UPDATE IntegrationObjectItem; integrationObject(code)[unique=true]; code[unique = true]; type(code) 
+; OutboundReturnOrder	; SAPCpiOutboundReturnOrderEntry         	; SAPCpiOutboundReturnOrderEntry 
+; OutboundReturnOrder	; SAPCpiOutboundReturnOrderEntryCondition	; SAPCpiOutboundReturnOrderEntryCondition 
+; OutboundReturnOrder	; SAPCpiOutboundReturnOrderConfig        	; SAPCpiOutboundReturnOrderConfig 
+; OutboundReturnOrder	; SAPCpiOutboundReturnOrder              	; SAPCpiOutboundReturnOrder 
+ 
+INSERT_UPDATE IntegrationObjectItemAttribute; integrationObjectItem(integrationObject(code), code)[unique = true]; attributeName[unique = true]; attributeDescriptor(enclosingType(code), qualifier); returnIntegrationObjectItem(integrationObject(code), code); unique[default = false] 
+; OutboundReturnOrder:SAPCpiOutboundReturnOrderEntry         	; productDescription                      	; SAPCpiOutboundReturnOrderEntry:productDescription                      	;                                                            	;  
+; OutboundReturnOrder:SAPCpiOutboundReturnOrderEntry         	; itemNumber                              	; SAPCpiOutboundReturnOrderEntry:itemNumber                              	;                                                            	;  
+; OutboundReturnOrder:SAPCpiOutboundReturnOrderEntry         	; productId                               	; SAPCpiOutboundReturnOrderEntry:productId                               	;                                                            	; true 
+; OutboundReturnOrder:SAPCpiOutboundReturnOrderEntry         	; rejectionReason                         	; SAPCpiOutboundReturnOrderEntry:rejectionReason                         	;                                                            	;  
+; OutboundReturnOrder:SAPCpiOutboundReturnOrderEntry         	; orderedProduct                          	; SAPCpiOutboundReturnOrderEntry:orderedProduct                          	;                                                            	;  
+; OutboundReturnOrder:SAPCpiOutboundReturnOrderEntry         	; processQtyInitIso                       	; SAPCpiOutboundReturnOrderEntry:processQtyInitIso                       	;                                                            	;  
+; OutboundReturnOrder:SAPCpiOutboundReturnOrderEntry         	; defectQuantity                          	; SAPCpiOutboundReturnOrderEntry:defectQuantity                          	;                                                            	;  
+; OutboundReturnOrder:SAPCpiOutboundReturnOrderEntry         	; sapCpiOutboundReturnOrderEntryConditions	; SAPCpiOutboundReturnOrderEntry:sapCpiOutboundReturnOrderEntryConditions	; OutboundReturnOrder:SAPCpiOutboundReturnOrderEntryCondition	;  
+; OutboundReturnOrder:SAPCpiOutboundReturnOrderEntryCondition	; conditionCode                           	; SAPCpiOutboundReturnOrderEntryCondition:conditionCode                  	;                                                            	; true 
+; OutboundReturnOrder:SAPCpiOutboundReturnOrderEntryCondition	; conditionValue                          	; SAPCpiOutboundReturnOrderEntryCondition:conditionValue                 	;                                                            	;  
+; OutboundReturnOrder:SAPCpiOutboundReturnOrderEntryCondition	; conditionCurrencyIsoCode                	; SAPCpiOutboundReturnOrderEntryCondition:conditionCurrencyIsoCode       	;                                                            	;  
+; OutboundReturnOrder:SAPCpiOutboundReturnOrderConfig        	; distributionChannel                     	; SAPCpiOutboundReturnOrderConfig:distributionChannel                    	;                                                            	;  
+; OutboundReturnOrder:SAPCpiOutboundReturnOrderConfig        	; salesOrg                                	; SAPCpiOutboundReturnOrderConfig:salesOrg                               	;                                                            	; true 
+; OutboundReturnOrder:SAPCpiOutboundReturnOrderConfig        	; userName                                	; SAPCpiOutboundReturnOrderConfig:userName                               	;                                                            	;  
+; OutboundReturnOrder:SAPCpiOutboundReturnOrderConfig        	; senderName                              	; SAPCpiOutboundReturnOrderConfig:senderName                             	;                                                            	;  
+; OutboundReturnOrder:SAPCpiOutboundReturnOrderConfig        	; senderPort                              	; SAPCpiOutboundReturnOrderConfig:senderPort                             	;                                                            	;  
+; OutboundReturnOrder:SAPCpiOutboundReturnOrderConfig        	; serviceOrg                              	; SAPCpiOutboundReturnOrderConfig:serviceOrg                             	;                                                            	;  
+; OutboundReturnOrder:SAPCpiOutboundReturnOrderConfig        	; receiverName                            	; SAPCpiOutboundReturnOrderConfig:receiverName                           	;                                                            	;  
+; OutboundReturnOrder:SAPCpiOutboundReturnOrderConfig        	; serviceOrgResp                          	; SAPCpiOutboundReturnOrderConfig:serviceOrgResp                         	;                                                            	;  
+; OutboundReturnOrder:SAPCpiOutboundReturnOrderConfig        	; servOrgShort                            	; SAPCpiOutboundReturnOrderConfig:servOrgShort                           	;                                                            	;  
+; OutboundReturnOrder:SAPCpiOutboundReturnOrderConfig        	; url                                     	; SAPCpiOutboundReturnOrderConfig:url                                    	;                                                            	;  
+; OutboundReturnOrder:SAPCpiOutboundReturnOrderConfig        	; client                                  	; SAPCpiOutboundReturnOrderConfig:client                                 	;                                                            	;  
+; OutboundReturnOrder:SAPCpiOutboundReturnOrderConfig        	; salesOrgResp                            	; SAPCpiOutboundReturnOrderConfig:salesOrgResp                           	;                                                            	; true 
+; OutboundReturnOrder:SAPCpiOutboundReturnOrderConfig        	; processType                             	; SAPCpiOutboundReturnOrderConfig:processType                            	;                                                            	;  
+; OutboundReturnOrder:SAPCpiOutboundReturnOrderConfig        	; receiverPort                            	; SAPCpiOutboundReturnOrderConfig:receiverPort                           	;                                                            	;  
+; OutboundReturnOrder:SAPCpiOutboundReturnOrder              	; responseStatus                          	; SAPCpiOutboundReturnOrder:responseStatus                               	;                                                            	;  
+; OutboundReturnOrder:SAPCpiOutboundReturnOrder              	; sapCpiOutboundReturnOrderEntries        	; SAPCpiOutboundReturnOrder:sapCpiOutboundReturnOrderEntries             	; OutboundReturnOrder:SAPCpiOutboundReturnOrderEntry         	;  
+; OutboundReturnOrder:SAPCpiOutboundReturnOrder              	; responseMessage                         	; SAPCpiOutboundReturnOrder:responseMessage                              	;                                                            	;  
+; OutboundReturnOrder:SAPCpiOutboundReturnOrder              	; orderId                                 	; SAPCpiOutboundReturnOrder:orderId                                      	;                                                            	;  
+; OutboundReturnOrder:SAPCpiOutboundReturnOrder              	; precedingDocumentId                     	; SAPCpiOutboundReturnOrder:precedingDocumentId                          	;                                                            	; true 
+; OutboundReturnOrder:SAPCpiOutboundReturnOrder              	; b2bUnit                                 	; SAPCpiOutboundReturnOrder:b2bUnit                                      	;                                                            	;  
+; OutboundReturnOrder:SAPCpiOutboundReturnOrder              	; customerId                              	; SAPCpiOutboundReturnOrder:customerId                                   	;                                                            	;  
+; OutboundReturnOrder:SAPCpiOutboundReturnOrder              	; sapCpiConfig                            	; SAPCpiOutboundReturnOrder:sapCpiConfig                                 	; OutboundReturnOrder:SAPCpiOutboundReturnOrderConfig        	;  
+
+
+
+INSERT_UPDATE IntegrationObject; code[unique = true]; 
+; InboundReturnOrder 
+ 
+INSERT_UPDATE IntegrationObjectItem; integrationObject(code)[unique=true]; code[unique = true]; type(code) 
+; InboundReturnOrder	; ReturnRequest	; ReturnRequest 
+ 
+INSERT_UPDATE IntegrationObjectItemAttribute; integrationObjectItem(integrationObject(code), code)[unique = true]; attributeName[unique = true]; attributeDescriptor(enclosingType(code), qualifier); returnIntegrationObjectItem(integrationObject(code), code); unique[default = false] 
+; InboundReturnOrder:ReturnRequest	; code             	; ReturnRequest:code             	;                    	; true 
+; InboundReturnOrder:ReturnRequest	; deliveryDocNumber	; ReturnRequest:deliveryDocNumber	;                    	;  
+; InboundReturnOrder:ReturnRequest	; creditMemoNumber 	; ReturnRequest:creditMemoNumber 	;                    	;  

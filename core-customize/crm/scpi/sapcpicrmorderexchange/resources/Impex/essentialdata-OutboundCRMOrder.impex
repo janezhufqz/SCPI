@@ -1,0 +1,20 @@
+#**************************************************
+#************* Outbound OMM & OMS Order ***********
+#**************************************************
+
+INSERT_UPDATE IntegrationObject; code[unique = true];
+; OutboundOMMOrderOMSOrder
+
+INSERT_UPDATE IntegrationObjectItem; integrationObject(code)[unique=true]; code[unique = true]; type(code)
+; OutboundOMMOrderOMSOrder ; SAPCpiOutboundOrder          ; SAPCpiOutboundOrder
+; OutboundOMMOrderOMSOrder ; SAPCpiOutboundOrderItem      ; SAPCpiOutboundOrderItem
+; OutboundOMMOrderOMSOrder ; SAPCpiOutboundPriceComponent ; SAPCpiOutboundPriceComponent
+; OutboundOMMOrderOMSOrder ; SAPCpiOutboundPartnerRole    ; SAPCpiOutboundPartnerRole
+; OutboundOMMOrderOMSOrder ; SAPCpiOutboundAddress        ; SAPCpiOutboundAddress
+; OutboundOMMOrderOMSOrder ; SAPCpiOutboundCardPayment    ; SAPCpiOutboundCardPayment
+; OutboundOMMOrderOMSOrder ; SAPCpiOutboundConfig         ; SAPCpiOutboundConfig
+
+INSERT_UPDATE IntegrationObjectItemAttribute; integrationObjectItem(integrationObject(code), code)[unique = true]; attributeName[unique = true]; attributeDescriptor(enclosingType(code), qualifier); returnIntegrationObjectItem(integrationObject(code), code); unique[default = false]
+#; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrder          ; namedDeliveryDate         ; SAPCpiOutboundOrder:namedDeliveryDate         ;                                                       ;
+
+

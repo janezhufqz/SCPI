@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- [y] hybris Platform Copyright (c) 2000-2015 hybris AG All rights reserved. 
+	This software is the confidential and proprietary information of hybris ("Confidential 
+	Information"). You shall not disclose such Confidential Information and shall 
+	use it only in accordance with the terms of the license agreement you entered 
+	into with hybris. -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd 
+           http://www.springframework.org/schema/mvc
+		http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+	<context:annotation-config />
+
+
+	<!-- Expose /acceleratoraddon/web/webroot/WEB-INF/messages/base.js.properties 
+		resource bundle as javascript variables -->
+	<bean
+		id="defaultProductregistrationaddonJavaScriptMessageResourceAccessor"
+		parent="abstractJavaScriptMessageResourceAccessor">
+		<property name="addOnName" value="productregistrationaddon" />
+	</bean>
+
+	<bean id="defaultProductregistrationaddonBeforeViewJsPropsHandlerAdaptee"
+		parent="abstractBeforeViewJsPropsHandlerAdaptee"
+		class="de.hybris.platform.addonsupport.interceptors.ExportJsPropertiesBeforeViewHandler">
+		<property name="messageSource"
+			ref="defaultProductregistrationaddonJavaScriptMessageResourceAccessor" />
+	</bean>
+
+	<bean id="getProductregistrationaddonBeforeViewHandler" parent="beforeViewHandlerAdapter">
+		<property name="adaptee">
+			<ref bean="defaultProductregistrationaddonBeforeViewJsPropsHandlerAdaptee" />
+		</property>
+	</bean>
+	<bean id="ProductregistrationaddonBeforeViewHandlerListMergeDirective"
+		depends-on="beforeViewHandlersList" parent="listMergeDirective">
+		<property name="add" ref="getProductregistrationaddonBeforeViewHandler" />
+	</bean>
+
+	<bean name="productRegistrationController"
+		class="com.sap.hybris.productregistrationaddon.controllers.pages.ProductRegistrationPageController" />
+
+	<bean id="registerProductFormValidator"
+		class="com.sap.hybris.productregistrationaddon.forms.validation.RegisterProductFormValidator" />
+		
+	<mvc:interceptors>
+        <mvc:interceptor>
+          <mvc:mapping path="/my-account/registered-products/**"/>
+             <bean id="webContentInterceptor"
+                    class="org.springframework.web.servlet.mvc.WebContentInterceptor">
+                     <property name="cacheSeconds" value="0" />
+                     <property name="useExpiresHeader" value="true" />
+                     <property name="useCacheControlHeader" value="true" />
+                     <property name="useCacheControlNoStore" value="true" />
+              </bean>
+         </mvc:interceptor>
+      </mvc:interceptors>
+</beans>

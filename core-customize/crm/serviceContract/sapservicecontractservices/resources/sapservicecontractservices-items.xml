@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- ~ [y] hybris Platform ~ ~ Copyright (c) 2000-2016 SAP SE ~ All rights 
+	reserved. ~ ~ This software is the confidential and proprietary information 
+	of SAP ~ Hybris ("Confidential Information"). You shall not disclose such 
+	~ Confidential Information and shall use it only in accordance with the ~ 
+	terms of the license agreement you entered into with SAP Hybris. -->
+<!-- ATTENTION: This is just an example file. You have to edit it according 
+	to your needs. -->
+
+<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="items.xsd">
+
+	<enumtypes>
+		<enumtype code="ContractStatus" autocreate="true" generate="true"
+			dynamic="true">
+			<description>Standard status values from backend</description>
+		</enumtype>
+		<enumtype code="ServiceProfile" autocreate="true" generate="true"
+			dynamic="true">
+			<description>Different Service Profiles from CRM</description>
+		</enumtype>
+
+		<enumtype code="ResponseProfile" autocreate="true" generate="true"
+			dynamic="true">
+			<description>Different Response Profiles from CRM</description>
+		</enumtype>
+
+		<enumtype code="ServiceContractBillingPeriod" autocreate="true"
+			generate="true" dynamic="true">
+			<description>Different periods for billing plans</description>
+		</enumtype>
+
+	</enumtypes>
+	<relations>
+		<relation code="ServiceContract2CustomerRel" generate="true"
+			localized="false" autocreate="true">
+			<description>This relation links contract with b2c-customer.
+			</description>
+			<sourceElement qualifier="contract" type="ServiceContract"
+				cardinality="many" collectiontype="list">
+				<modifiers read="true" write="true" search="true"
+					optional="true" />
+			</sourceElement>
+			<targetElement qualifier="customer" type="Customer"
+				cardinality="one">
+				<modifiers read="true" write="true" search="true"
+					optional="true" />
+			</targetElement>
+		</relation>
+
+		<relation code="ServiceContract2ServiceProductRel" generate="true"
+			localized="false" autocreate="true">
+			<description>This relation links contract with service product.
+			</description>
+			<sourceElement qualifier="contract" type="ServiceContract"
+				cardinality="one">
+				<modifiers read="true" write="true" search="true"
+					optional="true" />
+			</sourceElement>
+			<targetElement qualifier="product" type="ServiceProduct"
+				cardinality="many" collectiontype="list">
+				<modifiers read="true" write="true" search="true"
+					optional="true" />
+			</targetElement>
+		</relation>
+
+	</relations>
+
+
+	<itemtypes>
+		<itemtype code="SAPConfiguration" autocreate="false"
+			generate="false">
+			<attributes>
+
+				<attribute qualifier="sapServiceContract_RFCDestination"
+					type="SAPRFCDestination">
+					<description>RFC Destination for Synchronous Service Contract
+					</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="sapServiceContractProcessType" type="java.lang.String">
+					<description>Process Type for Service Contract</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="sapServiceContractNoteType" type="java.lang.String">
+					<description>Process Type of Note to be display on UI</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.Integer" qualifier="maxHits">
+					<persistence type="property" />
+					<description>Max number of contracts to be retrieved</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype code="SAPStatus" extends="GenericItem"
+			jaloclass="com.sap.hybris.crm.contract.jalo.SAPContractStatus"
+			autocreate="true" generate="true">
+			<deployment table="SAPContractStatuses" typecode="8004" />
+			<attributes>
+				<attribute qualifier="description" type="localized:java.lang.String">
+					<persistence type="property" />
+					<modifiers unique="false" optional="true" read="true"
+						write="true" initial="false" search="true" />
+				</attribute>
+				<attribute qualifier="code" type="java.lang.String"
+					autocreate="true">
+					<persistence type="property" />
+					<modifiers unique="true" optional="false" read="true"
+						write="true" initial="false" search="true" />
+				</attribute>
+				<attribute qualifier="statusProfile" type="java.lang.String"
+					autocreate="true">
+					<persistence type="property" />
+					<modifiers unique="true" optional="false" read="true"
+						write="true" initial="false" search="true" />
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype code="ServiceContract" extends="order"
+			jaloclass="com.sap.hybris.crm.contract.jalo.ServiceContract"
+			autocreate="true" generate="true">
+			<deployment table="ServiceContracts" typecode="8001" />
+			<attributes>
+				<attribute autocreate="true" qualifier="ContractId" type="java.lang.String"
+					generate="true">
+					<persistence type="property" />
+					<modifiers read="true" write="true" search="true"
+						initial="true" optional="false" unique="true" />
+					<custom-properties>
+						<property name="hmcIndexField">
+							<value>"thefield"</value>
+						</property>
+					</custom-properties>
+				</attribute>
+				<attribute autocreate="true" qualifier="name" type="java.lang.String"
+					redeclare="true">
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+					<custom-properties>
+						<property name="hmcIndexField">
+							<value>"thefield"</value>
+						</property>
+					</custom-properties>
+				</attribute>
+				<attribute autocreate="true" qualifier="description" type="java.lang.String"
+					redeclare="true">
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property">
+						<columntype database="oracle">
+							<value>CLOB</value>
+						</columntype>
+						<columntype database="sap">
+							<value>NCLOB</value>
+						</columntype>
+						<columntype>
+							<value>HYBRIS.LONG_STRING</value>
+						</columntype>
+					</persistence>
+					<custom-properties>
+						<property name="hmcIndexField">
+							<value>"thefield"</value>
+						</property>
+					</custom-properties>
+				</attribute>
+				<attribute qualifier="startDate" type="java.util.Date">
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<description>Start Date</description>
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="endDate" type="java.util.Date">
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<description>End Date</description>
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="netValue" type="java.lang.Double"
+					autocreate="true">
+					<persistence type="property" />
+					<description>Net Value of Contract</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+				</attribute>
+				<attribute qualifier="grossValue" type="java.lang.Double"
+					autocreate="true">
+					<persistence type="property" />
+					<description>Gross Value of Contract</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+				</attribute>
+
+				<!-- <attribute qualifier="currency" type="Currency" autocreate="true"> 
+					<description>Currency</description> <persistence type="property" /> <modifiers 
+					read="true" write="true" search="true" optional="false" removable="false" 
+					initial="true" private="false" partof="false" /> </attribute> -->
+				<attribute qualifier="contractStatus" type="SAPStatus">
+					<description>The status of this particular export</description>
+					<persistence type="property" />
+					<modifiers read="true" write="true" />
+				</attribute>
+				<attribute qualifier="notes" type="StringCollection"
+					autocreate="true">
+					<persistence type="property" />
+					<description>Contract notes</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+				</attribute>
+				<attribute qualifier="billPlan" type="ContractBillPlan"
+					autocreate="true">
+					<persistence type="property" />
+					<description>Contract bill plan</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype code="ContractBillPlan" extends="GenericItem"
+			jaloclass="com.sap.hybris.crm.contract.jalo.ContractBillPlan"
+			autocreate="true" generate="true">
+			<deployment table="ContractBillPlans" typecode="8002" />
+			<attributes>
+				<attribute qualifier="contractSettlementPeriod" type="java.lang.String">
+					<persistence type="property" />
+					<description>Settlement Period  of Contract</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+				</attribute>
+				<attribute qualifier="contractBillingDate" type="java.lang.String">
+					<persistence type="property" />
+					<description>Billing Date of Contract</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+				</attribute>
+				<attribute qualifier="invoiceCreationDate" type="java.lang.String">
+					<persistence type="property" />
+					<description>Invoice Creation Date of Contract</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype code="ServiceProduct" extends="OrderEntry"
+			jaloclass="com.sap.hybris.crm.contract.jalo.ServiceProduct"
+			autocreate="true" generate="true">
+			<deployment table="ServiceProducts" typecode="8003" />
+			<attributes>
+				<attribute type="java.lang.String" qualifier="itemNumber">
+					<persistence type="property" />
+					<description>Item number for service product</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="description">
+					<persistence type="property" />
+					<description>Description for service product</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+				</attribute>
+				<attribute type="java.lang.Integer" qualifier="releasedQuantity">
+					<persistence type="property" />
+					<description>Released quantity for service product</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+				</attribute>
+				<attribute type="java.lang.Double" qualifier="netValue">
+					<persistence type="property" />
+					<description>Net value for service product</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+				</attribute>
+				<attribute type="java.lang.Double" qualifier="expectedValue">
+					<persistence type="property" />
+					<description>Expected value for service product</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+				</attribute>
+				<attribute type="java.lang.Double" qualifier="targetValue">
+					<persistence type="property" />
+					<description>Target value for service product</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+				</attribute>
+				<attribute type="java.lang.Double" qualifier="releasedValue">
+					<persistence type="property" />
+					<description>Released value for service product</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+				</attribute>
+				<attribute type="ResponseProfile" qualifier="responseProfile">
+					<persistence type="property" />
+					<description>Response profile for service product</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+				</attribute>
+				<attribute type="ServiceProfile" qualifier="serviceProfile">
+					<persistence type="property" />
+					<description>Service profile for service product</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+				</attribute>
+				<attribute type="Currency" qualifier="currency">
+					<persistence type="property" />
+					<description>currency for service product</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+				</attribute>
+				<attribute type="SAPStatus" qualifier="status">
+					<persistence type="property" />
+					<description>Status for service product</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="productUnit">
+					<persistence type="property" />
+					<description>Unit for service product</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+				</attribute>
+				<attribute type="java.util.Date" qualifier="validFrom">
+					<persistence type="property" />
+					<description>Valid from date for service product</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+				</attribute>
+				<attribute type="java.util.Date" qualifier="validTo">
+					<persistence type="property" />
+					<description>Valid to date for service product</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+				</attribute>
+			</attributes>
+		</itemtype>
+	</itemtypes>
+
+</items>
+

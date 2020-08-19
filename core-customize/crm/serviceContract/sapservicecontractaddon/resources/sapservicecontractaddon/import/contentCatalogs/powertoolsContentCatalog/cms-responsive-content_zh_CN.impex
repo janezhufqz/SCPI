@@ -1,0 +1,26 @@
+$contentCatalog=powertoolsContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$jarResourceCms=jar:com.sap.hybris.sapservicecontractaddon.constants.sapservicecontractaddonConstants&/sapservicecontractaddon/import/cockpit/cmscockpit
+
+
+$contentCatalogName=Powertools Content Catalog
+$productCatalog=powertoolsProductCatalog
+$productCatalogName=Powertools Product Catalog
+$productCV=catalogVersion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$picture=media(code, $contentCV);
+$image=image(code, $contentCV);
+$media=media(code, $contentCV);
+$page=page(uid, $contentCV);
+$contentPage=contentPage(uid, $contentCV);
+$product=product(code, $productCV)
+$category=category(code, $productCV)
+$addonExtensionName=sapservicecontractaddon
+$lang=zh_CN
+
+
+
+
+
+# update linkname
+UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang]
+;;ServiceContractsLink;"服务合同"

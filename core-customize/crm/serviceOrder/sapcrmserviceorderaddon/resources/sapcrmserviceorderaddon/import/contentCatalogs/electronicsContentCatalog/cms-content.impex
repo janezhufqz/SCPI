@@ -1,0 +1,63 @@
+$contentCatalog=electronicsContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+
+$addonExtensionName=sapcrmserviceorderaddon
+
+
+INSERT_UPDATE SearchRestriction;code[unique=true];name[lang=en];query;principal(UID);restrictedType(code);active;generate
+;b2cserviceorder_restriction;Restrict Cutomer Group visibility for service orders;({item:User}=?session.user);customergroup;ServiceOrder;true;true;
+
+
+INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;page;actions(uid,$contentCV);&componentRef
+;;AccountServiceOrderHistoryComponent;Account History Component;/WEB-INF/views/addons/sapcrmserviceorderaddon/responsive/pages/serviceorders/accountServiceOrderHistoryPage.jsp;;AccountServiceOrderHistoryComponent
+;;ServiceOrderDetailsHeadlineComponent;Service Order Details Headline Component;/WEB-INF/views/addons/$addonExtensionName/responsive/pages/serviceorder/serviceOrderDetailHeadline.jsp;;ServiceOrderDetailsHeadlineComponent
+;;ServiceOrderDetailsInfoComponent;Service Order Details Information Page;/WEB-INF/views/addons/$addonExtensionName/responsive/pages/serviceorder/serviceOrderDetailOverview.jsp;;ServiceOrderDetailsInfoComponent
+;;ServiceOrderDetailItemsComponent;Service Order Items Details Page;/WEB-INF/views/addons/$addonExtensionName/responsive/pages/serviceorder/serviceOrderDetailItems.jsp;;ServiceOrderDetailItemsComponent
+
+
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false'];previewImage(code, $contentCV)
+;;serviceorders;Service Order History Page;AccountPageTemplate;serviceorders
+;;serviceorder;Service Order Details Page;AccountPageTemplate;serviceorder
+
+
+# ContentSlot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;SideContent-serviceorders;Side Content Slot for My Account Service Order History;true;;;;
+;;BodyContent-serviceorders;Body Content Slot for My Account Service Order History;true;AccountServiceOrderHistoryComponent;;;
+
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='serviceorders'];contentSlot(uid,$contentCV)[unique=true];;;
+;;SideContent-serviceorders;SideContent;;SideContent-serviceorders;;;
+;;BodyContent-serviceorders;BodyContent;;BodyContent-serviceorders;;;
+
+
+
+# ContentSlot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;SideContent-serviceorderdetail;Side Content Slot for My Account Service Order Details;true;;;;
+;;BodyContent-serviceorderdetail;Body Content Slot for My Account Service Order Details;true;ServiceOrderDetailsHeadlineComponent,ServiceOrderDetailsInfoComponent,ServiceOrderDetailItemsComponent;;;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='serviceorder'];contentSlot(uid,$contentCV)[unique=true];;;
+;;SideContent-serviceorderdetail;SideContent;;SideContent-serviceorderdetail;;;
+;;BodyContent-serviceorderdetail;BodyContent;;BodyContent-serviceorderdetail;;;
+
+
+
+
+INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;target(code)[default='sameWindow']
+;;ServiceOrderLink;ServiceOrderLink;/my-account/service-orders;ServiceOrderLink;
+
+
+# create navigation root node for my account & child nodes for the root node
+INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);links(&linkRef);&nodeRef
+;ServiceOrderNavNode;;ServiceOrderNavNode;MyAccountNavNode;;ServiceOrderNavNode
+
+
+# create cms navigation entry for navigation child nodes
+INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;navigationNode(&nodeRef);item(&linkRef);
+;ServiceOrderNavNodeEntry;;ServiceOrderNavNodeEntry;ServiceOrderNavNode;ServiceOrderLink;
+
+
+

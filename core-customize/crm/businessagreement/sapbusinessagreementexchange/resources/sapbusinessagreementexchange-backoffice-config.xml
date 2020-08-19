@@ -1,0 +1,878 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- ~ [y] hybris Platform ~ ~ Copyright (c) 2000-2015 hybris AG ~ All rights 
+	reserved. ~ ~ This software is the confidential and proprietary information 
+	of hybris ~ ("Confidential Information"). You shall not disclose such Confidential 
+	~ Information and shall use it only in accordance with the terms of the ~ 
+	license agreement you entered into with hybris. -->
+
+<config xmlns="http://www.hybris.com/cockpit/config"
+ xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+
+	<context merge-by="type" parent="auto" type="B2BUnit"
+		component="editor-area">
+		<editorArea:editorArea
+			xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab name="hmc.tab.b2bunit.businessAG">
+				<editorArea:section name="hmc.section.b2bunit.businessAG">
+					<editorArea:attribute
+						editor="com.hybris.cockpitng.editor.extendedmultireferenceeditor"
+						qualifier="BusinessAgreement">
+						<editorArea:editor-parameter>
+							<editorArea:name>listConfigContext</editorArea:name>
+							<editorArea:value>referenceListViewBusinessAgreement
+							</editorArea:value>
+						</editorArea:editor-parameter>
+					</editorArea:attribute>
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="BusinessAgreement"
+		component="advanced-search">
+		<advanced-search:advanced-search
+			xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list>
+				<advanced-search:field
+					xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="businessagreementheader"
+					selected="false" />
+			</advanced-search:field-list>
+		</advanced-search:advanced-search>
+	</context>
+
+	<context merge-by="type" parent="GenericItem" type="BusinessAgreement"
+		component="referenceListViewBusinessAgreement">
+		<list-view:list-view
+			xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="guid" />
+			<list-view:column qualifier="id" />
+			<list-view:column qualifier="text" />
+		</list-view:list-view>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="BusinessAgreementHeader"
+		component="referenceListViewBusinessAgreementHeader">
+		<list-view:list-view
+			xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="bankidinc" />
+			<list-view:column qualifier="bankidout" />
+
+		</list-view:list-view>
+	</context>
+	<context component="explorer-tree" merge-by="module">
+		<n:explorer-tree xmlns:n="http://www.hybris.com/cockpitng/config/explorertree">
+			<n:navigation-node id="hmc_businessAgreementgroup">
+				<n:type-node id="BusinessAgreement" code="BusinessAgreement" />
+				<n:type-node id="BusinessAgreementHeader" code="BusinessAgreementHeader" />
+				<n:type-node id="BusinessAgreementRuleHeader" code="BusinessAgreementRuleHeader" />
+				<n:type-node id="BusinessAgreementPartners" code="BusinessAgreementPartners" />
+			</n:navigation-node>
+		</n:explorer-tree>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="BusinessAgreement"
+		component="listview">
+		<list-view:list-view
+			xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="guid" />
+			<list-view:column qualifier="id" />
+			<list-view:column qualifier="text" />
+		</list-view:list-view>
+	</context>
+	<context component="create-wizard" type="BusinessAgreement"
+		merge-by="type">
+		<wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config"
+			id="BusinessAGWizard" title="create.businessAG.title">
+			<wz:prepare id="newBusinessAG">
+				<wz:initialize property="newBusinessAG" type="ctx.TYPE_CODE" />
+			</wz:prepare>
+
+			<wz:step id="step1" label="create.businessAG.general.label"
+				sublabel="create.businessAG.general.sublabel">
+				<wz:content id="step1.content">
+					<wz:property-list root="newBusinessAG">
+						<wz:property qualifier="guid" type="java.lang.String" />
+						<wz:property qualifier="id" type="java.lang.String" />
+						<wz:property qualifier="text" type="java.lang.String" />
+						<wz:property qualifier="partner" type="Reference(B2BUnit)"
+							editor="com.hybris.cockpitng.editor.defaultreferenceeditor" />
+
+					</wz:property-list>
+				</wz:content>
+
+				<wz:navigation id="step1.navigation">
+					<wz:cancel />
+					<wz:next visible="!#empty(newBusinessAG.guid)" />
+					<wz:done>
+						<wz:save property="newBusinessAG" />
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+
+
+		</wz:flow>
+	</context>
+
+
+	<!-- Business Agreement Header -->
+
+
+
+	<context merge-by="type" parent="GenericItem" type="BusinessAgreementHeader"
+		component="listview">
+		<list-view:list-view
+			xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="businessagreementclass" />
+			<list-view:column qualifier="bankidinc" />
+			<list-view:column qualifier="bankidout" />
+		</list-view:list-view>
+	</context>
+
+	<context component="create-wizard" type="BusinessAgreementHeader"
+		merge-by="type">
+		<wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config"
+			id="BusinessAGHeaderWizard" title="create.businessAG.title">
+			<wz:prepare id="newBusinessAGHeader">
+				<wz:initialize property="newBusinessAGHeader" type="ctx.TYPE_CODE" />
+			</wz:prepare>
+
+			<wz:step id="step1" label="create.businessAGheader.general.label"
+				sublabel="create.businessAG.general.sublabel">
+				<wz:content id="step1.content">
+					<wz:property-list root="newBusinessAGHeader">
+						<wz:property qualifier="businessagreementdefault"
+							type="java.lang.Boolean" />
+						<wz:property qualifier="businessagreementclass"
+							type="Reference(CRMBusinessAgreementClass)" editor="com.hybris.cockpitng.editor.defaultreferenceeditor" />
+						<wz:property qualifier="bankidinc" type="java.lang.String" />
+						<wz:property qualifier="bankidout" type="java.lang.String" />
+						<wz:property qualifier="creditcardinc" type="java.lang.String" />
+						<wz:property qualifier="creditcardout" type="java.lang.String" />
+						<wz:property qualifier="addresscorrespondenceguid"
+							type="java.lang.String" />
+						<wz:property qualifier="addressdunningguid" type="java.lang.String" />
+						<wz:property qualifier="addresspayerguid" type="java.lang.String" />
+						<wz:property qualifier="addressrecipientguid" type="java.lang.String" />
+						<wz:property qualifier="addressirguid" type="java.lang.String" />
+						<wz:property qualifier="addresstaxguid" type="java.lang.String" />
+						<wz:property qualifier="businessagreementpayer" type="java.lang.String" />
+						<wz:property qualifier="taxcategory"
+							type="Reference(CRMBusinessAgreementTaxCategory)" editor="com.hybris.cockpitng.editor.defaultreferenceeditor" />
+						<wz:property qualifier="taxcode"
+							type="Reference(CRMBusinessAgreementTaxCode)" editor="com.hybris.cockpitng.editor.defaultreferenceeditor" />
+						<wz:property qualifier="refnumber" type="java.lang.String" />
+						<wz:property qualifier="businessagreement" type="Reference(BusinessAgreement)"
+							editor="com.hybris.cockpitng.editor.defaultreferenceeditor" />
+						<wz:property qualifier="validto" type="java.lang.String" />
+
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step1.navigation">
+					<wz:cancel />
+
+					<wz:done>
+						<wz:save property="newBusinessAGHeader" />
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+
+
+		</wz:flow>
+	</context>
+
+
+
+	<!-- Business Agreement Rule Header -->
+
+	<context merge-by="type" parent="GenericItem" type="BusinessAgreementRuleHeader"
+		component="listview">
+		<list-view:list-view
+			xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="businessruleguid" />
+			<list-view:column qualifier="paymentmethodinc" />
+			<list-view:column qualifier="paymentmethodout" />
+		</list-view:list-view>
+	</context>
+	<context component="create-wizard" type="BusinessAgreementRuleHeader"
+		merge-by="type">
+		<wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config"
+			id="BusinessAGRuleWizard" title="create.businessAG.title">
+			<wz:prepare id="newBusinessAGRuleHeader">
+				<wz:initialize property="newBusinessAGRuleHeader"
+					type="ctx.TYPE_CODE" />
+			</wz:prepare>
+
+			<wz:step id="step1" label="create.businessAG.general.label"
+				sublabel="create.businessAG.general.sublabel">
+				<wz:content id="step1.content">
+					<wz:property-list root="newBusinessAGRuleHeader">
+						<wz:property qualifier="businessruleguid" type="java.lang.String" />
+						<wz:property qualifier="validto" type="java.lang.String" />
+						<wz:property qualifier="validfrom" type="java.lang.String" />
+						<wz:property qualifier="paymentmethodinc"
+							type="Reference(CRMBusinessAgreementPaymentMethod)" editor="com.hybris.cockpitng.editor.defaultreferenceeditor" />
+						<wz:property qualifier="paymentmethodout"
+							type="Reference(CRMBusinessAgreementPaymentMethod)" editor="com.hybris.cockpitng.editor.defaultreferenceeditor" />
+						<wz:property qualifier="shippingcontroldr"
+							type="Reference(CRMBusinessAgreementShippingControl)" editor="com.hybris.cockpitng.editor.defaultreferenceeditor" />
+						<wz:property qualifier="termofpayment"
+							type="Reference(CRMBusinessAgreementTermsPayment)" editor="com.hybris.cockpitng.editor.defaultreferenceeditor" />
+						<wz:property qualifier="shippingcontrolbr"
+							type="Reference(CRMBusinessAgreementShippingControl)" editor="com.hybris.cockpitng.editor.defaultreferenceeditor" />
+						<wz:property qualifier="correpondencevariant"
+							type="Reference(CRMBusinessAgreementCorrepondingVariant)" editor="com.hybris.cockpitng.editor.defaultreferenceeditor" />
+						<wz:property qualifier="shippingcontrolbp"
+							type="Reference(CRMBusinessAgreementShippingControl)" editor="com.hybris.cockpitng.editor.defaultreferenceeditor" />
+						<wz:property qualifier="text" type="java.lang.String" />
+						<wz:property qualifier="businessagHeader"
+							type="Reference(BusinessAgreementHeader)" editor="com.hybris.cockpitng.editor.defaultreferenceeditor" />
+					</wz:property-list>
+				</wz:content>
+
+				<wz:navigation id="step1.navigation">
+					<wz:cancel />
+
+					<wz:done>
+						<wz:save property="newBusinessAGRuleHeader" />
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+
+
+		</wz:flow>
+	</context>
+
+
+	<!-- Business Agreement Header Partners -->
+	<context merge-by="type" parent="GenericItem" type="BusinessAgreementPartners"
+		component="listview">
+		<list-view:list-view
+			xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="businessagreementpartnercat" />
+			<list-view:column qualifier="partnerguid1" />
+			<list-view:column qualifier="partnerguid2" />
+			<list-view:column qualifier="partnerfunction" />
+			<list-view:column qualifier="customerguid" />
+		</list-view:list-view>
+	</context>
+
+	<context component="create-wizard" type="BusinessAgreementPartners"
+		merge-by="type">
+		<wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config"
+			id="BusinessAGPartnersWizard" title="create.businessAG.title">
+			<wz:prepare id="newBusinessAGPartners">
+				<wz:initialize property="newBusinessAGPartners" type="ctx.TYPE_CODE" />
+			</wz:prepare>
+
+			<wz:step id="step1" label="create.businessAG.general.label"
+				sublabel="create.businessAG.general.sublabel">
+				<wz:content id="step1.content">
+					<wz:property-list root="newBusinessAGPartners">
+						<wz:property qualifier="businessagreementpartnercat"
+							type="java.lang.String" />
+						<wz:property qualifier="partnerguid1" type="java.lang.String" />
+						<wz:property qualifier="partnerguid2" type="Reference(B2BUnit)"
+							editor="com.hybris.cockpitng.editor.defaultreferenceeditor" />
+						<wz:property qualifier="customerguid" type="Reference(Customer)"
+							editor="com.hybris.cockpitng.editor.defaultreferenceeditor" />
+						<wz:property qualifier="bprelationshipnum" type="java.lang.String" />
+						<wz:property qualifier="partnerfunction" type="Reference(PartnerFunction)"
+							editor="com.hybris.cockpitng.editor.defaultreferenceeditor" />
+						<wz:property qualifier="businessagreementheader"
+							type="Reference(BusinessAgreementHeader)" editor="com.hybris.cockpitng.editor.defaultreferenceeditor" />
+					</wz:property-list>
+				</wz:content>
+
+				<wz:navigation id="step1.navigation">
+					<wz:cancel />
+					<wz:done>
+						<wz:save property="newBusinessAGPartners" />
+					</wz:done>
+
+				</wz:navigation>
+			</wz:step>
+
+		</wz:flow>
+	</context>
+
+	<!-- advance search attribute for business agreement -->
+	<context merge-by="type" parent="GenericItem" type="BusinessAgreement"
+		component="advanced-search">
+		<advanced-search:advanced-search
+			xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list>
+
+				<advanced-search:field
+					xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="id"
+					selected="false" />
+				<advanced-search:field
+					xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="guid"
+					selected="false" />
+				<advanced-search:field
+					xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="text"
+					selected="false" />
+				
+
+				<advanced-search:field
+					xmlns="http://www.hybris.com/cockpitng/config/advancedsearch"
+					editor="java.lang.Long" name="pk" selected="false" />
+			</advanced-search:field-list>
+		</advanced-search:advanced-search>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="BusinessAgreementHeader"
+		component="advanced-search">
+		<advanced-search:advanced-search
+			xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list>
+
+				
+				<advanced-search:field
+					xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="businessagreementdefault"
+					selected="false" />
+				<advanced-search:field
+					xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="refnumber"
+					selected="false" />
+
+
+
+			</advanced-search:field-list>
+		</advanced-search:advanced-search>
+	</context>
+
+	<context merge-by="type" parent="GenericItem" type="BusinessAgreementRuleHeader"
+		component="advanced-search">
+		<advanced-search:advanced-search
+			xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list>
+				<advanced-search:field
+					xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="text"
+					selected="false" />
+			</advanced-search:field-list>
+		</advanced-search:advanced-search>
+	</context>
+	
+		<context merge-by="type" parent="GenericItem" type="BusinessAgreementPartners"
+		component="advanced-search">
+		<advanced-search:advanced-search
+			xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list>
+
+				<advanced-search:field
+					xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="partnerguid1"
+					selected="false" />
+				<advanced-search:field
+					xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="partnerguid2"
+					selected="false" />
+				<advanced-search:field
+					xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="customerguid"
+					selected="false" />
+			</advanced-search:field-list>
+		</advanced-search:advanced-search>
+	</context>
+	<!-- simple search attribute for business agreement -->
+
+	<context merge-by="type" parent="GenericItem" type="BusinessAgreement"
+		component="simple-search">
+		<simple-search:simple-search
+			xmlns:simple-search="http://www.hybris.com/cockpitng/config/simplesearch">
+			<simple-search:field
+				xmlns="http://www.hybris.com/cockpitng/config/simplesearch" name="id" />
+		</simple-search:simple-search>
+	</context>
+
+	<!-- editor area for business agreement -->
+	<context merge-by="type" parent="GenericItem" type="BusinessAgreement"
+		component="editor-area">
+		<editorArea:editorArea
+			xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab name="hmc.tab.general">
+				<editorArea:section name="hmc.section.general">
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="guid" readonly="true" />
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="id" readonly="true"/>
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="text" />
+
+				</editorArea:section>
+				<editorArea:section name="hmc.section.partners">
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="partner" />
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="customer" />
+
+				</editorArea:section>
+				<editorArea:section name="hmc.section.businessAgreementHeader">
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="businessagreementheader" />
+
+
+				</editorArea:section>
+			</editorArea:tab>
+
+		</editorArea:editorArea>
+	</context>
+
+	<context merge-by="type" parent="GenericItem" type="BusinessAgreementHeader"
+		component="editor-area">
+		<editorArea:editorArea
+			xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab name="hmc.tab.general">
+				<editorArea:section name="hmc.section.general">
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="businessagreementclass" />
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="refnumber" />
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="validto" />
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="validfrom" />
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="businessagreementdefault" readonly="true" />
+
+				</editorArea:section>
+
+
+
+				<editorArea:section name="hmc.section.businessagreementpartners">
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="businessagreementpartners" />
+				</editorArea:section>
+
+				<editorArea:section name="hmc.section.businessruleHeader">
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="businessruleHeader" />
+				</editorArea:section>
+
+				<editorArea:section name="hmc.section.paymentInfo">
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="bankidinc" />
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="bankidout" />
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="creditcardinc" />
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="creditcardout" />
+
+				</editorArea:section>
+
+				<editorArea:section name="hmc.section.taxInfo">
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="taxcategory" />
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="taxcode" />
+
+
+				</editorArea:section>
+			</editorArea:tab>
+
+		</editorArea:editorArea>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="BusinessAgreementRuleHeader"
+		component="editor-area">
+		<editorArea:editorArea
+			xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab name="hmc.tab.general">
+				<editorArea:section name="hmc.section.general">
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="businessruleguid" readonly="true" />
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="text" />
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="validto" />
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="validfrom" />
+
+				</editorArea:section>
+				<editorArea:section name="hmc.section.ruleHeaderPaymentInfo">
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="termofpayment" />
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="paymentmethodinc" />
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="paymentmethodout" />
+
+				</editorArea:section>
+				<editorArea:section name="hmc.section.shippingControlInfo">
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="shippingcontrolbr" />
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="shippingcontroldr" />
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="shippingcontrolbp" />
+				
+
+				</editorArea:section>
+			</editorArea:tab>
+
+		</editorArea:editorArea>
+	</context>
+
+<context merge-by="type" parent="GenericItem" type="BusinessAgreementPartners"
+		component="editor-area">
+		<editorArea:editorArea
+			xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab name="hmc.tab.general">
+				<editorArea:section name="hmc.section.general">
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="partnerguid1" readonly="true" />
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="partnerguid2" />
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="customerguid" />
+
+				</editorArea:section>
+				<editorArea:section name="hmc.section.partnerfunctionInfo">
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="partnerfunction" />
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="businesspartnerfunctionguid" />
+						<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="businessagreementpartnercat" />
+					
+
+				</editorArea:section>
+			</editorArea:tab>
+
+		</editorArea:editorArea>
+	</context>
+
+
+
+
+
+<context merge-by="type" parent="GenericItem" type="CRMBusinessAgreementClass"
+		component="editor-area">
+		<editorArea:editorArea
+			xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab name="hmc.tab.general">
+				<editorArea:section name="hmc.section.general">
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="code"  readonly="true"/>
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="text" readonly="true" />
+						
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="collectivebill" readonly="true"/>
+						<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="country" readonly="true"/>
+
+				</editorArea:section>
+				
+			</editorArea:tab>
+
+		</editorArea:editorArea>
+	</context>
+	
+	<context merge-by="type" parent="GenericItem" type="CRMBusinessAgreementTaxCategory"
+		component="editor-area">
+		<editorArea:editorArea
+			xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab name="hmc.tab.general">
+				<editorArea:section name="hmc.section.general">
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="code" readonly="true" />
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="text" />
+
+				</editorArea:section>
+				
+			</editorArea:tab>
+
+		</editorArea:editorArea>
+	</context>
+
+<context merge-by="type" parent="GenericItem" type="CRMBusinessAgreementTaxCode"
+		component="editor-area">
+		<editorArea:editorArea
+			xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab name="hmc.tab.general">
+				<editorArea:section name="hmc.section.general">
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="code" readonly="true" />
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="text" />
+
+				</editorArea:section>
+				
+			</editorArea:tab>
+
+		</editorArea:editorArea>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="CRMBusinessAgreementShippingControl"
+		component="editor-area">
+		<editorArea:editorArea
+			xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab name="hmc.tab.general">
+				<editorArea:section name="hmc.section.general">
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="code" readonly="true" />
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="text" />
+
+				</editorArea:section>
+				
+			</editorArea:tab>
+
+		</editorArea:editorArea>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="CRMBusinessAgreementPaymentMethod"
+		component="editor-area">
+		<editorArea:editorArea
+			xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab name="hmc.tab.general">
+				<editorArea:section name="hmc.section.general">
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="code" readonly="true" />
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="text" />
+						<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="country" />
+						<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="actvbankdetail" />
+
+				</editorArea:section>
+				
+			</editorArea:tab>
+
+		</editorArea:editorArea>
+	</context>
+		<context merge-by="type" parent="GenericItem" type="CRMBusinessAgreementTermsPayment"
+		component="editor-area">
+		<editorArea:editorArea
+			xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab name="hmc.tab.general">
+				<editorArea:section name="hmc.section.general">
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="code" readonly="true" />
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="description" />
+				</editorArea:section>
+				<editorArea:section name="hmc.section.termsPayment">
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="daysfrom1" readonly="true" />
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="percentage1" />
+						<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="daysfrom2" />
+						<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="percentage2" />
+						<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="daysfrom3" />
+						<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="paymentmethod" />
+
+				</editorArea:section>
+				
+			</editorArea:tab>
+
+		</editorArea:editorArea>
+	</context>
+		<context merge-by="type" parent="GenericItem" type="CRMBusinessAgreementCorrepondingVariant"
+		component="editor-area">
+		<editorArea:editorArea
+			xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab name="hmc.tab.general">
+				<editorArea:section name="hmc.section.general">
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="code" readonly="true" />
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="text" />
+				</editorArea:section>
+				
+			</editorArea:tab>
+
+		</editorArea:editorArea>
+	</context>
+	
+
+	<!-- label for business agreement -->
+	<context merge-by="type" parent="GenericItem" type="BusinessAgreement"
+		component="base">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:labels>
+				<y:label>id</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="BusinessAgreementHeader"
+		component="base">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:labels>
+				<y:label>refnumber</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+
+
+
+<context merge-by="type" parent="GenericItem" type="BusinessAgreementRuleHeader"
+		component="base">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:labels>
+				<y:label>text</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+
+<context merge-by="type" parent="GenericItem" type="BusinessAgreementPartners"
+		component="base">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:labels>
+				<y:label>partnerfunction.description</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+<context merge-by="type" parent="GenericItem" type="CRMBusinessAgreementClass"
+		component="base">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:labels>
+				<y:label>code</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="CRMBusinessAgreementTaxCategory"
+		component="base">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:labels>
+				<y:label>code</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="CRMBusinessAgreementTaxCode"
+		component="base">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:labels>
+				<y:label>code</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+		<context merge-by="type" parent="GenericItem" type="CRMBusinessAgreementShippingControl"
+		component="base">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:labels>
+				<y:label>code</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+		<context merge-by="type" parent="GenericItem" type="CRMBusinessAgreementPaymentMethod"
+		component="base">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:labels>
+				<y:label>code</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="CRMBusinessAgreementTermsPayment"
+		component="base">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:labels>
+				<y:label>code</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+	
+	<context merge-by="type" parent="GenericItem" type="CRMBusinessAgreementCorrepondingVariant"
+		component="base">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:labels>
+				<y:label>code</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+	 <!-- editor area for Business Agreement tab related to  SAP Integration-->
+	<context merge-by="type" parent="GenericItem" type="SAPGlobalConfiguration"
+		component="editor-area">
+		<editorArea:editorArea
+			xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab name="backoffice.tab.sapintegration.businessAG">
+				<editorArea:section name="backoffice.section.sapintegration.businessAG">
+					
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="businessagreementclass"/>
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="termofpayment" />
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="paymentmethod" />
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+	
+	<context merge-by="type" parent="GenericItem" type="CRMBusinessAgreementPaymentMethod" component="advanced-search">
+    	<advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+    		<advanced-search:field-list>
+      			<advanced-search:field name="country" selected="true"/>
+       			<advanced-search:field name="paymentuasge" selected="true"/>
+       			<advanced-search:field name="actvbankdetail" selected="true"/>
+        	</advanced-search:field-list>
+        </advanced-search:advanced-search>
+  	</context>
+  	
+  	<context merge-by="type" parent="GenericItem" type="CRMBusinessAgreementPaymentMethod" component="listview">
+		<list-view:list-view>
+			<list-view:column qualifier="country" />
+			<list-view:column qualifier="actvbankdetail" />
+			<list-view:column qualifier="text" />
+		</list-view:list-view>
+	</context>
+</config>

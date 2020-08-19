@@ -1,0 +1,15 @@
+##******************************This file is generated - please do not edit it. It will be regenerated after every build.********************************#
+$contentCatalog=electronicsContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+
+# Language
+$lang=ru
+
+# Content Pages
+UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
+;;crm-add-complaint;"Ð”Ð¾Ð±Ð°Ð²Ð¸Ñ‚ÑŒ Ð¶Ð°Ð»Ð¾Ð±Ñƒ";
+;;crm-update-complaint;"ÐžÐ±Ð½Ð¾Ð²Ð»ÐµÐ½Ð¸Ðµ Ð¶Ð°Ð»Ð¾Ð±Ñ‹";
+
+# CMS Link Components
+UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang]
+;;AccountSupportTicketHistoryLink;"Ð¡Ð¾Ð¾Ð±Ñ‰ÐµÐ½Ð¸Ðµ Ñ�Ð»ÑƒÐ¶Ð±Ñ‹ Ð¿Ð¾Ð´Ð´ÐµÑ€Ð¶ÐºÐ¸ / Ð¶Ð°Ð»Ð¾Ð±Ñ‹"

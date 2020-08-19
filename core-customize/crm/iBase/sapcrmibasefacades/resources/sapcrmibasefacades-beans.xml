@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- ~ [y] hybris Platform ~ ~ Copyright (c) 2000-2016 SAP SE ~ All rights 
+	reserved. ~ ~ This software is the confidential and proprietary information 
+	of SAP ~ Hybris ("Confidential Information"). You shall not disclose such 
+	~ Confidential Information and shall use it only in accordance with the ~ 
+	terms of the license agreement you entered into with SAP Hybris. -->
+
+<!-- ATTENTION: This is just an example file. You have to edit it according 
+	to your needs. -->
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="beans.xsd">
+
+	<bean class="com.sap.hybris.crm.sapcrmibasefacades.data.IBaseData">
+		<description>Holds IBase data for rendering ibase</description>
+
+		<property name="number" type="java.lang.String">
+			<description>IBase Number</description>
+		</property>
+		<property name="description" type="java.lang.String">
+			<description>Description</description>
+		</property>
+		<property name="externalId" type="java.lang.String">
+			<description>External ID</description>
+		</property>
+		<property name="category" type="java.lang.String">
+			<description>IBase Category</description>
+		</property>
+		<property name="status" type="java.lang.String">
+			<description>IBase Status</description>
+		</property>
+		<!-- <property name="createdOn" type="java.util.Date"> <description>Creation 
+			Time</description> </property> <property name="modifiedOn" type="java.util.Date"> 
+			<description>Modification Time</description> </property> -->
+	</bean>
+	<bean class="com.sap.hybris.crm.sapcrmibasefacades.data.IBaseDetailData">
+		<description>Holds IBase data for rendering ibase in details
+		</description>
+
+		<!-- General Detail -->
+		<property name="number" type="java.lang.String">
+			<description>IBase Number</description>
+		</property>
+		<property name="guid" type="java.lang.String">
+			<description>IBase GUID</description>
+		</property>
+		<property name="externalId" type="java.lang.String">
+			<description>External ID</description>
+		</property>
+		<property name="category" type="java.lang.String">
+			<description>IBase Category</description>
+		</property>
+		<property name="status" type="java.lang.String">
+			<description>IBase Status</description>
+		</property>
+		<property name="description" type="java.lang.String">
+			<description>Description</description>
+		</property>
+		<!-- <property name="createdOn" type="java.util.Date"> <description>Creation 
+			Time</description> </property> <property name="modifiedOn" type="java.util.Date"> 
+			<description>Modification Time</description> </property> -->
+		<property name="permissionGroup" type="java.lang.String">
+			<description>Permission Group</description>
+		</property>
+		<property name="name" type="java.lang.String">
+			<description>Name</description>
+		</property>
+		<property name="additionalName" type="java.lang.String">
+			<description>Additional Name</description>
+		</property>
+		<property name="streetname" type="java.lang.String">
+			<description>StreetName</description>
+		</property>
+		<property name="streetnumber" type="java.lang.String">
+			<description>Street Number</description>
+		</property>
+		<property name="postalcode" type="java.lang.String">
+			<description>Postal Code</description>
+		</property>
+		<property name="city" type="java.lang.String">
+			<description>City</description>
+		</property>
+		<property name="country" type="java.lang.String">
+			<description>country</description>
+		</property>
+		<property name="partners"
+			type="java.util.List&lt;com.sap.hybris.crm.sapcrmibasefacades.data.IBasePartnerData>">
+			<description>Partners</description>
+		</property>
+		<property name="ibaseComponents"
+			type="java.util.List&lt;com.sap.hybris.crm.sapcrmibasefacades.data.IBaseComponentData>">
+			<description>Installed Base Components</description>
+		</property>
+		<property name="productComponents"
+			type="java.util.List&lt;com.sap.hybris.crm.sapcrmibasefacades.data.ProductComponentData>">
+			<description>Partners</description>
+		</property>
+		<property name="objectComponents"
+			type="java.util.List&lt;com.sap.hybris.crm.sapcrmibasefacades.data.ObjectComponentData>">
+			<description>Object Components</description>
+		</property>
+		<property name="textComponents"
+			type="java.util.List&lt;com.sap.hybris.crm.sapcrmibasefacades.data.TextComponentData>">
+			<description>Text Components</description>
+		</property>
+	</bean>
+	<bean class="com.sap.hybris.crm.sapcrmibasefacades.data.IBasePartnerData">
+		<description>Holds IBase Partner data for rendering ibase in details
+		</description>
+
+		<!-- General Detail -->
+		<property name="function" type="java.lang.String">
+			<description>IBase Number</description>
+		</property>
+		<property name="id" type="java.lang.String">
+			<description>External ID</description>
+		</property>
+		<property name="name" type="java.lang.String">
+			<description>IBase Category</description>
+		</property>
+		<property name="address" type="java.lang.String">
+			<description>address</description>
+		</property>
+		<property name="isMainPartner" type="Boolean">
+			<description>is main partner</description>
+		</property>
+	</bean>
+	<bean class="com.sap.hybris.crm.sapcrmibasefacades.data.ProductComponentData">
+		<description>Holds IBase Partner data for rendering ibase in details
+		</description>
+
+		<!-- General Detail -->
+		<property name="instanceNumber" type="java.lang.String">
+			<description>instanceNumber</description>
+		</property>
+		<property name="guid" type="java.lang.String">
+			<description>GUID</description>
+		</property>
+		<property name="productId" type="java.lang.String">
+			<description>Product ID</description>
+		</property>
+		<property name="name" type="java.lang.String">
+			<description>name</description>
+		</property>
+		<property name="url" type="java.lang.String">
+			<description>url</description>
+		</property>
+		<property name="quantity" type="java.lang.Integer">
+			<description>quantity</description>
+		</property>
+		<property name="unit" type="java.lang.String">
+			<description>unit</description>
+		</property>
+		<property name="warrantyStartDate" type="java.util.Date">
+			<description>warranty Start Date</description>
+		</property>
+		<property name="warrantyEndDate" type="java.util.Date">
+			<description>Warranty End Date</description>
+		</property>
+	</bean>
+	<bean class="com.sap.hybris.crm.sapcrmibasefacades.data.TextComponentData">
+		<description>Holds IBase text component data for rendering ibase in
+			details
+		</description>
+
+		<!-- General Detail -->
+		<property name="instanceNumber" type="java.lang.String">
+			<description>instanceNumber</description>
+		</property>
+		<property name="guid" type="java.lang.String">
+			<description>GUID</description>
+		</property>
+		<property name="description" type="java.lang.String">
+			<description>Description</description>
+		</property>
+		<!-- <property name="quantity" type="java.lang.Integer"> <description>quantity</description> 
+			</property> <property name="unit" type="java.lang.String"> <description>unit</description> 
+			</property> -->
+	</bean>
+	<bean class="com.sap.hybris.crm.sapcrmibasefacades.data.ObjectComponentData">
+		<description>Holds IBase object component data for rendering ibase in
+			details
+		</description>
+
+		<!-- General Detail -->
+		<property name="instanceNumber" type="java.lang.String">
+			<description>instanceNumber</description>
+		</property>
+		<property name="guid" type="java.lang.String">
+			<description>GUID</description>
+		</property>
+		<property name="objectId" type="java.lang.String">
+			<description>Object ID</description>
+		</property>
+		<property name="productId" type="java.lang.String">
+			<description>Product ID</description>
+		</property>
+		<property name="productUrl" type="java.lang.String">
+			<description>url</description>
+		</property>
+		<property name="productName" type="java.lang.String">
+			<description>name</description>
+		</property>
+		<property name="quantity" type="java.lang.Integer">
+			<description>quantity</description>
+		</property>
+		<property name="unit" type="java.lang.String">
+			<description>unit</description>
+		</property>
+		<property name="warrantyStartDate" type="java.util.Date">
+			<description>warranty Start Date</description>
+		</property>
+		<property name="warrantyEndDate" type="java.util.Date">
+			<description>Warranty End Date</description>
+		</property>
+	</bean>
+	<bean class="com.sap.hybris.crm.sapcrmibasefacades.data.IBaseComponentData">
+		<description>Holds IBase component data for rendering ibase in details
+		</description>
+
+		<!-- General Detail -->
+		<property name="instanceNumber" type="java.lang.String">
+			<description>instanceNumber</description>
+		</property>
+		<property name="guid" type="java.lang.String">
+			<description>GUID</description>
+		</property>
+		<property name="ibaseId" type="java.lang.String">
+			<description>IBase ID</description>
+		</property>
+		<property name="description" type="java.lang.String">
+			<description>Description</description>
+		</property>
+		<property name="quantity" type="java.lang.Integer">
+			<description>quantity</description>
+		</property>
+		<property name="unit" type="java.lang.String">
+			<description>unit</description>
+		</property>
+		<property name="ibase" type="IBaseDetailData">
+			<description>iBase</description>
+		</property>
+		<property name="warrantyStartDate" type="java.util.Date">
+			<description>warranty Start Date</description>
+		</property>
+		<property name="warrantyEndDate" type="java.util.Date">
+			<description>Warranty End Date</description>
+		</property>
+
+	</bean>
+
+</beans>

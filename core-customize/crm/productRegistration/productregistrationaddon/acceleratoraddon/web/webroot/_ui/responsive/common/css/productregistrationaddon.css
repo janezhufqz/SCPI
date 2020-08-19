@@ -1,0 +1,171 @@
+#register-a-product-button {
+	margin-bottom: 13px !important;
+	float: right;
+}
+
+#productDetails {
+	width: 30%;
+}
+
+.account-section .account-section-content .account-productRegistrationHistory-pagination
+	{
+	padding-top: 10px;
+}
+
+.account-section .account-section-content .account-productRegistrationHistory-pagination .account-orderhistory-pagination-text
+	{
+	line-height: 32px;
+}
+
+.account-section .account-section-content .account-productRegistrationHistory-pagination .pager
+	{
+	margin: 0;
+}
+
+.account-section .account-section-content .account-productRegistrationHistory-sort
+	{
+	background: #f2f4f7;
+	padding: 10px;
+}
+
+thead .productRegistrationTableState {
+	width: 75px;
+}
+
+.product-registration-body {
+	margin: 20px 0;
+}
+
+#productRegistrationForm {
+	margin-top: 20px;
+	padding-top: 20px;
+}
+
+#product-registration-buttons {
+	margin-top: 40px !important;
+}
+
+.product-registration-body #product-registration-buttons.form-actions .btn
+	{
+	width: 49%;
+}
+
+.account-productDetails {
+	max-width: 1200px;
+}
+
+.productRegTopBackBtn {
+	background-color: transparent;
+	border: none;
+	box-shadow: none;
+}
+
+.product-reg-header {
+	font-size: 24px;
+	font-weight: bold;
+	text-transform: capitalize;
+	margin: 24px 0 0 0;
+	padding-bottom: 23px;
+}
+
+.regProductDetailsHeadline {
+	margin-top: 56px;
+	font-size: 20px;
+	margin-left: -15px;
+	margin-right: -10px;
+	font-size: 16px;
+	font-weight: 700;
+	padding: 5px 20px 15px;
+}
+
+.well.well-tertiary .regItem-label {
+	text-transform: uppercase;
+	font-weight: 310;
+	display: block;
+	font-size: 15px;
+}
+
+.createProdRegistrationDiv .ui-front ul.ui-autocomplete li {
+	border: 1px solid #359bac;
+	display: block;
+	width: 100%;
+}
+
+.createProdRegistrationDiv .ui-front ul.ui-autocomplete {
+	display: none;
+	position: absolute;
+	background: #ffffff;
+	left: 0;
+	right: 0;
+	-webkit-box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+	box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+	z-index: 100;
+	width: 538px !important;
+	padding-left: 0;
+	list-style: none;
+	margin: 0;
+}
+
+.createProdRegistrationDiv .ui-front ul.ui-autocomplete li a {
+	display: table;
+	width: 100%;
+	color: inherit;
+	text-decoration: none;
+	background-color: rgb(200, 190, 190);
+}
+
+.productRegAutoComplete .thumb1 {
+	display: table-cell;
+	vertical-align: middle;
+	padding: 0 10px 0 0;
+	font-weight: 400;
+	font-size: smaller !important;
+}
+
+.thumb1+.name1 {
+	padding: 0 10px;
+}
+
+.productRegAutoComplete ul.ui-autocomplete li .name1 {
+	display: table-cell;
+	padding: 10px;
+	vertical-align: middle;
+	width: 100%;
+}
+
+.createProdRegistrationDiv .ui-front .ui-autocomplete ui-front ui-menu ui-widget ui-widget-content
+	{
+	width: auto !important;
+}
+
+.createProdRegistrationDiv .ui-front .ui-autocomplete {
+	background-color: white;
+}
+
+#productRegistrationForm .control-group .controls input {
+	width: 30%;
+}
+
+.genDetails {
+	margin-top: -37px;
+	margin-bottom: -11px;
+	border-collapse: collapse;
+}
+
+.genDetails tr {
+	margin-bottom: -34px;
+	text-transform: uppercase;
+	font-weight: 310;
+	/* display: block; */
+	font-size: 15px;
+}
+
+.genDetails td {
+	width:40%
+	padding: 5px 5px !important;
+}
+
+.productDetailsIcon > a > img{		
+		height: 100px;
+		width: 100px;	
+}

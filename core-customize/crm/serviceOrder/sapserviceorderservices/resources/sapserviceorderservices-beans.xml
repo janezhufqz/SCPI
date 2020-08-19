@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- [y] hybris Platform Copyright (c) 2000-2013 hybris AG All rights reserved. 
+	This software is the confidential and proprietary information of hybris ("Confidential 
+	Information"). You shall not disclose such Confidential Information and shall 
+	use it only in accordance with the terms of the license agreement you entered 
+	into with hybris. -->
+
+<!-- ATTENTION: This is just an example file. You have to edit it according 
+	to your needs. -->
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="beans.xsd">
+
+	<bean
+		class="com.sap.hybris.crm.sapserviceorderservices.ServiceOrderHistoryData"
+		extends="de.hybris.platform.commercefacades.order.data.OrderHistoryData">
+		<property name="type" type="java.lang.String" />
+		<property name="startDate" type="java.util.Date" />
+		<property name="endDate" type="java.util.Date" />
+		<property name="description" type="java.lang.String" />
+		<property name="createDate" type="java.util.Date" />
+
+	</bean>
+
+
+	<bean
+		class="com.sap.hybris.crm.sapserviceorderservices.data.ServiceOrderFilterData">
+		<property name="filterKey" type="String" />
+		<property name="filterValue" type="String" />
+		<property name="filterOperator" type="String" />
+	</bean>
+
+
+
+
+	<bean class="com.sap.hybris.crm.sapserviceorderservices.ServiceOrderData"
+		extends="de.hybris.platform.commercefacades.order.data.OrderData">
+		<property name="serviceOrderType" type="java.lang.String" />
+		<property name="ibase" type="java.lang.String" />
+		<property name="ibasecomponent" type="java.lang.String" />
+		<property name="objectid" type="java.lang.String" />
+		<property name="serviceContractId" type="java.lang.String" />
+		<property name="serviceRequestId" type="java.lang.String" />
+		<property name="warrantyId" type="java.lang.String" />
+		<property name="requestedStartDate" type="java.util.Date" />
+		<property name="requestedEndDate" type="java.util.Date" />
+		<property name="note" type="java.lang.String" />
+		<property name="description" type="java.lang.String" />
+		<property name="billingAddress"
+			type="de.hybris.platform.commercefacades.user.data.AddressData"></property>
+		<property name="currency"
+			type="de.hybris.platform.commercefacades.storesession.data.CurrencyData" />
+		<property name="netPrice"
+			type="de.hybris.platform.commercefacades.product.data.PriceData" />
+			
+		<property name="relatedObjects"
+			type="java.util.List&lt;com.sap.hybris.crm.sapserviceorderservices.data.ServiceOrderRelObjData>" />	
+			
+	</bean>
+
+
+
+	<bean class="de.hybris.platform.commercefacades.order.data.OrderEntryData">
+		<property name="scheduleServiceOrderEntries"
+			type="java.util.List&lt;com.sap.hybris.crm.sapserviceorderservices.ScheduleEntryData>" />
+		<property name="status" type="java.lang.String" />
+		<property name="requestedStartDate" type="java.util.Date" />
+		<property name="requestedEndDate" type="java.util.Date" />
+		<property name="unitOfMeasure" type="java.lang.String" />
+		<property name="netPrice"
+			type="de.hybris.platform.commercefacades.product.data.PriceData" />
+
+	</bean>
+
+
+	<bean class="com.sap.hybris.crm.sapserviceorderservices.ScheduleEntryData">
+		<property name="orderNumber" type="java.lang.String" />
+		<property name="itemNumber" type="java.lang.String" />
+		<property name="startDate" type="java.util.Date" />
+		<property name="endDate" type="java.util.Date" />
+	</bean>
+
+	<bean
+		class="com.sap.hybris.crm.sapserviceorderservices.data.ServiceOrderRelObjData">
+		<property name="objecturl" type="String" />
+		<property name="objectid" type="String" />
+		<property name="objectType" type="String" />
+	</bean>
+
+
+</beans>

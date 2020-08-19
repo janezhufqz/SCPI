@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="/platform"/>
+	<classpathentry exported="true" kind="src" path="/addonsupport"/>
+	<classpathentry exported="true" kind="lib" path="resources"/>
+	<classpathentry kind="src" output="eclipsebin/classes" path="src"/>
+	<classpathentry kind="src" output="eclipsebin/classes" path="testsrc"/>
+	<classpathentry kind="src" path="acceleratoraddon/web/src"/>
+	<classpathentry kind="src" path="/acceleratorstorefrontcommons"/>
+	<classpathentry kind="src" path="/productregistrationfacades"/>
+	<classpathentry kind="output" path="eclipsebin/notused"/>
+</classpath>

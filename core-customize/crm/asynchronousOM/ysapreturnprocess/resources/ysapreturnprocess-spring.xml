@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ~ [y] hybris Platform ~ ~ Copyright (c) 2000-2016 SAP SE ~ All rights 
+	reserved. ~ ~ This software is the confidential and proprietary information 
+	of SAP ~ Hybris ("Confidential Information"). You shall not disclose such 
+	~ Confidential Information and shall use it only in accordance with the ~ 
+	terms of the license agreement you entered into with SAP Hybris. -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+	<import resource="/ysapreturnprocess/process/return-process-spring.xml" />
+	<bean id="sapReturnProcessDefinitionResource"
+		class="de.hybris.platform.processengine.definition.ProcessDefinitionResource">
+		<property name="resource"
+			value="classpath:/ysapreturnprocess/process/sap-return-process.xml" />
+	</bean>
+	<alias name="defaultSapDataHubInboundReturnOrderHelper" alias="sapDataHubInboundReturnOrderHelper" />
+	<bean id="defaultSapDataHubInboundReturnOrderHelper"
+		class="com.sap.hybris.crm.inbound.impl.DefaultDataHubInboundOrderHelper">
+		<property name="businessProcessService" ref="businessProcessService" />
+		<property name="flexibleSearchService" ref="flexibleSearchService" />
+		<property name="modelService" ref="modelService" />
+	</bean>
+
+	<bean id="defaultCRMSapRawHybrisReturnOrderBuilder"
+		class="de.hybris.platform.sap.orderexchange.outbound.impl.DefaultRawHybrisOrderBuilder"
+		parent="sapAbstractRawItemBuilder">
+		<property name="contributors">
+			<list>
+				<ref bean="returnOrderSalesConditionsContributor"></ref>
+				<ref bean="precedingDocContributor"></ref>
+				<ref bean="returnOrderContributor"></ref>
+				<ref bean="returnOrderEntryContributor"></ref>
+				<ref bean="returnOrderPartnerContributor"></ref>
+			</list>
+		</property>
+	</bean>
+	<bean id="defaultReturnRequestCodeGenerator"
+		class="de.hybris.platform.servicelayer.keygenerator.impl.PersistentKeyGenerator"
+		init-method="init" scope="tenant">
+		<property name="key" value="${keygen.returnorder.code.name}" />
+		<property name="digits" value="${keygen.returnorder.code.digits}" />
+		<property name="start" value="${keygen.returnorder.code.start}" />
+		<property name="type" value="${keygen.returnorder.code.type}"/>
+	</bean>
+	<alias name="defaultReturnOrderSalesConditionsContributor" alias="returnOrderSalesConditionsContributor" />
+	<bean id="defaultReturnOrderSalesConditionsContributor"
+		class="com.sap.hybris.crm.outbound.impl.DefaultReturnOrderSalesConditionsContributor">
+		<property name="salesConditionsContributor" ref="sapCrmSalesConditionsContributor"/>
+		<property name="batchIdAttributes">
+			<map key-type="java.lang.String">
+				<entry key="dh_batchId" value="${ysapreturnprocess.outbound.batchid:000001}" />
+				<entry key="dh_sourceId" value="${ysapreturnprocess.outbound.sourceid:HYBRIS}" />
+				<entry key="dh_type" value="${ysapreturnprocess.outbound.idoctype:CRMXIF_ORDER}" />
+			</map>
+		</property>
+	</bean>
+	<alias name="defaultPrecedingDocContributor" alias="precedingDocContributor" />
+	<bean id="defaultPrecedingDocContributor"
+		class="com.sap.hybris.crm.outbound.impl.DefaultPrecedingDocContributor">
+		<property name="batchIdAttributes">
+			<map key-type="java.lang.String">
+				<entry key="dh_batchId" value="${ysapreturnprocess.outbound.batchid:000001}" />
+				<entry key="dh_sourceId" value="${ysapreturnprocess.outbound.sourceid:HYBRIS}" />
+				<entry key="dh_type" value="${ysapreturnprocess.outbound.idoctype:CRMXIF_ORDER}" />
+			</map>
+		</property>
+	</bean>
+	<alias name="defaultReturnOrderContributor" alias="returnOrderContributor" />
+	<bean id="defaultReturnOrderContributor"
+		class="com.sap.hybris.crm.outbound.impl.DefaultReturnOrderContributor">
+		<property name="batchIdAttributes">
+			<map key-type="java.lang.String">
+				<entry key="dh_batchId" value="${ysapreturnprocess.outbound.batchid:000001}" />
+				<entry key="dh_sourceId" value="${ysapreturnprocess.outbound.sourceid:HYBRIS}" />
+				<entry key="dh_type" value="${ysapreturnprocess.outbound.idoctype:CRMXIF_ORDER}" />
+			</map>
+		</property>
+	</bean>
+	<alias name="defaultReturnOrderEntryContributor" alias="returnOrderEntryContributor" />
+	<bean id="defaultReturnOrderEntryContributor"
+		class="com.sap.hybris.crm.outbound.impl.DefaultReturnOrderEntryContributor">
+		<property name="batchIdAttributes">
+			<map key-type="java.lang.String">
+				<entry key="dh_batchId" value="${ysapreturnprocess.outbound.batchid:000001}" />
+				<entry key="dh_sourceId" value="${ysapreturnprocess.outbound.sourceid:HYBRIS}" />
+				<entry key="dh_type" value="${ysapreturnprocess.outbound.idoctype:CRMXIF_ORDER}" />
+			</map>
+		</property>
+	</bean>
+	<alias name="defaultReturnOrderPartnerContributor" alias="returnOrderPartnerContributor" />
+	<bean id="defaultReturnOrderPartnerContributor"
+		class="com.sap.hybris.crm.outbound.impl.DefaultReturnOrderPartnerContributor">
+		<property name="b2CCustomerHelper" ref="sapOrderexchangeB2CCustomerHelper" />
+		<property name="batchIdAttributes">
+			<map key-type="java.lang.String">
+				<entry key="dh_batchId" value="${ysapreturnprocess.outbound.batchid:000001}" />
+				<entry key="dh_sourceId" value="${ysapreturnprocess.outbound.sourceid:HYBRIS}" />
+				<entry key="dh_type" value="${ysapreturnprocess.outbound.idoctype:CRMXIF_ORDER}" />
+			</map>
+		</property>
+	</bean>
+	<alias name="sapOrderexchangeDefaultSendReturnOrderToDataHubHelper"
+		alias="sapOrderexchangeSendReturnOrderToDataHubHelper" />
+	<bean id="sapOrderexchangeDefaultSendReturnOrderToDataHubHelper"
+		class="de.hybris.platform.sap.orderexchange.outbound.impl.DefaultSendOrderToDataHubHelper"
+		parent="sapAbstractSendToDataHubHelper">
+		<property name="rawItemBuilder" ref="defaultCRMSapRawHybrisReturnOrderBuilder"></property>
+		<property name="rawItemType"
+			value="${saporderexchange.orderoutbound.datahub.rawOrderItemType}"></property>
+	</bean>
+	
+	<bean id="sapRefundReasonMappingTransferHubConfiguration" parent="sapCoreDataHubTransferConfiguration">
+		<property name="itemCode" value="SAPReturnOrderReason" />
+		<property name="rawType" value="RawHybrisRefundReasonMapping" />
+		<property name="converter" ref="sapRefundReasonMappingDataHubConverter" />
+	</bean>
+
+
+	<alias name="sapDefaultRefundReasonMappingPopulator" alias="sapRefundReasonMappingPopulator" />
+	<bean id="sapDefaultRefundReasonMappingPopulator"
+		class="com.sap.hybris.crm.returns.populators.DefaultRefundReasonMappingPopulator"
+		scope="prototype" />
+
+	<alias name="sapDefaultRefundReasonMappingDataHubConverter"
+		alias="sapRefundReasonMappingDataHubConverter" />
+	<bean id="sapDefaultRefundReasonMappingDataHubConverter" parent="abstractPopulatingConverter">
+		<lookup-method name="createTarget" bean="sapCoreDataHubPropertyMap" />
+		<property name="populators">
+			<list>
+				<ref bean="sapCoreGenericModel2MapPopulator" />
+				<ref bean="sapRefundReasonMappingPopulator" />
+			</list>
+		</property>
+	</bean>
+</beans>

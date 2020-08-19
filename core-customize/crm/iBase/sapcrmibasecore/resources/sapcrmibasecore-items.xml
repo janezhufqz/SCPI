@@ -1,0 +1,906 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- ~ [y] hybris Platform ~ ~ Copyright (c) 2000-2016 SAP SE ~ All rights 
+	reserved. ~ ~ This software is the confidential and proprietary information 
+	of SAP ~ Hybris ("Confidential Information"). You shall not disclose such 
+	~ Confidential Information and shall use it only in accordance with the ~ 
+	terms of the license agreement you entered into with SAP Hybris. -->
+<!-- ATTENTION: This is just an example file. You have to edit it according 
+	to your needs. -->
+
+<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="items.xsd">
+
+
+	<relations>
+		<relation code="IBase2IBaseComponentRelation" localized="false"
+			generate="true" autocreate="true">
+			<sourceElement type="IBase" qualifier="iBase"
+				cardinality="one">
+				<modifiers read="true" write="true" search="true"
+					optional="true" />
+			</sourceElement>
+			<targetElement type="IBaseComponent" qualifier="components"
+				cardinality="many" collectiontype="list" ordered="false">
+				<modifiers read="true" write="true" search="true"
+					optional="true" partof="true" />
+			</targetElement>
+		</relation>
+
+		<relation code="IBase2IBasePartnerRelation" localized="false"
+			generate="true" autocreate="true">
+			<sourceElement type="IBase" qualifier="iBase"
+				cardinality="one">
+				<modifiers read="true" unique="true" write="true" search="true"
+					optional="false" />
+			</sourceElement>
+			<targetElement type="IBasePartner" qualifier="partners"
+				cardinality="many" collectiontype="list" ordered="false">
+				<modifiers read="true" write="true" search="true"
+					optional="true" partof="true" />
+			</targetElement>
+		</relation>
+
+		<relation code="IBase2IBaseStructureRelation" localized="false"
+			generate="true" autocreate="true">
+			<sourceElement type="IBase" qualifier="iBase"
+				cardinality="one">
+				<modifiers read="true" write="true" search="true"
+					optional="true" />
+			</sourceElement>
+			<targetElement type="IBaseStructure" qualifier="structures"
+				cardinality="many" collectiontype="list" ordered="false">
+				<modifiers read="true" write="true" search="true"
+					optional="true" partof="true" />
+			</targetElement>
+		</relation>
+	</relations>
+	<itemtypes>
+		<itemtype code="IBaseType" extends="GenericItem" autocreate="true"
+			generate="true">
+			<deployment table="IBaseType" typecode="7011" />
+			<attributes>
+				<attribute type="java.lang.String" qualifier="code">
+					<description>Code</description>
+					<modifiers read="true" write="true" search="true" unique="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="description">
+					<description>Description</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		<itemtype code="IBaseStatus" autocreate="true" generate="true">
+			<deployment table="IBaseStatus" typecode="7004" />
+			<attributes>
+				<attribute type="java.lang.String" qualifier="code">
+					<description>Code</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="description">
+					<description>Description</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		<itemtype code="ClassType" autocreate="true" generate="true">
+			<deployment table="ClassType" typecode="7006" />
+			<attributes>
+				<attribute type="java.lang.String" qualifier="code">
+					<description>Code</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="description">
+					<description>Description</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		<itemtype code="ValidationType" autocreate="true" generate="true">
+			<deployment table="ValidationType" typecode="7007" />
+			<attributes>
+				<attribute type="java.lang.String" qualifier="code">
+					<description>Code</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="description">
+					<description>Description</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		<itemtype code="ObjectType" autocreate="true" generate="true">
+			<deployment table="ObjectType" typecode="7008" />
+			<attributes>
+				<attribute type="java.lang.String" qualifier="code">
+					<description>Code</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="description">
+					<description>Description</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		<itemtype code="InternalState" autocreate="true" generate="true">
+			<deployment table="InternalState" typecode="7005" />
+			<attributes>
+				<attribute type="java.lang.String" qualifier="code">
+					<description>Code</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="description">
+					<description>Description</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		<itemtype code="FileId" autocreate="true" generate="true">
+			<deployment table="FileId" typecode="7009" />
+			<attributes>
+				<attribute type="java.lang.String" qualifier="code">
+					<description>Code</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="description">
+					<description>Description</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		<itemtype code="PermissionGroup" autocreate="true" generate="true">
+			<deployment table="PermissionGroup" typecode="7010" />
+			<attributes>
+				<attribute type="java.lang.String" qualifier="code">
+					<description>Code</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="description">
+					<description>Description</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		<itemtype code="ProductObject" autocreate="true" generate="true">
+			<deployment table="ProductObject" typecode="7012" />
+			<attributes>
+				<attribute type="java.lang.String" qualifier="code">
+					<description>Code</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="Product" qualifier="refProduct">
+					<description>Product</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		<itemtype code="IBase" extends="GenericItem" generate="true"
+			autocreate="true">
+			<deployment table="IBase" typecode="7000" />
+			<attributes>
+				<attribute type="java.lang.String" qualifier="guid">
+					<description>IBase GUID</description>
+					<modifiers read="true" write="true" search="true" unique="true"
+						optional="false" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="objectGuid">
+					<description>Object GUID</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="externalId">
+					<description>External ID</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="number">
+					<description>IBase Number</description>
+					<modifiers read="true" write="true" search="true"
+						optional="false" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="IBaseType" qualifier="iBaseType">
+					<description>IBASE TYPE</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="FileId" qualifier="fileId">
+					<description>IBASE Field</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="InternalState" qualifier="internalState">
+					<description>IBASE Internal State</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="ValidationType" qualifier="validationType">
+					<description>IBASE Validation Type</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="PermissionGroup" qualifier="permissionGroup">
+					<description>IBASE Permission Group</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="Language" qualifier="configLanguage">
+					<description>IBASE Config language</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="componentStoreIndicator">
+					<description>IBASE Component Store Indicator</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="usedForVariantConfig">
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="configState">
+					<description>IBASE Config State</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="description">
+					<description>Description</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="IBaseStatus" qualifier="status">
+					<description>IBase Status</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="Address" qualifier="address">
+					<modifiers read="true" write="true" search="false"
+						optional="true" partof="true"/>
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.util.Date" qualifier="sapCreatedTime">
+					<description>SAP Create Time</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="sapCreatedBy">
+					<description>SAP Created By</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.util.Date" qualifier="sapModifiedTime">
+					<description>SAP Modified Time</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="sapModifiedBy">
+					<description>SAP Modified By</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		<itemtype code="IBaseComponent" extends="GenericItem"
+			generate="true" autocreate="true">
+			<deployment table="IBaseComponent" typecode="7001" />
+			<attributes>
+				<attribute type="java.lang.String" qualifier="guid">
+					<description>IBase Component GUID</description>
+					<modifiers read="true" write="true" search="true" unique="true"
+						optional="false" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="objectGuid">
+					<description>Object GUID</description>
+					<modifiers read="true" write="true" search="true" unique="true"
+						optional="false" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="description">
+					<description>Description</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="displayText">
+					<description>Display Text</description>
+					<modifiers read="true" write="false" search="true"
+						optional="true" />
+					<persistence type="dynamic" attributeHandler="componentTypeDynamicDescription" />
+				</attribute>
+				<attribute type="IBase" qualifier="componentIBase">
+					<description>IBase Partner</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="Product" qualifier="product">
+					<description>IBase Product</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="ProductObject" qualifier="object">
+					<description>Object</description>
+					<modifiers read="true" write="true" search="true" unique="false"
+						optional="true" />						
+					<persistence type="property" />
+				</attribute>
+				<attribute type="Address" qualifier="address">
+					<modifiers read="true" write="true" search="false"
+						optional="true" partof="true"/>
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="instanceNumber">
+					<description>Component Instance Number</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="objectAllocation">
+					<description>OBJECT ALLOCATION</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="ObjectType" qualifier="objectType">
+					<description>Object Type</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="ClassType" qualifier="classType">
+					<description>Class Type</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.util.Date" qualifier="validFrom">
+					<description>Component Valid From</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.util.Date" qualifier="validTo">
+					<description>Component Valid To</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.util.Date" qualifier="sapCreatedTime">
+					<description>SAP Create Time</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="sapCreatedBy">
+					<description>SAP Created By</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.util.Date" qualifier="sapModifiedTime">
+					<description>SAP Modified Time</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="sapModifiedBy">
+					<description>SAP Modified By</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="changeNumber">
+					<description>Change Number</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.Boolean" qualifier="archiveFlag">
+					<description>Archive Flag</description>
+					<defaultvalue>java.lang.Boolean.FALSE</defaultvalue>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="sorter">
+					<description>Is Component a Sorter</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="Unit" qualifier="unit">
+					<description>Component Unit</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="configState">
+					<description>Configuration State</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="counter">
+					<description>Counter</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="expert">
+					<description>Expert</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.Integer" qualifier="quantity">
+					<description>Quantity</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="technicalState">
+					<description>Technical State</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="justification">
+					<description>Justification</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.util.Date" qualifier="warrantyStartDate">
+					<description>Warranty Start Date</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.util.Date" qualifier="warrantyEndDate">
+					<description>Warranty End Date</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype code="IBasePartner" extends="GenericItem" generate="true"
+			autocreate="true">
+			<deployment table="IBasePartner" typecode="7003" />
+			<attributes>
+				<attribute type="java.lang.String" qualifier="guid">
+					<description>Partner GUID</description>
+					<modifiers read="true" write="true" search="true" unique="true"
+						optional="false" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="PartnerFunction" qualifier="function">
+					<description>Partner Function</description>
+					<modifiers read="true" write="true" search="true" unique="true"
+						optional="false" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="User" qualifier="partner">
+					<description>IBase Partner/User</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.Boolean" qualifier="mainPartner">
+					<description>Main Partner Indicator</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="displayType">
+					<description>Display Type</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="User" qualifier="refPartner">
+					<description>Reference Partner/User</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="PartnerFunction" qualifier="refPartnerFunction">
+					<description>Reference Partner Function</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.util.Date" qualifier="validFrom">
+					<description>Partner Valid From</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.util.Date" qualifier="validTo">
+					<description>Partner Valid To</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.util.Date" qualifier="sapCreatedTime">
+					<description>SAP Create Time</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="sapCreatedBy">
+					<description>SAP Created By</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.util.Date" qualifier="sapModifiedTime">
+					<description>SAP Modified Time</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="sapModifiedBy">
+					<description>SAP Modified By</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="B2BUnit" qualifier="b2bUnit">
+					<description>IBase B2B Unit</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype code="IBaseStructure" extends="GenericItem"
+			generate="true" autocreate="true">
+			<deployment table="IBaseStructure" typecode="7002" />
+			<attributes>
+				<attribute type="java.lang.String" qualifier="guid">
+					<description>Structure GUID</description>
+					<modifiers read="true" write="true" search="true" unique="true"
+						optional="false" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="IBaseComponent" qualifier="objectGuid">
+					<description>Object GUID</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="IBaseComponent" qualifier="parentObjectGuid">
+					<description>Parent Object GUID</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="IBaseComponent" qualifier="rootObjectGuid">
+					<description>Root Object GUID</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="changeNumber">
+					<description>Change Number</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.Boolean" qualifier="archiveFlag">
+					<description>Archive Flag</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="instanceNumber">
+					<description>Instance</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="position">
+					<description>Position</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="parent">
+					<description>Parent</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="root">
+					<description>Root</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="justification">
+					<description>Justification</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.util.Date" qualifier="validFrom">
+					<description>Structure Valid From</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.util.Date" qualifier="validTo">
+					<description>Structure Valid To</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.util.Date" qualifier="sapCreatedTime">
+					<description>SAP Create Time</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="sapCreatedBy">
+					<description>SAP Created By</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.util.Date" qualifier="sapModifiedTime">
+					<description>SAP Modified Time</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="sapModifiedBy">
+					<description>SAP Modified By</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype code="IBaseAddress" extends="Address" generate="true"
+			autocreate="true">
+			<attributes>
+				<attribute type="java.lang.String" qualifier="addressType">
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.util.Date" qualifier="validFrom">
+					<description>Structure Valid From</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.util.Date" qualifier="validTo">
+					<description>Structure Valid To</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="formOfAddress">
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="name">
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="name2">
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="name3">
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="name4">
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="coName">
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="city">
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="cityNo">
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="postalCode1">
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="postalCode2">
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="postalCode3">
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="poBoxCit">
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="deliveryDis">
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="street">
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="strAbbr">
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="houseNo">
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="strSupll1">
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="strSupll2">
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="location">
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="floor">
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="roomNo">
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="language">
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="sort1">
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="sort2">
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="timeZone">
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="taxJurCode">
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="addressNotes">
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="commType">
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="telNumber1">
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="telExt1">
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="faxNumber">
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="faxExtens">
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+	</itemtypes>
+</items>

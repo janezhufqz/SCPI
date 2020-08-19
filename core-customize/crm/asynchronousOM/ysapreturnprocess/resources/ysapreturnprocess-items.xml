@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+  ~ [y] hybris Platform
+  ~ 
+  ~ Copyright (c) 2000-2016 SAP SE
+  ~ All rights reserved.
+  ~ 
+  ~ This software is the confidential and proprietary information of SAP 
+  ~ Hybris ("Confidential Information"). You shall not disclose such 
+  ~ Confidential Information and shall use it only in accordance with the 
+  ~ terms of the license agreement you entered into with SAP Hybris.
+  -->
+<!--
+	ATTENTION: This is just an example file. You have to edit it according to your needs.
+-->
+
+<items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+			xsi:noNamespaceSchemaLocation="items.xsd">
+	
+	<relations>
+		<relation code="SAPConfigReturnReasonRelation" autocreate="true" localized="false">
+			<sourceElement type="SAPConfiguration" qualifier="sapConfiguration"
+				cardinality="one">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</sourceElement>
+
+			<targetElement type="SAPReturnOrderReason" qualifier="sapReturnReasons"
+				cardinality="many" collectiontype="set" ordered="false">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</targetElement>
+		</relation>
+	</relations>
+	
+	<itemtypes>
+		<itemtype code="ReturnRequest" autocreate="false" generate="false">
+			<attributes>
+				<attribute qualifier="deliveryDocNumber" type="java.lang.String">
+					<persistence type="property" />
+					<description>holds delivery document number from CRM system
+					</description>
+				</attribute>
+				<attribute qualifier="creditMemoNumber" type="java.lang.String">
+					<persistence type="property" />
+					<description>holds credit memo number from CRM system</description>
+				</attribute>
+			</attributes>
+		</itemtype>
+		<itemtype code="SAPConfiguration" autocreate="false"
+			generate="false">
+			<attributes>
+				<attribute qualifier="returnOrderProcesstype" type="java.lang.String">
+					<persistence type="property" />
+					<description>crm return order process type</description>
+				</attribute>						
+				<attribute qualifier="creditMemoProcesstype" type="java.lang.String">
+					<persistence type="property" />
+					<description>crm return order process type</description>
+				</attribute>
+			</attributes>			
+		</itemtype>
+		
+		<itemtype code="SAPReturnOrderReason" extends="GenericItem"
+			jaloclass="com.sap.hybris.crm.jalo.SAPReturnOrderReason"
+			autocreate="true" generate="true">
+
+			<deployment table="SAPReturnOrderReasons" typecode="10047" />
+			<attributes>
+				<attribute qualifier="sapConfiguration" type="SAPConfiguration">
+					<persistence type="property" />
+					<modifiers unique="true" optional="true" read="true"
+						write="false" initial="true" search="true" />
+				</attribute>
+				<attribute qualifier="refundReason" type="RefundReason">
+					<persistence type="property" />
+					<modifiers unique="true" optional="true" read="true"/>
+				</attribute>
+				<attribute qualifier="sapReturnReasonCode" type="java.lang.String"
+					autocreate="true">
+					<persistence type="property" />
+					<modifiers unique="true" optional="true" read="true"/>
+				</attribute>
+			</attributes>
+		</itemtype>
+
+	</itemtypes>
+</items>

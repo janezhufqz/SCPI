@@ -1,0 +1,25 @@
+$iflowURL=https://scpi-tenant-iflmap-gw-url/odata/SAP/REPLICATE-COMPLAINT-FROM-SAP-COMMERCE-TO-SAP-CRM
+
+#**********************************#
+#************ Credentials *********#
+#**********************************#
+INSERT_UPDATE BasicCredential; id[forceWrite=true,unique=true]; password; username
+;scpiCRM; password; username
+
+#**********************************#
+#************  Endpoints  *********#
+#**********************************#
+INSERT_UPDATE Endpoint; id[unique = true]    ; version[unique = true]; specUrl; name
+; scpiComplaintEndpoint          ; unknown ; "$iflowURL;v=1/SAPCpiOutboundComplaints"; scpiComplaintEndpoint
+
+#**********************************************#
+#************  Destination Target  *********#
+#**********************************************#
+INSERT_UPDATE DestinationTarget ; id[unique=true]
+                                ; scpiOutboundDestination
+
+#**********************************************#
+#************  Consumed Destinations  *********#
+#**********************************************#
+INSERT_UPDATE ConsumedDestination; id[unique = true]        ; url                                      ; endpoint(id, version)         ; credential(id) ; additionalProperties(key, value)[map-delimiter = |] ; destinationTarget(id)[forceWrite=true]
+                                 ; scpiComplaintDestination ; "$iflowURL;v=1/SAPCpiOutboundComplaints" ; scpiComplaintEndpoint:unknown ; scpiCRM        ; "csrfURL->$iflowURL;v=1"                            ; scpiOutboundDestination

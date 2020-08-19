@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- [y] hybris Platform Copyright (c) 2000-2013 hybris AG All rights reserved. 
+    This software is the confidential and proprietary information of hybris ("Confidential 
+    Information"). You shall not disclose such Confidential Information and shall 
+    use it only in accordance with the terms of the license agreement you entered 
+    into with hybris. -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+    
+    <alias name="defaultSapCrmSalesConditionsContributor" alias="sapCrmSalesConditionsContributor" />
+    <bean id="defaultSapCrmSalesConditionsContributor"
+        class="de.hybris.platform.sap.sapcrmorderexchange.outbound.impl.DefaultCRMSalesConditionsContributor"
+        parent="defaultSapSalesConditionsContributor">
+        <property name="tax1" value="${saporderexchange.itemtax.code1}" />
+        <property name="batchIdAttributes">
+			<map key-type="java.lang.String">
+				<entry key="dh_batchId" value="${sapcrmorderexchange.outbound.batchid:000001}" />
+				<entry key="dh_sourceId" value="${sapcrmorderexchange.outbound.sourceid:HYBRIS}" />
+				<entry key="dh_type" value="${sapcrmorderexchange.outbound.idoctype:CRMXIF_ORDER}" />
+			</map>
+		</property>
+    </bean>
+
+	<alias name="defaultSapCrmPartnerContributor" alias="sapCrmPartnerContributor" />
+    <bean id="defaultSapCrmPartnerContributor"
+        class="de.hybris.platform.sap.sapcrmorderexchange.outbound.impl.DefaultCRMPartnerContributor" parent="defaultSapPartnerContributor">
+        <property name="b2CCustomerHelper" ref="sapOrderexchangeB2CCustomerHelper" />
+        <property name="batchIdAttributes">
+			<map key-type="java.lang.String">
+				<entry key="dh_batchId" value="${sapcrmorderexchange.outbound.batchid:000001}" />
+				<entry key="dh_sourceId" value="${sapcrmorderexchange.outbound.sourceid:HYBRIS}" />
+				<entry key="dh_type" value="${sapcrmorderexchange.outbound.idoctype:CRMXIF_ORDER}" />
+			</map>
+		</property>
+    </bean>
+
+    <alias name="defaultSapCrmPaymentContributor" alias="sapCrmPaymentContributor" />
+    <bean id="defaultSapCrmPaymentContributor"
+        class="de.hybris.platform.sap.sapcrmorderexchange.outbound.impl.DefaultCRMPaymentContributor"  parent="defaultSapPaymentContributor">
+        <property name="batchIdAttributes">
+			<map key-type="java.lang.String">
+				<entry key="dh_batchId" value="${sapcrmorderexchange.outbound.batchid:000001}" />
+				<entry key="dh_sourceId" value="${sapcrmorderexchange.outbound.sourceid:HYBRIS}" />
+				<entry key="dh_type" value="${sapcrmorderexchange.outbound.idoctype:CRMXIF_ORDER}" />
+			</map>
+		</property>
+    </bean>
+
+    <alias name="defaultSapCRMOrderContributor" alias="sapCrmOrderContributor" />
+    <bean id="defaultSapCRMOrderContributor"
+        class="de.hybris.platform.sap.sapcrmorderexchange.outbound.impl.DefaultCrmOrderContributor"
+        parent="defaultSapOrderContributor" >
+		<property name="batchIdAttributes">
+			<map key-type="java.lang.String">
+				<entry key="dh_batchId" value="${sapcrmorderexchange.outbound.batchid:000001}" />
+				<entry key="dh_sourceId" value="${sapcrmorderexchange.outbound.sourceid:HYBRIS}" />
+				<entry key="dh_type" value="${sapcrmorderexchange.outbound.idoctype:CRMXIF_ORDER}" />
+			</map>
+		</property>        
+    </bean>
+    
+    <alias name="defaultSapCrmOrderEntryContributor" alias="sapCrmOrderEntryContributor" />
+	<bean id="defaultSapCrmOrderEntryContributor" class="de.hybris.platform.sap.orderexchange.outbound.impl.DefaultOrderEntryContributor">
+		<property name="batchIdAttributes">
+			<map key-type="java.lang.String">
+				<entry key="dh_batchId" value="${sapcrmorderexchange.outbound.batchid:000001}" />
+				<entry key="dh_sourceId" value="${sapcrmorderexchange.outbound.sourceid:HYBRIS}" />
+				<entry key="dh_type" value="${sapcrmorderexchange.outbound.idoctype:CRMXIF_ORDER}" />
+			</map>
+		</property>
+	</bean>
+    
+    <alias name="defaultCRMSapRawHybrisOrderBuilder" alias="sapCrmRawHybrisOrderBuilder"/>
+    <bean id="defaultCRMSapRawHybrisOrderBuilder"
+        class="de.hybris.platform.sap.orderexchange.outbound.impl.DefaultRawHybrisOrderBuilder"
+        parent="sapAbstractRawItemBuilder">
+        <property name="contributors">
+            <list>
+                <ref bean="sapCrmSalesConditionsContributor"></ref>
+                <ref bean="sapCrmPaymentContributor"></ref>
+                <ref bean="sapCrmOrderContributor"></ref>
+                <ref bean="sapCrmOrderEntryContributor"></ref>
+                <ref bean="sapCrmPartnerContributor"></ref>
+            </list>
+        </property>
+    </bean>
+    
+    <alias name="sapCrmOrderexchangeDefaultSendOrderToDataHubHelper"
+        alias="sapOrderexchangeSendOrderToDataHubHelper" />
+    <bean id="sapCrmOrderexchangeDefaultSendOrderToDataHubHelper"
+        class="de.hybris.platform.sap.orderexchange.outbound.impl.DefaultSendOrderToDataHubHelper"
+        parent="sapAbstractSendToDataHubHelper">
+        <property name="rawItemBuilder" ref="sapCrmRawHybrisOrderBuilder"></property>
+        <property name="rawItemType"
+            value="${saporderexchange.orderoutbound.datahub.rawOrderItemType}">
+        </property>
+    </bean>
+
+    <alias name="defaultSapSendOrderCancelRequestAsCSVTaskRunner"
+        alias="sapSendOrderCancelRequestAsCSVTaskRunner" />
+    <bean id="defaultSapSendOrderCancelRequestAsCSVTaskRunner"
+        class="de.hybris.platform.sap.orderexchange.taskrunners.SendOrderCancelRequestAsCSVTaskRunner">
+        <property name="orderCancelRequestCSVHelper"
+            ref="sapOrderexchangeSendOrderCancelRequestToDataHubHelper" />
+        <property name="retryDelay" value="${saporderexchange.orderoutbound.retryDelay}"></property>
+        <property name="maxRetries" value="${saporderexchange.orderoutbound.maxRetries}"></property>
+        <property name="modelService" ref="modelService"></property>
+    </bean>
+
+    <alias name="sapOrderexchangeDefaultSendOrderCancelRequestToDataHubHelper"
+        alias="sapOrderexchangeSendOrderCancelRequestToDataHubHelper" />
+    <bean id="sapOrderexchangeDefaultSendOrderCancelRequestToDataHubHelper"
+        class="de.hybris.platform.sap.orderexchange.outbound.impl.DefaultSendOrderCancelRequestToDataHubHelper"
+        parent="sapAbstractSendToDataHubHelper">
+        <property name="rawItemType"
+            value="${saporderexchange.orderoutbound.datahub.rawCancelRequestItemType}"></property>
+        <property name="rawItemBuilder" ref="crmOrderCancelRequestBuilder"></property>
+    </bean>
+
+    <alias name="defaultCrmOrderCancelRequestBuilder" alias="crmOrderCancelRequestBuilder" />
+    <bean id="defaultCrmOrderCancelRequestBuilder"
+        class="de.hybris.platform.sap.orderexchange.outbound.impl.DefaultOrderCancelRequestBuilder"
+        parent="sapAbstractRawItemBuilder">
+        <property name="contributors">
+            <list>
+                <ref bean="crmOrderCancelRequestContributor"></ref>
+            </list>
+        </property>
+    </bean>
+
+    <alias name="defaultCrmOrderCancelRequestContributor" alias="crmOrderCancelRequestContributor" />
+    <bean id="defaultCrmOrderCancelRequestContributor"
+        class="de.hybris.platform.sap.sapcrmorderexchange.outbound.impl.DefaultCrmOrderCancelRequestContributor" parent="defaultSapOrderCancelRequestContributor">
+    	<property name="batchIdAttributes">
+			<map key-type="java.lang.String">
+				<entry key="dh_batchId" value="${sapcrmorderexchange.outbound.batchid:000001}" />
+				<entry key="dh_sourceId" value="${sapcrmorderexchange.outbound.sourceid:HYBRIS}" />
+				<entry key="dh_type" value="${sapcrmorderexchange.outbound.idoctype:CRMXIF_ORDER}" />
+			</map>
+		</property> 
+    </bean>
+
+    <alias name="defaultSapDataHubInboundInvoiceHelper" alias="sapDataHubInboundInvoiceHelper" />
+    <bean id="defaultSapDataHubInboundInvoiceHelper"
+        class="de.hybris.platform.sap.sapcrmorderexchange.inbound.impl.DefaultDataHubInboundInvoiceHelper"
+        parent="sapAbstractDataHubOrderInboundHelper">
+    </bean>
+
+    <alias alias="orderPopulator" name="sapCrmOrderPopulatorPopulatorCRM" />
+    <bean id="sapCrmOrderPopulatorPopulatorCRM"
+        class="de.hybris.platform.sap.sapcrmorderexchange.populator.DefaultOrderPopulatorCRM"
+        parent="defaultOrderPopulator">
+    </bean>
+
+    <alias name="defaultSapCRMDataHubInboundDeliveryHelper" alias="sapDataHubInboundDeliveryHelper" />
+    <bean id="defaultSapCRMDataHubInboundDeliveryHelper"
+        class="de.hybris.platform.sap.sapcrmorderexchange.inbound.impl.DefaultCRMDataHubInboundDeliveryHelper"
+        parent="defaultSapDataHubInboundDeliveryHelper">
+        <property name="consignmentService" ref="consignmentService" />
+    </bean>
+
+    <alias name="defaultSAPCrmOrderCancelStateMappingStrategy" alias="orderCancelStateMappingStrategy" />
+    <bean id="defaultSAPCrmOrderCancelStateMappingStrategy" parent="defaultSAPOrderCancelStateMappingStrategy"
+        scope="prototype" />
+
+</beans>

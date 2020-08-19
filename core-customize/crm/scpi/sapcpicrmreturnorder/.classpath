@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="lib" path="classes"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="testsrc"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry exported="true" kind="lib" path="resources"/>
+	<classpathentry kind="src" path="/platform"/>
+	<classpathentry kind="src" path="/sapcpiadapter"/>
+	<classpathentry kind="lib" path="/datahubadapter"/>
+	<classpathentry exported="true" kind="lib" path="/datahubadapter/bin/datahubadapterserver.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="https://download.hybris.com/api/18.11.0"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" path="/sapcoreconfiguration"/>
+	<classpathentry kind="src" path="/saporderexchange"/>
+	<classpathentry kind="src" path="/ysapreturnprocess"/>
+	<classpathentry kind="output" path="eclipsebin/notused"/>
+</classpath>

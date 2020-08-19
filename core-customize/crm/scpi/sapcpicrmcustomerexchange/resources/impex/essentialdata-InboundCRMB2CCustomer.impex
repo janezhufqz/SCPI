@@ -1,0 +1,64 @@
+INSERT_UPDATE IntegrationObject; code[unique = true]; integrationType(code) 
+; InboundB2CCustomer; INBOUND 
+ 
+INSERT_UPDATE IntegrationObjectItem; integrationObject(code)[unique=true]; code[unique = true]; type(code) 
+; InboundB2CCustomer	; Customer             	; Customer 
+; InboundB2CCustomer	; Address              	; Address 
+; InboundB2CCustomer	; Title                	; Title 
+; InboundB2CCustomer	; PaymentInfo          	; PaymentInfo 
+; InboundB2CCustomer	; Language             	; Language 
+; InboundB2CCustomer	; Country              	; Country 
+; InboundB2CCustomer	; User                 	; User 
+; InboundB2CCustomer	; CreditCardType       	; CreditCardType 
+; InboundB2CCustomer	; CreditCardPaymentInfo	; CreditCardPaymentInfo 
+ 
+INSERT_UPDATE IntegrationObjectItemAttribute; integrationObjectItem(integrationObject(code), code)[unique = true]; attributeName[unique = true]; attributeDescriptor(enclosingType(code), qualifier); returnIntegrationObjectItem(integrationObject(code), code); unique[default = false]; autoCreate[default = false] 
+; InboundB2CCustomer:Customer             	; incoterms2        	; Customer:incoterms2                  	;                                  	; 	;  
+; InboundB2CCustomer:Customer             	; incoterms1        	; Customer:incoterms1                  	;                                  	; 	;  
+; InboundB2CCustomer:Customer             	; sapIsReplicated   	; Customer:sapIsReplicated             	;                                  	; 	;  
+; InboundB2CCustomer:Customer             	; sessionLanguage   	; Customer:sessionLanguage             	; InboundB2CCustomer:Language      	; 	;  
+; InboundB2CCustomer:Customer             	; addresses         	; Customer:addresses                   	; InboundB2CCustomer:Address       	; 	;  
+; InboundB2CCustomer:Customer             	; sapConsumerID     	; Customer:sapConsumerID               	;                                  	; 	;  
+; InboundB2CCustomer:Customer             	; erpCustomerId     	; Customer:erpCustomerId               	;                                  	; 	;
+; InboundB2CCustomer:Customer             	; crmGuid           	; Customer:crmGuid                     	;                                  	; 	;  
+; InboundB2CCustomer:Customer             	; customerID        	; Customer:customerID                  	;                                  	; true	;  
+; InboundB2CCustomer:Customer             	; title             	; Customer:title                       	; InboundB2CCustomer:Title         	; 	;  
+; InboundB2CCustomer:Customer             	; uid               	; Customer:uid                         	;                                  	; true	;  
+; InboundB2CCustomer:Customer             	; defaultPaymentInfo	; Customer:defaultPaymentInfo          	; InboundB2CCustomer:PaymentInfo   	; 	; true 
+; InboundB2CCustomer:Customer             	; name              	; Customer:name                        	;                                  	; 	;  
+; InboundB2CCustomer:Customer             	; paymentInfos      	; Customer:paymentInfos                	; InboundB2CCustomer:PaymentInfo   	; 	;  
+; InboundB2CCustomer:Address              	; duplicate         	; Address:duplicate                    	;                                  	; true	;  
+; InboundB2CCustomer:Address              	; sapIsReplicated   	; Address:sapIsReplicated              	;                                  	; 	;  
+; InboundB2CCustomer:Address              	; town              	; Address:town                         	;                                  	; 	;  
+; InboundB2CCustomer:Address              	; streetname        	; Address:streetname                   	;                                  	; 	;  
+; InboundB2CCustomer:Address              	; fax               	; Address:fax                          	;                                  	; 	;  
+; InboundB2CCustomer:Address              	; streetnumber      	; Address:streetnumber                 	;                                  	; 	;  
+; InboundB2CCustomer:Address              	; postalcode        	; Address:postalcode                   	;                                  	; 	;  
+; InboundB2CCustomer:Address              	; country           	; Address:country                      	; InboundB2CCustomer:Country       	; 	;  
+; InboundB2CCustomer:Address              	; shippingAddress   	; Address:shippingAddress              	;                                  	; 	;  
+; InboundB2CCustomer:Address              	; publicKey         	; Address:publicKey                    	;                                  	; true	;  
+; InboundB2CCustomer:Address              	; phone1            	; Address:phone1                       	;                                  	; 	;  
+; InboundB2CCustomer:Title                	; code              	; Title:code                           	;                                  	; true	;  
+; InboundB2CCustomer:PaymentInfo          	; duplicate         	; PaymentInfo:duplicate                	;                                  	; 	;  
+; InboundB2CCustomer:PaymentInfo          	; code              	; PaymentInfo:code                     	;                                  	; true	;  
+; InboundB2CCustomer:PaymentInfo          	; user              	; PaymentInfo:user                     	; InboundB2CCustomer:User          	; true	;  
+; InboundB2CCustomer:PaymentInfo          	; saved             	; PaymentInfo:saved                    	;                                  	; 	;  
+; InboundB2CCustomer:Language             	; isocode           	; Language:isocode                     	;                                  	; true	;  
+; InboundB2CCustomer:Country              	; isocode           	; Country:isocode                      	;                                  	; true	;  
+; InboundB2CCustomer:User                 	; uid               	; User:uid                             	;                                  	; true	;  
+; InboundB2CCustomer:CreditCardType       	; code              	; CreditCardType:code                  	;                                  	; true	;  
+; InboundB2CCustomer:CreditCardPaymentInfo	; validFromMonth    	; CreditCardPaymentInfo:validFromMonth 	;                                  	; 	;  
+; InboundB2CCustomer:CreditCardPaymentInfo	; validToMonth      	; CreditCardPaymentInfo:validToMonth   	;                                  	; 	;  
+; InboundB2CCustomer:CreditCardPaymentInfo	; issuer            	; CreditCardPaymentInfo:issuer         	;                                  	; 	;  
+; InboundB2CCustomer:CreditCardPaymentInfo	; validFromYear     	; CreditCardPaymentInfo:validFromYear  	;                                  	; 	;  
+; InboundB2CCustomer:CreditCardPaymentInfo	; issuingDate       	; CreditCardPaymentInfo:issuingDate    	;                                  	; 	;  
+; InboundB2CCustomer:CreditCardPaymentInfo	; subscriptionId    	; CreditCardPaymentInfo:subscriptionId 	;                                  	; 	;  
+; InboundB2CCustomer:CreditCardPaymentInfo	; type              	; CreditCardPaymentInfo:type           	; InboundB2CCustomer:CreditCardType	; 	;  
+; InboundB2CCustomer:CreditCardPaymentInfo	; validToYear       	; CreditCardPaymentInfo:validToYear    	;                                  	; 	;  
+; InboundB2CCustomer:CreditCardPaymentInfo	; user              	; CreditCardPaymentInfo:user           	; InboundB2CCustomer:User          	; true	;  
+; InboundB2CCustomer:CreditCardPaymentInfo	; code              	; CreditCardPaymentInfo:code           	;                                  	; true	;  
+; InboundB2CCustomer:CreditCardPaymentInfo	; number            	; CreditCardPaymentInfo:number         	;                                  	; 	;  
+; InboundB2CCustomer:CreditCardPaymentInfo	; sapIsReplicated   	; CreditCardPaymentInfo:sapIsReplicated	;                                  	; 	;  
+; InboundB2CCustomer:CreditCardPaymentInfo	; saved             	; CreditCardPaymentInfo:saved          	;                                  	; 	;  
+; InboundB2CCustomer:CreditCardPaymentInfo	; ccOwner           	; CreditCardPaymentInfo:ccOwner        	;                                  	; 	;  
+; InboundB2CCustomer:CreditCardPaymentInfo	; cardInc           	; CreditCardPaymentInfo:cardInc        	;                                  	; 	;  

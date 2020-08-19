@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- [y] hybris Platform Copyright (c) 2000-2015 hybris AG All rights reserved. 
+	This software is the confidential and proprietary information of hybris ("Confidential 
+	Information"). You shall not disclose such Confidential Information and shall 
+	use it only in accordance with the terms of the license agreement you entered 
+	into with hybris. -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+           
+    <alias name="sapServiceContractConfigurationAccess" alias="sapServiceContractConfigurationAccess" />
+	<bean id="sapServiceContractConfigurationAccess" parent="sapCoreModuleConfigurationAccess">
+		<property name="moduleId" value="sapservicecontractfacades" />
+			<property name="properties">
+			<map>
+				<entry key="sapServiceContractProcessType" value="SCE" />
+				<entry key="sapServiceContractNoteType" value="1000" />
+				<entry key="maxHits" value="500" />
+			</map>
+		</property>
+	</bean>
+	
+	<alias alias="sapCrmbackendBusinessObject" name="sapCrmbackendBusinessObject" />
+	<bean id="sapCrmbackendBusinessObject" parent="sapCoreBusinessObject"
+		class="com.sap.hybris.crm.sapservicecontractbol.backendbusinessobject.impl.DefaultSapServiceContractBackendBusinessObject">
+		<property name="moduleConfigurationAccess" ref="sapServiceContractConfigurationAccess" />
+		<property name="sessionService" ref="sessionService"></property>
+	</bean>
+
+	<bean id="sapServiceContractFactory"
+		class="com.sap.hybris.crm.sapservicecontractbol.service.factory.impl.DefaultSapServiceContractFactory">
+		<property name="genericFactory" ref="sapCoreGenericFactory" />
+	</bean>
+           
+
+	<alias name="defaultSapCRMServiceContractBackend" alias="defaultSapCRMServiceContractBackend" />
+	<bean id="defaultSapCRMServiceContractBackend"
+		class="com.sap.hybris.crm.sapservicecontractbol.service.backend.impl.DefaultSapCRMServiceContractBackend"
+		scope="sapSession" parent="sapCoreBackendObjectJCo">
+		<property name="moduleConfigurationAccess" ref="sapServiceContractConfigurationAccess" />
+		<property name="managedConnectionFactory" ref="sapCoreJCoManagedConnectionFactory" />
+		<property name="defaultConnectionName" value="JCoStatefulServiceUser" />
+		<property name="defaultDestinationName"
+			value="QD3_RFC" />
+		<property name="userService" ref="userService" />
+		<property name="baseStoreService" ref="baseStoreService" />
+		<property name="i18nService" ref="i18nService" />
+		<property name="jcoFunctionTerminate" value="ZCRM_SC_TERMINATE" />
+		<property name="jcoFuntionRenew" value="CRM_HYB_SC_QUOTATION_CREATE" />
+	</bean>
+	
+	
+	<alias alias="i18nService" name="dummyI18NService"/>
+	<bean id="dummyI18NService" class="com.sap.hybris.crm.sapservicecontractbol.service.DummyI18NService"  >
+	</bean>
+	
+	<alias alias="userService" name="dummyUserService"/>
+	<bean id="dummyUserService" class="com.sap.hybris.crm.sapservicecontractbol.service.DummyUserService"  >
+	</bean>
+	
+	<alias alias="baseStoreService" name="dummyBaseStoreService"/>
+	<bean id="dummyBaseStoreService" class="com.sap.hybris.crm.sapservicecontractbol.service.DummyBaseStoreService"  >
+	</bean>
+</beans>

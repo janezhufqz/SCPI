@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- [y] hybris Platform Copyright (c) 2000-2015 hybris AG All rights reserved. 
+	This software is the confidential and proprietary information of hybris ("Confidential 
+	Information"). You shall not disclose such Confidential Information and shall 
+	use it only in accordance with the terms of the license agreement you entered 
+	into with hybris. -->
+<!-- ATTENTION: This is just an example file. You have to edit it according 
+	to your needs. -->
+
+<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="items.xsd">
+    
+    <relations>
+		<relation code="SAPB2BUnitPaymentInfoRelation" autocreate="true" generate="false" localized="false">
+			<sourceElement type="B2BUnit" qualifier="b2bunit"
+				cardinality="one">
+				<modifiers read="true" write="true" search="true"
+					optional="true" />
+			</sourceElement>
+			<targetElement qualifier="paymentinfos" type="SAPPaymentInfo"
+				collectiontype="set" cardinality="many" ordered="false">
+				<modifiers read="true" write="true" search="true" partof="true"
+					optional="true" />
+			</targetElement>
+		</relation>
+	</relations>
+	
+	
+
+	<itemtypes>
+	
+		<itemtype code="B2BUnit" generate="true" autocreate="false">
+			<attributes>
+
+				<attribute type="java.lang.String" qualifier="b2bunitguid">
+					<description>B2B Unit GUID</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="erpcustomerid">
+					<description>B2B Unit ERP Customer Id</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="incoterms1">
+					<description>B2B Sales Area Unit Incoterms 1</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="incoterms2">
+					<description>>B2B Sales Area Unit Incoterms 2</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="shippingconditions">
+					<description>>B2B Sales Area Unit Shipping Conditions</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="deliverypriority">
+					<description>>B2B Sales Area Unit Delivery Priority</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="termsofpayment">
+					<description>>B2B Sales Area Unit terms of payment</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+
+        <itemtype code="SAPCRMB2BRelations" generate="true"
+			autocreate="true" jaloclass="de.hybris.platform.b2b.jalo.SAPCRMB2BRelations">
+			<deployment table="sapcrmb2brelationstable" typecode="10046" />
+			<attributes>
+				<attribute type="java.lang.String" qualifier="source">
+					<description>Source B2BUnit</description>
+					<modifiers read="true" write="true" search="true"
+						optional="false" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="target">
+					<description>Target B2BUnit</description>
+					<modifiers read="true" write="true" search="true"
+						optional="false" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="addressUsage">
+					<description>Usage Of Source Address in Target</description>
+					<modifiers read="true" write="true" search="true"
+						optional="false" />
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype code="B2BCustomer" generate="false" autocreate="false">
+			<attributes>
+				<attribute qualifier="b2bUnitRelationSent" type="java.lang.Boolean">
+					<description>Indicates if the relationship for this customer has been sent to the SAP system</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<defaultvalue>Boolean.FALSE</defaultvalue>
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		<itemtype code="SAPPaymentInfo" generate="true"
+			autocreate="true">
+			<description>Payment Info Related to SAP Data</description>
+			<deployment table="sappaymentinfotable" typecode="10608" />
+			<attributes>
+				<attribute generate="true" autocreate="true" qualifier="validFrom"
+					type="java.lang.String">
+					<persistence type="property" qualifier="" />
+					<modifiers read="true" write="true" search="true"
+						encrypted="false" optional="true" removable="true" initial="false"
+						unique="false" private="false" partof="false" />
+				</attribute>
+				<attribute generate="true" autocreate="true" qualifier="validTo"
+					type="java.lang.String">
+					<persistence type="property" qualifier="" />
+					<modifiers read="true" write="true" search="true"
+						encrypted="false" optional="true" removable="true" initial="false"
+						unique="false" private="false" partof="false" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		<itemtype code="SAPCCPaymentInfo" generate="true"
+			autocreate="true" extends="SAPPaymentInfo">
+			<description>Credit Card Payment Info Related to SAP Data
+			</description>
+			<attributes>
+			<attribute generate="true" autocreate="true" qualifier="ccOwner"
+					type="java.lang.String">
+					<persistence type="property" qualifier="" />
+					<modifiers read="true" write="true" search="false"
+						encrypted="false" optional="true" removable="true" initial="false"
+						unique="false" private="false" partof="false" />
+				</attribute>
+				<attribute generate="true" autocreate="true" qualifier="cardId"
+					type="java.lang.String">
+					<persistence type="property" qualifier="" />
+					<modifiers read="true" write="false" search="true"
+						encrypted="false" optional="false" removable="false" initial="true"
+						unique="false" private="false" partof="false" />
+				</attribute>
+				<attribute generate="true" autocreate="true" qualifier="cardNumber"
+					type="java.lang.String">
+					<persistence type="property" qualifier="" />
+					<modifiers read="true" write="true" search="false"
+						encrypted="true" optional="true" removable="true" initial="false"
+						unique="false" private="false" partof="true" />
+				</attribute>
+				<attribute generate="true" autocreate="true" qualifier="cardType"
+					type="CreditCardType">
+					<persistence type="property" qualifier="" />
+					<modifiers read="true" write="true" search="false"
+						encrypted="false" optional="true" removable="true" initial="false"
+						unique="false" private="false" partof="false" />
+				</attribute>
+				<attribute generate="true" autocreate="true" qualifier="issuer"
+					type="java.lang.String">
+					<persistence type="property" qualifier="" />
+					<modifiers read="true" write="true" search="false"
+						encrypted="false" optional="true" removable="true" initial="false"
+						unique="false" private="false" partof="false" />
+				</attribute>
+				<attribute generate="true" autocreate="true" qualifier="issuingDate"
+					type="java.lang.String">
+					<persistence type="property" qualifier="" />
+					<modifiers read="true" write="true" search="false"
+						encrypted="false" optional="true" removable="true" initial="false"
+						unique="false" private="false" partof="false" />
+				</attribute>
+				<attribute generate="true" autocreate="true" qualifier="isDefault"
+					type="java.lang.Boolean">
+					<persistence type="property" qualifier="" />
+					<defaultvalue>java.lang.Boolean.FALSE</defaultvalue>
+					<modifiers read="true" write="true" search="false"
+						encrypted="false" optional="true" removable="true" initial="false"
+						unique="false" private="false" partof="false" />
+				</attribute>
+				<attribute generate="true" autocreate="true" qualifier="subscriptionId"
+					type="java.lang.String">
+					<persistence type="property" qualifier="" />
+					<modifiers read="true" write="true" search="false"
+						encrypted="false" optional="true" removable="true" initial="false"
+						unique="false" private="false" partof="false" />
+				</attribute>
+			</attributes>
+		</itemtype>
+	</itemtypes>
+</items>

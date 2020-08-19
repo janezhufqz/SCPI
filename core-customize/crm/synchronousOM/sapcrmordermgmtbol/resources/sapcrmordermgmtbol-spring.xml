@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd"
+           default-init-method="init">
+
+	  
+	  <alias alias="sapCrmOrdermgmtItemBuffer" name="sapCrmOrdermgmtDefaultItemBuffer" />
+	<bean id="sapCrmOrdermgmtDefaultItemBuffer" scope="prototype"
+		class="com.sap.hybris.crm.sapcrmordermgmtbol.transaction.salesdocument.backend.impl.crm.ItemBufferImpl">
+	</bean>
+	
+	<alias alias="sapCrmOrdermgmtReadStrategy" name="sapCrmOrdermgmtDefaultReadStrategy" />
+	<bean id="sapCrmOrdermgmtDefaultReadStrategy" scope="prototype"
+		class="com.sap.hybris.crm.sapcrmordermgmtbol.transaction.salesdocument.backend.impl.crm.strategy.GetAllStrategyCRM">
+		<property name="messageMapper" ref="sapCrmOrdermgmtBackendMessageMapper" />
+		<property name="moduleConfigurationAccess" ref="sapOrdermgmtConfigurationAccess" />
+		<property name="genericFactory" ref="sapCoreGenericFactory" />
+		<property name="orderDetailFunctionModule" value="CRM_HYBRIS_ORDER_GET" />
+		<property name="cacheManager" ref="cacheMgr"></property>
+	</bean>
+	
+	<alias alias="sapCrmOrdermgmtActionsStrategy" name="sapCrmOrdermgmtDefaultActionsStrategy" />
+	<bean id="sapCrmOrdermgmtDefaultActionsStrategy" scope="prototype"
+		class="com.sap.hybris.crm.sapcrmordermgmtbol.transaction.salesdocument.backend.impl.crm.strategy.LrdActionsStrategyCRM">
+		<property name="messageMapper" ref="sapCrmOrdermgmtBackendMessageMapper" />
+		<property name="genericFactory" ref="sapCoreGenericFactory" />
+		<property name="moduleConfigurationAccess" ref="sapOrdermgmtConfigurationAccess" />
+		<property name="getAllStrategy" ref="sapCrmOrdermgmtReadStrategy" />	
+		<property name="orderSetFunctionModule" value="CRM_HYBRIS_ORDER_SET" />
+		<property name="orderDetailFunctionModule" value="CRM_HYBRIS_ORDER_GET" />
+		<property name="orderSaveFunctionModule" value="CRM_HYBRIS_ORDER_SAVE" />
+	</bean>
+	
+	<alias alias="sapCrmOrdermgmtWriteStrategy" name="sapCrmOrdermgmtDefaultWriteStrategy" />
+	<bean id="sapCrmOrdermgmtDefaultWriteStrategy" scope="prototype"
+		class="com.sap.hybris.crm.sapcrmordermgmtbol.transaction.salesdocument.backend.impl.crm.strategy.SetStrategyCRM">
+		<property name="messageMapper" ref="sapCrmOrdermgmtBackendMessageMapper" />
+		<property name="genericFactory" ref="sapCoreGenericFactory" />
+		<property name="orderSetFunctionModule" value="CRM_HYBRIS_ORDER_SET" />
+	</bean>
+	
+<!-- 	added extra -->
+
+	<alias alias="sapCrmOrdermgmtPartnerMapper" name="sapCrmOrdermgmtDefaultPartnerMapper" />
+	<bean id="sapCrmOrdermgmtDefaultPartnerMapper" scope="prototype"
+		class="com.sap.hybris.crm.sapcrmordermgmtbol.transaction.salesdocument.backend.impl.crm.strategy.PartnerMapper">
+		<property name="genericFactory" ref="sapCoreGenericFactory" />
+	</bean>
+
+	<alias alias="sapCrmOrdermgmtHeaderMapper" name="sapCrmOrdermgmtDefaultHeaderMapper" />
+	<bean id="sapCrmOrdermgmtDefaultHeaderMapper" scope="prototype"
+		class="com.sap.hybris.crm.sapcrmordermgmtbol.transaction.salesdocument.backend.impl.crm.strategy.HeaderMapper">
+		<property name="converter" ref="sapCommonConverter"></property>
+		<property name="commonI18NService" ref="commonI18NService" />
+		<property name="moduleConfigurationAccess" ref="sapOrdermgmtConfigurationAccess" />
+			
+	</bean>
+	<alias alias="sapCrmOrdermgmtItemMapper" name="sapCrmOrdermgmtDefaultItemMapper" />
+	<bean id="sapCrmOrdermgmtDefaultItemMapper" scope="prototype"
+		class="com.sap.hybris.crm.sapcrmordermgmtbol.transaction.salesdocument.backend.impl.crm.strategy.ItemMapper">
+		<property name="genericFactory" ref="sapCoreGenericFactory" />
+		<property name="converter" ref="sapCommonConverter"></property>
+	</bean>
+	
+	<bean id="sapCommonDefaultConverterBeCRM"
+		class="com.sap.hybris.crm.sapcrmordermgmtbol.backendobject.impl.ConverterBackendCRM"
+		scope="sapSession" parent="sapCoreBackendObjectJCo">
+	</bean>
+		
+	<alias alias="sapCrmOrdermgmtMessageMappingRulesContainer" name="sapCrmOrdermgmtDefaultMessageMappingRulesContainer" />
+	<bean id="sapCrmOrdermgmtDefaultMessageMappingRulesContainer" scope="prototype"
+		class="com.sap.hybris.crm.sapcrmordermgmtbol.transaction.salesdocument.backend.impl.messagemapping.MessageMappingCRMRulesContainerImpl">
+		<property name="genericFactory" ref="sapCoreGenericFactory" />
+		<property name="moduleConfigurationAccess" ref="sapOrdermgmtConfigurationAccess" />
+		<property name="messageMappingCallbackLoader" ref="sapCrmOrdermgmtMessageMappingCallbackLoader" />
+	</bean>
+	
+
+	<alias alias="sapCrmOrdermgmtMessageMappingRulesLoader" name="sapCrmOrdermgmtDefaultMessageMappingRulesLoader" />
+	<bean id="sapCrmOrdermgmtDefaultMessageMappingRulesLoader" scope="prototype"
+		class="com.sap.hybris.crm.sapcrmordermgmtbol.transaction.salesdocument.backend.impl.messagemapping.MessageMappingCRMRulesLoaderImpl">
+	</bean>
+	
+	<!-- CRM Message Handling -->
+	<alias alias="sapCrmOrdermgmtBackendMessageMapper" name="sapCrmOrdermgmtDefaultBackendMessageMapper" />
+	<bean id="sapCrmOrdermgmtDefaultBackendMessageMapper" scope="prototype"
+		class="com.sap.hybris.crm.sapcrmordermgmtbol.transaction.salesdocument.backend.impl.messagemapping.BackendMessageCRMMapperImpl">
+		<property name="genericFactory" ref="sapCoreGenericFactory" />
+	</bean>
+	
+	
+	<alias alias="sapCrmOrdermgmtMessageMappingCallbackLoader" name="sapCrmOrdermgmtDefaultMessageMappingCallbackLoader" />
+	<bean id="sapCrmOrdermgmtDefaultMessageMappingCallbackLoader" scope="prototype"
+		class="com.sap.hybris.crm.sapcrmordermgmtbol.transaction.salesdocument.backend.impl.messagemapping.MessageMappingCRMCallbackLoader">
+	</bean>
+	
+	
+	
+    
+  
+    
+	
+	
+	
+
+	<!-- Backendtype Added to the implementation for 6.0 Changes RFC Destination -->
+	<alias alias="sapOrdermgmtSearchBO" name="sapCRMOrdermgmtDefaultSearchBO" />
+	<bean id="sapCRMOrdermgmtDefaultSearchBO" parent="sapOrdermgmtDefaultSearchBO">
+		<property name="backendType" value="#{baseStoreService.getCurrentBaseStore().getSAPConfiguration().getSapordermgmt_RFCDestination()?.getBackendType().getCode()}"/> 
+	</bean>
+
+	<alias alias="sapOrdermgmtOrderBO" name="sapCRMOrdermgmtDefaultOrderBO" />
+	<bean id="sapCRMOrdermgmtDefaultOrderBO" parent="sapOrdermgmtDefaultOrderBO">
+		<property name="backendType" value="#{baseStoreService.getCurrentBaseStore().getSAPConfiguration().getSapordermgmt_RFCDestination()?.getBackendType().getCode()}"/>		
+	</bean>
+	
+	<alias alias="sapOrdermgmtCartBO" name="sapCRMOrdermgmtDefaultCartBO" />
+	<bean id="sapCRMOrdermgmtDefaultCartBO" parent="sapOrdermgmtDefaultCartBO">
+		<property name="backendType" value="#{baseStoreService.getCurrentBaseStore().getSAPConfiguration().getSapordermgmt_RFCDestination()?.getBackendType().getCode()}"/>
+	</bean>
+	
+	
+	
+	<alias alias="sapCommonConverter" name="sapCRMCommonDefaultConverter" />
+	<bean id="sapCRMCommonDefaultConverter" parent="sapCommonDefaultConverter">
+		<property name="backendType" value="#{baseStoreService.getCurrentBaseStore().getSAPConfiguration().getSapordermgmt_RFCDestination()?.getBackendType().getCode()}"/>
+	</bean>
+</beans>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- [y] hybris Platform Copyright (c) 2000-2013 hybris AG All rights reserved. 
+	This software is the confidential and proprietary information of hybris ("Confidential 
+	Information"). You shall not disclose such Confidential Information and shall 
+	use it only in accordance with the terms of the license agreement you entered 
+	into with hybris. -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<!-- Customer Export -->
+	<alias alias="customerExportService" name="defaultCRMCustomerExportService" />
+	<bean id="defaultCRMCustomerExportService"
+		class="com.sap.hybris.sapcrmcustomerb2c.outbound.CRMCustomerExportService"
+		parent="defaultCustomerExportService">
+		<property name="dataHubOutboundService" ref="dataHubOutboundService" />
+		<property name="customerNameStrategy" ref="customerNameStrategy" />
+		<property name="feed" value="${sapcustomerexchange.outbound.datahub.feed}" />
+		<property name="cardType" value="${sapcrmcustomer.creditcard.type}" />
+		<property name="commonI18NService" ref="commonI18NService" />
+		<property name="sapGlobalConfigurationService" ref="sapCoreSAPGlobalConfigurationService" />
+		<property name="baseSiteService" ref="baseSiteService" />
+		<property name="commerceConsentService" ref="commerceConsentService" />
+		<property name="consentTemplateId" value="MARKETING_NEWSLETTER" />
+		<property name="consentTemplateVersion" value="#{new Integer(0)}" />
+		<property name="flexibleSearchService" ref="flexibleSearchService"/>
+		<property name="modelService" ref="modelService"/>
+	</bean>
+
+	<!-- action to trigger the sap consumer -->
+	<alias alias="customerPublishAction" name="defaultCRMCustomerPublishAction" />
+	<bean id="defaultCRMCustomerPublishAction"
+		class="com.sap.hybris.sapcrmcustomerb2c.outbound.CRMCustomerPublishAction"
+		parent="defaultCustomerPublishAction">
+		<property name="customerExportService" ref="customerExportService" />
+		<property name="storeSessionFacade" ref="storeSessionFacade" />
+		<property name="customerAccountService" ref="customerAccountService" />
+		<property name="eventService" ref="eventService" />
+	</bean>
+
+	<bean id="replicatedCustomerRepairJob"
+		class="com.sap.hybris.sapcrmcustomerb2c.cronjob.RepairReplicatedCustomerPerformable"
+		parent="abstractJobPerformable">
+		<property name="customerExportService" ref="customerExportService" />
+		<property name="storeSessionFacade" ref="storeSessionFacade" />
+		<property name="baseStoreService" ref="baseStoreService" />
+		<property name="baseSiteService" ref="baseSiteService" />
+		<property name="eventService" ref="eventService" />
+	</bean>
+
+	<alias alias="defaultCustomerInterceptor" name="defaultCRMCustomerInterceptor" />
+	<bean id="defaultCRMCustomerInterceptor"
+		class="com.sap.hybris.sapcrmcustomerb2c.outbound.DefaultCRMCustomerInterceptor"
+		autowire="byName">
+		<property name="modelService" ref="modelService" />
+		<property name="customerExportService" ref="customerExportService" />
+		<property name="baseSiteService" ref="baseSiteService" />
+		<property name="eventService" ref="eventService" />
+	</bean>
+	<alias alias="defaultAddressInterceptor" name="defaultCRMAddressInterceptor" />
+	<bean id="defaultCRMAddressInterceptor"
+		class="com.sap.hybris.sapcrmcustomerb2c.outbound.DefaultCRMAddressInterceptor"
+		autowire="byName">
+		<property name="customerExportService" ref="customerExportService" />
+		<property name="baseSiteService" ref="baseSiteService" />
+		<property name="eventService" ref="eventService" />
+	</bean>
+	<bean id="defaultCRMAddressRemoveInterceptor"
+		class="com.sap.hybris.sapcrmcustomerb2c.outbound.DefaultCRMAddressRemoveInterceptor">
+		<property name="storeSessionFacade" ref="storeSessionFacade" />
+		<property name="customerExportService" ref="customerExportService" />
+		<property name="baseStoreService" ref="baseStoreService" />
+		<property name="baseSiteService" ref="baseSiteService" />
+		<property name="eventService" ref="eventService" />
+	</bean>
+	<bean id="defaultCRMAddressRemoveInterceptorMapping"
+		class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor" ref="defaultCRMAddressRemoveInterceptor" />
+		<property name="typeCode" value="Address" />
+		<property name="order" value="5000" />
+	</bean>
+
+	<bean id="creditCardInterceptorMapping"
+		class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor" ref="defaultCreditCardInterceptor" />
+		<property name="typeCode" value="CreditCardPaymentInfo" />
+		<property name="order" value="5076" />
+	</bean>
+	<bean id="defaultCreditCardInterceptor"
+		class="com.sap.hybris.sapcrmcustomerb2c.outbound.DefaultCreditCardInterceptor">
+		<property name="baseStoreService" ref="baseStoreService" />
+		<property name="storeSessionFacade" ref="storeSessionFacade" />
+		<property name="customerExportService" ref="customerExportService" />
+		<property name="baseSiteService" ref="baseSiteService" />
+		<property name="eventService" ref="eventService" />
+	</bean>
+
+	<bean id="defaultCRMCustomerRemoveInterceptor"
+		class="com.sap.hybris.sapcrmcustomerb2c.outbound.DefaultCRMCustomerRemoveInterceptor">
+		<property name="customerExportService" ref="customerExportService" />
+		<property name="eventService" ref="eventService" />
+	</bean>
+	<bean id="defaultCRMCustomerRemoveInterceptorMapping"
+		class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor" ref="defaultCRMCustomerRemoveInterceptor" />
+		<property name="typeCode" value="Customer" />
+		<property name="order" value="5080" />
+	</bean>
+
+	 <!-- CONSENT LISTENER -->														
+	<bean id="defaultConsentEventListener"
+		class="com.sap.hybris.sapcrmcustomerb2c.outbound.DefaultConsentEventListener">
+		<property name="modelService" ref="modelService" />
+		<property name="baseStoreService" ref="baseStoreService" />
+		<property name="baseSiteService" ref="baseSiteService" />
+		<property name="storeSessionFacade" ref="storeSessionFacade" />
+		<property name="customerExportService" ref="customerExportService" />
+		<property name="eventService" ref="eventService" />
+	</bean>
+	
+	<alias name="crmCustomerReplicationEventListener" alias="crmCustomerReplicationEventListener" />
+	<bean id="crmCustomerReplicationEventListener"
+		class="com.sap.hybris.sapcrmcustomerb2c.outbound.events.impl.CRMCustomerReplicationEventListener">
+		<property name="customerExportService" ref="customerExportService" />
+		<property name="clusterService" ref="clusterService" />
+		<property name="tenantService" ref="tenantService" />
+		<property name="sapGlobalConfigurationService" ref="sapCoreSAPGlobalConfigurationService" />
+	</bean>
+</beans>

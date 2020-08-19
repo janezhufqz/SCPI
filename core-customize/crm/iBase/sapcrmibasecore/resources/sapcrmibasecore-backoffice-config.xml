@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<config xmlns="http://www.hybris.com/cockpit/config">
+
+	<context component="explorer-tree" merge-by="module">
+		<n:explorer-tree xmlns:n="http://www.hybris.com/cockpitng/config/explorertree">
+			<n:navigation-node id="hmc_installedbasegroup">
+				<n:type-node id="IBase" code="IBase" />
+				<n:type-node id="IBaseComponent" code="IBaseComponent" />
+				<n:type-node id="IBasePartner" code="IBasePartner" />
+				<n:type-node id="IBaseStructure" code="IBaseStructure" />
+
+			</n:navigation-node>
+		</n:explorer-tree>
+	</context>
+
+	<context merge-by="type" parent="GenericItem" type="IBase"
+		component="listview">
+		<list-view:list-view
+			xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="number" />
+			<list-view:column qualifier="description" />
+			<list-view:column qualifier="externalId" />
+			<list-view:column qualifier="iBaseType" />
+			<list-view:column qualifier="sapCreatedTime" />
+			<list-view:column qualifier="sapModifiedTime" />
+			<list-view:column qualifier="status" />
+		</list-view:list-view>
+	</context>
+
+	<context merge-by="type" parent="GenericItem" type="IBaseComponent"
+		component="listview">
+		<list-view:list-view
+			xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="instanceNumber" />
+			<list-view:column qualifier="displayText" />
+			<list-view:column qualifier="product" />
+			<list-view:column qualifier="objectType" />
+			<list-view:column qualifier="warrantyStartDate" />
+			<list-view:column qualifier="warrantyEndDate" />
+		</list-view:list-view>
+	</context>
+
+	<context merge-by="type" parent="GenericItem" type="IBasePartner"
+		component="listview">
+		<list-view:list-view
+			xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="function" />
+			<list-view:column qualifier="partner" />
+			<list-view:column qualifier="displayType" />
+			<list-view:column qualifier="mainPartner" />
+			<list-view:column qualifier="validFrom" />
+			<list-view:column qualifier="validTo" />
+		</list-view:list-view>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="IBaseStructure"
+		component="listview">
+		<list-view:list-view
+			xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="instanceNumber" />
+			<list-view:column qualifier="objectGuid" />
+			<list-view:column qualifier="parentObjectGuid" />
+			<list-view:column qualifier="rootObjectGuid" />
+			<list-view:column qualifier="position" />
+		</list-view:list-view>
+	</context>
+
+	<context merge-by="type" parent="GenericItem" type="IBase"
+		component="advanced-search">
+		<advanced-search:advanced-search
+			xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list>
+				<advanced-search:field
+					xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="objectGuid"
+					selected="false" />
+				<advanced-search:field
+					xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="externalId"
+					selected="false" />
+				<advanced-search:field
+					xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="number"
+					selected="false" />
+				<advanced-search:field
+					xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="iBaseType"
+					selected="false" />
+				<advanced-search:field
+					xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="status"
+					selected="false" />
+				<advanced-search:field
+					xmlns="http://www.hybris.com/cockpitng/config/advancedsearch"
+					editor="java.lang.Long" name="pk" selected="false" />
+			</advanced-search:field-list>
+		</advanced-search:advanced-search>
+	</context>
+
+	<context merge-by="type" parent="GenericItem" type="IBaseComponent"
+		component="advanced-search">
+		<advanced-search:advanced-search
+			xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list>
+				<advanced-search:field
+					xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="guid"
+					selected="false" />
+				<advanced-search:field
+					xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="partner"
+					selected="false" />
+				<advanced-search:field
+					xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="product"
+					selected="false" />
+				<advanced-search:field
+					xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="objectType"
+					selected="false" />
+				<advanced-search:field
+					xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="warrantyStartDate"
+					selected="false" />
+				<advanced-search:field
+					xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="warrantyEndDate"
+					selected="false" />
+
+			</advanced-search:field-list>
+		</advanced-search:advanced-search>
+	</context>
+
+	<context merge-by="type" parent="GenericItem" type="IBasePartner"
+		component="advanced-search">
+		<advanced-search:advanced-search
+			xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list>
+				<advanced-search:field
+					xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="partner"
+					selected="false" />
+				<advanced-search:field
+					xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="mainPartner"
+					selected="false" />
+				<advanced-search:field
+					xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="guid"
+					selected="false" />
+				<advanced-search:field
+					xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="validFrom"
+					selected="false" />
+				<advanced-search:field
+					xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="validTo"
+					selected="false" />
+				<advanced-search:field
+					xmlns="http://www.hybris.com/cockpitng/config/advancedsearch"
+					editor="java.lang.Long" name="pk" selected="false" />
+			</advanced-search:field-list>
+		</advanced-search:advanced-search>
+	</context>
+
+	<context merge-by="type" parent="GenericItem" type="IBaseStructure"
+		component="advanced-search">
+		<advanced-search:advanced-search
+			xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list>
+				<advanced-search:field
+					xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="guid"
+					selected="false" />
+				<advanced-search:field
+					xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="parentObjectGuid"
+					selected="false" />
+				<advanced-search:field
+					xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="rootObjectGuid"
+					selected="false" />
+				<advanced-search:field
+					xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="parent"
+					selected="false" />
+				<advanced-search:field
+					xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="root"
+					selected="false" />
+				<advanced-search:field
+					xmlns="http://www.hybris.com/cockpitng/config/advancedsearch"
+					editor="java.lang.Long" name="pk" selected="false" />
+			</advanced-search:field-list>
+		</advanced-search:advanced-search>
+	</context>
+
+	<context merge-by="type" parent="GenericItem" type="IBase"
+		component="simple-search">
+		<simple-search:simple-search
+			xmlns:simple-search="http://www.hybris.com/cockpitng/config/simplesearch">
+			<simple-search:field
+				xmlns="http://www.hybris.com/cockpitng/config/simplesearch" name="guid" />
+		</simple-search:simple-search>
+	</context>
+
+
+	<context merge-by="type" parent="GenericItem" type="IBase"
+		component="editor-area">
+		<editorArea:editorArea
+			xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab name="hmc.tab.general">
+				<editorArea:section name="hmc.section.general">
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="number" />
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="description" />
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="iBaseType" />
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="status" />
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="externalId" />
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="permissionGroup" />
+				</editorArea:section>
+				<editorArea:section name="hmc.section.address">
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="address" />
+				</editorArea:section>
+				<editorArea:section name="hmc.section.partiesInvolved">
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="partners" />
+				</editorArea:section>
+				<editorArea:section name="hmc.section.components">
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="components" />
+				</editorArea:section>
+				<editorArea:section name="hmc.section.structures">
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="structures" />
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+
+	<context merge-by="type" parent="GenericItem" type="IBaseComponent"
+		component="editor-area">
+		<editorArea:editorArea
+			xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab name="hmc.tab.general">
+				<editorArea:section name="hmc.section.general">
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="objectGuid" />
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="description" />
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="configState" />
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="guid" />
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="unit" />
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="warrantyStartDate" />
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="warrantyEndDate" />
+				</editorArea:section>
+				<editorArea:section name="hmc.section.address">
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="address" />
+				</editorArea:section>
+				<editorArea:section name="hmc.section.partiesInvolved">
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="partner" />
+				</editorArea:section>
+				<editorArea:section name="hmc.section.products">
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="product" />
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+
+	<context merge-by="type" parent="GenericItem" type="ObjectType"
+		component="base">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:labels>
+				<y:label>description</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+
+	<context merge-by="type" parent="GenericItem" type="IBase"
+		component="base">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:labels>
+				<y:label>number</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+
+	<context merge-by="type" parent="GenericItem" type="PermissionGroup"
+		component="base">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:labels>
+				<y:label>description</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+
+	<context merge-by="type" parent="GenericItem" type="ValidationType"
+		component="base">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:labels>
+				<y:label>description</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+
+	<context merge-by="type" parent="GenericItem" type="IBaseComponent"
+		component="base">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:labels>
+				<y:label>description</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+
+	<context merge-by="type" parent="GenericItem" type="IBaseStatus"
+		component="base">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:labels>
+				<y:label>description</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+
+	<context merge-by="type" parent="GenericItem" type="IBaseType"
+		component="base">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:labels>
+				<y:label>description</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+
+	<context merge-by="type" parent="GenericItem" type="PartnerFunction"
+		component="base">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:labels>
+				<y:label>description</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+
+	<context merge-by="type" parent="GenericItem" type="IBasePartner"
+		component="base">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:labels>
+				<y:label>partner</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+
+	<context merge-by="type" parent="GenericItem" type="IBaseStructure"
+		component="base">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:labels>
+				<y:label>objectGuid</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+
+	<context merge-by="type" parent="GenericItem" type="IBasePartner"
+		component="editor-area">
+		<editorArea:editorArea
+			xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab name="hmc.tab.general">
+				<editorArea:section name="hmc.section.general">
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="guid" />
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="partner" />
+				</editorArea:section>
+				<editorArea:section name="hmc.section.details">
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="function" />
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="mainPartner" />
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="displayType" />
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="refPartnerFunction" />
+				</editorArea:section>
+				<editorArea:section name="hmc.section.validity">
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="validFrom" />
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="validTo" />
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+
+	<context merge-by="type" parent="GenericItem" type="IBaseStructure"
+		component="editor-area">
+		<editorArea:editorArea
+			xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab name="hmc.tab.general">
+				<editorArea:section name="hmc.section.general">
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="guid" />
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="objectGuid" />
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="changeNumber" />
+				</editorArea:section>
+				<editorArea:section name="hmc.section.hierarchy">
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="parentObjectGuid" />
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="rootObjectGuid" />
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="root" />
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="position" />
+					<editorArea:attribute
+						xmlns="http://www.hybris.com/cockpitng/component/editorArea"
+						qualifier="parent" />
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+</config>

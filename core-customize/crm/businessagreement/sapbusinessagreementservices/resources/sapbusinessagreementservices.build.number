@@ -1,0 +1,10 @@
+#Ant properties
+#Mon Sep 12 09:59:08 CEST 2016
+builddate=20160912 0959
+description=sapbusinessagreementservices
+group.id=de.hybris.platform
+module.name=platform-module
+name=sapbusinessagreementservices
+vendor=hybris
+version=6.2.0.0-SNAPSHOT
+version.api=6.2.0

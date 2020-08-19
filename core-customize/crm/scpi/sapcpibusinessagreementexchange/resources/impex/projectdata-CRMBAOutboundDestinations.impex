@@ -1,0 +1,23 @@
+$iflowURL=https://scpi-tenant-iflmap-gw-url/odata/SAP/REPLICATE-BUSINESSAGREEMENT-FROM-SAP-COMMERCE-TO-SAP-CRM
+
+
+#**********************************#
+#************ Credentials *********#
+#**********************************#
+INSERT_UPDATE BasicCredential; id[forceWrite=true,unique=true]; password; username
+;scpiCRM; password; username
+
+#**********************************#
+#************  Endpoints  *********#
+#**********************************#
+INSERT_UPDATE Endpoint; id[unique = true]; version[unique = true]; specUrl          ; name
+; scpiBusinessAgreementEndpoint          ; unknown               ; "iflowURL;v=1/"; scpiBusinessagreementEndpoint
+
+INSERT_UPDATE DestinationTarget; id[unique=true]
+; scpiOutboundDestination
+
+#**********************************************#
+#************  Consumed Destinations  *********#
+#**********************************************#
+INSERT_UPDATE ConsumedDestination; id[unique = true]               ; url                                               ; endpoint(id, version)                 ; credential(id) ; additionalProperties(key, value)[map-delimiter = |] ; destinationTarget(id)[forceWrite=true]
+                                 ; scpiBusinessagreementDestination; "$iflowURL;v=1/SAPCpiBusinessAgreementOutbounds"  ; scpiBusinessAgreementEndpoint:unknown ; scpiCRM        ; "csrfURL->$iflowURL;v=1"                            ; scpiOutboundDestination

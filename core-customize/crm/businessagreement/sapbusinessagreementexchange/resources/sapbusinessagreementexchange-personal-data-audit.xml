@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<audit-report-config name="PersonalDataReport">
+	<given-root-type>User</given-root-type>
+	<types>
+		<type code="User" mode="append">
+			<virtual-attributes>
+				<virtual-attribute expression="customer" type="BusinessAgreement" many="true" displayName="Agreements" />
+			</virtual-attributes>
+		</type>
+		
+		<type code="BusinessAgreement">
+			<atomic-attributes>
+				<atomic-attribute qualifier="id" displayName="AgreementID" />
+				<atomic-attribute qualifier="text" displayName="AgreementText" />
+			</atomic-attributes>
+
+			<virtual-attributes>
+				<virtual-attribute expression="businessagreement" type="BusinessAgreementHeader" many="true" displayName="AgreementHeaderDetails" />
+			</virtual-attributes>
+		</type>
+		
+		<type code="BusinessAgreementHeader">
+			<atomic-attributes>
+				<atomic-attribute qualifier="validto" displayName="ValidTo" />
+				<atomic-attribute qualifier="validfrom" displayName="ValidFrom" />
+				<atomic-attribute qualifier="bankidinc" displayName="BankIdInc" />
+				<atomic-attribute qualifier="bankidout" displayName="BankIdOut" />
+				<atomic-attribute qualifier="creditcardinc" displayName="CreditCardInc" />
+				<atomic-attribute qualifier="creditcardout" displayName="CreditCardOut" />
+			</atomic-attributes>
+			
+			<virtual-attributes>
+				<virtual-attribute expression="businessagHeader" type="BusinessAgreementRuleHeader" many="true" displayName="AgreementRuleHeaderDetails" />
+			</virtual-attributes>
+		</type>
+		
+		<type code="BusinessAgreementRuleHeader">
+			<atomic-attributes>
+				<atomic-attribute qualifier="businessruleguid" displayName="Guid" />
+			</atomic-attributes>
+			
+			<reference-attributes>
+                <reference-attribute qualifier="paymentmethodinc" displayName="PaymentMethodInc"
+                                     type="CRMBusinessAgreementPaymentMethod"/>
+                <reference-attribute qualifier="paymentmethodout" displayName="PaymentMethodOut"
+                                     type="CRMBusinessAgreementPaymentMethod"/>
+            </reference-attributes>
+		</type>
+		
+		<type code="CRMBusinessAgreementPaymentMethod">
+			<atomic-attributes>
+				<atomic-attribute qualifier="actvbankdetail" displayName="ActiveBankDetail" />
+				<atomic-attribute qualifier="actvaddress" displayName="ActiveAddress" />
+			</atomic-attributes>
+		</type>
+	</types>
+</audit-report-config>

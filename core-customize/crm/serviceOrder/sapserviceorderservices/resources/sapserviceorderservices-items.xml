@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+  
+-->
+<!--
+	ATTENTION: This is just an example file. You have to edit it according to your needs.
+-->
+
+<items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+			xsi:noNamespaceSchemaLocation="items.xsd">
+
+	<enumtypes>
+		<enumtype code="ServiceType" autocreate="true" generate="true"
+			dynamic="true">
+			<value code="ORDER" />
+			<value code="PLAN" />
+		</enumtype>
+
+		<enumtype code="ScheduleStatus" autocreate="true" generate="true"
+			dynamic="true">
+			<value code="OPEN" />
+			<value code="COMPLETED" />
+			<value code="IN_PROCESS" />
+			<value code="RELEASED" />
+			<value code="ACCEPTED" />
+			<value code="RESOLVED" />
+			<value code="INFORMED" />
+			<value code="ASSIGNED" />
+			<value code="AT_CUSTOMER_SITE" />
+			<value code="IN_REVISION" />
+		</enumtype>
+		
+		<enumtype code="OrderStatus" autocreate="false" generate="false"
+			dynamic="true">
+			<value code="IN_PROCESS" />
+			<value code="RELEASED" />
+			<value code="ACCEPTED" />
+			<value code="RESOLVED" />
+			<value code="INFORMED" />
+			<value code="ASSIGNED" />
+			<value code="AT_CUSTOMER_SITE" />
+			<value code="IN_REVISION" />			
+		</enumtype>
+	</enumtypes>
+	<relations>
+		<relation code="ServiceOrderEntryToScheduleItemRelation" generate="true" localized="false" autocreate="true">
+			<description>Relation between Service Order Entry to Schedule items</description>
+			<sourceElement qualifier="serviceOrderEntry"
+				type="ServiceOrderEntry" cardinality="one">
+				<modifiers read="true" write="true" search="true"
+					optional="true" />
+			</sourceElement>
+			<targetElement qualifier="ScheduleEntry" type="scheduleEntry"
+				cardinality="many" collectiontype="list">
+				<modifiers read="true" write="true" search="true"
+					optional="true" />
+			</targetElement>
+		</relation>
+	
+	</relations>
+
+	<itemtypes>
+		<itemtype code="ServiceOrder" extends="Order" autocreate="true"
+			generate="true">
+			<attributes>
+				<attribute qualifier="serviceOrderType" type="ServiceType">
+					<description>items for the Order</description>
+					<persistence type="property" />
+					<modifiers optional="true" />
+				</attribute>
+				<attribute qualifier="ibase" type="java.lang.String">
+					<description>reference number for the iBase</description>
+					<persistence type="property" />
+					<modifiers optional="true" />
+				</attribute>
+				<attribute qualifier="ibasecomponent" type="java.lang.String">
+					<description>reference number of the ibase component</description>
+					<persistence type="property" />
+					<modifiers optional="true" />
+				</attribute>
+				<attribute qualifier="objectid" type="java.lang.String">
+					<description>object id of the ibase</description>
+					<persistence type="property" />
+					<modifiers optional="true" />
+				</attribute>
+				<attribute qualifier="servicecontractid" type="java.lang.String">
+					<description>Service contract id assosiated with the order</description>
+					<persistence type="property" />
+					<modifiers optional="true" />
+				</attribute>
+				<attribute qualifier="servicerequestid" type="java.lang.String">
+					<description>Service request id assosiated with the order</description>
+					<persistence type="property" />
+					<modifiers optional="true" />
+				</attribute>
+				<attribute qualifier="warrantyid" type="java.lang.String">
+					<description>Waranty id assosiated with the Order</description>
+					<persistence type="property" />
+					<modifiers optional="true" />
+				</attribute>
+				<attribute qualifier="requestedstartdate" type="java.util.Date">
+					<description>Requested start date for the Order</description>
+					<persistence type="property" />
+					<modifiers optional="true" />
+				</attribute>
+				<attribute qualifier="requestedenddate" type="java.util.Date">
+					<description>Requested end date for the Order</description>
+					<persistence type="property" />
+					<modifiers optional="true" />
+				</attribute>
+				<attribute qualifier="note" type="java.lang.String">
+					<description>Comments related to order</description>
+					<persistence type="property" />
+					<modifiers optional="true" />
+				</attribute>
+				<attribute qualifier="description" type="java.lang.String" redeclare="true">
+					<description>Discriptions of the order</description>
+					<persistence type="property" />
+					<modifiers optional="true" />
+				</attribute>
+				
+				 <attribute autocreate="true" qualifier="netPrice" type="java.lang.Double" generate="true">
+                    <persistence type="property">
+                        <columntype>
+                            <value>java.math.BigDecimal</value>
+                        </columntype>
+                    </persistence>
+                    <modifiers read="true" write="true" search="true" optional="true"/>
+                    <defaultvalue>Double.valueOf(0.0d)</defaultvalue>
+                </attribute>
+                
+                <attribute qualifier="deleteOrderEntries" type="boolean">
+						<persistence type="property" />
+						<modifiers optional="false" />
+						<defaultvalue>Boolean.FALSE</defaultvalue>
+						<description></description>
+				</attribute>
+			</attributes>
+		</itemtype>
+		<itemtype code="ServiceOrderEntry" autocreate="true"
+			generate="true" extends="OrderEntry">
+			<attributes>
+				<attribute qualifier="itemguid" type="java.lang.String">
+					<description>Item GUID</description>
+					<persistence type="property" />
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+				</attribute>
+				<attribute qualifier="requestedstartdate" type="java.util.Date">
+					<description>Requested start date for the item</description>
+					<persistence type="property" />
+					<modifiers optional="true" />
+				</attribute>
+				<attribute qualifier="requestedenddate" type="java.util.Date">
+					<description>Requested end date for the item</description>
+					<persistence type="property" />
+					<modifiers optional="true" />
+				</attribute>
+			</attributes>
+		</itemtype>
+
+
+		<itemtype code="ScheduleEntry" extends="GenericItem" autocreate="true"
+			generate="true">
+			<deployment table="scheduleEntry" typecode="20911" />
+			<attributes>
+			
+				<attribute qualifier="assignmentid" type="java.lang.String">
+					<description>Assignment id</description>
+					<modifiers write="true" read="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				
+				<attribute autocreate="true" qualifier="status" type="ScheduleStatus">
+					<description>Status Of Each Line</description>
+					<persistence type="property" />
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+				</attribute>
+				
+				<attribute qualifier="ordernumber" type="java.lang.String">
+					<description>Service Order Nubmer</description>
+					<modifiers write="true" read="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="itemnumber" type="java.lang.String">
+					<description>Item Nubmer of the service order </description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="startdate" type="java.util.Date">
+					<description>Scheduled start date for an item in the service order</description>
+					<persistence type="property" />
+					<modifiers read="true" write="true" optional="false"
+						search="true" />
+				</attribute>
+				<attribute qualifier="enddate" type="java.util.Date">
+					<description>Scheduled end date for an item in the service order</description>
+					<persistence type="property" />
+					<modifiers optional="true" read="true" write="true"
+						search="true" />
+				</attribute>
+			</attributes>
+		</itemtype>
+			
+	</itemtypes>
+</items>

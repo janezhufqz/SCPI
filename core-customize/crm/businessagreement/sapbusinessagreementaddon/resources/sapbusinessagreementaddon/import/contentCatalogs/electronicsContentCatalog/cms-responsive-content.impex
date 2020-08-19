@@ -1,0 +1,67 @@
+$contentCatalog=electronicsContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$jarResourceCms=jar:com.sap.hybris.sapbusinessagreementaddon.constants.SapbusinessagreementaddonConstants&/sapbusinessagreementaddon/import/cockpit/cmscockpit
+
+$contentCatalogName=Electronics Content Catalog
+$productCatalog=electronicsProductCatalog
+$productCatalogName=Electronics Product Catalog
+$productCV=catalogVersion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$picture=media(code, $contentCV);
+$image=image(code, $contentCV);
+$media=media(code, $contentCV);
+$page=page(uid, $contentCV);
+$contentPage=contentPage(uid, $contentCV);
+$product=product(code, $productCV)
+$category=category(code, $productCV)
+$addonExtensionName=sapbusinessagreementaddon
+$lang=en
+
+
+# create cms link components for my account pages
+INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;target(code)[default='sameWindow']
+;;BusinessAgreementsLink;BusinessAgreementsLink;/my-company/business-agreements;BusinessAgreementsLink
+
+
+# create navigation root node for my account & child nodes for the root node 
+INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);links(&linkRef);&nodeRef
+;BusinessAgreementsNavNode;;BusinessAgreementsNavNode;MyAccountNavNode;;BusinessAgreementsNavNode
+
+
+# create cms navigation entry for nvaigation child nodes
+INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;navigationNode(&nodeRef);item(&linkRef);
+;BusinessAgreementsNavNodeEntry;;BusinessAgreementsNavNodeEntry;BusinessAgreementsNavNode;BusinessAgreementsLink
+
+
+INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;page;&componentRef
+;;AccountBusinessAgreementComponent;Account business agreements component;/WEB-INF/views/addons/$addonExtensionName/responsive/pages/account/accountBusinessAgreementsPage.jsp;AccountBusinessAgreementComponent
+;;AccountBusinessAgreementDetailHeadlineComponent;Account  business agreement detail header component;/WEB-INF/views/addons/$addonExtensionName/responsive/pages/account/accountBusinessAgreementDetailHeadline.jsp;AccountBusinessAgreementDetailHeadlineComponent
+;;AccountBusinessAgreementDetailOverviewComponent;Account  business agreement detail overview component;/WEB-INF/views/addons/$addonExtensionName/responsive/pages/account/accountBusinessAgreementDetailOverview.jsp;AccountBusinessAgreementDetailOverviewComponent
+
+ ;;AccountBusinessAgreementDetailShippingComponent;Account  business agreement detail shipping component;/WEB-INF/views/addons/$addonExtensionName/responsive/pages/account/accountBusinessAgreementDetailShippingInfo.jsp;AccountBusinessAgreementDetailShippingComponent
+                                          
+;;AccountBusinessAgreementDetailPaymentComponent;Account  business agreement detail payment component;/WEB-INF/views/addons/$addonExtensionName/responsive/pages/account/accountBusinessAgreementDetailPaymentInfo.jsp;AccountBusinessAgreementDetailPaymentComponent
+;;AccountBusinessAgreementDetailCorrespondenceComponent;Account  business agreement detail Correspondence component;/WEB-INF/views/addons/$addonExtensionName/responsive/pages/account/accountBusinessAgreementDetailCorrespondenceInfo.jsp;AccountBusinessAgreementDetailCorrespondenceComponent
+;;AccountBusinessAgreementDetailDunningComponent;Account  business agreement detail Dunning component;/WEB-INF/views/addons/$addonExtensionName/responsive/pages/account/accountBusinessAgreementDetailDunningInfo.jsp;AccountBusinessAgreementDetailDunningComponent
+;;AccountBusinessAgreementDetailTaxRateComponent;Account  business agreement detail Tax rate component;/WEB-INF/views/addons/$addonExtensionName/responsive/pages/account/accountBusinessAgreementDetailTaxRateInfo.jsp;AccountBusinessAgreementDetailTaxRateComponent
+
+
+#cms-content.impex
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false'];previewImage(code, $contentCV)
+;;business-agreements;business agreements Page;AccountPageTemplate;business-agreements
+;;business-agreement; business agreement detail Page;AccountPageTemplate;business-agreement
+
+
+# ContentSlot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;BodyContent-business-agreements;Body Content Slot for My Account business agreements;true;AccountBusinessAgreementComponent;;;
+;;BodyContent-business-agreement;Body Content Slot for business agreement detail page;true;AccountBusinessAgreementDetailHeadlineComponent,AccountBusinessAgreementDetailOverviewComponent,AccountBusinessAgreementDetailShippingComponent,AccountBusinessAgreementDetailPaymentComponent,AccountBusinessAgreementDetailCorrespondenceComponent,AccountBusinessAgreementDetailDunningComponent,AccountBusinessAgreementDetailTaxRateComponent;;;
+
+
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='business-agreements'];contentSlot(uid,$contentCV)[unique=true];;;
+;;BodyContent-business-agreements;BodyContent;;BodyContent-business-agreements;;;
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='business-agreement'];contentSlot(uid,$contentCV)[unique=true];;;
+;;BodyContent-business-agreement;BodyContent;;BodyContent-business-agreement;;;

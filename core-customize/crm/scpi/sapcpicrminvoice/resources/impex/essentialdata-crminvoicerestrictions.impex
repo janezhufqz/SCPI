@@ -1,0 +1,25 @@
+#*******************************************
+#*** Create SAP Integration User Groups ****
+#*******************************************
+INSERT_UPDATE UserGroup; UID[unique = true]        ; locname[lang = en]            ; description                   ; groups(uid)[mode = append]
+					   ; sapInboundCRMInvoiceGroup ; SAP Inbound CRM Invoice Group ; SAP Inbound CRM Invoice Group ; integrationusergroup
+#**********************************************************
+#*** Create SAP Integration Flexible Search Restriction ***
+#**********************************************************
+INSERT_UPDATE SearchRestriction; code[unique = true]                    ; name[lang = en]                             ; query                                                                                                                                                                                                                                               ; principal(UID)       ; restrictedType(code); active; generate
+ 								; sapInboundInvoiceRestriction           ; SAP Inbound CRM Invoice Restriction             ; ({code}='InboundInvoice' AND EXISTS ( {{ select {ug:PK} from {UserGroup as ug} where {ug:PK} IN (?session.user.groups) and {ug:uid} = 'sapInboundCRMInvoiceGroup' }} )) OR ({code}!='InboundInvoice')                                                  ; integrationusergroup ; IntegrationObject   ; true  ; true
+ 
+       
+    
+    
+#**********************************
+#*** Reset The Default Password ***
+#**********************************
+$defaultPassword = nimda
+
+#******************************************
+#*** Create SAP Integration Test Users ****
+#******************************************
+INSERT_UPDATE Employee; UID[unique = true]           ; name                            ; groups(uid)[mode = append]                         ; password[default = $defaultPassword]
+                      ; sapInboundCRMInvoiceUser       ; SAP Inbound CRM Invoice User      ; sapInboundCRMInvoiceGroup,integrationadmingroup      ;
+              

@@ -1,0 +1,29 @@
+$orderIflowURL=https://scpi-tenant-iflmap-gw-url/odata/SAP/REPLICATE-SALES-ORDER-FROM-SAP-COMMERCE-TO-SAP-CRM
+$cancelIflowURL=https://scpi-tenant-iflmap-gw-url/odata/SAP/REPLICATE-SALES-ORDER-CANCELLATIONS-FROM-SAP-COMMERCE-TO-SAP-CRM
+
+#**********************************#
+#************ Credentials *********#
+#**********************************#
+INSERT_UPDATE BasicCredential; id[forceWrite=true,unique=true]; password; username
+;scpiCRM; password; username
+
+
+#**********************************#
+#************  Endpoints  *********#
+#**********************************#
+INSERT_UPDATE Endpoint; id[unique = true]; version[unique = true]; specUrl; name
+; scpiOrderEndpoint          ; unknown ; "$orderIflowURL;v=1/"            ; scpiOrderEndpoint
+; scpiOrderCancellationEndpoint          ; unknown ; "$cancelIflowURL;v=1/"            ; scpiOrderCancellationEndpoint
+
+
+INSERT_UPDATE DestinationTarget; id[unique=true]
+; scpiOutboundDestination
+
+#**********************************************#
+#************  Consumed Destinations  *********#
+#**********************************************#
+INSERT_UPDATE ConsumedDestination; id[unique = true]                ; url                                                    ; endpoint(id, version)                 ; credential(id) ; additionalProperties(key, value)[map-delimiter = |]
+                                 ; scpiOrderDestination             ; "$orderIflowURL;v=1/SAPCpiOutboundOrders"              ; scpiOrderEndpoint:unknown             ; scpiCRM        ; "csrfURL->$orderIflowURL;v=1"
+
+INSERT_UPDATE ConsumedDestination; id[unique = true]                ; url                                                    ; endpoint(id, version)                 ; credential(id) ; additionalProperties(key, value)[map-delimiter = |] ; destinationTarget(id)[forceWrite=true]
+                                 ; scpiOrderCancellationDestination ; "$cancelIflowURL;v=1/SAPCpiOutboundOrderCancellations" ; scpiOrderCancellationEndpoint:unknown ; scpiCRM        ; "csrfURL->$cancelIflowURL;v=1"                      ; scpiOutboundDestination

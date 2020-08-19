@@ -1,0 +1,172 @@
+$contentCatalog=powertoolsContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default='Staged'])[default=$contentCatalog:Staged]
+$contentCatalogName=Powertools Content Catalog
+$productCatalog=powertoolsProductCatalog
+$productCatalogName=Powertools Product Catalog
+$productCV=catalogVersion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$picture=media(code, $contentCV);
+$image=image(code, $contentCV);
+$media=media(code, $contentCV);
+$page=page(uid, $contentCV);
+$contentPage=contentPage(uid, $contentCV);
+$product=product(code, $productCV)
+$category=category(code, $productCV)
+$jarResourceCms=jar:com.sap.hybris.crm.crmcustomerticketingaddon.constants.CrmcustomerticketingaddonConstants&/crmcustomerticketingaddon/import/cockpits/cmscockpit
+$addonExtensionName=crmcustomerticketingaddon
+
+
+INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;page;&componentRef
+;;AccountSupportTicketsHistoryComponent;Account Support Tickets Component;/WEB-INF/views/addons/$addonExtensionName/responsive/pages/account/accountSupportTicketsPage.jsp;AccountSupportTicketsHistoryComponent
+;;AccountCRMAddSupportTicketComponent;Account AddSupport Ticket Component;/WEB-INF/views/addons/$addonExtensionName/responsive/pages/account/accountAddSupportTicketPage.jsp;AccountCRMAddSupportTicketComponent
+;;AccountCRMUpdateSupportTicketComponent;Account UpdateSupport Ticket Component;/WEB-INF/views/addons/$addonExtensionName/responsive/pages/account/accountUpdateSupportTicketPage.jsp;AccountCRMUpdateSupportTicketComponent
+;;CrmSupportTicketRightComponent;Crm Support Ticket Right Component;/WEB-INF/views/addons/$addonExtensionName/responsive/pages/account/crmSupportTicketRightSlot.jsp;CrmSupportTicketRightComponent
+;;AccountCRMAddComplaintComponent;Crm Add Complaint Component;/WEB-INF/views/addons/$addonExtensionName/responsive/pages/account/accountAddComplaintPage.jsp;AccountCRMAddComplaintComponent
+;;AccountCRMUpdateComplaintComponent;Crm Update Complaint Component;/WEB-INF/views/addons/$addonExtensionName/responsive/pages/account/accountUpdateComplaintPage.jsp;AccountCRMUpdateComplaintComponent
+
+
+###########################TEMPLATE CREATION #################################
+INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;frontendTemplateName;restrictedPageTypes(code);active[default=true]
+;;SupportTicketPageTemplate;Support Ticket Page Template;addon:/$addonExtensionName/pages/layout/supportTicketLayoutPage;ContentPage
+
+UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];velocityTemplate[translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+;;SupportTicketPageTemplate 		;$jarResourceCms/structure-view/structure_supportTicketPageTemplate.vm
+
+
+
+# Bind Content Slots to Page Templates
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='SupportTicketPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-SupportTicket;SiteLogo;;SiteLogoSlot;true
+;;HomepageLink-SupportTicket;HomepageNavLink;;HomepageNavLinkSlot;true
+;;NavigationBar-SupportTicket;NavigationBar;;NavigationBarSlot;true
+;;MiniCart-SupportTicket;MiniCart;;MiniCartSlot;true
+;;Footer-SupportTicket;Footer;;FooterSlot;true
+;;HeaderLinks-SupportTicket;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-SupportTicket;SearchBox;;SearchBoxSlot;true
+;;TopHeaderSlot-SupportTicket;TopHeaderSlot;;TopHeaderSlot;true
+;;BottomHeaderSlot-SupportTicket;BottomHeaderSlot;;BottomHeaderSlot;true
+;;RightContent-SupportTicket;RightContenslot;;RightContentSlot;true
+;;PlaceholderContentSlot-SupportTicket;PlaceholderContentSlot;;PlaceholderContentSlot;true
+
+
+# Create Content Slots
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active
+;;RightContentSlot;Right Content Slot;true
+
+# Account Page Template
+# Template used for all of the Account pages
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='SupportTicketPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;HeaderLinks;;;headerlinks
+;SearchBox;;;searchbox
+;MiniCart;;;minicart
+;Section2A;;;wide
+;Section2B;;;wide
+;NavigationBar;;;navigation
+;TopContent;;;wide
+;SideContent;;;narrow
+;BodyContent;;;wide
+;BottomContent;;;wide
+;Footer;;;footer
+;TopHeaderSlot;;;wide
+;BottomHeaderSlot;;;wide
+;PlaceholderContentSlot;;;
+
+#cms-content.impex
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false'];previewImage(code, $contentCV)
+;;crm-support-tickets;Support Tickets Page;AccountPageTemplate;crm-support-tickets
+;;crm-add-support-ticket;Add Support Ticket Page;SupportTicketPageTemplate;crm-add-support-ticket
+;;crm-update-support-ticket;Update Support Ticket Page;SupportTicketPageTemplate;crm-update-support-ticket
+;;crm-add-complaint;Add Complaint Page;SupportTicketPageTemplate;crm-add-complaint
+;;crm-update-complaint;Update Complaint Page;SupportTicketPageTemplate;crm-update-complaint
+
+INSERT_UPDATE AccountNavigationComponent;$contentCV[unique=true];uid[unique=true];name;navigationNode(&nodeRef);styleClass;&componentRef
+;;AccountLeftNavigationComponent;Account Left Navigation Component;AccountLeftNavNode;;AccountLeftNavigationComponent
+
+# ContentSlot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;SideContent-crm-support-tickets;Side Content Slot for My Account Support Tickets History;true;AccountLeftNavigationComponent;;;
+;;BodyContent-crm-support-tickets;Body Content Slot for My Account Support Tickets History;true;AccountSupportTicketsHistoryComponent;;;
+
+#;;SideContent-crm-add-support-ticket;Side Content Slot for AddSupport Ticket;true;AccountLeftNavigationComponent;;;
+#;;BodyContent-crm-add-support-ticket;Body Content Slot for AddSupport Ticket;true;AccountCRMAddSupportTicketComponent;;;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='crm-support-tickets'];contentSlot(uid,$contentCV)[unique=true];;;
+;;SideContent-crm-support-tickets;SideContent;;SideContent-crm-support-tickets;;;
+;;BodyContent-crm-support-tickets;BodyContent;;BodyContent-crm-support-tickets;;;
+
+#INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='crm-add-support-ticket'];contentSlot(uid,$contentCV)[unique=true];;;
+#;;SideContent-crm-add-support-ticket;SideContent;;SideContent-crm-add-support-ticket;;;
+#;;BodyContent-crm-add-support-ticket;BodyContent;;BodyContent-crm-add-support-ticket;;;
+
+
+
+
+# Navigation Bar Component
+INSERT_UPDATE AccountNavigationComponent;$contentCV[unique=true];uid[unique=true];name;navigationNode(&nodeRef);styleClass;&componentRef
+;;AccountSupportTicketHistoryNavigationComponent;Account Support Tickets History Navigation Component;AccountSupportTicketHistoryNavNode;;AccountSupportTicketHistoryNavigationComponent
+
+# CMS Navigation Nodes
+INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);links(&linkRef);&nodeRef
+;AccountSupportTicketHistoryNavNode;;Order History;AccountLeftNavNode;AccountViewSupportTicketHistoryLink;AccountSupportTicketHistoryNavNode
+
+# CMS Link Components
+INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;&componentRef;target(code)[default='sameWindow'];$category;$product;
+;;AccountViewSupportTicketHistoryLink;AccountViewSupportTicketHistoryLink;/my-account/crm-support-tickets;AccountViewSupportTicketHistoryLink;AccountViewSupportTicketHistoryLink;;;;
+;;AccountSupportTicketHistoryLink	   ;AccountSupportTicketHistoryLink;/my-account/crm-support-tickets;AccountSupportTicketHistoryLink;AccountSupportTicketHistoryLink;;;;
+
+INSERT_UPDATE AccountNavigationComponent;$contentCV[unique=true];uid[unique=true];name;navigationNode(&nodeRef);styleClass;&componentRef
+;;AccountSupportTicketHistoryNavigationComponent;Account Support Tickets History Navigation Component;AccountSupportTicketHistoryNavNode;;AccountSupportTicketHistoryNavigationComponent
+
+# Account Navigation Bar Component
+INSERT_UPDATE AccountNavigationCollectionComponent;$contentCV[unique=true];uid[unique=true];components(uid, $contentCV)[mode=append];&componentRef
+;;AccountHomepageComponent;AccountSupportTicketHistoryNavigationComponent;AccountHomepageComponent
+
+INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];parent(uid, $contentCV);links(&linkRef)[mode=append];&nodeRef
+;AccountLeftNavNode;;SiteRootNode;AccountSupportTicketHistoryLink;AccountLeftNavNode
+
+
+################# Update Support Ticket #########################
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;Section2A-crm-update-support-ticket;Update Support Ticket;true;AccountCRMUpdateSupportTicketComponent;;;
+;;Section2B-crm-update-support-ticket;Update Support Ticket;true;CrmSupportTicketRightComponent;;;
+
+
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='crm-update-support-ticket'];contentSlot(uid,$contentCV)[unique=true];;;
+;;Section2A-crm-update-support-ticket;Section2A;;Section2A-crm-update-support-ticket;;;
+;;Section2B-crm-update-support-ticket;Section2B;;Section2B-crm-update-support-ticket;;;
+
+
+################# Add Support Ticket #########################
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;Section2A-crm-add-support-ticket;Add Support Ticket;true;AccountCRMAddSupportTicketComponent;;;
+;;Section2B-crm-add-support-ticket;Add Support Ticket;true;CrmSupportTicketRightComponent;;;
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='crm-add-support-ticket'];contentSlot(uid,$contentCV)[unique=true];;;
+;;Section2A-crm-add-support-ticket;Section2A;;Section2A-crm-add-support-ticket;;;
+;;Section2B-crm-add-support-ticket;Section2B;;Section2B-crm-add-support-ticket;;;
+
+
+################# Add Complaint #########################
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;Section2A-crm-add-complaint;Add Complaint;true;AccountCRMAddComplaintComponent;;;
+;;Section2B-crm-add-complaint;Add Complaint;true;CrmSupportTicketRightComponent;;;
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='crm-add-complaint'];contentSlot(uid,$contentCV)[unique=true];;;
+;;Section2A-crm-add-complaint;Section2A;;Section2A-crm-add-complaint;;;
+;;Section2B-crm-add-complaint;Section2B;;Section2B-crm-add-complaint;;;
+
+################# Update Complaint #########################
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;Section2A-crm-update-complaint;Update Complaint;true;AccountCRMUpdateComplaintComponent;;;
+;;Section2B-crm-update-complaint;Update Complaint;true;CrmSupportTicketRightComponent;;;
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='crm-update-complaint'];contentSlot(uid,$contentCV)[unique=true];;;
+;;Section2A-crm-update-complaint;Section2A;;Section2A-crm-update-complaint;;;
+;;Section2B-crm-update-complaint;Section2B;;Section2B-crm-update-complaint;;;
+
+
+
+

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- ~ [y] hybris Platform ~ ~ Copyright (c) 2000-2016 SAP SE ~ All rights 
+	reserved. ~ ~ This software is the confidential and proprietary information 
+	of SAP ~ Hybris ("Confidential Information"). You shall not disclose such 
+	~ Confidential Information and shall use it only in accordance with the ~ 
+	terms of the license agreement you entered into with SAP Hybris. -->
+<!-- ATTENTION: This is just an example file. You have to edit it according 
+	to your needs. -->
+
+<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="items.xsd">
+
+	<collectiontypes>
+		<collectiontype elementtype="AbstractOrderEntry" code="AssociatedOrderEntryList"
+			type="list" autocreate="true" />
+	</collectiontypes>
+	<itemtypes>
+		<itemtype autocreate="false" code="CsTicket" generate="false"
+			singleton="true">
+			<attributes>
+				<attribute type="AssociatedOrderEntryList" qualifier="associatedOrderEntries">
+					<persistence type="property" />
+					<modifiers unique="false" optional="true" read="true"
+						write="true" search="true" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		<itemtype code="SAPConfiguration" autocreate="false"
+			generate="false">
+			<attributes>
+				<attribute qualifier="comp_serviceOrg" generate="true"
+					autocreate="true" type="java.lang.String">
+					<description>Service org</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="comp_serviceOrgResp" generate="true"
+					autocreate="true" type="java.lang.String">
+					<description>Service org Responsible</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="comp_processType" generate="true"
+					autocreate="true" type="java.lang.String">
+					<description>Service Transaction Type</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="comp_servOrgShort" generate="true"
+					autocreate="true" type="java.lang.String">
+					<description>Service Org Short</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="complaintCatagoryCatalogType"
+					generate="true" autocreate="true" type="java.lang.String">
+					<description>Category Catalog name for Complaint</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="complaintCatagoryCodeGroup"
+					generate="true" autocreate="true" type="java.lang.String">
+					<description>Crm schema id for Complaint</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+	</itemtypes>
+</items>

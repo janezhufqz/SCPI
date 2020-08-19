@@ -1,0 +1,11 @@
+#******************************This file is generated - please do not edit it. It will be regenerated after every build.********************************#
+
+$contentCatalog=electronicsContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$picture=media(code, $contentCV);
+
+# Language
+$lang=zh
+
+UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang]
+;;ServiceOrderLink;"服务订单"

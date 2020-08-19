@@ -1,0 +1,54 @@
+#*****************************************
+#******* B2C CRM Customer Outbound *******
+#*****************************************
+
+INSERT_UPDATE IntegrationObject; code[unique = true];
+; OutboundB2CCustomer
+
+INSERT_UPDATE IntegrationObjectItem; integrationObject(code)[unique = true]; code[unique = true]       ; type(code)
+                         ; OutboundB2CCustomer                   ; SAPCpiOutboundContactAddress      ; SAPCpiOutboundContactAddress
+                         ; OutboundB2CCustomer                   ; SAPCpiOutboundCreditCard      ; SAPCpiOutboundCreditCard
+
+
+INSERT_UPDATE IntegrationObjectItemAttribute; integrationObjectItem(integrationObject(code), code)[unique = true]; attributeName[unique = true]; attributeDescriptor(enclosingType(code), qualifier); returnIntegrationObjectItem(integrationObject(code), code); unique[default = false]
+; OutboundB2CCustomer:SAPCpiOutboundCustomer ; crmGuid  ; SAPCpiOutboundCustomer:crmGuid  ;  
+; OutboundB2CCustomer:SAPCpiOutboundCustomer ; erpCustomerId  ; SAPCpiOutboundCustomer:erpCustomerId  ;
+; OutboundB2CCustomer:SAPCpiOutboundCustomer ; sapSessionLanguage  ; SAPCpiOutboundCustomer:sapSessionLanguage  ;  
+; OutboundB2CCustomer:SAPCpiOutboundCustomer ; b2cFeedType                 ; SAPCpiOutboundCustomer:b2cFeedType                 ;                                              ;
+#; OutboundB2CCustomer:SAPCpiOutboundCustomer ; uid             ; SAPCpiOutboundCustomer:uid             ;                                          ;true
+
+; OutboundB2CCustomer:SAPCpiOutboundCustomer ; isConsentGiven                 ; SAPCpiOutboundCustomer:isConsentGiven                 ;                                              ;
+; OutboundB2CCustomer:SAPCpiOutboundCustomer ; channel  ; SAPCpiOutboundCustomer:channel  ;
+; OutboundB2CCustomer:SAPCpiOutboundCustomer ; valid_from  ; SAPCpiOutboundCustomer:valid_from  ;       
+; OutboundB2CCustomer:SAPCpiOutboundCustomer ; consent_guid  ; SAPCpiOutboundCustomer:consent_guid  ;
+; OutboundB2CCustomer:SAPCpiOutboundCustomer ; consent_flag  ; SAPCpiOutboundCustomer:consent_flag  ;       
+
+; OutboundB2CCustomer:SAPCpiOutboundCustomer ; centralBlock  ; SAPCpiOutboundCustomer:centralBlock  ;
+; OutboundB2CCustomer:SAPCpiOutboundCustomer ; centralArchivingFlag  ; SAPCpiOutboundCustomer:centralArchivingFlag  ;       
+; OutboundB2CCustomer:SAPCpiOutboundCustomer ; notReleased                 ; SAPCpiOutboundCustomer:notReleased                 ;                                              ;
+
+
+; OutboundB2CCustomer:SAPCpiOutboundContactAddress  ; addressGuid              ; SAPCpiOutboundContactAddress:addressGuid                      ;                                              ;
+; OutboundB2CCustomer:SAPCpiOutboundContactAddress  ; street                   ; SAPCpiOutboundContactAddress:street                        ;                                              ;
+; OutboundB2CCustomer:SAPCpiOutboundContactAddress  ; streetNumber             ; SAPCpiOutboundContactAddress:streetNumber                    ;                                              ;
+; OutboundB2CCustomer:SAPCpiOutboundContactAddress  ; town                     ; SAPCpiOutboundContactAddress:town                     ;                                              ;
+; OutboundB2CCustomer:SAPCpiOutboundContactAddress  ; city                     ; SAPCpiOutboundContactAddress:city                       ;                                              ;
+; OutboundB2CCustomer:SAPCpiOutboundContactAddress  ; faxNumber                ; SAPCpiOutboundContactAddress:faxNumber               ;                                              ;
+; OutboundB2CCustomer:SAPCpiOutboundContactAddress  ; phone                    ; SAPCpiOutboundContactAddress:phone                     ;                                              ;
+; OutboundB2CCustomer:SAPCpiOutboundContactAddress  ; postalCode               ; SAPCpiOutboundContactAddress:postalCode                 ;
+; OutboundB2CCustomer:SAPCpiOutboundContactAddress  ; countryIsoCode           ; SAPCpiOutboundContactAddress:countryIsoCode                      ;                                              ;
+; OutboundB2CCustomer:SAPCpiOutboundContactAddress  ; region            	   ; SAPCpiOutboundContactAddress:region                        ;                                              ;
+; OutboundB2CCustomer:SAPCpiOutboundContactAddress  ; isDefault                ; SAPCpiOutboundContactAddress:isDefault                    ;                                              ;true
+
+; OutboundB2CCustomer:SAPCpiOutboundCustomer          ; sapCpiOutboundContactAddress       ; SAPCpiOutboundCustomer:sapCpiOutboundContactAddress       ; OutboundB2CCustomer:SAPCpiOutboundContactAddress        ;
+
+; OutboundB2CCustomer:SAPCpiOutboundCreditCard  ; cardId              		  ; SAPCpiOutboundCreditCard:cardId                      ;                                              ;true
+; OutboundB2CCustomer:SAPCpiOutboundCreditCard  ; cardName                    ; SAPCpiOutboundCreditCard:cardName                        ;                                              ;
+; OutboundB2CCustomer:SAPCpiOutboundCreditCard  ; cardType            		  ; SAPCpiOutboundCreditCard:cardType                    ;                                              ;
+; OutboundB2CCustomer:SAPCpiOutboundCreditCard  ; stampName                   ; SAPCpiOutboundCreditCard:stampName                     ;                                              ;
+; OutboundB2CCustomer:SAPCpiOutboundCreditCard  ; cardNumber                  ; SAPCpiOutboundCreditCard:cardNumber                       ;                                              ;
+; OutboundB2CCustomer:SAPCpiOutboundCreditCard  ; validTo             		  ; SAPCpiOutboundCreditCard:validTo               ;                                              ;
+; OutboundB2CCustomer:SAPCpiOutboundCreditCard  ; isDefault                   ; SAPCpiOutboundCreditCard:isDefault                     ;                                              ;
+
+; OutboundB2CCustomer:SAPCpiOutboundCustomer          ; sapCpiOutboundCreditCard       ; SAPCpiOutboundCustomer:sapCpiOutboundCreditCard       ; OutboundB2CCustomer:SAPCpiOutboundCreditCard        ;
+

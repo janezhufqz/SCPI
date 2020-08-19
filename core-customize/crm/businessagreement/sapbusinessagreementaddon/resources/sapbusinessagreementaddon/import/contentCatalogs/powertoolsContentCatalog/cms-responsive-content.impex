@@ -1,0 +1,68 @@
+$contentCatalog=powertoolsContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$jarResourceCms=jar:com.sap.hybris.sapbusinessagreementaddon.constants.SapbusinessagreementaddonConstants&/sapbusinessagreementaddon/import/cockpit/cmscockpit
+
+
+
+$contentCatalogName=Powertools Content Catalog
+$productCatalog=powertoolsProductCatalog
+$productCatalogName=Powertools Product Catalog
+$productCV=catalogVersion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$picture=media(code, $contentCV);
+$image=image(code, $contentCV);
+$media=media(code, $contentCV);
+$page=page(uid, $contentCV);
+$contentPage=contentPage(uid, $contentCV);
+$product=product(code, $productCV)
+$category=category(code, $productCV)
+$addonExtensionName=sapbusinessagreementaddon
+$lang=en
+
+# create cms link components for my company pages
+INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;target(code)[default='sameWindow']
+;;BusinessAgreementsLink;BusinessAgreementsLink;/my-company/business-agreements;BusinessAgreementsLink
+
+
+# create navigation root node for my company & child nodes for the root node 
+INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);links(&linkRef);&nodeRef
+;BusinessAgreementsNavNode;;BusinessAgreementsNavNode;MyCompanyNavNode;;BusinessAgreementsNavNode
+
+
+# create cms navigation entry for nvaigation child nodes
+INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;navigationNode(&nodeRef);item(&linkRef);
+;BusinessAgreementsNavNodeEntry;;BusinessAgreementsNavNodeEntry;BusinessAgreementsNavNode;BusinessAgreementsLink
+
+INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;page;&componentRef
+;;MyCompanyBusinessAgreementComponent;Company business agreements component;/WEB-INF/views/addons/$addonExtensionName/responsive/pages/company/myCompanyBusinessAgreementsPage.jsp;MyCompanyBusinessAgreementComponent
+
+
+;;MyCompanyBusinessAgreementDetailHeadlineComponent;Company  business agreement detail header component;/WEB-INF/views/addons/$addonExtensionName/responsive/pages/company/myCompanyBusinessAgreementDetailHeadline.jsp;MyCompanyBusinessAgreementDetailHeadlineComponent
+;;MyCompanyBusinessAgreementDetailOverviewComponent;Company  business agreement detail overview component;/WEB-INF/views/addons/$addonExtensionName/responsive/pages/company/myCompanyBusinessAgreementDetailOverview.jsp;MyCompanyBusinessAgreementDetailOverviewComponent
+
+ ;;MyCompanyBusinessAgreementDetailShippingComponent;Company  business agreement detail shipping component;/WEB-INF/views/addons/$addonExtensionName/responsive/pages/company/myCompanyBusinessAgreementDetailShippingInfo.jsp;MyCompanyBusinessAgreementDetailShippingComponent
+                                          
+;;MyCompanyBusinessAgreementDetailPaymentComponent;Company  business agreement detail payment component;/WEB-INF/views/addons/$addonExtensionName/responsive/pages/company/myCompanyBusinessAgreementDetailPaymentInfo.jsp;MyCompanyBusinessAgreementDetailPaymentComponent
+;;MyCompanyBusinessAgreementDetailCorrespondenceComponent;Company  business agreement detail Correspondence component;/WEB-INF/views/addons/$addonExtensionName/responsive/pages/company/myCompanyBusinessAgreementDetailCorrespondenceInfo.jsp;MyCompanyBusinessAgreementDetailCorrespondenceComponent
+;;MyCompanyBusinessAgreementDetailDunningComponent;Company  business agreement detail Dunning component;/WEB-INF/views/addons/$addonExtensionName/responsive/pages/company/myCompanyBusinessAgreementDetailDunningInfo.jsp;MyCompanyBusinessAgreementDetailDunningComponent
+;;MyCompanyBusinessAgreementDetailTaxRateComponent;Company  business agreement detail Tax rate component;/WEB-INF/views/addons/$addonExtensionName/responsive/pages/company/myCompanyBusinessAgreementDetailTaxRateInfo.jsp;MyCompanyBusinessAgreementDetailTaxRateComponent
+
+
+#cms-content.impex
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false'];previewImage(code, $contentCV)
+;;business-agreements;business agreements Page;AccountPageTemplate;business-agreements
+;;business-agreement; business agreement detail Page;AccountPageTemplate;business-agreement
+
+
+# ContentSlot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;BodyContent-business-agreements;Body Content Slot for My Company business agreements;true;MyCompanyBusinessAgreementComponent;;;
+;;BodyContent-business-agreement;Body Content Slot for business agreement detail page;true;MyCompanyBusinessAgreementDetailHeadlineComponent,MyCompanyBusinessAgreementDetailOverviewComponent,MyCompanyBusinessAgreementDetailShippingComponent,MyCompanyBusinessAgreementDetailPaymentComponent,MyCompanyBusinessAgreementDetailCorrespondenceComponent,MyCompanyBusinessAgreementDetailDunningComponent,MyCompanyBusinessAgreementDetailTaxRateComponent;;;
+
+
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='business-agreements'];contentSlot(uid,$contentCV)[unique=true];;;
+;;BodyContent-business-agreements;BodyContent;;BodyContent-business-agreements;;;
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='business-agreement'];contentSlot(uid,$contentCV)[unique=true];;;
+;;BodyContent-business-agreement;BodyContent;;BodyContent-business-agreement;;;

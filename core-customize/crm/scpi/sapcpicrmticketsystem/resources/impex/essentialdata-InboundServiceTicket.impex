@@ -1,0 +1,44 @@
+INSERT_UPDATE IntegrationObject; code[unique = true]; 
+; ServiceTicketInboundIntegrationObject 
+ 
+INSERT_UPDATE IntegrationObjectItem; integrationObject(code)[unique=true]; code[unique = true]; type(code) 
+; ServiceTicketInboundIntegrationObject	; CsTicketResolutionEvent	; CsTicketResolutionEvent 
+; ServiceTicketInboundIntegrationObject	; CsTicketCategory       	; CsTicketCategory 
+; ServiceTicketInboundIntegrationObject	; CsTicketState          	; CsTicketState 
+; ServiceTicketInboundIntegrationObject	; Customer                  ; Customer 
+; ServiceTicketInboundIntegrationObject	; BaseSite               	; BaseSite 
+; ServiceTicketInboundIntegrationObject	; Employee               	; Employee 
+; ServiceTicketInboundIntegrationObject	; AbstractOrder          	; AbstractOrder 
+; ServiceTicketInboundIntegrationObject	; CategorizationCategory 	; CategorizationCategory 
+; ServiceTicketInboundIntegrationObject	; CsAgentGroup           	; CsAgentGroup 
+; ServiceTicketInboundIntegrationObject	; CsTicketPriority       	; CsTicketPriority 
+; ServiceTicketInboundIntegrationObject	; CsTicket               	; CsTicket 
+; ServiceTicketInboundIntegrationObject	; Comment               		; Comment 
+ 
+INSERT_UPDATE IntegrationObjectItemAttribute; integrationObjectItem(integrationObject(code), code)[unique = true]; attributeName[unique = true]; attributeDescriptor(enclosingType(code), qualifier); returnIntegrationObjectItem(integrationObject(code), code); unique[default = false] 
+; ServiceTicketInboundIntegrationObject:Comment					; text					; Comment:text								; 												 				; true
+; ServiceTicketInboundIntegrationObject:CsTicketResolutionEvent	; code               	; CsTicketResolutionEvent:code             	;                                                              	; true 
+; ServiceTicketInboundIntegrationObject:CsTicketCategory       	; code               	; CsTicketCategory:code                    	;                                                              	; true 
+; ServiceTicketInboundIntegrationObject:CsTicketState          	; code               	; CsTicketState:code                       	;                                                              	; true 
+; ServiceTicketInboundIntegrationObject:Customer                	; customerID            	; Customer:customerID                       	;                                                              	; true 
+; ServiceTicketInboundIntegrationObject:BaseSite               	; uid                	; BaseSite:uid                             	;                                                              	; true 
+; ServiceTicketInboundIntegrationObject:Employee               	; uid                	; Employee:uid                             	;                                                              	; true 
+; ServiceTicketInboundIntegrationObject:AbstractOrder          	; code               	; AbstractOrder:code                       	;                                                              	; true 
+; ServiceTicketInboundIntegrationObject:CategorizationCategory 	; categorizationGuid 	; CategorizationCategory:categorizationGuid	;                                                              	; true 
+; ServiceTicketInboundIntegrationObject:CsAgentGroup           	; uid                	; CsAgentGroup:uid                         	;                                                              	; true 
+; ServiceTicketInboundIntegrationObject:CsTicketPriority       	; code               	; CsTicketPriority:code                    	;                                                              	; true 
+; ServiceTicketInboundIntegrationObject:CsTicket               	; order              	; CsTicket:order                           	; ServiceTicketInboundIntegrationObject:AbstractOrder          	;  
+; ServiceTicketInboundIntegrationObject:CsTicket               	; category           	; CsTicket:category                        	; ServiceTicketInboundIntegrationObject:CsTicketCategory       	;  
+; ServiceTicketInboundIntegrationObject:CsTicket               	; reasonCategory     	; CsTicket:reasonCategory                  	; ServiceTicketInboundIntegrationObject:CategorizationCategory 	;  
+; ServiceTicketInboundIntegrationObject:CsTicket               	; isTicketReplicated 	; CsTicket:isTicketReplicated              	;                                                              	;  
+; ServiceTicketInboundIntegrationObject:CsTicket               	; priority           	; CsTicket:priority                        	; ServiceTicketInboundIntegrationObject:CsTicketPriority       	;  
+; ServiceTicketInboundIntegrationObject:CsTicket               	; headline           	; CsTicket:headline                        	;                                                              	;  
+; ServiceTicketInboundIntegrationObject:CsTicket               	; resolution         	; CsTicket:resolution                      	; ServiceTicketInboundIntegrationObject:CsTicketResolutionEvent	;  
+; ServiceTicketInboundIntegrationObject:CsTicket               	; ticketID           	; CsTicket:ticketID                        	;                                                              	; true 
+; ServiceTicketInboundIntegrationObject:CsTicket               	; reasonCategoryLevel	; CsTicket:reasonCategoryLevel             	;                                                              	;  
+; ServiceTicketInboundIntegrationObject:CsTicket               	; state              	; CsTicket:state                           	; ServiceTicketInboundIntegrationObject:CsTicketState          	;  
+; ServiceTicketInboundIntegrationObject:CsTicket               	; customer           	; CsTicket:customer                        	; ServiceTicketInboundIntegrationObject:Customer                ;  
+; ServiceTicketInboundIntegrationObject:CsTicket               	; retentionDate      	; CsTicket:retentionDate                   	;                                                              	;  
+; ServiceTicketInboundIntegrationObject:CsTicket 					; cpi_categorizationcode	; CsTicket:cpi_categorizationcode			; 																; 
+; ServiceTicketInboundIntegrationObject:CsTicket					; resolutionData			; CsTicket:resolutionData					;  				; 
+; ServiceTicketInboundIntegrationObject:CsTicket					; comments				; CsTicket:comments							; ServiceTicketInboundIntegrationObject:Comment 				; 

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- [y] hybris Platform Copyright (c) 2000-2015 hybris AG All rights reserved. 
+	This software is the confidential and proprietary information of hybris ("Confidential 
+	Information"). You shall not disclose such Confidential Information and shall 
+	use it only in accordance with the terms of the license agreement you entered 
+	into with hybris. -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:int="http://www.springframework.org/schema/integration"
+	xmlns:int-jms="http://www.springframework.org/schema/integration/jms"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd
+           http://www.springframework.org/schema/integration 
+           http://www.springframework.org/schema/integration/spring-integration.xsd
+		   http://www.springframework.org/schema/integration/jms 
+		   http://www.springframework.org/schema/integration/jms/spring-integration-jms.xsd">
+
+	<context:annotation-config />
+
+	<bean id="crmcustomerticketingaddonCoreDataImportedEventListener"
+		parent="abstractCoreDataImportedEventListener">
+		<property name="supportedChannels">
+			<list value-type="de.hybris.platform.commerceservices.enums.SiteChannel">
+				<value>B2C</value>
+				<!-- <value>B2B</value> -->
+			</list>
+		</property>
+		<property name="addonExtensionMetadata">
+			<bean class="de.hybris.platform.addonsupport.data.AddonExtensionMetadata">
+				<property name="suffixChannel" value="false" />
+				<property name="baseExtensionName" value="crmcustomerticketingaddon" />
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="crmcustomerticketingaddonSampleDataEventListener"
+		parent="abstractGenericAddOnSampleDataEventListener">
+		<property name="extensionName" value="crmcustomerticketingaddon" />
+	</bean>
+
+	<bean id="sapCrmCustomerTicketInitialDataSystemSetup"
+		class="com.sap.hybris.crm.crmcustomerticketingaddon.setup.CrmcustomerticketingaddonSystemSetup"
+		parent="abstractCoreSystemSetup" />
+
+
+	<!-- Integration channel for linking service ticket with service order -->
+
+	<int:channel id="serviceTicketLinkChannel" />
+
+	<int:service-activator input-channel="serviceTicketLinkChannel"
+		ref="serviceTicketLinkManager" method="serviceTicketLink" />
+
+	<bean id="serviceTicketLinkManager"
+		class="com.sap.hybris.crm.crmcustomerticketingaddon.integration.ServiceTicketLinkManager" />
+
+</beans>

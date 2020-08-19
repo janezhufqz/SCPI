@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<testclasses>
+	<sapcrmpricingbol>
+		<testclass>com.sap.hybris.crm.sapcrmpricingbol.jalo.SapcrmpricingbolTest
+		</testclass>
+		<testclass>com.sap.hybris.crm.sapcrmpricingbol.backend.impl.SapCrmPricingItemMapperTest
+		</testclass>
+		<testclass>com.sap.hybris.crm.sapcrmpricingbol.unittests.base.SapcrmpricingBolSpringJunitTest
+		</testclass>
+		<testclass>com.sap.hybris.crm.sapcrmpricingbol.backend.impl.SapCrmPricingHeaderMapperTest
+		</testclass>
+		<testclass>com.sap.hybris.crm.sapcrmpricingbol.backend.impl.SapCrmPricingMapperTest
+		</testclass>
+		<testclass>com.sap.hybris.crm.sapcrmpricingbol.unittests.base.JCORecTestBase
+		</testclass>
+	</sapcrmpricingbol>
+</testclasses>

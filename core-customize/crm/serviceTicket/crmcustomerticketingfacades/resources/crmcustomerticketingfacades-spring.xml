@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ~ [y] hybris Platform ~ ~ Copyright (c) 2000-2016 SAP SE ~ All rights 
+	reserved. ~ ~ This software is the confidential and proprietary information 
+	of SAP ~ Hybris ("Confidential Information"). You shall not disclose such 
+	~ Confidential Information and shall use it only in accordance with the ~ 
+	terms of the license agreement you entered into with SAP Hybris. -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<!-- Overriding the populator service to populate data for priority -->
+	<alias name="defaultCrmTicketPopulator" alias="defaultCrmTicketPopulator" />
+	<bean id="defaultCrmTicketPopulator"
+		class="com.sap.hybris.crm.crmcustomerticketingfacades.converters.populators.DefaultCrmTicketPopulator"
+		parent="defaultTicketPopulator">
+		<property name="sapCategoriesService" ref="sapCategoriesService" />
+	</bean>
+
+	<alias name="defaultCrmTicketConverter" alias="ticketConverter" />
+	<bean id="defaultCrmTicketConverter" parent="defaultTicketConverter">
+		<lookup-method name="createTarget" bean="ticketData" />
+		<property name="populators">
+			<list>
+				<ref bean="defaultCrmTicketPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- <alias name="defaultCrmCategoryUrlPopulator" alias="categoryUrlPopulator" 
+		/> <bean id="defaultCrmCategoryUrlPopulator" class="com.sap.hybris.crm.crmcustomerticketingfacades.converters.populators.DefaultCrmCategoryUrlPopulator" 
+		parent="defaultCategoryUrlPopulator"> </bean> -->
+
+	<alias name="defaultCategoryReverseConverter" alias="categoryReverseConverter" />
+	<bean id="defaultCategoryReverseConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="de.hybris.platform.category.model.CategoryModel" />
+		<property name="populators">
+			<list>
+				<ref bean="categoryReversePopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultCategoryReversePopulator" alias="categoryReversePopulator" />
+	<bean id="defaultCategoryReversePopulator"
+		class="com.sap.hybris.crm.crmcustomerticketingfacades.converters.populators.DefaultCategoryReversePopulator">
+	</bean>
+
+	<alias name="defaultCrmCustomerTicketingFacade" alias="defaultTicketFacade" />
+	<bean id="defaultCrmCustomerTicketingFacade"
+		class="com.sap.hybris.crm.crmcustomerticketingfacades.facade.impl.DefaultCrmCustomerTicketingFacade"
+		parent="defaultCustomerTicketingFacade">
+		<property name="sapTicketBusinessService" ref="ticketBusinessService" />
+		<property name="categorizationCategoryConverter" ref="categorizationCategoryConverter" />
+		<property name="sapCategoriesService" ref="sapCategoriesService" />
+	</bean>
+
+	<!-- Complaint Associated Orders -->
+	<bean id="complaintOrderAssociationStrategy"
+		class="com.sap.hybris.crm.crmcustomerticketingfacades.strategies.ComplaintOrderAssociationStrategy" />
+
+	<alias name="defaultComplaintOrderCoverter" alias="complaintOrderCoverter" />
+	<bean id="defaultComplaintOrderCoverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.sap.hybris.crm.crmcustomerticketingfacades.data.ComplaintAssociatedOrderData" />
+		<property name="populators">
+			<list merge="true">
+				<ref bean="complaintOrderPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultComplaintOrderPopulator" alias="complaintOrderPopulator" />
+	<bean id="defaultComplaintOrderPopulator"
+		class="com.sap.hybris.crm.crmcustomerticketingfacades.converters.populators.DefaultComplaintOrderPopulator" />
+
+	<alias name="defaultComplaintOrderEntryCoverter" alias="complaintOrderEntryCoverter" />
+	<bean id="defaultComplaintOrderEntryCoverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.sap.hybris.crm.crmcustomerticketingfacades.data.ComplaintAssociatedOrderEntryData" />
+		<property name="populators">
+			<list merge="true">
+				<ref bean="complaintOrderEntryPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultComplaintOrderEntryPopulator" alias="complaintOrderEntryPopulator" />
+	<bean id="defaultComplaintOrderEntryPopulator"
+		class="com.sap.hybris.crm.crmcustomerticketingfacades.converters.populators.DefaultComplaintOrderEntryPopulator" />
+
+
+	<!-- Complaint Associated Orders Ends -->
+
+	<!-- Crm Ticketing list populator -->
+	<alias name="defaultCrmTicketListPopulator" alias="crmTicketListPopulator" />
+	<bean id="defaultCrmTicketListPopulator"
+		class="com.sap.hybris.crm.crmcustomerticketingfacades.converters.populators.DefaultCrmTicketListPopulator" />
+
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="ticketListConverter" />
+		<property name="add" ref="crmTicketListPopulator" />
+	</bean>
+</beans>

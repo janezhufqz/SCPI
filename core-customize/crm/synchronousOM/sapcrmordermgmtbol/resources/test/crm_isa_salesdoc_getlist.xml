@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Repository>
+    <RepositoryVersion>1.0.0</RepositoryVersion>
+    <Functions>
+        <Function functionName="CRM_ISA_SALESDOC_GETLIST" executionOrder="1">
+            <Import>
+                <Element name="BP_CONTACT_GUID" description="GUID of a CRM Order Object, 32 Bit Characters" fieldType="CHAR" maxLength="32"></Element>
+                <Element name="BP_SOLDTO_GUID" description="GUID of a CRM Order Object, 32 Bit Characters" fieldType="CHAR" maxLength="32"></Element>
+                <Element name="CATALOG" description="Prod. catalog number" fieldType="CHAR" maxLength="30"></Element>
+                <Element name="COUNTRY" description="Country key" fieldType="CHAR" maxLength="3"></Element>
+                <Element name="CREATED_AT_C" description="Text field length 14" fieldType="CHAR" maxLength="14"></Element>
+                <Element name="DESCRIPTION" description="Description" fieldType="CHAR" maxLength="40"></Element>
+                <Element name="ENHANCED" description="Steuert die Verarbeitung OLTP Belegen" fieldType="CHAR" maxLength="1"></Element>
+                <Element name="OBJECT_ID" description="Business Transaction Number" fieldType="CHAR" maxLength="10"></Element>
+                <Element name="PO_NUMBER" description="Bestellnummer des Auftraggebers (in Großbuchstaben)" fieldType="CHAR" maxLength="35"></Element>
+                <Element name="PRODUCT_ID" description="Produktnummer (not yet supported)" fieldType="CHAR" maxLength="40"></Element>
+                <Element name="QUOTATION_TYPE" description="' ' = nur einfach, 'S'= nur erweitert, 'B' = beide" fieldType="CHAR" maxLength="1"></Element>
+                <Element name="REQUESTED_BASKETS" description="Single-Character Flag" fieldType="CHAR" maxLength="1"></Element>
+                <Element name="REQUESTED_COLLECTIVE_ORDERS" description="Single-Character Flag" fieldType="CHAR" maxLength="1"></Element>
+                <Element name="REQUESTED_ORDERS" description="Single-Character Flag" fieldType="CHAR" maxLength="1"></Element>
+                <Element name="REQUESTED_QUOTATIONS" description="Single-Character Flag" fieldType="CHAR" maxLength="1"></Element>
+                <Element name="RESELLER" description="Kennzeichnet das Reseller Szenario" fieldType="CHAR" maxLength="1"></Element>
+                <Element name="SHOP" description="Identifier shop" fieldType="CHAR" maxLength="10"></Element>
+                <Element name="USER_STATUS" description="Zu suchender Anwenderstatus wenn REQESTED_.. = 'U'" fieldType="CHAR" maxLength="5"></Element>
+                <Element name="VARIANT" description="Catalog Variant Number" fieldType="CHAR" maxLength="30"></Element>
+            </Import>
+            <Tables>
+                <Table tableName="CRMT_ISALES_BASKETHEAD_UI" name="BASKET">
+                    <LineType>
+                        <ElementMetaData name="GUID" description="GUID of a CRM Order Object, 32 Bit Characters" fieldType="CHAR" maxLength="32"/>
+                        <ElementMetaData name="HANDLE" description="Handle" fieldType="NUM" maxLength="10"/>
+                        <ElementMetaData name="OBJECT_ID" description="Transaction ID" fieldType="CHAR" maxLength="10"/>
+                        <ElementMetaData name="DESCRIPTION" description="Description" fieldType="CHAR" maxLength="40"/>
+                        <ElementMetaData name="POSTING_DATE" description="Field of type DATS" fieldType="DATE" maxLength="8"/>
+                        <ElementMetaData name="SALES_ORG" description="Sales Organization ID" fieldType="CHAR" maxLength="14"/>
+                        <ElementMetaData name="DIS_CHANNEL" description="Distribution Channel" fieldType="CHAR" maxLength="2"/>
+                        <ElementMetaData name="DIVISION" description="Division" fieldType="CHAR" maxLength="2"/>
+                        <ElementMetaData name="SALES_OFFICE" description="Sales Office" fieldType="CHAR" maxLength="14"/>
+                        <ElementMetaData name="PROCESS_TYPE" description="Business Transaction Type" fieldType="CHAR" maxLength="4"/>
+                        <ElementMetaData name="CURRENCY" description="Currency" fieldType="CHAR" maxLength="5"/>
+                        <ElementMetaData name="PO_NUMBER_SOLD" description="Sold-To Party's External Reference Number" fieldType="CHAR" maxLength="35"/>
+                        <ElementMetaData name="SALES_ORG_RESP" description="Organizational Unit (Sales)" fieldType="CHAR" maxLength="14"/>
+                        <ElementMetaData name="SHIP_COND" description="Shipping Conditions" fieldType="CHAR" maxLength="2"/>
+                        <ElementMetaData name="SERVICE_ORG" description="Service Organization" fieldType="CHAR" maxLength="14"/>
+                        <ElementMetaData name="SERVICE_ORG_RESP" description="Organizational Unit (Service)" fieldType="CHAR" maxLength="14"/>
+                        <ElementMetaData name="DLV_PRIO" description="Delivery Priority" fieldType="NUM" maxLength="2"/>
+                        <ElementMetaData name="DLV_PRIO_DESC" description="Description (20 Characters)" fieldType="CHAR" maxLength="20"/>
+                        <ElementMetaData name="NET_VALUE" description="30 Characters" fieldType="CHAR" maxLength="30"/>
+                        <ElementMetaData name="GROSS_VALUE" description="30 Characters" fieldType="CHAR" maxLength="30"/>
+                        <ElementMetaData name="FREIGHT_VALUE" description="30 Characters" fieldType="CHAR" maxLength="30"/>
+                        <ElementMetaData name="TAX_VALUE" description="30 Characters" fieldType="CHAR" maxLength="30"/>
+                        <ElementMetaData name="SHOP_ID" description="Web Shop Identifier" fieldType="CHAR" maxLength="10"/>
+                        <ElementMetaData name="CREATED_AT" description="Field for Date Input" fieldType="CHAR" maxLength="26"/>
+                        <ElementMetaData name="CHANGED_AT" description="Field for Date Input" fieldType="CHAR" maxLength="26"/>
+                        <ElementMetaData name="SHIPTO_LINE_KEY" description="Handle" fieldType="NUM" maxLength="10"/>
+                        <ElementMetaData name="OBJECTS_ORIGIN" description="Logical Destination (Specified in Function Call)" fieldType="CHAR" maxLength="32"/>
+                        <ElementMetaData name="CONTRACT_START" description="Field for Date Input" fieldType="CHAR" maxLength="26"/>
+                        <ElementMetaData name="TIMEZONE_FROM" description="Time Zone for a Start Time" fieldType="CHAR" maxLength="6"/>
+                        <ElementMetaData name="CONTRACT_END" description="Field for Date Input" fieldType="CHAR" maxLength="26"/>
+                        <ElementMetaData name="TIMEZONE_TO" description="Time Zone for a Start Time" fieldType="CHAR" maxLength="6"/>
+                        <ElementMetaData name="PROC_TYPE_DESC" description="Description (20 Characters)" fieldType="CHAR" maxLength="20"/>
+                        <ElementMetaData name="REJECTION_REASON" description="Cancellation Reason Code" fieldType="CHAR" maxLength="2"/>
+                        <ElementMetaData name="REQ_DLV_DATE" description="Field for Date Input" fieldType="CHAR" maxLength="26"/>
+                        <ElementMetaData name="NET_WO_FREIGHT" description="30 Characters" fieldType="CHAR" maxLength="30"/>
+                        <ElementMetaData name="PAYMENT_TERMS" description="Terms of Payment" fieldType="CHAR" maxLength="4"/>
+                        <ElementMetaData name="PAYMENT_TERMS_DESC" description="Explanation of Payment Terms" fieldType="CHAR" maxLength="50"/>
+                        <ElementMetaData name="INCOTERMS1" description="Incoterms (Part 1)" fieldType="CHAR" maxLength="3"/>
+                        <ElementMetaData name="INCOTERMS1_DESC" description="Description" fieldType="CHAR" maxLength="40"/>
+                        <ElementMetaData name="INCOTERMS2" description="Incoterms (Part 2)" fieldType="CHAR" maxLength="28"/>
+                        <ElementMetaData name="SERVICE_RECALL" description="Transaction ID" fieldType="CHAR" maxLength="10"/>
+                        <ElementMetaData name="SERVICE_RECALL_DESC" description="Description" fieldType="CHAR" maxLength="40"/>
+                        <ElementMetaData name="LAST_DLV_DATE" description="Field for Date Input" fieldType="CHAR" maxLength="26"/>
+                        <ElementMetaData name="EXT_REF_OBJECT_TYPE" description="Subject Profile" fieldType="CHAR" maxLength="9"/>
+                        <ElementMetaData name="EXT_REF_OBJECT_TYPE_DESC" description="Text (30 Characters)" fieldType="CHAR" maxLength="30"/>
+                        <ElementMetaData name="RECURRING_NET" description="30 Characters" fieldType="CHAR" maxLength="30"/>
+                        <ElementMetaData name="RECURRING_TAX" description="30 Characters" fieldType="CHAR" maxLength="30"/>
+                        <ElementMetaData name="RECURRING_GROSS" description="30 Characters" fieldType="CHAR" maxLength="30"/>
+                        <ElementMetaData name="REC_DURATION" description="Character Field of Length 12" fieldType="CHAR" maxLength="12"/>
+                        <ElementMetaData name="REC_TIME_UNIT" description="Long Text for Time Unit in Singular" fieldType="CHAR" maxLength="20"/>
+                        <ElementMetaData name="REC_TIME_UNIT_PL" description="Long Text for Time Unit in Plural" fieldType="CHAR" maxLength="20"/>
+                        <ElementMetaData name="REC_TIME_UNIT_ABBREV" description="Abbreviation of Time Unit" fieldType="CHAR" maxLength="3"/>
+                        <ElementMetaData name="NON_RECURRING_NET" description="30 Characters" fieldType="CHAR" maxLength="30"/>
+                        <ElementMetaData name="NON_RECURRING_TAX" description="30 Characters" fieldType="CHAR" maxLength="30"/>
+                        <ElementMetaData name="NON_RECURRING_GROSS" description="30 Characters" fieldType="CHAR" maxLength="30"/>
+                        <ElementMetaData name="LOY_MEMSHIP_ID" description="Membership ID" fieldType="CHAR" maxLength="10"/>
+                        <ElementMetaData name="LOY_POINT_TYPE" description="ID of Point Type" fieldType="CHAR" maxLength="10"/>
+                        <ElementMetaData name="LOY_POINTS" description="Loyalty Point" fieldType="BCD" maxLength="6" BCD-Decimals="2"/>
+                        <ElementMetaData name="POINT_PMT_INDIC" description="Point Payment Option" fieldType="CHAR" maxLength="1"/>
+                        <ElementMetaData name="POINT_PMT_AMT" description="Point Payment Amount - Header" fieldType="BCD" maxLength="6" BCD-Decimals="2"/>
+                        <ElementMetaData name="POINT_PMT_PTYPE" description="Payment Point Type" fieldType="CHAR" maxLength="10"/>
+                    </LineType>
+                </Table>
+                <Table tableName="CRMT_ISALES_ORDER_STATUS" name="BASKET_STATUS">
+                    <LineType>
+                        <ElementMetaData name="TYPE" description="Object Status" fieldType="CHAR" maxLength="5"/>
+                        <ElementMetaData name="COMPLETION" description="Object Status" fieldType="CHAR" maxLength="5"/>
+                        <ElementMetaData name="QUOTEVALIDITY" description="Current Date of Application Server" fieldType="DATE" maxLength="8"/>
+                        <ElementMetaData name="CHANGEABLE" description="General Flag" fieldType="CHAR" maxLength="1"/>
+                        <ElementMetaData name="COMPLETION_DLV" description="General Flag" fieldType="CHAR" maxLength="1"/>
+                        <ElementMetaData name="QUOTEVALIDITY_C" description="Field for Date Input" fieldType="CHAR" maxLength="26"/>
+                        <ElementMetaData name="QUOTE_RELEASED" description="General Flag" fieldType="CHAR" maxLength="1"/>
+                        <ElementMetaData name="IS_ISA_QUOTE" description="General Flag" fieldType="CHAR" maxLength="1"/>
+                        <ElementMetaData name="QUOTE_ACCEPTED" description="General Flag" fieldType="CHAR" maxLength="1"/>
+                        <ElementMetaData name="IS_CONTRACT" description="General Flag" fieldType="CHAR" maxLength="1"/>
+                    </LineType>
+                </Table>
+                <Table tableName="CRMS_ISA_WEC_CONFIG_DATA" name="CONFIG_DATA">
+                    <LineType>
+                        <ElementMetaData name="NAME" description="Char 20" fieldType="CHAR" maxLength="20"/>
+                        <ElementMetaData name="VALUE" description="Character field of length 40" fieldType="CHAR" maxLength="40"/>
+                    </LineType>
+                </Table>
+                <Table tableName="CRMT_ISALES_EXTENSION_INT" name="EXTENSION_IN">
+                    <LineType>
+                        <ElementMetaData name="REF_GUID" description="GUID of a CRM Order Object, 32 Bit Characters" fieldType="CHAR" maxLength="32"/>
+                        <ElementMetaData name="REF_TYPE" description="Object Type" fieldType="CHAR" maxLength="2"/>
+                        <ElementMetaData name="COUNTER" description="Counter for Extension" fieldType="INT1" maxLength="1"/>
+                        <ElementMetaData name="ALT_HANDLE" description="Extension: Alternative Key for a Business Object" fieldType="CHAR" maxLength="30"/>
+                        <ElementMetaData name="NAME" description="Extension: Extension Name" fieldType="CHAR" maxLength="20"/>
+                        <ElementMetaData name="VALUE" description="Extension: Extension Value" fieldType="CHAR" maxLength="40"/>
+                    </LineType>
+                </Table>
+                <Table tableName="CRMT_ISALES_EXTENSION_INT" name="EXTENSION_OUT">
+                    <LineType>
+                        <ElementMetaData name="REF_GUID" description="GUID of a CRM Order Object, 32 Bit Characters" fieldType="CHAR" maxLength="32"/>
+                        <ElementMetaData name="REF_TYPE" description="Object Type" fieldType="CHAR" maxLength="2"/>
+                        <ElementMetaData name="COUNTER" description="Counter for Extension" fieldType="INT1" maxLength="1"/>
+                        <ElementMetaData name="ALT_HANDLE" description="Extension: Alternative Key for a Business Object" fieldType="CHAR" maxLength="30"/>
+                        <ElementMetaData name="NAME" description="Extension: Extension Name" fieldType="CHAR" maxLength="20"/>
+                        <ElementMetaData name="VALUE" description="Extension: Extension Value" fieldType="CHAR" maxLength="40"/>
+                    </LineType>
+                </Table>
+                <Table tableName="CRMT_ISALES_RETURN" name="MESSAGELINE">
+                    <LineType>
+                        <ElementMetaData name="REF_GUID" description="GUID of a CRM Order Object, 32 Bit Characters" fieldType="CHAR" maxLength="32"/>
+                        <ElementMetaData name="REF_KIND" description="Object Type" fieldType="CHAR" maxLength="1"/>
+                        <ElementMetaData name="TYPE" description="Message type: S Success, E Error, W Warning, I Info, A Abort" fieldType="CHAR" maxLength="1"/>
+                        <ElementMetaData name="ID" description="Message Class" fieldType="CHAR" maxLength="20"/>
+                        <ElementMetaData name="NUMBER" description="Message Number" fieldType="NUM" maxLength="3"/>
+                        <ElementMetaData name="MESSAGE" description="Message Text" fieldType="CHAR" maxLength="220"/>
+                        <ElementMetaData name="LOG_NO" description="Application log: log number" fieldType="CHAR" maxLength="20"/>
+                        <ElementMetaData name="LOG_MSG_NO" description="Application log: Internal message serial number" fieldType="NUM" maxLength="6"/>
+                        <ElementMetaData name="MESSAGE_V1" description="Message Variable" fieldType="CHAR" maxLength="50"/>
+                        <ElementMetaData name="MESSAGE_V2" description="Message Variable" fieldType="CHAR" maxLength="50"/>
+                        <ElementMetaData name="MESSAGE_V3" description="Message Variable" fieldType="CHAR" maxLength="50"/>
+                        <ElementMetaData name="MESSAGE_V4" description="Message Variable" fieldType="CHAR" maxLength="50"/>
+                        <ElementMetaData name="PARAMETER" description="Parameter Name" fieldType="CHAR" maxLength="32"/>
+                        <ElementMetaData name="ROW" description="Lines in parameter" fieldType="INT" maxLength="4"/>
+                        <ElementMetaData name="FIELD" description="Field in parameter" fieldType="CHAR" maxLength="30"/>
+                        <ElementMetaData name="SYSTEM" description="Logical system from which message originates" fieldType="CHAR" maxLength="10"/>
+                        <ElementMetaData name="TARGET" description="Target for Message" fieldType="CHAR" maxLength="1"/>
+                    </LineType>
+                </Table>
+                <Table tableName="CRMT_ISALES_SALESDOCPARTNER_UI" name="PARTNER">
+                    <LineType>
+                        <ElementMetaData name="GUID" description="GUID of a CRM Order Object, 32 Bit Characters" fieldType="CHAR" maxLength="32"/>
+                        <ElementMetaData name="HANDLE" description="Handle" fieldType="NUM" maxLength="10"/>
+                        <ElementMetaData name="PARTNER_FUNC_TYPE" description="Partner Function Category" fieldType="CHAR" maxLength="4"/>
+                        <ElementMetaData name="PARTNER_ID" description="Business Partner Number" fieldType="CHAR" maxLength="10"/>
+                        <ElementMetaData name="PARTNER_GUID" description="GUID of a Business Partner in CHAR 32 Format for BAPIs" fieldType="CHAR" maxLength="32"/>
+                    </LineType>
+                </Table>
+                <Table tableName="CRMT_ISA_PARTNER_FUNCTION_TYPE" name="REQUESTED_PFT">
+                    <LineType>
+                        <ElementMetaData name="PARTNER_FUNC_TYPE" description="Partner Function Category" fieldType="CHAR" maxLength="4"/>
+                    </LineType>
+                </Table>
+                <Table tableName="CRMT_ISALES_SALESDOCPARTNER_UI" name="SEARCH_PARTNER">
+                    <LineType>
+                        <ElementMetaData name="GUID" description="GUID of a CRM Order Object, 32 Bit Characters" fieldType="CHAR" maxLength="32"/>
+                        <ElementMetaData name="HANDLE" description="Handle" fieldType="NUM" maxLength="10"/>
+                        <ElementMetaData name="PARTNER_FUNC_TYPE" description="Partner Function Category" fieldType="CHAR" maxLength="4"/>
+                        <ElementMetaData name="PARTNER_ID" description="Business Partner Number" fieldType="CHAR" maxLength="10"/>
+                        <ElementMetaData name="PARTNER_GUID" description="GUID of a Business Partner in CHAR 32 Format for BAPIs" fieldType="CHAR" maxLength="32"/>
+                    </LineType>
+                </Table>
+            </Tables>
+        </Function>
+    </Functions>
+</Repository>

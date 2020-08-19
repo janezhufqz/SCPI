@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- [y] hybris Platform Copyright (c) 2018 SAP SE or an SAP affiliate company. 
+	All rights reserved. This software is the confidential and proprietary information 
+	of SAP ("Confidential Information"). You shall not disclose such Confidential 
+	Information and shall use it only in accordance with the terms of the license 
+	agreement you entered into with SAP. -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/util 
+           http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<bean id="sapcpicrmcomplaintSystemSetup"
+		class="sap.sapcpicrmcomplaint.setup.SapcpicrmcomplaintSystemSetup">
+		<!-- constructor arg injection example -->
+		<constructor-arg ref="sapcpicrmcomplaintService" />
+	</bean>
+
+	<bean id="sapcpicrmcomplaintService"
+		class="sap.sapcpicrmcomplaint.service.impl.DefaultSapcpicrmcomplaintService">
+		<!-- setter injection example -->
+		<property name="modelService" ref="modelService" />
+		<property name="mediaService" ref="mediaService" />
+		<property name="flexibleSearchService" ref="flexibleSearchService" />
+	</bean>
+
+
+
+	<alias alias="complaintOutboundService" name="sapCpiComplaintOutboundService" />
+	<bean id="sapCpiComplaintOutboundService"
+		class="sap.sapcpicrmcomplaint.service.impl.SapCpiComplaintOutboundServiceImpl">
+		<property name="outboundServiceFacade" ref="outboundServiceFacade" />
+	</bean>
+
+	<alias alias="complaintConversionService" name="sapCpiComplaintConversionService" />
+	<bean id="sapCpiComplaintConversionService"
+		class="sap.sapcpicrmcomplaint.service.impl.SapCpiComplaintConversionServiceImpl">
+
+		<property name="globalConfigurationDAO" ref="sapCoreSAPGlobalConfigurationDAO" />
+		<property name="modelService" ref="modelService" />
+		<property name="baseStoreService" ref="baseStoreService" />
+		<property name="complaintStateMap" ref="complaintStateMap" />
+		<property name="complaintPriorityMap" ref="complaintPriorityMap" />
+	</bean>
+
+	<util:map id="complaintStateMap" map-class="java.util.HashMap">
+		<entry key="New" value="E0001" />
+		<entry key="Open" value="E0002" />
+		<entry key="Closed" value="E0005" />
+	</util:map>
+
+	<util:map id="complaintPriorityMap" map-class="java.util.HashMap">
+		<entry key="Low" value="9" />
+		<entry key="Medium" value="5" />
+		<entry key="High" value="3" />
+	</util:map>
+
+	<alias alias="complaintExportService" name="sapCpiComplaintExportService" />
+	<bean id="sapCpiComplaintExportService"
+		class="sap.sapcpicrmcomplaint.service.impl.SapCpiComplaintExportServiceImpl"
+		parent="defaultComplaintExportService">
+		<property name="sapCpiComplaintConversionService" ref="complaintConversionService" />
+		<property name="sapCpiComplaintOutboundService" ref="complaintOutboundService" />
+	</bean>
+
+</beans>

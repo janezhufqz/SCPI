@@ -1,0 +1,77 @@
+<messages xmlns="http://www.sap.com/rfcmessages/" xmlns:wec="com.sap.wec.core.config"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.sap.com/rfcmessages/ messages.xsd ">
+
+	<global_config hide_non_error_messages="true" />
+
+
+<!-- Order Header Level Message Case -->
+	<message>
+		<source id="CRM_HYB_ORDER" number="001" type="E" />
+		<destination type="E" resource_key="sapcrmordermgmtbol.ui.general.message001" />
+	</message>
+	<message>
+		<source id="CRM_HYB_ORDER" number="002" type="E" />
+		<destination type="E" resource_key="sapcrmordermgmtbol.ui.general.message002" />
+	</message>
+	<message>
+		<source id="CRM_HYB_ORDER" number="003" type="E" />
+		<destination type="E" resource_key="sapcrmordermgmtbol.ui.general.message003" />
+	</message>
+	<message>
+		<source id="CRM_HYB_ORDER" number="004" type="E" />
+		<destination type="E" resource_key="sapcrmordermgmtbol.ui.general.message004" />
+	</message>
+	<message>
+		<source id="CRM_HYB_ORDER" number="005" type="E" />
+		<destination type="E" resource_key="sapcrmordermgmtbol.ui.general.message005" />
+	</message>
+	<message>
+		<source id="CRM_HYB_ORDER" number="006" type="E" />
+		<destination type="E" resource_key="sapcrmordermgmtbol.ui.general.message006" />
+	</message>
+	<message>
+		<source id="CRM_HYB_ORDER" number="007" type="E" />
+		<destination type="E" resource_key="sapcrmordermgmtbol.ui.general.message007" />
+	</message>
+	<message>
+		<source id="CRM_HYB_ORDER" number="008" type="E" />
+		<destination type="E" resource_key="sapcrmordermgmtbol.ui.general.message008" />
+	</message>
+	<message>
+		<source id="CRM_HYB_ORDER" number="009" type="E" />
+		<destination type="E" resource_key="sapcrmordermgmtbol.ui.general.message009" />
+	</message>
+	<message>
+		<source id="CRM_ORDER" number="000" type="E" />
+		<destination type="E" resource_key="sapcrmordermgmtbol.ui.general.message000" />
+	</message>
+	
+	<message>
+		<source id="CRM_ORDERADM_I" number="009" type="E" />
+		<destination type="E" resource_key="sapcrmordermgmtbol.ui.general.lineitem.message009" />
+	</message>
+	
+	<!-- CRM Sales Org Responsible is miss match -->
+	<message>
+		<source id="CRM_ORGMAN" number="022" type="E" />
+		<destination type="E" resource_key="sapcrmordermgmt.crm.ui.rfc.messages.label.crm022" />
+	</message>
+
+<!-- CRM PRODUCT Related Messages -->
+	<message>
+		<source id="CRM_PRODUCT_I" number="310" type="E" />
+		<destination type="E" resource_key="sapcrmordermgmtbol.ui.general.message310" />
+	</message>
+<!-- CRM PRODUCT Availability related message -->
+	<message>
+		<source id="CRM_APO" number="205" type="E" />
+		<destination type="E" resource_key="sapcrmordermgmtbol.ui.general.message205" />
+	</message>	
+	
+	<message>
+		<source id="COM_PARTNER" number="147" type="E" />
+		<destination type="E" resource_key="sapcrmordermgmtbol.ui.general.message147" />
+	</message>
+	
+</messages>

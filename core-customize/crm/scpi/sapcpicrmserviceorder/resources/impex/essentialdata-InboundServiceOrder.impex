@@ -1,0 +1,88 @@
+INSERT_UPDATE IntegrationObject; code[unique = true]; 
+; InboundServiceOrder 
+ 
+INSERT_UPDATE IntegrationObjectItem; integrationObject(code)[unique=true]; code[unique = true]; type(code) 
+; InboundServiceOrder	; Customer    	; Customer 
+; InboundServiceOrder	; Currency    	; Currency 
+; InboundServiceOrder	; OrderStatus 	; OrderStatus 
+; InboundServiceOrder	; Country     	; Country 
+; InboundServiceOrder	; Address     	; Address 
+; InboundServiceOrder	; B2BUnit     	; B2BUnit 
+; InboundServiceOrder	; ServiceOrder	; ServiceOrder 
+; InboundServiceOrder	; ServiceType 	; ServiceType 
+; InboundServiceOrder	; ScheduleEntry    	; ScheduleEntry 
+; InboundServiceOrder	; Unit             	; Unit 
+; InboundServiceOrder	; ServiceOrderEntry	; ServiceOrderEntry 
+; InboundServiceOrder	; Order            	; Order 
+; InboundServiceOrder	; Product          	; Product 
+; InboundServiceOrder	; ScheduleStatus   	; ScheduleStatus 
+; InboundServiceOrder	; Catalog          	; Catalog 
+; InboundServiceOrder	; CatalogVersion   	; CatalogVersion 
+
+ 
+INSERT_UPDATE IntegrationObjectItemAttribute; integrationObjectItem(integrationObject(code), code)[unique = true]; attributeName[unique = true]; attributeDescriptor(enclosingType(code), qualifier); returnIntegrationObjectItem(integrationObject(code), code); unique[default = false]
+; InboundServiceOrder:Customer    	; uid               	; Customer:uid                   	;                                	; true 
+; InboundServiceOrder:Customer    	; customerID        	; Customer:customerID            	;                                	; true 
+; InboundServiceOrder:Currency    	; isocode           	; Currency:isocode               	;                                	; true 
+; InboundServiceOrder:OrderStatus 	; code              	; OrderStatus:code               	;                                	; true 
+; InboundServiceOrder:B2BUnit     	; uid               	; B2BUnit:uid                    	;                                 	; true 
+; InboundServiceOrder:Country     	; isocode           	; Country:isocode                	;                                	; true 
+; InboundServiceOrder:Address     	; streetnumber      	; Address:streetnumber           	;                                	; true 
+; InboundServiceOrder:Address     	; postalcode        	; Address:postalcode             	;                                	; true 
+; InboundServiceOrder:Address     	; duplicate         	; Address:duplicate              	;                                	; true 
+; InboundServiceOrder:Address     	; streetname        	; Address:streetname             	;                                	; true 
+; InboundServiceOrder:Address     	; country           	; Address:country                	; InboundServiceOrder:Country    	; true 
+; InboundServiceOrder:Address     	; phone1            	; Address:phone1                 	;                                	; true 
+; InboundServiceOrder:Address     	; town              	; Address:town                   	;                                	; true 
+; InboundServiceOrder:Address     	; billingAddress    	; Address:billingAddress         	;                                	; true 
+; InboundServiceOrder:Address     	; shippingAddress   	; Address:shippingAddress        	;                                	; true 
+; InboundServiceOrder:Address     	; publicKey         	; Address:publicKey              	;                                	; true 
+; InboundServiceOrder:ServiceOrder	; ibase             	; ServiceOrder:ibase             	;                                	;  
+; InboundServiceOrder:ServiceOrder	; currency          	; ServiceOrder:currency          	; InboundServiceOrder:Currency   	;  
+; InboundServiceOrder:ServiceOrder	; totalTax          	; ServiceOrder:totalTax          	;                                	;  
+; InboundServiceOrder:ServiceOrder	; ibasecomponent    	; ServiceOrder:ibasecomponent    	;                                	;  
+; InboundServiceOrder:ServiceOrder	; user              	; ServiceOrder:user              	; InboundServiceOrder:Customer   	;  
+; InboundServiceOrder:ServiceOrder	; servicerequestid  	; ServiceOrder:servicerequestid  	;                                	;  
+; InboundServiceOrder:ServiceOrder	; versionID         	; ServiceOrder:versionID         	;                                	; true 
+; InboundServiceOrder:ServiceOrder	; netPrice          	; ServiceOrder:netPrice          	;                                	;  
+; InboundServiceOrder:ServiceOrder	; servicecontractid 	; ServiceOrder:servicecontractid 	;                                	;  
+; InboundServiceOrder:ServiceOrder	; deliveryAddress   	; ServiceOrder:deliveryAddress   	; InboundServiceOrder:Address    	;  
+; InboundServiceOrder:ServiceOrder	; date              	; ServiceOrder:date              	;                                	;  
+; InboundServiceOrder:ServiceOrder	; deleteOrderEntries	; ServiceOrder:deleteOrderEntries	;                                	;  
+; InboundServiceOrder:ServiceOrder	; description       	; ServiceOrder:description       	;                                	;  
+; InboundServiceOrder:ServiceOrder	; serviceOrderType  	; ServiceOrder:serviceOrderType  	; InboundServiceOrder:ServiceType	;  
+; InboundServiceOrder:ServiceOrder	; status            	; ServiceOrder:status            	; InboundServiceOrder:OrderStatus	;  
+; InboundServiceOrder:ServiceOrder	; code              	; ServiceOrder:code              	;                                	; true 
+; InboundServiceOrder:ServiceOrder	; totalPrice        	; ServiceOrder:totalPrice        	;                                	;  
+; InboundServiceOrder:ServiceOrder	; paymentAddress    	; ServiceOrder:paymentAddress    	; InboundServiceOrder:Address    	;  
+; InboundServiceOrder:ServiceType 	; code              	; ServiceType:code               	;                                	; true 
+; InboundServiceOrder:ServiceOrder	; b2bUnitID         	; ServiceOrder:b2bUnitID         	;                                	;  
+; InboundServiceOrder:ScheduleEntry    	; startdate        	; ScheduleEntry:startdate        	;                                           	;  
+; InboundServiceOrder:ScheduleEntry    	; itemnumber       	; ScheduleEntry:itemnumber       	;                                           	;  
+; InboundServiceOrder:ScheduleEntry    	; assignmentid     	; ScheduleEntry:assignmentid     	;                                           	; true 
+; InboundServiceOrder:ScheduleEntry    	; status           	; ScheduleEntry:status           	; InboundServiceOrder:ScheduleStatus        	;  
+; InboundServiceOrder:ScheduleEntry    	; enddate          	; ScheduleEntry:enddate          	;                                           	;  
+; InboundServiceOrder:ScheduleEntry    	; ordernumber      	; ScheduleEntry:ordernumber      	;                                           	;  
+; InboundServiceOrder:ServiceOrderEntry	; entryNumber      	; ServiceOrderEntry:entryNumber  	;                                           	; true 
+; InboundServiceOrder:ServiceOrderEntry	; basePrice        	; ServiceOrderEntry:basePrice    	;                                           	;  
+; InboundServiceOrder:ServiceOrderEntry	; itemguid         	; ServiceOrderEntry:itemguid     	;                                           	;  
+; InboundServiceOrder:ServiceOrderEntry	; order            	; ServiceOrderEntry:order        	; InboundServiceOrder:Order                 	; true 
+; InboundServiceOrder:ServiceOrderEntry	; quantity         	; ServiceOrderEntry:quantity     	;                                           	;  
+; InboundServiceOrder:ServiceOrderEntry	; ScheduleEntry    	; ServiceOrderEntry:ScheduleEntry	; InboundServiceOrder:ScheduleEntry         	;  
+; InboundServiceOrder:ServiceOrderEntry	; product          	; ServiceOrderEntry:product      	; InboundServiceOrder:Product               	;  
+; InboundServiceOrder:ServiceOrderEntry	; unit             	; ServiceOrderEntry:unit         	; InboundServiceOrder:Unit                  	;  
+; InboundServiceOrder:ServiceOrderEntry	; totalPrice       	; ServiceOrderEntry:totalPrice   	;                                           	;  
+; InboundServiceOrder:Unit             	; code             	; Unit:code                      	;                                           	; true 
+; InboundServiceOrder:Order            	; versionID        	; Order:versionID                	;                                           	; true 
+; InboundServiceOrder:Order            	; code             	; Order:code                     	;                                           	; true 
+; InboundServiceOrder:Product          	; guid             	; Product:guid                   	;                                           	; true 
+; InboundServiceOrder:Product          	; catalogVersion   	; Product:catalogVersion         	; InboundServiceOrder:CatalogVersion        	; true 
+; InboundServiceOrder:CatalogVersion   	; catalog          	; CatalogVersion:catalog         	; InboundServiceOrder:Catalog               	; true 
+; InboundServiceOrder:CatalogVersion   	; version          	; CatalogVersion:version         	;                                           	; true 
+; InboundServiceOrder:Catalog          	; id               	; Catalog:id                     	;                                           	; true 
+; InboundServiceOrder:ScheduleStatus   	; code             	; ScheduleStatus:code            	;                                           	; true 
+
+INSERT_UPDATE IntegrationObjectItemAttribute; integrationObjectItem(integrationObject(code), code)[unique = true]; attributeName[unique = true]; autoCreate[default=false]
+; InboundServiceOrder:ServiceOrder  	; deliveryAddress	; true
+; InboundServiceOrder:ServiceOrder  	; paymentAddress 	; true
+; InboundServiceOrder:ServiceOrderEntry	; ScheduleEntry  	; true

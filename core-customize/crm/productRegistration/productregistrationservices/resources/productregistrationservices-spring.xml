@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<!--
+	The hybris platform provides one single Spring application context for beans located at the jalo layer.
+	Each extension can add beans to this context by specifying them at this configuration file.
+	 
+	You can use and/or redefine beans defined at configuration files of other extensions as well as
+	adding new one.
+		
+	If you want to locate this file at a different location or want to use several files for better,
+	structuring, please use the '<yourextension>.application-context' property at your project.properties file.
+	There you can specify a comma separated list of files where first is tried to find a file per classpath and
+	then per file system.
+
+	
+	If you want to configure beans for your web module please have a look at
+	your web/webroot/WEB-INF/<extname>-web-spring.xml.
+	-->
+	
+	<alias alias="productRegistrationService" name="defaultProductRegistrationService"/>
+	<bean id="defaultProductRegistrationService" class="com.sap.hybris.productregistrationservices.service.impl.DefaultProductRegistrationService">
+		<property name="productRegistrationDao" ref="productRegistrationDao"/>
+		<property name="sapCoreConfigurationService" ref="sapCoreConfigurationService"/>
+		<property name="productRegistrationBOFactory" ref="productRegistrationBOFactory"/>
+		<property name="productConverter" ref="productConverter"/>
+		<property name="baseStoreService" ref="baseStoreService"/>
+		<property name="eventService" ref="eventService"/>
+	</bean>
+	
+	<bean id="productRegistrationCreatedEventListener"
+		  class="com.sap.hybris.crm.productregistrationservices.event.ProductRegistrationCreatedEventListener"
+		  parent="abstractEventListener">
+	</bean>
+			
+	<alias alias="productRegistrationDao" name="defaultProductRegistrationDao"/>
+	<bean id="defaultProductRegistrationDao" class="com.sap.hybris.productregistrationservices.dao.impl.DefaultProductRegistrationDao"
+			parent="abstractItemDao">
+	</bean>
+	
+	
+	<alias name="defaultProductRegistrationBOFactory" alias="productRegistrationBOFactory" />
+	<bean id="defaultProductRegistrationBOFactory" class="com.sap.hybris.productregistrationservices.service.impl.DefaultProductRegistrationBOFactory">
+		<property name="genericFactory" ref="sapCoreGenericFactory" />
+	</bean>
+	
+	<bean id="productRegistrationConfigurationAccess" parent="sapCoreModuleConfigurationAccess">
+		<property name="moduleId" value="productregistrationservices" />		
+	</bean>
+	
+	<bean id="sapcrmservprodregistraddonSampleDataEventListener" parent="abstractGenericAddOnSampleDataEventListener"  >
+		<property name="extensionName" value="productregistrationaddon" />
+	</bean>
+
+</beans>

@@ -1,0 +1,11 @@
+#Ant properties
+#Thu Nov 29 14:15:45 GMT 2018
+builddate=20181129 1415
+description=sapcpibusinessagreementexchange
+group.id=de.hybris.platform
+module.name=platform-module
+name=sapcpibusinessagreementexchange
+releasedate=20181129 1415
+vendor=hybris
+version=18.11
+version.api=1811

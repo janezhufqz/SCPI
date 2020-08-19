@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- [y] hybris Platform Copyright (c) 2000-2013 hybris AG All rights reserved. 
+	This software is the confidential and proprietary information of hybris ("Confidential 
+	Information"). You shall not disclose such Confidential Information and shall 
+	use it only in accordance with the terms of the license agreement you entered 
+	into with hybris. -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd"  >
+
+	<!-- Backend Objects (BE) -->
+	<bean id="sapCrmOrdermgmtDefaultCartBeCRM"
+		class="com.sap.hybris.crm.sapcrmordermgmtbol.transaction.basket.backend.impl.crm.BasketCRM" parent="sapCoreBackendObjectJCo"	>
+		<property name="itemBuffer" ref="sapCrmOrdermgmtItemBuffer" />
+		<property name="defaultConnectionName" value="JCoStatefulServiceUser" />		
+		<property name="getAllStrategy" ref="sapCrmOrdermgmtReadStrategy" />
+		<property name="lrdActionsStrategy" ref="sapCrmOrdermgmtActionsStrategy" />
+		<property name="setStrategy" ref="sapCrmOrdermgmtWriteStrategy" />
+		<property name="moduleConfigurationAccess" ref="sapOrdermgmtConfigurationAccess" />
+		<property name="defaultDestinationName" value="#{baseStoreService.getCurrentBaseStore().getSAPConfiguration().getSapordermgmt_RFCDestination()?.getRfcDestinationName()}"/>
+												
+	</bean>
+	
+	<bean id="sapCrmOrdermgmtDefaultOrderBeCRM"
+		class="com.sap.hybris.crm.sapcrmordermgmtbol.transaction.order.backend.impl.crm.OrderCRM" parent="sapCoreBackendObjectJCo"	>
+			<property name="itemBuffer" ref="sapCrmOrdermgmtItemBuffer" />
+			<property name="defaultConnectionName" value="JCoStatefulServiceUser" />		
+			<property name="getAllStrategy" ref="sapCrmOrdermgmtReadStrategy" />
+			<property name="lrdActionsStrategy" ref="sapCrmOrdermgmtActionsStrategy" />
+			<property name="setStrategy" ref="sapCrmOrdermgmtWriteStrategy" />
+			<property name="moduleConfigurationAccess" ref="sapOrdermgmtConfigurationAccess" />	
+			<property name="defaultDestinationName" value="#{baseStoreService.getCurrentBaseStore().getSAPConfiguration().getSapordermgmt_RFCDestination()?.getRfcDestinationName()}"/>
+				
+	</bean>	
+	
+	<bean id="sapCrmOrdermgmtDefaultOrderHistoryBeCRM"
+		class="com.sap.hybris.crm.sapcrmordermgmtbol.transaction.order.backend.impl.crm.OrderHistoryCRM" parent="sapCrmOrdermgmtDefaultCartBeCRM"	>
+		<property name="defaultConnectionName" value="JCoStatefulServiceUserSecond" />
+		<property name="defaultDestinationName" value="#{baseStoreService.getCurrentBaseStore().getSAPConfiguration().getSapordermgmt_RFCDestination()?.getRfcDestinationName()}"/>
+		
+	</bean>
+	
+	<bean id="sapCrmOrdermgmtDefaultSearchBeCRM"
+		class="com.sap.hybris.crm.sapcrmordermgmtbol.transaction.salesdocument.search.backend.impl.SearchBackendCRM" parent="sapCoreBackendObjectJCo" scope="sapSession" >
+		<property name="moduleConfigurationAccess" ref="sapOrdermgmtConfigurationAccess" />
+		<property name="defaultDestinationName" value="#{baseStoreService.getCurrentBaseStore().getSAPConfiguration().getSapordermgmt_RFCDestination()?.getRfcDestinationName()}"/>
+		<property name="cacheManager" ref="cacheMgr"></property>		
+	</bean>	
+	
+	<bean id="sapCrmOrdermgmtDefaultTransactionConfigurationBeCRM"
+		class="com.sap.hybris.crm.sapcrmordermgmtbol.transaction.misc.backend.impl.crm.TransactionConfigurationCRM" parent="sapCoreBackendObjectJCo"	>
+		<property name="defaultDestinationName" value="#{baseStoreService.getCurrentBaseStore().getSAPConfiguration().getSapordermgmt_RFCDestination()?.getRfcDestinationName()}"/>
+		
+	</bean>
+	
+	<bean id="crmAddressResolverUtil"
+		class="com.sap.hybris.crm.sapcrmordermgmtbol.transaction.genilutil.CRMAddressResolverUtil" parent="sapCoreBackendObjectJCo"	>
+		<property name="defaultDestinationName" value="#{baseStoreService.getCurrentBaseStore().getSAPConfiguration().getSapordermgmt_RFCDestination()?.getRfcDestinationName()}"/>
+		
+	</bean>
+	
+	<bean id="cacheMgr" class="com.sap.hybris.crm.sapcrmordermgmtbol.util.impl.SessionServiceCacheManager">
+	</bean>
+	
+</beans>

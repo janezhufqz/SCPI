@@ -1,0 +1,27 @@
+#*******************************************
+#*** Create SAP Integration User Groups ****
+#*******************************************
+INSERT_UPDATE UserGroup; UID[unique = true]; locname[lang = en]; description; groups(uid);
+; integrationusergroup   ; Integration User Group   ; Integration User Group   ; ;
+
+INSERT_UPDATE UserGroup; UID[unique = true]            ; locname[lang = en]               ; description                      ; groups(uid)[mode = append]
+					   ; sapInboundBusinessagreementGroup        ; SAP Inbound Businessagreement Group        ; SAP Inbound Businessagreement Group        ; integrationusergroup					   
+
+#**********************************************************
+#*** Create SAP Integration Flexible Search Restriction ***
+#**********************************************************
+INSERT_UPDATE SearchRestriction; code[unique = true]                    ; name[lang = en]                             ; query                                                                                                                                                                                                                                               ; principal(UID)       ; restrictedType(code); active; generate
+ 								; sapInboundBusinessagreementRestriction           ; SAP Inbound Businessagreement Restriction             ; ({code}='InboundBusinessagreement' AND EXISTS ( {{ select {ug:PK} from {UserGroup as ug} where {ug:PK} IN (?session.user.groups) and {ug:uid} = 'sapInboundBusinessagreementGroup' }} )) OR ({code}!='InboundBusinessagreement')                                                  ; integrationusergroup ; IntegrationObject   ; true  ; true 
+       
+  
+#**********************************
+#*** Reset The Default Password ***
+#**********************************
+$defaultPassword = nimda
+
+#******************************************
+#*** Create SAP Integration Test Users ****
+#******************************************
+INSERT_UPDATE Employee; UID[unique = true]           ; name                            ; groups(uid)[mode = append]                         ; password[default = $defaultPassword]
+                      ; sapInboundBusinessagreementUser        ; SAP Inbound Businessagreement User        ; sapInboundBusinessagreementGroup,integrationadmingroup       ; 
+             

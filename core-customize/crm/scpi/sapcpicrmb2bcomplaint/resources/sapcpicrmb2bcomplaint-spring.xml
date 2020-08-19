@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2018 SAP SE or an SAP affiliate company. All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/util 
+           http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<!--
+	The hybris platform provides one single Spring application context for beans located at the jalo layer.
+	Each extension can add beans to this context by specifying them at this configuration file.
+	 
+	You can use and/or redefine beans defined at configuration files of other extensions as well as
+	adding new one.
+		
+	If you want to locate this file at a different location or want to use several files for better,
+	structuring, please use the '<yourextension>.application-context' property at your project.properties file.
+	There you can specify a comma separated list of files where first is tried to find a file per classpath and
+	then per file system.
+
+	
+	If you want to configure beans for your web module please have a look at
+	your web/webroot/WEB-INF/<extname>-web-spring.xml.
+	-->
+	
+	<!--  Example how to override a manager -->
+	<!--
+	<bean id="core.productManager"   class="sap.sapcpicrmb2bcomplaint.jalo.Sapcpicrmb2bcomplaintProductManager" 	init-method="init"	destroy-method="destroy" />
+	-->
+	
+	
+ 	<!--  Example how to configure the class to use for jalo session creation -->
+	<!--
+	<bean id="jalosession"   class="de.hybris.platform.jalo.JaloSessionFactory">
+		<property name="targetClassName" value="sap.sapcpicrmb2bcomplaint.jalo.Sapcpicrmb2bcomplaintJaloSession"/>
+	</bean>
+	-->
+
+	
+	<!--  Example how to override an item  -->
+	<!-- 
+	<bean id="de.hybris.platform.jalo.product.Product" class="sap.sapcpicrmb2bcomplaint.jalo.Sapcpicrmb2bcomplaintProduct" scope="prototype" />		
+ 	-->
+
+	<!--  
+	 Example how to register and use an AOP aspect 
+     Also see http://static.springframework.org/spring/docs/2.5.x/reference/aop.html	
+     -->
+	
+	<!-- 
+	<bean id="sapcpicrmb2bcomplaintProfBean" class="sap.sapcpicrmb2bcomplaint.aop.Sapcpicrmb2bcomplaintProfilingAspect"/>
+	<aop:config proxy-target-class="true">
+  		<aop:aspect id="sapcpicrmb2bcomplaintProfAspect" ref="sapcpicrmb2bcomplaintProfBean" >
+    	  <aop:pointcut id="profiledMethods" 
+	      	expression="execution(* getModificationTime(..))" />  	            
+	   		<aop:around pointcut-ref="profiledMethods" method="profile" />
+  		</aop:aspect>
+	</aop:config>
+	 -->
+
+	
+	<!-- some other examples of a pointcut that matches everything:
+
+    	  <aop:pointcut id="profiledMethods" 
+	      	expression="bean(de.hybris.platform.jalo.user.Customer) &amp;&amp; 
+	      	            !execution(* getPK(..))" />  	            
+	       <aop:pointcut id="profiledMethods" expression="execution(* *(..))" />	
+	  -->
+	
+    <bean id="sapcpicrmb2bcomplaintSystemSetup" class="sap.sapcpicrmb2bcomplaint.setup.Sapcpicrmb2bcomplaintSystemSetup">
+        <!-- constructor arg injection example -->
+        <constructor-arg ref="sapcpicrmb2bcomplaintService"/>
+    </bean>
+
+    <bean id="sapcpicrmb2bcomplaintService" class="sap.sapcpicrmb2bcomplaint.service.impl.DefaultSapcpicrmb2bcomplaintService">
+        <!-- setter injection example -->
+        <property name="modelService" ref="modelService"/>
+        <property name="mediaService" ref="mediaService"/>
+        <property name="flexibleSearchService" ref="flexibleSearchService"/>
+    </bean>
+    
+    <alias  alias="complaintConversionService" name="sapCpiB2BComplaintConversionService"/>
+    <bean id="sapCpiB2BComplaintConversionService"
+          class="sap.sapcpicrmb2bcomplaint.service.impl.SapCpiB2BComplaintConversionServiceImpl">
+          
+        <property name="globalConfigurationDAO" ref="sapCoreSAPGlobalConfigurationDAO"/>
+        <property name="modelService" ref="modelService"/>
+        <property name="baseStoreService" ref="baseStoreService"/>
+        <property name="complaintStateMap" ref="complaintStateMap" />
+        <property name="complaintPriorityMap" ref="complaintPriorityMap" />
+    </bean>
+    
+    <util:map id="complaintStateMap" map-class="java.util.HashMap">
+  		<entry key="New" value="E0001" />
+  		<entry key="Open" value="E0002" />
+  		<entry key="Closed" value="E0005" />
+ 	</util:map>
+ 	
+ 	<util:map id="complaintPriorityMap" map-class="java.util.HashMap">
+  		<entry key="Low" value="9" />
+  		<entry key="Medium" value="5" />
+  		<entry key="High" value="3" />
+ 	</util:map>
+			
+</beans>

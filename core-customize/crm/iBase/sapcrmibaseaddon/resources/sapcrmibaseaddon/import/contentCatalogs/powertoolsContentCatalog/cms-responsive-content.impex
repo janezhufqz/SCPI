@@ -1,0 +1,57 @@
+#
+# Import the CMS content for installed base page
+# the user of this addon should change the value of "$contentCatalog" accordingly
+#
+
+$contentCatalog=powertoolsContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$jarResourceCms=jar:com.sap.hybris.crm.sapcrmibaseaddon.constants.SapcrmibaseaddonConstants&/sapcrmibaseaddon/import/cockpits/cmscockpit/$contentCatalog
+$addonExtensionName=sapcrmibaseaddon
+
+## CMS Link Component for the link on the main account page
+INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;target(code)[default='sameWindow']
+;;IBasesLink;IBasesLink;/my-company/installed-bases;IBasesLink;
+
+# create navigation root node for my account & child nodes for the root node 
+INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);links(&linkRef);&nodeRef
+;IBasesNavNode;;IBasesNavNode;MyCompanyNavNode;;IBasesNavNode
+
+# create cms navigation entry for nvaigation child nodes
+INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;navigationNode(&nodeRef);item(&linkRef);
+;IBasesNavNodeEntry;;IBasesNavNodeEntry;IBasesNavNode;IBasesLink;
+ 
+#### Jsp Include Component ####
+INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;page;actions(uid,$contentCV);&componentRef
+;;AccountIBasesPageComponent;Account Installed Bases Component;/WEB-INF/views/addons/$addonExtensionName/responsive/pages/account/accountIBaseListingPage.jsp;;AccountIBasesPageComponent 
+;;AccountIBaseHeadlineComponent;Account Installed Base Headline Component;/WEB-INF/views/addons/$addonExtensionName/responsive/pages/account/accountIBaseDetailHeadline.jsp;;AccountIBaseHeadlineComponent
+;;AccountIBaseItemsComponent;Account Installed Base Component;/WEB-INF/views/addons/$addonExtensionName/responsive/pages/account/accountIBaseDetailItems.jsp;;AccountIBaseItemsComponent
+;;AccountIBaseTreeComponent;Account Installed Base Tree Component;/WEB-INF/views/addons/$addonExtensionName/responsive/pages/account/accountIBaseTree.jsp;;AccountIBaseTreeComponent
+
+
+# ContentSlot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;SideContent-installed-bases;Side Content Slot for Account Installed Bases;true;;;;
+;;BodyContent-installed-bases;Body Content Slot for Account Installed Bases;true;AccountIBasesPageComponent;;;
+
+;;Section1-installed-base;Section1 Slot for Account Installed Base;true;AccountIBaseHeadlineComponent;;;
+;;Section2A-installed-base;Section2A Slot for Account Installed Base;true;AccountIBaseTreeComponent;;;
+;;Section2B-installed-base;Section2B Slot for Account Installed Base;true;AccountIBaseItemsComponent;;;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='installed-bases'];contentSlot(uid,$contentCV)[unique=true];;;
+;;SideContent-installed-bases;SideContent;;SideContent-installed-bases;;;
+;;BodyContent-installed-bases;BodyContent;;BodyContent-installed-bases;;;
+
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='installed-base'];contentSlot(uid,$contentCV)[unique=true];;;
+;;Section1-installed-base;Section1;;Section1-installed-base;;;
+;;Section2A-installed-base;Section2A;;Section2A-installed-base;;;
+;;Section2B-installed-base;Section2B;;Section2B-installed-base;;;
+
+
+# Content Pages
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false'];previewImage(code, $contentCV)
+;;installed-bases;Installed Bases Page;CompanyPageTemplate;installed-bases
+;;installed-base;Installed Base Page;ContentPage1Template;installed-base
+

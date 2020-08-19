@@ -1,0 +1,13 @@
+$contentCatalog=powertoolsContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$jarResourceCms=jar:com.sap.hybris.sapbusinessagreementaddon.constants.SapbusinessagreementaddonConstants&/sapbusinessagreementaddon/import/cockpit/cmscockpit
+$contentCatalogName=Powertools Content Catalog
+$addonExtensionName=sapbusinessagreementaddon
+$lang=hi
+
+
+
+
+# update linkname
+UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang]
+;;BusinessAgreementsLink;"व्यापार समझौतों"

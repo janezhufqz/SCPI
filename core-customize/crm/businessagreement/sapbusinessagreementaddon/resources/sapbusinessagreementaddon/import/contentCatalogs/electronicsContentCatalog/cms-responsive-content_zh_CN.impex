@@ -1,0 +1,15 @@
+$contentCatalog=electronicsContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$jarResourceCms=jar:com.sap.hybris.sapbusinessagreementaddon.constants.SapbusinessagreementaddonConstants&/sapbusinessagreementaddon/import/cockpit/cmscockpit
+
+$contentCatalogName=Electronics Content Catalog
+$addonExtensionName=sapbusinessagreementaddon
+$lang=zh_CN
+
+
+
+
+
+# update linkname
+UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang]
+;;BusinessAgreementsLink;"商业协议"

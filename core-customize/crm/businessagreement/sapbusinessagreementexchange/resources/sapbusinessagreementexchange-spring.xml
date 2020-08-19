@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ~ [y] hybris Platform ~ ~ Copyright (c) 2000-2016 SAP SE ~ All rights 
+	reserved. ~ ~ This software is the confidential and proprietary information 
+	of SAP ~ Hybris ("Confidential Information"). You shall not disclose such 
+	~ Confidential Information and shall use it only in accordance with the ~ 
+	terms of the license agreement you entered into with SAP Hybris. -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<!-- The hybris platform provides one single Spring application context 
+		for beans located at the jalo layer. Each extension can add beans to this 
+		context by specifying them at this configuration file. You can use and/or 
+		redefine beans defined at configuration files of other extensions as well 
+		as adding new one. If you want to locate this file at a different location 
+		or want to use several files for better, structuring, please use the '<yourextension>.application-context' 
+		property at your project.properties file. There you can specify a comma separated 
+		list of files where first is tried to find a file per classpath and then 
+		per file system. If you want to configure beans for your web module please 
+		have a look at your web/webroot/WEB-INF/<extname>-web-spring.xml. -->
+
+	<!-- Example how to override a manager -->
+	<!-- <bean id="core.productManager" class="com.sap.hybris.sapbusinessagreement.jalo.SapbusinessagreementexchangeProductManager" 
+		init-method="init" destroy-method="destroy" /> -->
+
+
+	<!-- Example how to configure the class to use for jalo session creation -->
+	<!-- <bean id="jalosession" class="de.hybris.platform.jalo.JaloSessionFactory"> 
+		<property name="targetClassName" value="com.sap.hybris.sapbusinessagreement.jalo.SapbusinessagreementexchangeJaloSession"/> 
+		</bean> -->
+
+
+	<!-- Example how to override an item -->
+	<!-- <bean id="de.hybris.platform.jalo.product.Product" class="com.sap.hybris.sapbusinessagreement.jalo.SapbusinessagreementexchangeProduct" 
+		scope="prototype" /> -->
+
+	<!-- Example how to register and use an AOP aspect Also see http://static.springframework.org/spring/docs/2.5.x/reference/aop.html -->
+
+	<!-- <bean id="sapbusinessagreementexchangeProfBean" class="com.sap.hybris.sapbusinessagreement.aop.SapbusinessagreementexchangeProfilingAspect"/> 
+		<aop:config proxy-target-class="true"> <aop:aspect id="sapbusinessagreementexchangeProfAspect" 
+		ref="sapbusinessagreementexchangeProfBean" > <aop:pointcut id="profiledMethods" 
+		expression="execution(* getModificationTime(..))" /> <aop:around pointcut-ref="profiledMethods" 
+		method="profile" /> </aop:aspect> </aop:config> -->
+
+
+	<!-- some other examples of a pointcut that matches everything: <aop:pointcut 
+		id="profiledMethods" expression="bean(de.hybris.platform.jalo.user.Customer) 
+		&amp;&amp; !execution(* getPK(..))" /> <aop:pointcut id="profiledMethods" 
+		expression="execution(* *(..))" /> -->
+
+	
+
+
+
+	<alias name="defaultCRMBusinessAgreementExportService" alias="businessAgreementExportService" />
+	<bean id="defaultCRMBusinessAgreementExportService"
+		class="com.sap.hybris.sapbusinessagreement.outbound.DefaultCRMBusinessAgreementExportService">
+		<property name="dataHubOutboundService" ref="dataHubOutboundService" />
+	</bean>
+
+
+	<bean id="businessAgreementInterceptorMapping"
+		class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor" ref="defaultCRMBusinessAgreementInterceptor" />
+		<property name="typeCode" value="BusinessAgreement" />
+		<property name="order" value="5071" />
+	</bean>
+	<bean id="defaultCRMBusinessAgreementInterceptor"
+		class="com.sap.hybris.sapbusinessagreement.interceptor.DefaultCRMBusinessAgreementInterceptor">
+		<property name="defaultCRMBusinessAgreementExportService"
+			ref="businessAgreementExportService" />
+	</bean>
+	
+		
+	
+
+	<bean id="baCreditCardInterceptor"
+		class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor" ref="businessAgreementCreditCardInterceptor" />
+		<property name="typeCode" value="CreditCardPaymentInfo" />
+		<property name="order" value="5045" />
+	</bean>
+
+
+	<bean id="businessAgreementCreditCardInterceptor"
+		class="com.sap.hybris.sapbusinessagreement.interceptor.BusinessAgreementCreditCardInterceptor">
+		<property name="businessProcessService" ref="businessProcessService" />
+	</bean>
+	
+	<bean id="businessAgreementPartnerInterceptorMapping"
+		class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor" ref="businessAgreementPartnerInterceptor" />
+		<property name="typeCode" value="BusinessAgreement" />
+		<property name="order" value="5046" />
+	</bean>
+
+	<alias name="defaultBusinessAgreementPartnerInterceptor" alias="businessAgreementPartnerInterceptor"/>
+	<bean id="defaultBusinessAgreementPartnerInterceptor"
+		class="com.sap.hybris.sapbusinessagreement.interceptor.BusinessAgreementPartnerPrepareInterceptor">
+		<property name="flexibleSearchService" ref="flexibleSearchService" />
+	</bean>
+
+	<bean id="businessAgreementRelationPartnerInterceptorMapping"
+		class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor" ref="businessAgreementRelationPartnerInterceptor" />
+		<property name="typeCode" value="BusinessAgreementPartners" />
+		<property name="order" value="5047" />
+	</bean>
+
+	<alias name="defaultBusinessAgreementRelationPartnerInterceptor" alias="businessAgreementRelationPartnerInterceptor"/>
+	<bean id="defaultBusinessAgreementRelationPartnerInterceptor"
+		class="com.sap.hybris.sapbusinessagreement.interceptor.BusinessAgreementRelationPartnerPrepareInterceptor">
+		<property name="flexibleSearchService" ref="flexibleSearchService" />
+	</bean>
+	<bean id="businessAgreementHeaderInterceptorMapping"
+		class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor" ref="defaultCRMBusinessAgreementHeaderInterceptor" />
+		<property name="typeCode" value="BusinessAgreementHeader" />
+		<property name="order" value="5072" />
+	</bean>
+
+
+	<bean id="defaultCRMBusinessAgreementHeaderInterceptor"
+		class="com.sap.hybris.sapbusinessagreement.interceptor.DefaultCRMBusinessAgreementHeaderInterceptor">
+		<property name="defaultCRMBusinessAgreementExportService"
+			ref="businessAgreementExportService" />
+	</bean>
+
+	<bean id="businessAgreementRuleHeaderInterceptorMapping"
+		class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor"
+			ref="defaultCRMBusinessAgreementRuleHeaderInterceptor" />
+		<property name="typeCode" value="BusinessAgreementRuleHeader" />
+		<property name="order" value="5073" />
+	</bean>
+
+
+	<bean id="defaultCRMBusinessAgreementRuleHeaderInterceptor"
+		class="com.sap.hybris.sapbusinessagreement.interceptor.DefaultCRMBusinessAgreementRuleHeaderInterceptor">
+		<property name="defaultCRMBusinessAgreementExportService"
+			ref="businessAgreementExportService" />
+	</bean>
+
+	<bean id="businessAgreementPartnersInterceptorMapping"
+		class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor"
+			ref="defaultCRMBusinessAgreementPartnersInterceptor" />
+		<property name="typeCode" value="BusinessAgreementPartners" />
+		<property name="order" value="5074" />
+	</bean>
+
+
+	<bean id="defaultCRMBusinessAgreementPartnersInterceptor"
+		class="com.sap.hybris.sapbusinessagreement.interceptor.DefaultCRMBusinessAgreementPartnersInterceptor">
+		<property name="defaultCRMBusinessAgreementExportService"
+			ref="businessAgreementExportService" />
+	</bean>
+	
+		<bean id="businessAgreementGlobalConfigurationInterceptor"
+		class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor"
+			ref="defaultBusinessAgreementGlobalConfigurationInterceptor" />
+		<property name="typeCode" value="SAPGlobalConfiguration" />
+		<property name="order" value="5087" />
+	</bean>
+
+
+	<bean id="defaultBusinessAgreementGlobalConfigurationInterceptor"
+		class="com.sap.hybris.sapbusinessagreement.interceptor.DefaultBusinessAgreementGlobalConfigurationInterceptor">
+		
+	</bean>
+	
+	<bean id="defaultBusinessAgreementCreditCardEventListner"
+		class="com.sap.hybris.sapbusinessagreement.events.DefaultBusinessAgreementCreditCardEventListner">
+		<property name="modelService" ref="modelService" />
+		<property name="businessProcessService" ref="businessProcessService" />
+		<property name="businessAgreementCreateService" ref="businessAgreementCreateService" />	
+	</bean>
+	
+		<bean id="defaultBusinessAgreementPartnersEventListner"
+		class="com.sap.hybris.sapbusinessagreement.events.DefaultBusinessAgreementPartnersEventListner">
+		<property name="modelService" ref="modelService" />
+	</bean>
+	
+	
+	<bean id="checkCreditCardReplicationAction"
+		class="com.sap.hybris.sapbusinessagreement.actions.CheckCreditCardReplicationAction">
+	</bean>
+	
+	<bean id="businessAgreementPublishAction"
+		class="com.sap.hybris.sapbusinessagreement.actions.BusinessAgreementPublishAction">
+		<property name="defaultCRMBusinessAgreementExportService"
+			ref="businessAgreementExportService" />
+			
+		
+	</bean>
+	
+	<bean id="createBusinessAgreementProcessDefinitionResource"
+		  class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
+		<property name="resource" value="classpath:/sapbusinessagreementexchange/process/sapbusinessagreement-process.xml"/>
+	</bean>
+	
+	<!-- key generator for the sap Business Agreement ID -->
+	<bean id="sapBusinessAgreementIdGenerator" class="de.hybris.platform.servicelayer.keygenerator.impl.PersistentKeyGenerator">
+		<property name="key" value="sap_businessAgreement_id" />
+		<property name="digits" value="${keygen.businessAgreement.sap_businessAgreement_id.digits}" />
+		<property name="start" value="${keygen.businessAgreement.sap_businessAgreement_id.start}" />
+		<property name="type" value="${keygen.businessAgreement.sap_businessAgreement_id.type}" />
+		<property name="template" value="${keygen.businessAgreement.sap_businessAgreement_id.template}" />
+	</bean>
+	
+	<bean id="businessAgreementCreateServiceUtility"
+		class="com.sap.hybris.sapbusinessagreement.service.impl.BusinessAgreementCreateServiceUtility">
+		<property name="sapBusinessAgreementIdGenerator" ref="sapBusinessAgreementIdGenerator"/>
+		<property name="sapGlobalConfigurationService" ref="sapCoreSAPGlobalConfigurationService" />
+		
+	</bean>
+	
+	<alias name="defaultBusinessAgreementCreateService" alias="businessAgreementCreateService" />
+	<bean id="defaultBusinessAgreementCreateService"
+		class="com.sap.hybris.sapbusinessagreement.service.impl.DefaultBusinessAgreementCreateService">
+		<property name="modelService" ref="modelService" />
+		<property name="businessAgreementCreateServiceUtility" ref="businessAgreementCreateServiceUtility" />
+				
+	</bean>
+	
+	<alias name="defaultAgreementOrderBusinessProcessStrategy" alias="agreementOrderBusinessProcessStrategy" />
+	<bean id="defaultAgreementOrderBusinessProcessStrategy"
+		class="com.sap.hybris.sapbusinessagreement.strategies.impl.DefaultAgreementOrderProcessStrategy"
+		parent="abstractBusinessService">
+		<property name="processCode" value="sapAgreementOrder" />
+		<property name="processCodeGenerator" ref="processCodeGenerator" />
+		<property name="businessProcessService" ref="businessProcessService" />
+	</bean>
+
+	<bean id="agreementOrderBusinessProcessCreationPlaceOrderMethodHook"
+		class="com.sap.hybris.sapbusinessagreement.order.hooks.AgreementOrderBusinessProcessCreationPlaceOrderMethodHook">
+		<property name="agreementOrderProcessStrategy" ref="agreementOrderBusinessProcessStrategy" />
+	</bean>
+
+	<alias name="checkDefaultAgreementForCustomerAction" alias="checkAgreementForCustomerAction" />
+	<bean id="checkDefaultAgreementForCustomerAction"
+		class="com.sap.hybris.sapbusinessagreement.actions.CheckAgreementForCustomerAction"
+		parent="abstractAction">
+	</bean>
+
+	<alias name="checkDefaultAgreementReplicationAction" alias="checkAgreementReplicationAction" />
+	<bean id="checkDefaultAgreementReplicationAction"
+		class="com.sap.hybris.sapbusinessagreement.actions.CheckAgreementReplicationAction"
+		parent="abstractAction">
+	</bean>
+	
+	<alias name="defaultSapCRMAgreementOrderContributor" alias="sapCrmOrderContributor" />
+	<bean id="defaultSapCRMAgreementOrderContributor"
+		class="com.sap.hybris.sapbusinessagreement.outbound.impl.DefaultCrmAgreementOrderContributor"
+		parent="defaultSapCRMOrderContributor">
+		<property name="modelService" ref="modelService" />
+		<property name="batchIdAttributes">
+			<map key-type="java.lang.String">
+				<entry key="dh_batchId" value="${sapcrmorderexchange.outbound.batchid:000001}" />
+				<entry key="dh_sourceId" value="${sapcrmorderexchange.outbound.sourceid:HYBRIS}" />
+				<entry key="dh_type" value="${sapcrmorderexchange.outbound.idoctype:CRMXIF_ORDER}" />
+			</map>
+		</property>
+	</bean>
+	
+	<alias name="defaultSapCrmAgreementPartnerContributor" alias="sapCrmPartnerContributor" />
+    <bean id="defaultSapCrmAgreementPartnerContributor"
+        class="com.sap.hybris.sapbusinessagreement.outbound.impl.DefaultCrmAgreementPartnerContributor" parent="defaultSapCrmPartnerContributor">
+    </bean>
+	
+	
+	<alias name="defaultBusinessAgreementNotificationHelper" alias="businessAgreementNotificationHelper" />
+	<bean id="defaultBusinessAgreementNotificationHelper" class="com.sap.hybris.sapbusinessagreement.inbound.impl.DefaultBusinessAgreementNotificationHelper">
+		<property name="flexibleSearchService" ref="flexibleSearchService" />
+		<property name="businessProcessService" ref="businessProcessService" />
+		
+	</bean>
+	
+	<bean id="businessAgreementOrderProcessDefinitionResource"
+		  class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
+		<property name="resource" value="classpath:/sapbusinessagreementexchange/process/sap-agreement-order-process.xml"/>
+	</bean>
+	
+</beans>

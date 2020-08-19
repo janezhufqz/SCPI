@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- [y] hybris Platform Copyright (c) 2000-2013 hybris AG All rights reserved. 
+	This software is the confidential and proprietary information of hybris ("Confidential 
+	Information"). You shall not disclose such Confidential Information and shall 
+	use it only in accordance with the terms of the license agreement you entered 
+	into with hybris. -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<alias name="defaultServiceContractFacades" alias="serviceContractFacade" />
+	<bean id="defaultServiceContractFacades"
+		class="com.sap.hybris.crm.sapservicecontractfacades.facade.impl.DefaultServiceContractFacade">
+		<property name="userService" ref="userService" />
+		<property name="contractService" ref="contractService" />
+		<property name="serviceContractConverter" ref="serviceContractConverter" />
+		<property name="serviceContractSearchResultConverter" ref="serviceContractSearchResultConverter" />
+		<property name="typeService" ref="typeService" />
+	</bean>
+
+
+	<alias name="defaultServiceContractConverter" alias="serviceContractConverter" />
+	<bean id="defaultServiceContractConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.sap.hybris.crm.sapservicecontract.data.ServiceContractData" />
+		<property name="populators">
+			<list>
+				<ref bean="serviceContractPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultServiceContractPopulator" alias="serviceContractPopulator" />
+	<bean id="defaultServiceContractPopulator"
+		class="com.sap.hybris.crm.sapservicecontractfacades.converters.populator.DefaultServiceContractPopulator">
+		<property name="currencyConverter" ref="currencyConverter" />
+		<property name="customerConverter" ref="customerConverter" />
+	</bean>
+
+
+	<alias name="serviceContractSearchResultConverter" alias="serviceContractSearchResultConverter" />
+	<bean id="serviceContractSearchResultConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.sap.hybris.crm.sapservicecontract.data.ServiceContractData" />
+		<property name="populators">
+			<list>
+				<ref bean="serviceContractSearchResultPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="serviceContractSearchResultPopulator"
+		class="com.sap.hybris.crm.sapservicecontractfacades.converters.populator.ServiceContractSearchResultPopulator">
+		<property name="currencyDao" ref="currencyDao" />
+		<property name="currencyConverter" ref="currencyConverter" />
+		<property name="serviceContractItemResultConverter" ref="serviceContractItemResultConverter" />
+		<property name="userService" ref="userService" />
+		<property name="contractService" ref="contractService" />
+		<property name="i18nService" ref="i18nService" />
+		<property name="customerConverter" ref="customerConverter" />
+		<property name="typeService" ref="typeService" />
+	</bean>
+
+	<alias name="serviceContractItemResultConverter" alias="serviceContractItemResultConverter" />
+	<bean id="serviceContractItemResultConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.sap.hybris.crm.sapservicecontract.data.ServiceProductData" />
+		<property name="populators">
+			<list>
+				<ref bean="serviceContractItemResultPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="serviceContractItemResultPopulator"
+		class="com.sap.hybris.crm.sapservicecontractfacades.converters.populator.ServiceContractItemResultPopulator">
+		<property name="currencyDao" ref="currencyDao" />
+		<property name="currencyConverter" ref="currencyConverter" />
+		<property name="typeService" ref="typeService" />
+		<property name="contractService" ref="contractService" />
+		<property name="i18nService" ref="i18nService" />
+	</bean>
+
+
+
+
+</beans>

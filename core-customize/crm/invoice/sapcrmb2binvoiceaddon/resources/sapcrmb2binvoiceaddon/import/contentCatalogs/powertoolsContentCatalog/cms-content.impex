@@ -1,0 +1,12 @@
+#
+# Import the CMS content for invoice details page
+# the user of this addon should change the value of "$contentCatalog" accordingly
+#
+
+$contentCatalog=powertoolsContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$addonExtensionName=sapcrmb2binvoiceaddon
+
+
+INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;page;actions(uid,$contentCV);&componentRef
+;;AccountSummaryUnitDetailsListComponent;Account Summary Unit Details List Component;/WEB-INF/views/addons/sapcrmb2binvoiceaddon/responsive/pages/account/accountSummaryUnitDetailsList.jsp;;AccountSummaryUnitDetailsListComponent

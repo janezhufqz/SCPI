@@ -1,0 +1,53 @@
+INSERT_UPDATE IntegrationObject; code[unique = true]; 
+; InboundInvoice 
+ 
+INSERT_UPDATE IntegrationObjectItem; integrationObject(code)[unique=true]; code[unique = true]; type(code) 
+; InboundInvoice	; Currency       	; Currency 
+; InboundInvoice	; B2BDocumentType	; B2BDocumentType 
+; InboundInvoice	; Material       	; Material 
+; InboundInvoice	; B2BUnit        	; B2BUnit 
+; InboundInvoice	; PartnerAddress 	; PartnerAddress 
+; InboundInvoice	; DocumentStatus 	; DocumentStatus 
+; InboundInvoice	; SapB2BDocument 	; SapB2BDocument 
+ 
+INSERT_UPDATE IntegrationObjectItemAttribute; integrationObjectItem(integrationObject(code), code)[unique = true]; attributeName[unique = true]; attributeDescriptor(enclosingType(code), qualifier); returnIntegrationObjectItem(integrationObject(code), code); unique[default = false] 
+; InboundInvoice:Currency       	; isocode           	; Currency:isocode                 	;                               	; true 
+; InboundInvoice:B2BDocumentType	; code              	; B2BDocumentType:code             	;                               	; true 
+; InboundInvoice:Material       	; grossValue        	; Material:grossValue              	;                               	;  
+; InboundInvoice:Material       	; matDesc           	; Material:matDesc                 	;                               	;  
+; InboundInvoice:Material       	; matNo             	; Material:matNo                   	;                               	;  
+; InboundInvoice:Material       	; matPosNo          	; Material:matPosNo                	;                               	; true 
+; InboundInvoice:Material       	; netValue          	; Material:netValue                	;                               	;  
+; InboundInvoice:Material       	; quantity          	; Material:quantity                	;                               	;  
+; InboundInvoice:Material       	; sapB2BDocument    	; Material:sapB2BDocument          	; InboundInvoice:SapB2BDocument 	; true 
+; InboundInvoice:Material       	; unit              	; Material:unit                    	;                               	;  
+; InboundInvoice:B2BUnit        	; uid               	; B2BUnit:uid                      	;                               	; true 
+; InboundInvoice:PartnerAddress 	; poBox             	; PartnerAddress:poBox             	;                               	;  
+; InboundInvoice:PartnerAddress 	; partnerFunction   	; PartnerAddress:partnerFunction   	;                               	; true 
+; InboundInvoice:PartnerAddress 	; streetHouseNumber1	; PartnerAddress:streetHouseNumber1	;                               	;  
+; InboundInvoice:PartnerAddress 	; poBoxPostalCode   	; PartnerAddress:poBoxPostalCode   	;                               	;  
+; InboundInvoice:PartnerAddress 	; streetHouseNumber2	; PartnerAddress:streetHouseNumber2	;                               	;  
+; InboundInvoice:PartnerAddress 	; countryKey        	; PartnerAddress:countryKey        	;                               	;  
+; InboundInvoice:PartnerAddress 	; postalCode        	; PartnerAddress:postalCode        	;                               	;  
+; InboundInvoice:PartnerAddress 	; sapB2BDocument    	; PartnerAddress:sapB2BDocument    	; InboundInvoice:SapB2BDocument 	; true 
+; InboundInvoice:PartnerAddress 	; partner           	; PartnerAddress:partner           	;                               	;  
+; InboundInvoice:PartnerAddress 	; city              	; PartnerAddress:city              	;                               	;  
+; InboundInvoice:DocumentStatus 	; code              	; DocumentStatus:code              	;                               	; true 
+; InboundInvoice:SapB2BDocument 	; amount            	; SapB2BDocument:amount            	;                               	;  
+; InboundInvoice:SapB2BDocument 	; billAddress       	; SapB2BDocument:billAddress       	;                               	;  
+; InboundInvoice:SapB2BDocument 	; currency          	; SapB2BDocument:currency          	; InboundInvoice:Currency       	;  
+; InboundInvoice:SapB2BDocument 	; date              	; SapB2BDocument:date              	;                               	;  
+; InboundInvoice:SapB2BDocument 	; documentNumber    	; SapB2BDocument:documentNumber    	;                               	; true 
+; InboundInvoice:SapB2BDocument 	; documentType      	; SapB2BDocument:documentType      	; InboundInvoice:B2BDocumentType	;  
+; InboundInvoice:SapB2BDocument 	; dueDate           	; SapB2BDocument:dueDate           	;                               	;  
+; InboundInvoice:SapB2BDocument 	; grandTotal        	; SapB2BDocument:grandTotal        	;                               	;  
+; InboundInvoice:SapB2BDocument 	; grossWeight       	; SapB2BDocument:grossWeight       	;                               	;  
+; InboundInvoice:SapB2BDocument 	; netWeight         	; SapB2BDocument:netWeight         	;                               	;  
+; InboundInvoice:SapB2BDocument 	; orderDate         	; SapB2BDocument:orderDate         	;                               	;  
+; InboundInvoice:SapB2BDocument 	; orderNumber       	; SapB2BDocument:orderNumber       	;                               	;  
+; InboundInvoice:SapB2BDocument 	; overAllTax        	; SapB2BDocument:overAllTax        	;                               	;  
+; InboundInvoice:SapB2BDocument 	; payerAddress      	; SapB2BDocument:payerAddress      	;                               	;  
+; InboundInvoice:SapB2BDocument 	; termsOfDelivery   	; SapB2BDocument:termsOfDelivery   	;                               	;  
+; InboundInvoice:SapB2BDocument 	; termsOfPayment    	; SapB2BDocument:termsOfPayment    	;                               	;  
+; InboundInvoice:SapB2BDocument 	; unit              	; SapB2BDocument:unit              	; InboundInvoice:B2BUnit        	;  
+; InboundInvoice:SapB2BDocument 	; units             	; SapB2BDocument:units             	;                               	;  

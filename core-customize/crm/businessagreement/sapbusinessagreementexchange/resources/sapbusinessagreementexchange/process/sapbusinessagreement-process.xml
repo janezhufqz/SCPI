@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process xmlns="http://www.hybris.de/xsd/processdefinition" name="businessAgreementProcess" start="businessAgreementCreate"
+    processClass="com.sap.hybris.sapbusinessagreement.model.BusinessAgreementProcessModel" >
+    
+  
+    <action id="businessAgreementCreate" bean="checkCreditCardReplicationAction">
+        <transition name="OK" to="businessAgreementPublish" />
+        <transition name="WAIT" to="waitForCreditCardReplication" />
+        <transition name="NOK" to="error" />
+    </action>    
+    <wait id="waitForCreditCardReplication" then="businessAgreementPublish" prependProcessCode="false" >
+		<event>CreditCardReplication_${process.creditCardPaymentInfo.user.customerID}_${process.creditCardPaymentInfo.cardInc}</event>
+	</wait> 
+	   <action id="businessAgreementPublish" bean="businessAgreementPublishAction">
+        <transition name="OK" to="success" />
+        <transition name="NOK" to="error" />
+    </action>
+    
+    <end id="success" state="SUCCEEDED">Business Agreement Created.</end>
+    <end id="error" state="FAILED">Business Agreement is not Created.</end>
+</process> 
+

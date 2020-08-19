@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<config xmlns="http://www.hybris.com/cockpit/config">
+
+	<context component="explorer-tree" merge-by="module">
+		<n:explorer-tree xmlns:n="http://www.hybris.com/cockpitng/config/explorertree">
+			<n:navigation-node id="hmc_sapcrmcategorization">
+				<n:type-node id="CategorySchema" code="CategorySchema" />
+
+			</n:navigation-node>
+		</n:explorer-tree>
+	</context>
+
+	<context merge-by="type" parent="GenericItem" type="CategorySchema"
+		component="listview">
+		<list-view:list-view
+			xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="code" />
+			<list-view:column qualifier="level" />
+			<list-view:column qualifier="sourceCategory" />
+			<list-view:column qualifier="parentCategory" />
+			<list-view:column qualifier="validFrom" />
+			<list-view:column qualifier="validTo" />
+			<list-view:column qualifier="catalogName" />
+		</list-view:list-view>
+	</context>
+
+	<context merge-by="type" parent="GenericItem" type="CategorySchema"
+		component="advanced-search">
+		<advanced-search:advanced-search
+			xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list>
+				<advanced-search:field
+					xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="code"
+					selected="false" />
+				<advanced-search:field
+					xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="level"
+					selected="false" />
+				<advanced-search:field
+					xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="sourceCategory"
+					selected="false" />
+				<advanced-search:field
+					xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="parentCategory"
+					selected="false" />
+				<advanced-search:field
+					xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="validTo"
+					selected="false" />
+				<advanced-search:field
+					xmlns="http://www.hybris.com/cockpitng/config/advancedsearch"
+					editor="java.lang.Long" name="pk" selected="false" />
+			</advanced-search:field-list>
+		</advanced-search:advanced-search>
+	</context>
+
+	<context merge-by="module" type="CategorySchema" component="editor-area"
+		module="sapcrmcategoryschema">
+		<editorArea:editorArea
+			xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+			<editorArea:tab
+				xmlns="http://www.hybris.com/cockpitng/component/editorArea" name="hmc.tab.generalDetails">
+				<editorArea:section name="hmc.section.general">
+
+					<attribute qualifier="code" />
+					<attribute qualifier="catalogName" />
+					<attribute qualifier="level" />
+					<attribute qualifier="sourceCategory" />
+					<attribute qualifier="parentCategory" />
+					<attribute qualifier="validFrom" />
+					<attribute qualifier="validTo" />
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+
+</config>

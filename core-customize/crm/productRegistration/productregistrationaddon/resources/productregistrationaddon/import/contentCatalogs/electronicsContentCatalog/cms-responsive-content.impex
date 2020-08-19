@@ -1,0 +1,64 @@
+$contentCatalog=electronicsContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$contentCatalogName=Electronics Content Catalog
+$productCatalog=electronicsProductCatalog
+$productCatalogName=Electronics Product Catalog
+$productCV=catalogVersion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$picture=media(code, $contentCV);
+$image=image(code, $contentCV);
+$media=media(code, $contentCV);
+$page=page(uid, $contentCV);
+$contentPage=contentPage(uid, $contentCV);
+$product=product(code, $productCV)
+$category=category(code, $productCV)
+$addonExtensionName=productregistrationaddon
+
+#cms-content.impex
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false'];previewImage(code, $contentCV)
+;;registered-products;Register Products Listing Page;AccountPageTemplate;registered-products
+;;add-registered-products;Add Register Products Page;AccountPageTemplate;add-registered-products
+;;register-product-details;Update Register Products Page;AccountPageTemplate;register-product-details
+
+# ContentSlot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;BodyContent-registered-products;Body Content Slot for My Account Register Products History;true;AccountRegisterProductsHistoryComponent;;;
+
+;;BodyContent-add-registered-products;Body Content Slot for Add Register Products;true;AccountAddRegisterProductsComponent;;;
+
+;;BodyContent-register-product-details;Body Content Slot for Details Register Products;true;AccountRegisterProductsDetailsComponent;;;
+
+;;RegisterProductSlot-add-registered-products;Register product Component;true;CreateProductRegistrationComponent
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='registered-products'];contentSlot(uid,$contentCV)[unique=true];;;
+;;BodyContent-registered-products;BodyContent;;BodyContent-registered-products;;;
+;;RegisterProduct-registered-products;ProductRegistration;;RegisterProductSlot-add-registered-products
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='add-registered-products'];contentSlot(uid,$contentCV)[unique=true];;;
+;;BodyContent-add-registered-products;BodyContent;;BodyContent-add-registered-products;;;
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='register-product-details'];contentSlot(uid,$contentCV)[unique=true];;;
+;;BodyContent-register-product-details;BodyContent;;BodyContent-register-product-details;;;
+
+# Navigation Bar Component
+REMOVE AccountNavigationComponent;uid[unique=true];$contentCV[unique=true]
+;AccountRegisterProductsHistoryComponent;
+
+# CMS Navigation Nodes
+INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);links(&linkRef);&nodeRef
+# children for my account
+;ProductRegistrationNavNode;;ProductRegistrationNavNode;MyAccountNavNode;;ProductRegistrationNavNode
+
+# create cms navigation entry for nvaigation child nodes
+INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;navigationNode(&nodeRef);item(&linkRef);
+;ProductRegistrationNavNodeEntry;;ProductRegistrationNavNodeEntry;ProductRegistrationNavNode;AccountRegisterProductsHistoryLink;
+
+# CMS Link Components
+INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;&componentRef;target(code)[default='sameWindow'];$category;$product;
+;;AccountRegisterProductsHistoryLink	   ;AccountRegisterProductsHistoryLink     ;/my-account/registered-products;AccountRegisterProductsHistoryLink;AccountRegisterProductsHistoryLink;;;;
+
+INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;page;&componentRef
+;;AccountRegisterProductsHistoryComponent;Account Register Products Component;/WEB-INF/views/addons/$addonExtensionName/responsive/pages/productregistrationaddon/accountProductRegistrationPage.jsp;AccountRegisterProductsHistoryComponent
+;;AccountAddRegisterProductsComponent;Account Add Register Products Component;/WEB-INF/views/addons/$addonExtensionName/responsive/pages/productregistrationaddon/accountAddProductRegistrationPage.jsp;AccountAddRegisterProductsComponent
+;;AccountRegisterProductsDetailsComponent;Account Register Products Details Component;/WEB-INF/views/addons/$addonExtensionName/responsive/pages/productregistrationaddon/accountProductRegistrationDetailsPage.jsp;AccountRegisterProductsDetailsComponent
+;;CreateProductRegistrationComponent;Account Create Register Products Details Component;/WEB-INF/views/addons/$addonExtensionName/responsive/cms/productregistrationcomponent.jsp;CreateProductRegistrationComponent

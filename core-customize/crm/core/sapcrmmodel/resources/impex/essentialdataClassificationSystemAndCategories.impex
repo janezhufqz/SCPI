@@ -1,0 +1,96 @@
+## default impex script
+
+"#% impex.info(""Creating classification system"")"
+
+# Macros / Replacement Parameter definitions
+$classCatalogVersion=catalogversion(catalog(id[default='CRM_CLASSIFICATION']),version[default='CRM_IMPORT'])[unique=true,default='CRM_CLASSIFICATION:CRM_IMPORT']
+$classSystemVersion=systemVersion(catalog(id[default='CRM_CLASSIFICATION']),version[default='CRM_IMPORT'])[unique=true]
+$class=classificationClass(ClassificationClass.code,$classCatalogVersion)[unique=true]
+$attribute=classificationAttribute(code,$classSystemVersion)[unique=true]
+
+INSERT_UPDATE ClassificationSystem;id[unique=true]
+;CRM_CLASSIFICATION
+
+INSERT_UPDATE ClassificationSystemVersion;version[unique=true];catalog(id)
+;CRM_IMPORT;CRM_CLASSIFICATION
+
+# Insert Classifications
+INSERT_UPDATE ClassificationClass;$classCatalogVersion;code[unique=true];;;;;;
+;;Group Attributes;;;;;;
+;;Service Product Classification Category;;;;;;
+
+# Insert Classification Attributes
+INSERT_UPDATE ClassificationAttribute;$classSystemVersion;code[unique=true];name[lang=en];;;;;
+ ;;productPrGroup;Product Pr Group
+ ;;prcGroup1;Product Group 1
+ ;;prcGroup2;Product Group 2
+ ;;prcGroup3;Product Group 3
+ ;;prcGroup4;Product Group 4
+ ;;prcGroup5;Product Group 5
+ ;;rebateGroup;Rebate Group
+ ;;commGroup;Comm Group
+ ;;accountAssignmentGroup;Account Assignment Group
+ ;;duration;Duration
+ ;;durationUnit;Duration Unit
+ ;;serviceProfile;Service Profile
+ ;;responseProfile;Response Profile
+ ;;planVersion;Plan Version
+ ;;objectType;Object Type
+ ;;objectId;Object Id
+ ;;persons;Persons
+ ;;country;Country
+ ;;region;Region
+ ;;taxType;Tax Type
+ ;;taxGroup;Tax Group
+ ;;taxTariff;Tax Tariff
+ ;;taxFlag;Tax Flag
+ 
+ INSERT_UPDATE ClassAttributeAssignment;$class;$attribute;position;;attributeType(code[default=string]);multiValued[default=false];range[default=false];localized[default=false]
+ ;Group Attributes;productPrGroup;1;;;;
+ ;Group Attributes;prcGroup1;2;;;;
+ ;Group Attributes;prcGroup2;3;;;;
+ ;Group Attributes;prcGroup3;4;;;;
+ ;Group Attributes;prcGroup4;5;;;;
+ ;Group Attributes;prcGroup5;6;;;;
+ ;Group Attributes;rebateGroup;7;;;;
+ ;Group Attributes;commGroup;8;;;;
+ ;Group Attributes;accountAssignmentGroup;9;;;;
+ ;Service Product Classification Category;duration;1;;;;
+ ;Service Product Classification Category;durationUnit;2;;;;
+ ;Service Product Classification Category;serviceProfile;1;;;;
+ ;Service Product Classification Category;responseProfile;1;;;;
+ ;Service Product Classification Category;planVersion;1;;;;
+ ;Service Product Classification Category;objectType;1;;;;
+ ;Service Product Classification Category;objectId;1;;;;
+ ;Service Product Classification Category;persons;1;;;;
+ ;Service Product Classification Category;country;1;;;;
+ ;Service Product Classification Category;region;1;;;;
+ ;Service Product Classification Category;taxType;1;;;;
+ ;Service Product Classification Category;taxGroup;1;;;;
+ ;Service Product Classification Category;taxTariff;1;;;;
+ ;Service Product Classification Category;taxFlag;1;;;;
+
+"#% impex.info(""  Creating default categories"")"
+
+# ImpEx for Importing Categories into Default Catalog
+
+# Macros / Replacement Parameter definitions
+$productCatalog=Default
+$productCatalogName=Default Product Catalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$crmClassificationCatalog=CRM_CLASSIFICATION
+$classificationCatalogVersion=catalogversion(catalog(id[default=$crmClassificationCatalog]),version[default='CRM_IMPORT'])[unique=true,default=$crmClassificationCatalog:CRM_IMPORT]
+$supercategories=source(code, $classificationCatalogVersion)[unique=true]
+$categories=target(code, $catalogVersion)[unique=true]
+
+$lang=en
+
+# Insert Categories
+INSERT_UPDATE Category;code[unique=true];allowedPrincipals(uid)[default='customergroup'];$catalogVersion
+;CRM_PRODUCT_CATEGORY
+;CRM_SERVICE_PRODUCT_CATEGORY
+
+# Insert Category Structure
+INSERT_UPDATE CategoryCategoryRelation;$categories;$supercategories
+;CRM_PRODUCT_CATEGORY;Group Attributes
+;CRM_SERVICE_PRODUCT_CATEGORY;Service Product Classification Category

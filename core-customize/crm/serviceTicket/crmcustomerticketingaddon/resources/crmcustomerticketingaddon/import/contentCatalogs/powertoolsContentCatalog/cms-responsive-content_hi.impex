@@ -1,0 +1,15 @@
+##******************************This file is generated - please do not edit it. It will be regenerated after every build.********************************#
+$contentCatalog=powertoolsContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+
+# Language
+$lang=hi
+
+# Content Pages
+UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
+;;crm-add-complaint;"शिकायत जोड़े";
+;;crm-update-complaint;"अद्यतन शिकायत";
+
+# CMS Link Components
+UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang]
+;;AccountSupportTicketHistoryLink;"समर्थन टिकट / शिकायतों"

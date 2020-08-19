@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2018 SAP SE or an SAP affiliate company. All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<!--
+	ATTENTION: This is just an example file. You have to edit it according to your needs.
+-->
+
+<items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+			xsi:noNamespaceSchemaLocation="items.xsd">
+
+	<relations>
+
+		<relation code="SAPCpiOutboundReturnOrder2SAPCpiOutboundReturnOrderEntries"
+			localized="false">
+			<sourceElement type="SAPCpiOutboundReturnOrder"
+				qualifier="sapCpiOutboundReturnOrder" cardinality="one" />
+			<targetElement type="SAPCpiOutboundReturnOrderEntry"
+				qualifier="sapCpiOutboundReturnOrderEntries" cardinality="many"
+				collectiontype="set">
+				<modifiers partof="true" />
+			</targetElement>
+		</relation>
+		
+		<relation code="sapCpiOutboundReturnOrderEntry2RtrOrdrCnds"
+			localized="false">
+			<sourceElement type="SAPCpiOutboundReturnOrderEntry"
+				qualifier="sapCpiOutboundReturnOrderEntry" cardinality="one" />
+			<targetElement type="SAPCpiOutboundReturnOrderEntryCondition"
+				qualifier="sapCpiOutboundReturnOrderEntryConditions" cardinality="many"
+				collectiontype="set">
+				<modifiers partof="true" />
+			</targetElement>
+		</relation>
+
+	</relations>
+
+
+	<itemtypes>
+
+		<itemtype code="SAPCpiOutboundReturnOrder"
+                  jaloclass="sap.sapcpicrmreturnorder.jalo.SAPCpiOutboundReturnOrder"
+                  extends="GenericItem">
+
+            <deployment table="SAPCpiOTBRetOrd" typecode="9129"/>
+
+            <attributes>
+
+                <attribute qualifier="precedingDocumentId" type="java.lang.String">
+                    <persistence type="property"/>
+                    <modifiers unique="true"/>
+                </attribute>
+
+                <attribute qualifier="orderId" type="java.lang.String">
+                    <persistence type="property"/>
+                    <modifiers unique="true"/>
+                </attribute>
+
+                <attribute qualifier="customerId" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+                
+                <attribute qualifier="b2bUnit" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+                
+                <attribute qualifier="responseStatus" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="responseMessage" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+
+                <attribute qualifier="sapCpiConfig" type="SAPCpiOutboundReturnOrderConfig">
+                    <persistence type="property"/>
+                </attribute>
+                
+            </attributes>
+
+        </itemtype>
+        
+        <itemtype code="SAPCpiOutboundReturnOrderConfig"
+                  jaloclass="sap.sapcpicrmticketingsystem.jalo.SAPCpiOutboundReturnOrderConfig"
+                  extends="GenericItem">
+
+            <deployment table="SAPCpiOTBRetOrdCfg" typecode="9130"/>
+
+            <attributes>
+
+                <attribute qualifier="salesOrg" type="java.lang.String">
+                    <persistence type="property"/>
+                    <modifiers unique="true"/>
+                </attribute>
+
+                <attribute qualifier="salesOrgResp" type="java.lang.String">
+                    <persistence type="property"/>
+                    <modifiers unique="true"/>
+                </attribute>
+
+                <attribute qualifier="distributionChannel" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+
+                <attribute qualifier="serviceOrg" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+
+                <attribute qualifier="serviceOrgResp" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+
+                <attribute qualifier="servOrgShort" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+                
+                <attribute qualifier="processType" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+                
+                <attribute qualifier="url" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+                
+                <attribute qualifier="userName" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+                
+                <attribute qualifier="senderPort" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+                
+                <attribute qualifier="senderName" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+                
+                <attribute qualifier="receiverPort" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+                
+                <attribute qualifier="receiverName" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+  
+                <attribute qualifier="client" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+     
+            </attributes>
+
+        </itemtype>
+        
+        <itemtype code="SAPCpiOutboundReturnOrderEntry"
+			jaloclass="sap.sapcpicrmcomplaint.jalo.SAPCpiOutboundReturnOrderEntry"
+			extends="GenericItem">
+
+
+			<deployment table="SAPCpiOTBRetOrdEntry" typecode="9372" />
+
+			<attributes>
+			
+			
+			<attribute qualifier="itemNumber" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+			
+			<attribute qualifier="orderedProduct" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+				
+				<attribute qualifier="productDescription" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+			
+				<attribute qualifier="productId" type="java.lang.String">
+					<persistence type="property" />
+					<modifiers unique="true"/>
+				</attribute>
+
+
+				<attribute qualifier="processQtyInitIso" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="defectQuantity" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+				
+				<attribute qualifier="rejectionReason" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+				
+			</attributes>
+		</itemtype>
+		
+		<itemtype code="SAPCpiOutboundReturnOrderEntryCondition"
+			jaloclass="sap.sapcpicrmcomplaint.jalo.SAPCpiOutboundReturnOrderEntryCondition"
+			extends="GenericItem">
+
+
+			<deployment table="SAPCpiOBRetOrdEntryCond" typecode="9373" />
+
+			<attributes>
+			
+			<attribute qualifier="conditionCode" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+			
+			<attribute qualifier="conditionValue" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+				
+				<attribute qualifier="conditionCurrencyIsoCode" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+				
+			</attributes>
+		</itemtype>
+
+	</itemtypes>
+</items>

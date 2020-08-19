@@ -1,0 +1,60 @@
+INSERT_UPDATE IntegrationObject; code[unique = true];
+;InboundProductBundle
+
+INSERT_UPDATE IntegrationObjectItem; integrationObject(code)[unique=true]; code[unique = true]; type(code) 
+;InboundProductBundle	;ProductReference    		;ProductReference 
+;InboundProductBundle	;Product    				;Product
+;InboundProductBundle  ;Catalog               		;Catalog
+;InboundProductBundle  ;CatalogVersion       		;CatalogVersion
+;InboundProductBundle  ;ProductReferenceTypeEnum	;ProductReferenceTypeEnum
+;InboundProductBundle	;BundleProductGroup			;BundleProductGroup
+;InboundProductBundle	;BundleTemplate				;BundleTemplate
+;InboundProductBundle	;BundleProduct				;BundleProduct
+
+ 
+INSERT_UPDATE IntegrationObjectItemAttribute; integrationObjectItem(integrationObject(code), code)[unique = true]; attributeName[unique = true]; attributeDescriptor(enclosingType(code), qualifier); returnIntegrationObjectItem(integrationObject(code), code); unique[default = false] 
+;InboundProductBundle:Catalog             		 ;id               	       	;Catalog:id                    		  	;													; 
+;InboundProductBundle:CatalogVersion      		 ;catalog            	    ;CatalogVersion:catalog        		  	;InboundProductBundle:Catalog						; 
+;InboundProductBundle:CatalogVersion      		 ;version               	;CatalogVersion:version        		  	;													; 
+;InboundProductBundle:CatalogVersion      		 ;active                	;CatalogVersion:active         		  	;													;
+;InboundProductBundle:Product			   		 ;catalogVersion         	;Product:catalogVersion        			;InboundProductBundle:CatalogVersion				;
+;InboundProductBundle:Product             		 ;code                    	;Product:code                  			;													;
+#ProductReferenceTypeEnum
+;InboundProductBundle:ProductReferenceTypeEnum  ;code                    	;ProductReferenceTypeEnum:code        	;													;
+#ProductReference
+;InboundProductBundle:ProductReference    		 ;sourceProductID         	;ProductReference:source     			;InboundProductBundle:Product 						; true 
+;InboundProductBundle:ProductReference    	  	 ;targetProductID           ;ProductReference:target    			;InboundProductBundle:Product 						; true
+;InboundProductBundle:ProductReference    		 ;referenceType             ;ProductReference:referenceType      	;InboundProductBundle:ProductReferenceTypeEnum 	; 
+;InboundProductBundle:ProductReference   	  	 ;active                    ;ProductReference:active          		; 													; true
+;InboundProductBundle:ProductReference    		 ;preselected               ;ProductReference:preselected         	; 													; true
+
+ 
+#BundleProductGroup
+;InboundProductBundle:BundleProductGroup      	 ;code           			;BundleProductGroup:code            	;													; true
+
+#BundleTemplate BundleTemplate
+;InboundProductBundle:BundleTemplate       	 	;id           				;BundleTemplate:id            			;													; true
+;InboundProductBundle:BundleTemplate	   		;catalogVersion         	;BundleTemplate:catalogVersion  		;InboundProductBundle:CatalogVersion				;  
+;InboundProductBundle:BundleTemplate       	 	;products           		;BundleTemplate:products      			;InboundProductBundle:Product						;
+;InboundProductBundle:BundleTemplate       	 	;version           		;BundleTemplate:version      			;						; 
+ 
+
+#BundleProduct
+;InboundProductBundle:BundleProduct       		 ;product           		;BundleProduct:product      			;InboundProductBundle:Product						; true
+;InboundProductBundle:BundleProduct       		 ;bundleTemplate           	;BundleProduct:bundleTemplate  			;InboundProductBundle:BundleTemplate				; true
+;InboundProductBundle:BundleProduct       		 ;bundleGroup           	;BundleProduct:bundleGroup  			;InboundProductBundle:BundleProductGroup			; true
+;InboundProductBundle:BundleProduct	   			 ;catalogVersion         	;BundleProduct:catalogVersion  			;InboundProductBundle:CatalogVersion				; true
+;InboundProductBundle:BundleProduct	   			 ;default         			;BundleProduct:default  				;													;
+;InboundProductBundle:BundleProduct	   			 ;optional         			;BundleProduct:optional  				;													;
+;InboundProductBundle:BundleProduct       		 ;precProduct           	;BundleProduct:precProduct     			;InboundProductBundle:Product						; 
+;InboundProductBundle:BundleProduct	   			 ;validTo         			;BundleProduct:validTo  				;													;
+;InboundProductBundle:BundleProduct	   			 ;validFrom         		;BundleProduct:validFrom  				;													;
+
+
+
+
+
+
+
+
+

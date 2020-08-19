@@ -1,0 +1,30 @@
+#errorMessage
+{
+	display: none;
+}
+
+.account-section .account-serviceorderitemdetails-section-content {
+  padding-top: 15px;
+}
+
+.account-section .service-order-billing-address {
+  padding-top: 20px;
+}
+
+.account-section .service-order-delivery-address {
+  padding-top: 20px;
+}
+
+.account-section .service-order-related {
+  text-align: left;
+}
+
+.account-section .label-order-serviceorder-address{
+	font-weight: bold;
+}
+
+.account-section .serviceOrderTopBackBtn {
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+}

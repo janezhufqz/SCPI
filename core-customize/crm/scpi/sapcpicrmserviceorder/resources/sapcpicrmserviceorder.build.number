@@ -1,0 +1,11 @@
+#Ant properties
+#Fri Oct 05 14:28:06 GMT 2018
+builddate=20181005 1428
+description=sapcpicrmserviceorder
+group.id=de.hybris.platform
+module.name=platform-module
+name=sapcpicrmserviceorder
+releasedate=20181005 1428
+vendor=hybris
+version=18.11
+version.api=18.11.0

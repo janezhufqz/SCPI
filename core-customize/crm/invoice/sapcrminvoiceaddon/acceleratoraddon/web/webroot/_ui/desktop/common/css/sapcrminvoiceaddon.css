@@ -1,0 +1,14 @@
+#invoice {
+	width:343px;
+	position:relative;
+	left:566px;
+	top:225px ;
+}
+
+#asyncinvoice {
+	width:343px;
+}
+#errorMessage
+{
+	display: none;
+}

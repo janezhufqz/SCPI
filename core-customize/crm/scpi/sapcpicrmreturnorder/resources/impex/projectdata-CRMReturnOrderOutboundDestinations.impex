@@ -1,0 +1,26 @@
+$iflowURL=https://scpi-tenant-iflmap-gw-url/odata/SAP/REPLICATE-RETURNORDER-FROM-SAP-COMMERCE-TO-SAP-CRM
+
+#**********************************#
+#************ Credentials *********#
+#**********************************#
+INSERT_UPDATE BasicCredential; id[forceWrite=true,unique=true]; password; username
+;scpiCRM; password; username
+
+#**********************************#
+#************  Endpoints  *********#
+#**********************************#
+INSERT_UPDATE Endpoint; id[unique = true]    ; version[unique = true]; specUrl; name
+; scpiReturnOrderEndpoint          ; unknown ; "$iflowURL;v=1/SAPCpiOutboundReturnOrders";scpiReturnOrderEndpoint
+
+#**********************************************#
+#************  Consumed Destinations  *********#
+#**********************************************#
+INSERT_UPDATE DestinationTarget ; id[unique=true]
+                                ; scpiOutboundDestination
+
+
+INSERT_UPDATE ConsumedDestination ; id[unique = true]          ; url                                        ; endpoint(id, version)           ; credential(id) ; additionalProperties(key, value)[map-delimiter = |] ; destinationTarget(id)
+                                  ; scpiReturnOrderDestination ; "$iflowURL;v=1/SAPCpiOutboundReturnOrders" ; scpiReturnOrderEndpoint:unknown ; scpiCRM        ; "csrfURL->$iflowURL;v=1"                            ; scpiOutboundDestination
+
+
+

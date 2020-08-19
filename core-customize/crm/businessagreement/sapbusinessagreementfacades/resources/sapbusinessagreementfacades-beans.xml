@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- ~ [y] hybris Platform ~ ~ Copyright (c) 2000-2016 SAP SE ~ All rights 
+	reserved. ~ ~ This software is the confidential and proprietary information 
+	of SAP ~ Hybris ("Confidential Information"). You shall not disclose such 
+	~ Confidential Information and shall use it only in accordance with the ~ 
+	terms of the license agreement you entered into with SAP Hybris. -->
+
+<!-- ATTENTION: This is just an example file. You have to edit it according 
+	to your needs. -->
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="beans.xsd">
+
+	<!-- Example Data POJO <bean class="com.sap.hybris.sapbusinessagreementfacades.data.AbstractPojo" 
+		abstract="true"> <property name="id" type="String"/> <property name="flag" 
+		type="boolean"/> </bean> <bean class="com.sap.hybris.sapbusinessagreementfacades.data.MyPojo" 
+		extends="com.sap.hybris.sapbusinessagreementfacades.data.AbstractPojo"> <property 
+		name="message" type="String"/> </bean> <bean class="com.sap.hybris.sapbusinessagreementfacades.data.AnnotatedPojo"> 
+		<import type="javax.xml.bind.annotation.XmlRootElement"/> <import type="javax.xml.bind.annotation.XmlElements"/> 
+		<import type="javax.xml.bind.annotation.XmlElement"/> <annotations>@XmlRootElement</annotations> 
+		<property name="someText" type="String"> <annotations scope="getter"> @XmlElements(value 
+		= { @XmlElement(name="map", type=ValueAsMap.class), @XmlElement(name="string", 
+		type=ValueAsString.class) }) </annotations> </property> </bean> <bean class="de.hybris.platform.catalog.data.Equals1"> 
+		<property name="a1" type="boolean" equals="true"/> <property name="a2" type="int" 
+		equals="true"/> <property name="a3" type="String" equals="true"/> <property 
+		name="a4" type="de.hybris.platform.catalog.data.AbstractValue" equals="true"/> 
+		<property name="not4Equals" type="java.lang.Double"/> </bean> <bean class="de.hybris.platform.catalog.data.Equals2" 
+		extends="de.hybris.platform.catalog.data.Equals1" superEquals="true"> <property 
+		name="a5" type="java.lang.Integer" equals="true"/> <property name="a6" type="java.util.List" 
+		equals="true"/> <property name="not4Equals" type="java.lang.Double"/> </bean> -->
+	<bean
+		class="com.sap.hybris.sapbusinessagreementfacades.data.BusinessAgreementData">
+		<property name="businessAgreementID" type="String" />
+		<property name="description" type="String" />
+		<property name="businessAgreementClass" type="String" />
+		<property name="isDefault" type="java.lang.Boolean" />
+	</bean>
+
+	<bean
+		class="com.sap.hybris.sapbusinessagreementfacades.data.BusinessAgreementDetailsData"
+		extends="com.sap.hybris.sapbusinessagreementfacades.data.BusinessAgreementData">
+
+		<property name="partnerName" type="String" />
+		<property name="refnumber" type="String" />
+		<property name="collectivebill" type="java.lang.Boolean" />
+		<!-- <property name="partnerAddress" type="de.hybris.platform.commercefacades.user.data.AddressData>" 
+			/> -->
+		<!-- <property name="partnerClass" type="String>" /> -->
+
+		<property name="addressData"
+			type="de.hybris.platform.commercefacades.user.data.AddressData" />
+
+		<property name="paymentVia"
+			type="com.sap.hybris.sapbusinessagreementfacades.data.BusinessAgreementPaymentMethod" />
+
+		<property name="refundVia"
+			type="com.sap.hybris.sapbusinessagreementfacades.data.BusinessAgreementPaymentMethod" />
+
+		<property name="correspondenceRecipientId" type="String" />
+		<property name="correspondenceRecipientDesc" type="String" />
+		<property name="correspondenceVariant" type="String" />
+		<property name="correspondenceShipControl" type="String" />
+
+		<property name="dunningRecipientId" type="String" />
+		<property name="dunningDesc" type="String" />
+		<property name="dunningAddress"
+			type="de.hybris.platform.commercefacades.user.data.AddressData" />
+		<property name="dunningShipControl" type="String" />
+		
+		<property name="taxType" type="String" />
+		<property name="taxCode" type="String" />
+		<property name="taxRelevantAddress" type="de.hybris.platform.commercefacades.user.data.AddressData" />
+
+		<property name="payerCreditCardInfo"
+			type="com.sap.hybris.sapbusinessagreementfacades.data.CreditCardData" />
+		<property name="recipientCreditCardInfo"
+			type="com.sap.hybris.sapbusinessagreementfacades.data.CreditCardData" />
+		<property name="payerBankDetailsInfo"
+			type="com.sap.hybris.sapbusinessagreementfacades.data.BankDetailsData" />
+		<property name="recipientBankDetailsInfo"
+			type="com.sap.hybris.sapbusinessagreementfacades.data.BankDetailsData" />
+			
+		<property name="b2cCustomerPayerCCInfo"
+			type="de.hybris.platform.commercefacades.order.data.CCPaymentInfoData" />		
+		<property name="b2cCustomerRecipientCCInfo"
+			type="de.hybris.platform.commercefacades.order.data.CCPaymentInfoData" />
+	</bean>
+
+	<bean class="com.sap.hybris.sapbusinessagreementfacades.data.BankDetailsData">
+		<property name="bankaccountname" type="String" />
+		<property name="country" type="String" />
+		<property name="bankkey" type="String" />
+		<property name="accountnumber" type="String" />
+		<property name="partnerName" type="String"/>
+	</bean>
+
+	<bean class="com.sap.hybris.sapbusinessagreementfacades.data.CreditCardData">
+		<property name="cardtype" type="String" />
+		<property name="validTo" type="String" />
+
+		<property name="cardnumber" type="String" />
+		<property name="holdername" type="String" />
+	</bean>
+	<bean
+		class="com.sap.hybris.sapbusinessagreementfacades.data.BusinessAgreementPaymentMethod">
+		<property name="paymentMethod" type="String" />
+		<property name="alternativePayerId" type="String" />
+		<property name="alternativePayerDesc" type="String" />
+		<property name="alternativePayerAddress"
+			type="de.hybris.platform.commercefacades.user.data.AddressData" />
+	</bean>
+
+
+
+
+
+</beans>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- [y] hybris Platform Copyright (c) 2000-2013 hybris AG All rights reserved. 
+	This software is the confidential and proprietary information of hybris ("Confidential 
+	Information"). You shall not disclose such Confidential Information and shall 
+	use it only in accordance with the terms of the license agreement you entered 
+	into with hybris. -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<alias alias="sapPricingBolFactory" name="defaultCRMPricingBolFactory" />
+	<bean id="defaultCRMPricingBolFactory"
+		class="com.sap.hybris.crm.sapcrmpricing.services.impl.DefaultCRMPricingBolFactory">
+		<property name="genericFactory" ref="sapCoreGenericFactory" />
+	</bean>
+
+	  <!--<alias alias="sapPricingCartService" name="defaultCRMPricingCartService"/>
+		 <bean id="defaultCRMPricingCartService" class="com.sap.hybris.crm.sapcrmpricing.services.impl.DefaultCRMPricingCartService"> 
+		<property name="bolFactory" ref="sapPricingBolFactory" /> 
+		<property name="sapPartnerService" ref="sapPartnerService" />
+		<property name="conversionService" ref="sapPricingConversionService" />
+	</bean>
+		-->
+	<!-- <alias alias="priceService" name="defaultCRMPricingCatalogService" 
+		/> <bean id="defaultCRMPricingCatalogService" class="de.hybris.platform.sap.sappricing.services.impl.DefaultSapPricingCatalogService" 
+		parent="abstractBusinessService"> <property name="netGrossStrategy" ref="netGrossStrategy" 
+		/> <property name="timeService" ref="timeService" /> <property name="bolFactory" 
+		ref="defaultCRMPricingBolFactory" /> <property name="sapPartnerService" ref="sapPartnerService" 
+		/> <property name="sapPricingEnablementService" ref="sapPricingEnablementService" 
+		/> <property name="conversionService" ref="sapPricingConversionService" /> 
+		</bean> -->
+		
+	 <alias alias="calculationService" name="sapCRMCartCalculationService" 
+		/> <bean id="sapCRMCartCalculationService" class="com.sap.hybris.crm.sapcrmpricing.services.impl.SapCRMCartCalculationService" 
+		parent="sapCartCalculationService"> 
+		</bean>
+
+
+
+	
+</beans>

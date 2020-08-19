@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<alias name="serviceOrderFacadeImpl" alias="serviceOrderFacade" />
+	<bean id="serviceOrderFacadeImpl"
+		class="com.sap.hybris.crm.sapserviceorderservices.facade.impl.ServiceOrderFacadeImpl">
+		<property name="seriveOrderService" ref="seriveOrderService" />
+		<property name="serviceOrderHistoryConverter" ref="serviceOrderHistoryConverter" />
+		<property name="serviceOrderDetailsConverter" ref="serviceOrderDetailsConverter" />
+		<property name="sortValueProvider" ref="sortValueProvider" />
+		<property name="configurationService" ref="configurationService" />
+	</bean>
+
+	<alias name="serviceOrderServiceImpl" alias="seriveOrderService" />
+	<bean id="serviceOrderServiceImpl"
+		class="com.sap.hybris.crm.sapserviceorderservices.services.impl.ServiceOrderServiceImpl">
+		<property name="serviceOrderDao" ref="serviceOrderDao" />
+	</bean>
+
+	<alias name="serviceOrderDaoImpl" alias="serviceOrderDao" />
+	<bean id="serviceOrderDaoImpl"
+		class="com.sap.hybris.crm.sapserviceorderservices.daos.impl.ServiceOrderDaoImpl">
+		<property name="pagedFlexibleSearchService" ref="pagedFlexibleSearchService" />
+		<property name="flexibleSearchService" ref="flexibleSearchService" />		
+		<property name="modelService" ref="modelService" />
+
+	</bean>
+
+
+	<alias name="defaultServiceOrderHistoryConverter" alias="serviceOrderHistoryConverter" />
+	<bean id="defaultServiceOrderHistoryConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.sap.hybris.crm.sapserviceorderservices.ServiceOrderHistoryData" />
+		<property name="populators">
+			<list>
+				<ref bean="serviceOrderHistoryPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultServiceOrderHistoryPopulator" alias="serviceOrderHistoryPopulator" />
+	<bean id="defaultServiceOrderHistoryPopulator"
+		class="com.sap.hybris.crm.sapserviceorderservices.populators.ServiceOrderHistoryPopulator">
+		<property name="priceDataFactory" ref="priceDataFactory" />
+		<property name="enumerationService" ref="enumerationService"/>
+		<property name="storeSessionFacade" ref="storeSessionFacade"/>
+	</bean>
+
+
+	<alias name="defaultServiceOrderDetailsConverter" alias="serviceOrderDetailsConverter" />
+	<bean id="defaultServiceOrderDetailsConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.sap.hybris.crm.sapserviceorderservices.ServiceOrderData" />
+		<property name="populators">
+			<list>
+				<ref bean="serviceOrderDetailsPopulator" />
+				<ref bean="serviceOrderEntryDetailsPopulator" />
+			</list>
+		</property>
+	</bean>
+	
+	
+	
+
+
+	<alias name="defaultServiceOrderDetailsPopulator" alias="serviceOrderDetailsPopulator" />
+	<bean id="defaultServiceOrderDetailsPopulator"
+		class="com.sap.hybris.crm.sapserviceorderservices.populators.ServiceOrderDetailsPopulator">
+		<property name="addressConverter" ref="addressConverter" />
+		<property name="priceFactory" ref="priceDataFactory" />
+		<property name="currencyConverter" ref="currencyConverter" />
+		<property name="enumerationService" ref="enumerationService"/>
+		<property name="storeSessionFacade" ref="storeSessionFacade"/>
+	</bean>
+
+	<alias name="defaultServiceOrderEntryDetailsPopulator" alias="serviceOrderEntryDetailsPopulator" />
+	<bean id="defaultServiceOrderEntryDetailsPopulator"
+		class="com.sap.hybris.crm.sapserviceorderservices.populators.ServiceOrderEntryDetailsPopulator">
+		<property name="priceFactory" ref="priceDataFactory" />
+		<property name="productConverter" ref="productConverter"/>
+	</bean>
+
+
+	<alias name="defaultSapcrmProductCatalogMappingPopulator" alias="sapProductCatalogMappingPopulator" />
+	<bean id="defaultSapcrmProductCatalogMappingPopulator"
+		class="com.sap.hybris.crm.sapserviceorderservices.populators.SAPCRMProductCatalogMappingPopulator" />
+
+
+	<alias name="serviceOrderSortProvider" alias="sortValueProvider" />
+	<bean id="serviceOrderSortProvider"
+		class="com.sap.hybris.crm.sapserviceorderservices.providers.ServiceOrderSortProvider">
+		 <property name="properties">      		
+    		<map>
+    			<entry key="byDate" value="CREATIONTIME" />
+				<entry key="byOrderNumber" value="CODE" />
+			</map>
+		 </property>
+	</bean>	
+	
+	<alias alias="sapServiceOrderAddressUpdaterInterceptor" name="defaultServiceOrderAddressUpdaterInterceptor" />
+	<bean id="defaultServiceOrderAddressUpdaterInterceptor"
+		class="com.sap.hybris.crm.sapserviceorderservices.interceptors.ServiceOrderAddressUpdaterInterceptor"
+		autowire="byName" />
+	<bean id="sapServiceOrderAddressUpdaterInterceptorMapping"
+		class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor" ref="sapServiceOrderAddressUpdaterInterceptor" />
+		<property name="typeCode" value="Address" />
+		<property name="order" value="5000" />
+	</bean>	
+	
+			
+	
+			
+</beans>

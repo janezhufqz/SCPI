@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2018 SAP SE or an SAP affiliate company. All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+
+    <!-- Outbound Customer Conversion Service -->
+    <alias name="defaultSapCpiCrmCustomerConversionService" alias="sapCpiCustomerConversionService"/>
+    <bean id="defaultSapCpiCrmCustomerConversionService"
+          class="com.sap.hybris.crm.sapcpicrmcustomerexchange.service.impl.DefaultSapCpiCrmCustomerConversionService" parent="sapCpiCustomerDefaultConversionService">
+        <!--   <property name="flexibleSearchService" ref="flexibleSearchService"/> -->
+        <!-- <property name="globalConfigurationDAO" ref="sapCoreSAPGlobalConfigurationDAO"/>
+        <property name="modelService" ref="modelService"/>
+        <property name="customerNameStrategy" ref="customerNameStrategy"/> -->
+    </bean>
+     
+     <!-- Send Outbound Customer Service CPI to CRM -->
+      <alias name="sapCpiCrmCustomerOutboundService" alias="customerExportService"/>
+    <bean id="sapCpiCrmCustomerOutboundService"
+          class="com.sap.hybris.crm.sapcpicrmcustomerexchange.service.impl.SapCpiCrmCustomerOutboundService"
+          parent="defaultCRMCustomerExportService">
+        <property name="sapCpiCustomerConversionService" ref="sapCpiCustomerConversionService"/>
+        <property name="SapCpiCrmCustomerConversionService" ref="sapCpiCustomerConversionService"/>
+        <property name="sapCpiOutboundService" ref="sapCpiOutboundService"/>
+       <!--  <property name="commonI18NService" ref="commonI18NService" /> -->
+    </bean>
+          
+ 		<!--  Address is not replicate to CRM --> 	
+ 	<!-- <alias alias="defaultAddressInterceptor" name="defaultCpiCRMAddressInterceptor" />
+	<bean id="defaultCpiCRMAddressInterceptor"
+		class="com.sap.hybris.crm.sapcpicrmcustomerexchange.inbound.interceptors.DefaultCpiCRMAddressInterceptor"
+		autowire="byName">
+	</bean> -->
+    
+    <!-- CustomerReplicationEventListener Override -->
+    <alias name="crmScpiCustomerReplicationEventListener" alias="crmCustomerReplicationEventListener" />
+	<bean id="crmScpiCustomerReplicationEventListener"
+		class="com.sap.hybris.crm.sapcpicrmcustomerexchange.outbound.events.impl.CRMScpiCustomerReplicationEventListener">
+		<property name="sapCrmCustomerOutboundService" ref="customerExportService" />
+		<property name="customerExportService" ref="customerExportService" />
+		<property name="clusterService" ref="clusterService" />
+		<property name="tenantService" ref="tenantService" />
+		<property name="sapGlobalConfigurationService" ref="sapCoreSAPGlobalConfigurationService" />
+	</bean>
+    
+    
+    <bean id="sapCpiCrmCustomerPersistenceHook"
+          class="com.sap.hybris.crm.sapcpicrmcustomerexchange.inbound.events.SapCpiCrmCustomerPersistenceHook">
+          <property name="modelService" ref="modelService"/>
+        
+    </bean>
+    <bean id="sapCpiCrmCustomerEmailUpdateHook"
+          class="com.sap.hybris.crm.sapcpicrmcustomerexchange.inbound.events.SapCpiCrmCustomerEmailUpdateHook">
+          <property name="modelService" ref="modelService"/>
+          <property name="flexibleSearchService" ref="flexibleSearchService"/>
+    </bean>
+    
+			
+</beans>

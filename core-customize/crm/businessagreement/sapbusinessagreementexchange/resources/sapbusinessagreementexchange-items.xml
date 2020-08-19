@@ -1,0 +1,680 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- ~ [y] hybris Platform ~ ~ Copyright (c) 2000-2016 SAP SE ~ All rights 
+	reserved. ~ ~ This software is the confidential and proprietary information 
+	of SAP ~ Hybris ("Confidential Information"). You shall not disclose such 
+	~ Confidential Information and shall use it only in accordance with the ~ 
+	terms of the license agreement you entered into with SAP Hybris. -->
+<!-- ATTENTION: This is just an example file. You have to edit it according 
+	to your needs. -->
+<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="items.xsd">
+	<relations>
+
+
+
+		<relation code="BusinessAGBusinessAgreementHeaderRelation"
+			localized="false" generate="true" autocreate="true">
+			<sourceElement type="BusinessAgreement" qualifier="businessagreement"
+				cardinality="one">
+				<description>Business Agreement </description>
+				<modifiers read="true" write="true" search="true"
+					optional="false" unique="true" />
+			</sourceElement>
+			<targetElement type="BusinessAgreementHeader"
+				qualifier="businessagreementheader" cardinality="many"
+				collectiontype="set">
+				<description>Business Agreement Header</description>
+				<modifiers read="true" write="true" search="true" partof="true" />
+			</targetElement>
+		</relation>
+		<relation code="BusinessAGCustomerRelation" localized="false"
+			generate="true" autocreate="true">
+			<sourceElement type="Customer" qualifier="customer"
+				cardinality="one">
+				<description>Business Agreement </description>
+				<modifiers read="true" write="true" search="true"
+					optional="true" />
+			</sourceElement>
+			<targetElement type="BusinessAgreement" qualifier="businessagreement"
+				cardinality="many" collectiontype="set">
+				<description>Business Agreement Header</description>
+				<modifiers read="true" write="true" search="true" partof="true" />
+			</targetElement>
+		</relation>
+		<relation code="PartnerBusinessAgreementHeaderRelation"
+			localized="false" generate="true" autocreate="true">
+			<sourceElement type="BusinessAgreementHeader"
+				qualifier="businessagreementheader" cardinality="one">
+				<description>Business Agreement </description>
+				<modifiers read="true" write="true" search="true"
+					optional="false" />
+			</sourceElement>
+			<targetElement type="BusinessAgreementPartners"
+				qualifier="businessagreementpartners" cardinality="many"
+				collectiontype="set">
+				<description>Business Agreement Header</description>
+				<modifiers read="true" write="true" search="true" partof="true" />
+			</targetElement>
+		</relation>
+		<relation code="BusinessRuleHeaderBusinessAgreementHeaderRelation"
+			localized="false" generate="true" autocreate="true">
+			<sourceElement type="BusinessAgreementHeader"
+				qualifier="businessagHeader" cardinality="one">
+				<description>Business Agreement Rule Header </description>
+				<modifiers read="true" write="true" search="true"
+					optional="false" />
+			</sourceElement>
+			<targetElement type="BusinessAgreementRuleHeader"
+				qualifier="businessruleHeader" cardinality="many" collectiontype="set">
+				<description>Business Agreement Header</description>
+				<modifiers read="true" write="true" search="true" partof="true" />
+			</targetElement>
+		</relation>
+
+	</relations>
+		<itemtypes>
+			<itemtype code="Order" autocreate="false" generate="false">
+			<attributes>
+				<attribute type="BusinessAgreement" qualifier="businessAgreement">
+					<persistence type="property" />
+					<description>BusinessAgreement in order model</description>
+				</attribute>
+			</attributes>
+			</itemtype>
+		<typegroup name="BusinessAgreement">
+
+			<itemtype code="BusinessAgreement" generate="true"
+				autocreate="true">
+				<deployment table="BusinessAgreement" typecode="10710" />
+				<attributes>
+					<attribute type="java.lang.String" qualifier="guid">
+						<description>Business Agreement GUID</description>
+						<modifiers read="true" write="true" search="true"
+							optional="false"  unique="true"/>
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.String" qualifier="id">
+						<description>Business Agreement ID</description>
+						<modifiers read="true" write="true" search="true"
+							optional="false" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.String" qualifier="text">
+						<description>Business Agreement Text</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.Boolean" qualifier="sapIsReplicated">
+						<defaultvalue>Boolean.FALSE</defaultvalue>
+						<description>Business Agreement Text</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.String" qualifier="replicationNumber">
+						<description>Business Agreement replication number</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.String" qualifier="partnerid">
+						<description>Business Agreement Partner ID</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+			<itemtype code="BusinessAgreementHeader" generate="true"
+				autocreate="true">
+				<deployment table="BusinessAgreementHeader" typecode="10711" />
+				<attributes>
+					
+					<attribute type="java.lang.String" qualifier="validto">
+						<description>Valid To</description>
+						<modifiers read="true" write="true" search="true"
+							optional="false" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.String" qualifier="validfrom">
+						<description>Valid From</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+				
+					<attribute type="java.lang.Boolean" qualifier="businessagreementdefault">
+						<description>Default Business Agreement</description>
+						<defaultvalue>Boolean.FALSE</defaultvalue>
+						<modifiers read="true" write="true" search="true"
+							optional="false" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="CRMBusinessAgreementClass" qualifier="businessagreementclass">
+						<description>Business Agreement Class</description>
+						<modifiers read="true" write="true" search="true"
+							optional="false" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.String" qualifier="bankidinc">
+						<description>Bank Detail ID Incoming</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.String" qualifier="bankidout">
+						<description>Bank Detail ID Outgoing</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.String" qualifier="creditcardinc">
+						<description>Credit Card Incoming</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.String" qualifier="creditcardout">
+						<description>Credit Card Outgoing</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.String" qualifier="addresscorrespondenceguid">
+						<description>Address GUID of Correspondence Address </description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.String" qualifier="addressdunningguid">
+						<description>Address GUID for Alternative Dunning Recipient </description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.String" qualifier="addresspayerguid">
+						<description>>Address GUID of Payer</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.String" qualifier="addressrecipientguid">
+						<description>>Address GUID of Recipient</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.String" qualifier="addressirguid">
+						<description>Address GUID for Alternative Bill-To Party </description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.String" qualifier="addresstaxguid">
+						<description>Address GUID for Tax-Relevant Address</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.String" qualifier="businessagreementpayer">
+						<description>Business Agreement Payer</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="CRMBusinessAgreementTaxCategory"
+						qualifier="taxcategory">
+						<description>Tax Category</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="CRMBusinessAgreementTaxCode" qualifier="taxcode">
+						<description>Tax Code</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.String" qualifier="refnumber">
+						<description>Reference Number</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.String" qualifier="replicationNumberHeader">
+						<description>Business Agreement replication number</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+			<itemtype code="BusinessAgreementPartners" generate="true"
+				autocreate="true">
+				<deployment table="BusinessAGPartners" typecode="10712" />
+				<attributes>
+					<attribute type="java.lang.String" qualifier="businesspartnerfunctionguid">
+						<description>Business Partner Function GUID</description>
+						<modifiers read="true" write="true" search="true"
+							optional="false" unique="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.String" qualifier="businessagreementpartnercat">
+						<description>Business Agreement Partner Function Category</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.String" qualifier="partnerguid1">
+						<description>Primary Partner GUID</description>
+						<modifiers read="true" write="true" search="true"
+							optional="false" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="Customer" qualifier="customerguid">
+						<description>Customer GUID</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.String" qualifier="bprelationshipnum">
+						<description>BP relationship number</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="PartnerFunction" qualifier="partnerfunction">
+						<description>Partner Function</description>
+						<modifiers read="true" write="true" search="true"
+							optional="false" unique="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.String" qualifier="replicationNumberPartners">
+						<description>Business Agreement replication number</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.String" qualifier="relationTask">
+						<description>Business Agreement relation task status</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.String" qualifier="partnerid2">
+						<description>Business Agreement Secondary Partner ID</description>
+						<modifiers read="true" write="true" search="true"
+							optional="false" />
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+			<itemtype code="BusinessAgreementRuleHeader" generate="true"
+				autocreate="true">
+				<deployment table="BusinessRuleHeader" typecode="10713" />
+				<attributes>
+					<attribute type="java.lang.String" qualifier="businessruleguid">
+						<description>Business Agreement Rule GUID</description>
+						<modifiers read="true" write="true" search="true"
+							optional="false" unique="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.String" qualifier="validto">
+						<description>Business Agreement Rule Valid To</description>
+						<modifiers read="true" write="true" search="true"
+							optional="false" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.String" qualifier="validfrom">
+						<description>Business Rule Valid From</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="CRMBusinessAgreementPaymentMethod"
+						qualifier="paymentmethodinc">
+						<description>Payment Method Incoming</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="CRMBusinessAgreementPaymentMethod"
+						qualifier="paymentmethodout">
+						<description>Payment Method Outgoing</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="CRMBusinessAgreementShippingControl"
+						qualifier="shippingcontroldr">
+						<description>Shipping Control Dunning Recipient</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="CRMBusinessAgreementTermsPayment"
+						qualifier="termofpayment">
+						<description>Payment Terms</description>
+						<modifiers read="true" write="true" search="true"
+							optional="false" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="CRMBusinessAgreementShippingControl"
+						qualifier="shippingcontrolbr">
+						<description>Shipping Control BR</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="CRMBusinessAgreementCorrepondingVariant"
+						qualifier="correpondencevariant">
+						<description>Correspondence variant</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="CRMBusinessAgreementShippingControl"
+						qualifier="shippingcontrolbp">
+						<description>Shipping Control Business Partner</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.String" qualifier="text">
+						<description>Business Rule Description</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.String" qualifier="replicationNumberRuleHeader">
+						<description>Business Agreement replication number</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<itemtype code="CRMBusinessAgreementClass" autocreate="true"
+				generate="true">
+				<deployment table="BUAGClass" typecode="7800" />
+				<attributes>
+					<attribute type="java.lang.String" qualifier="code">
+						<description>businessagreementclass</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" unique="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.String" qualifier="country">
+						<description>Country of Company</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.String" qualifier="numberrange">
+						<description>Number Range for Internal Number Assignment</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.String" qualifier="extnumberrange">
+						<description>External Number Range for Business Agreement</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.Boolean" qualifier="collectivebill">
+						<description>Indicator: Business Agreement is usable for Collective Bills</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.Boolean" qualifier="replicationtoecc">
+						<description>No Replication to SAP ECC (ERP Central Component)</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.String" qualifier="text">
+						<description>Text for Business Agreement Class</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+			<itemtype code="CRMBusinessAgreementTaxCategory" autocreate="true"
+				generate="true">
+				<deployment table="BUAGTaxCategory" typecode="7801" />
+				<attributes>
+					<attribute type="java.lang.String" qualifier="code">
+						<description>Tax Category</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" unique="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.String" qualifier="text">
+						<description>Text for Tax Category</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+			<itemtype code="CRMBusinessAgreementTaxCode" autocreate="true"
+				generate="true">
+				<deployment table="BUAGCharacteristic" typecode="7802" />
+				<attributes>
+					<attribute type="java.lang.String" qualifier="code">
+						<description>Tax Code</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" unique="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.String" qualifier="text">
+						<description>Text Tax Code Feature</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+			<itemtype code="CRMBusinessAgreementShippingControl"
+				autocreate="true" generate="true">
+				<deployment table="BUAGShippingControl" typecode="7803" />
+				<attributes>
+					<attribute type="java.lang.String" qualifier="code">
+						<description>Shipping Control</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" unique="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.String" qualifier="text">
+						<description>Text Shipping Control Feature</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+			<itemtype code="CRMBusinessAgreementPaymentMethod"
+				autocreate="true" generate="true">
+				<deployment table="BUAGPaymentMethod" typecode="7804" />
+				<attributes>
+					<attribute type="java.lang.String" qualifier="code">
+						<description>Payment Method</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" unique="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.String" qualifier="country">
+						<description>Country of Company</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" unique="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.String" qualifier="paymentuasge">
+						<description>Usage of Payment Method</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.String" qualifier="actvbankdetail">
+						<description>Bank Details/Payment Card Required</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.String" qualifier="actvaddress">
+						<description>Bank Details/Payment Card Required</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.Boolean" qualifier="sepa">
+						<description>Indicator: SEPA Mandate Required for Payment Method</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.String" qualifier="dataorigin">
+						<description>Payment Method: Data Origin of Customizing</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.String" qualifier="text">
+						<description>Text for Payment Method</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					
+					
+				</attributes>
+			</itemtype>
+			<itemtype code="CRMBusinessAgreementTermsPayment"
+				autocreate="true" generate="true">
+				<deployment table="BUAGTermsPayment" typecode="7805" />
+				<attributes>
+					<attribute type="java.lang.String" qualifier="code">
+						<description>Terms of Payment</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" unique="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.String" qualifier="daysfrom1">
+						<description>Days From Payment Deadline Base Date 1st Level</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.String" qualifier="percentage1">
+						<description>Cash Discount Rate, Level 1</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.String" qualifier="daysfrom2">
+						<description>Days from payment deadline base date, 2nd level</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.String" qualifier="percentage2">
+						<description>Casn Discount Rate, Level 2</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.String" qualifier="daysfrom3">
+						<description>Days from Payment Deadline Base Date (Due Date Net Payment)</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.String" qualifier="paymentmethod">
+						<description>Payment Method</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.String" qualifier="description">
+						<description>Explanation of Payment Terms</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+			<itemtype code="CRMBusinessAgreementCorrepondingVariant"
+				autocreate="true" generate="true">
+				<deployment table="BUAGCorrepondingVariant" typecode="7806" />
+				<attributes>
+					<attribute type="java.lang.String" qualifier="code">
+						<description>Correspondence Variant Code</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" unique="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.String" qualifier="text">
+						<description>Text for Correspondence Variant</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+			<itemtype code="SAPGlobalConfiguration" autocreate="false"
+				generate="false">
+				<attributes>
+					<attribute type="CRMBusinessAgreementClass" qualifier="businessagreementclass">
+						<modifiers read="true" write="true" search="false"
+							optional="true" unique="false" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="CRMBusinessAgreementTermsPayment"
+						qualifier="termofpayment">
+						<modifiers read="true" write="true" search="false"
+							optional="true" unique="false" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="CRMBusinessAgreementPaymentMethod"
+						qualifier="paymentmethod">
+						<modifiers read="true" write="true" search="false"
+							optional="true" unique="false" />
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+		</typegroup>
+		<typegroup name="Processes">
+			<itemtype code="BusinessAgreementProcess" autocreate="true"
+				generate="true" extends="BusinessProcess">
+
+				<attributes>
+				<attribute type="CreditCardPaymentInfo" qualifier="creditCardPaymentInfo">
+						<description>business agreement  credit card Info</description>
+						<modifiers read="true" write="true" search="true"
+							/>
+						<persistence type="property"></persistence>
+					</attribute>
+					<attribute type="BusinessAgreement" qualifier="businessAgreement">
+						<description>business agreement  Info</description>
+						<modifiers read="true" write="true" search="true"
+							/>
+						<persistence type="property"></persistence>
+					</attribute>
+				</attributes>
+
+			</itemtype>
+			
+			<itemtype code="AgreementApprovalProcess" autocreate="true"
+				generate="true"
+				jaloclass="de.hybris.platform.agreement.jalo.AgreementApprovalProcess"
+				extends="OrderProcess">
+			</itemtype>
+		</typegroup>
+	</itemtypes>
+</items>

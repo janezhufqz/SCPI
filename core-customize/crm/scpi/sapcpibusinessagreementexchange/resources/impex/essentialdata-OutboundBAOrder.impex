@@ -1,0 +1,11 @@
+#**************************************************
+#************* Outbound OMM & OMS Order ***********
+#**************************************************
+
+INSERT_UPDATE IntegrationObject; code[unique = true];
+; OutboundOMMOrderOMSOrder
+
+
+INSERT_UPDATE IntegrationObjectItemAttribute; integrationObjectItem(integrationObject(code), code)[unique = true]; attributeName[unique = true]; attributeDescriptor(enclosingType(code), qualifier); returnIntegrationObjectItem(integrationObject(code), code); unique[default = false]
+; OutboundOMMOrderOMSOrder:SAPCpiOutboundOrder          ; agreementId                   ; SAPCpiOutboundOrder:agreementId                   ;                                                       ;
+

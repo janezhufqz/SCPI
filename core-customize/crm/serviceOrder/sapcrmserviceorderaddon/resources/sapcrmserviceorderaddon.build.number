@@ -1,0 +1,11 @@
+#Ant properties
+#Tue Feb 02 19:39:02 CET 2016
+builddate=20160202 1938
+description=sapcrmserviceorderaddon
+group.id=de.hybris.platform
+module.name=platform-module
+name=sapcrmserviceorderaddon
+releasedate=20160131 1522
+vendor=hybris
+version=6.0.0.0-SNAPSHOT
+version.api=6.0.0

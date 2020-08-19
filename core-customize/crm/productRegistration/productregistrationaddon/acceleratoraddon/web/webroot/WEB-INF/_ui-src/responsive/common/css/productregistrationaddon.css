@@ -1,0 +1,47 @@
+#register-a-product-button {
+	margin-bottom: 13px !important;
+	margin-top: 13px;
+}
+
+.account-section .account-section-content .account-productRegistrationHistory-pagination
+	{
+	padding-top: 10px;
+}
+
+.account-section .account-section-content .account-productRegistrationHistory-pagination .account-orderhistory-pagination-text
+	{
+	line-height: 32px;
+}
+
+.account-section .account-section-content .account-productRegistrationHistory-pagination .pager
+	{
+	margin: 0;
+}
+
+.account-section .account-section-content .account-productRegistrationHistory-sort
+	{
+	background: #f2f4f7;
+	padding: 10px;
+}
+
+thead .productRegistrationTableState {
+	width: 75px;
+}
+
+.product-registration-body {
+	margin: 20px 0;
+}
+
+#productRegistrationForm {
+	margin-top: 20px;
+	padding-top: 20px;
+}
+
+#product-registration-buttons {
+	margin-top: 40px !important;
+}
+
+.product-registration-body #product-registration-buttons.form-actions .btn
+	{
+	width: 49%;
+}

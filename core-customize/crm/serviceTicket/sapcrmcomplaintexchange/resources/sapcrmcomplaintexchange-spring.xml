@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ~ [y] hybris Platform ~ ~ Copyright (c) 2000-2016 SAP SE ~ All rights 
+	reserved. ~ ~ This software is the confidential and proprietary information 
+	of SAP ~ Hybris ("Confidential Information"). You shall not disclose such 
+	~ Confidential Information and shall use it only in accordance with the ~ 
+	terms of the license agreement you entered into with SAP Hybris. -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/util
+           http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<alias name="sapDefaultComplaintBussinessService" alias="sapComplaintBussinessService" />
+	<bean id="sapDefaultComplaintBussinessService"
+		class="com.sap.hybris.crm.sapcrmcomplaintexchange.service.impl.SapDefaultComplaintBussinessService"
+		parent="defaultTicketBusinessService" scope="tenant" />
+
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="ticketParameterConverter" />
+		<property name="add" ref="complaintParameterPopulator" />
+	</bean>
+	<alias name="defaultCrmComplaintParameterPopulator" alias="complaintParameterPopulator" />
+	<bean id="defaultCrmComplaintParameterPopulator"
+		class="com.sap.hybris.crm.sapcrmcomplaintexchange.converters.populators.CrmComplaintPopulator">
+	</bean>
+
+	<!-- Complaint Export -->
+	<alias alias="complaintExportService" name="defaultComplaintExportService" />
+	<bean id="defaultComplaintExportService"
+		class="com.sap.hybris.crm.sapcrmcomplaintexchange.outbound.ComplaintExportService">
+		<property name="feed"
+			value="${sapcrmcomplaintexchange.outbound.datahub.feed}" />
+	</bean>
+
+	<!-- Prepare interceptor -->
+	<alias name="defaultSapCsTicketPrepareInterceptor" alias="CsTicketPrepareInterceptor" />
+	<bean id="defaultSapCsTicketPrepareInterceptor"
+		class="com.sap.hybris.crm.sapcrmcomplaintexchange.interceptors.SapCsTicketPrepareInterceptor"
+		scope="tenant">
+		<property name="initialTicketState">
+			<util:constant static-field="de.hybris.platform.ticket.enums.CsTicketState.NEW" />
+		</property>
+		<property name="keyGenerator" ref="sapCsTicketCodeGenerator" />
+		<property name="complaintKeyGenerator" ref="sapComplaintCodeGenerator" />
+	</bean>
+	<!-- Complaint Key Generator -->
+	<alias name="defaultSapComplaintCodeGenerator" alias="sapComplaintCodeGenerator" />
+	<bean id="defaultSapComplaintCodeGenerator"
+		class="de.hybris.platform.servicelayer.keygenerator.impl.PersistentKeyGenerator"
+		init-method="init" scope="tenant">
+		<property name="key" value="complaint_code" />
+		<property name="digits" value="${keygen.ticket.sap_complaint.digits}" />
+		<property name="start" value="${keygen.ticket.sap_complaint.start}" />
+		<property name="type" value="${keygen.ticket.sap_complaint.type}" />
+		<property name="template" value="${keygen.ticket.sap_complaint.template}" />
+	</bean>
+</beans>

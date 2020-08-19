@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- ~ [y] hybris Platform ~ ~ Copyright (c) 2000-2016 SAP SE ~ All rights 
+	reserved. ~ ~ This software is the confidential and proprietary information 
+	of SAP ~ Hybris ("Confidential Information"). You shall not disclose such 
+	~ Confidential Information and shall use it only in accordance with the ~ 
+	terms of the license agreement you entered into with SAP Hybris. -->
+<extensioninfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="extensioninfo.xsd">
+
+	<extension abstractclassprefix="Generated" classprefix="Sapservicecontractbol"
+		managername="SapservicecontractbolManager" managersuperclass="de.hybris.platform.jalo.extension.Extension"
+		name="sapservicecontractbol" usemaven="false">
+		<!-- for more information on maven managed libraries please consult https://wiki.hybris.com/x/Nq8sDQ -->
+
+		<!-- you should add all required extensions to this list, except platform 
+			extensions which are automatically required -->
+		<!-- <requires-extension name="cms"/> -->
+		<requires-extension name="sapcorebol" />
+		<requires-extension name="sapgenil" />
+		<requires-extension name="sapcoreconfiguration" />
+		<requires-extension name="sapcorejco" />
+		<requires-extension name="sapcorejcorec" />
+		<requires-extension name="sapcoretest" />
+		<requires-extension name="sapcrmmodel" />
+		<coremodule generated="true"
+			manager="com.sap.hybris.crm.sapservicecontractbol.jalo.SapservicecontractbolManager"
+			packageroot="com.sap.hybris.crm.sapservicecontractbol" />
+
+		<meta key="backoffice-module" value="true" />
+
+
+	</extension>
+
+</extensioninfo>

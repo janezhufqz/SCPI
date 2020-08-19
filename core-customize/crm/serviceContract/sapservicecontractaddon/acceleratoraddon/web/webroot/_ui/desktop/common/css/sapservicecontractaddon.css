@@ -1,0 +1,327 @@
+.serviceContractsTable {
+	margin: 10px 0;
+	width: 100%;
+	table-layout: fixed;
+}
+
+.serviceContractsTable thead th {
+	text-transform: none;
+	color: #000;
+	bcontract-bottom: 2px solid #ffbc0e;
+	padding-right: 0;
+	font-weight: bold;
+	height: 30px;
+	line-height: 30px;
+}
+
+.serviceContractsTable thead .serviceContractsTableState {
+	width: 75px;
+}
+
+.serviceContractsTable thead .serviceContractsTablePayment {
+	width: 130px;
+}
+
+.serviceContractsTable thead .serviceContractsTableAction {
+	width: 205px;
+}
+
+.serviceContractsTable tbody td {
+	color: #484848;
+	font-size: .9286em;
+	padding: 20px 15px 20px 0;
+	vertical-align: top;
+}
+
+.serviceContractsTable tbody td:last-child {
+	padding-right: 5px;
+}
+
+.serviceContractsTable tbody td:first-child {
+	padding-left: 5px;
+}
+
+.serviceContractsTable tbody tr:nth-child(2n) {
+	background-color: #f8f8f7;
+}
+
+.serviceContractsTable tbody td a {
+	color: #fffff;
+	text-decoration: none;
+	font-weight: 700;
+}
+
+.serviceContractsTable .secondary, .serviceContractsTable .positive {
+	float: left;
+	margin: 0 0 0 15px;
+}
+
+.serviceContractsTable a.function_btn {
+	line-height: 3.214em;
+	float: left;
+}
+
+.serviceContractsTable tbody td:first-child a {
+	font-weight: normal;
+}
+
+.serviceContractsTable tbody td>span {
+	display: block;
+}
+
+.serviceContractsTableUpdate .serviceContractBR {
+	padding-bottom: 20px;
+}
+
+.control-group.error textarea {
+	bcontract-color: #c90400;
+}
+
+.account-contractdetail .account-contractdetail-overview .account-contract-header_data
+	{
+	font-weight: bold;
+}
+
+@media ( max-width : 1023px) {
+	.account-contractdetail .account-contractdetail-overview .account-contract-header_data .uppercase-sm
+		{
+		text-transform: uppercase;
+	}
+}
+
+.account-contractdetail .account-contractdetail-overview:before,
+	.account-contractdetail .account-contractdetail-overview:after {
+	content: " ";
+	display: table;
+}
+
+.account-contractdetail .account-contractdetail-overview:after {
+	clear: both;
+}
+
+.account-contractdetail .account-contractdetail-overview:before,
+	.account-contractdetail .account-contractdetail-overview:after {
+	content: " ";
+	display: table;
+}
+
+.account-contractdetail .account-contractdetail-overview:after {
+	clear: both;
+}
+
+.contractList {
+	bcontract: 1px dotted #a5a5a5;
+	padding: 0 20px 20px;
+	margin: 0 0 20px 0;
+}
+
+.contractList .headline {
+	bcontract-bottom: 1px dotted #A5A5A5;
+	font-size: 1em;
+	font-weight: bold;
+	height: 30px;
+	line-height: 30px;
+	text-transform: uppercase;
+	margin: 0 0 20px;
+}
+
+.contractList .contractListTable {
+	width: 100%;
+}
+
+.contractList .contractListTable thead th {
+	bcontract-bottom: 1px dotted #a5a5a5;
+	height: 30px;
+	line-height: 30px;
+	text-transform: uppercase;
+	font-weight: bold;
+	font-size: 1em;
+}
+
+.contractList .contractListTable .item td {
+	vertical-align: top;
+	bcontract-bottom: 1px dotted #a5a5a5;
+	padding: 20px 0 0 0;
+}
+
+.contractList .contractListTable .item td.thumb {
+	bcontract-bottom: 0;
+	padding-right: 20px;
+	width: 96px;
+}
+
+.contractList .contractListTable tbody td {
+	vertical-align: top;
+	padding-top: 5px;
+}
+
+.contractList .contractListTable tbody td p {
+	margin-bottom: 5px;
+}
+
+.contractList .contractListTable tbody td a {
+	text-decoration: underline !important;
+}
+
+.serviceContractsTable tbody td a {
+	text-decoration: underline !important;
+}
+
+/*
+## contractTotals
+********************************************************************/
+#contractTotals {
+	width: 100%;
+}
+
+#contractTotals td {
+	text-align: right;
+}
+
+#contractTotals td:first-child {
+	text-align: left;
+	vertical-align: top;
+}
+
+#contractTotals thead td {
+	border-bottom: 1px solid #a5a5a5;
+	height: 30px;
+	line-height: 30px;
+	text-transform: uppercase;
+	font-weight: bold;
+	font-size: 1.2em;
+	white-space: nowrap;
+	padding-left: 5px;
+	background-color: #f6f6f6;
+}
+
+#contractTotals tbody td {
+	height: 30px;
+	line-height: 30px;
+}
+
+#contractTotals tfoot td {
+	border-top: 1px dotted #a5a5a5;
+	height: 30px;
+	line-height: 30px;
+	font-weight: bold;
+	font-size: 1.1em;
+}
+
+#contractTotals #countryIso {
+	width: 150px;
+}
+
+#contractTotals .zipInput {
+	
+}
+
+#contractTotals #estimateTaxesButton {
+	margin: 8px 0 8px 8px;
+}
+
+.accountContentPane  .contractBoxes {
+	margin: 20px -20px 0 0;
+	clear: left;
+}
+
+.accountContentPane  .contractBoxes .contractBox {
+	width: 343px;
+	margin: 0 20px 20px 0;
+}
+
+.contractBoxes {
+	margin: 20px 0;
+}
+
+.contractBox {
+	float: left;
+	margin: 0 20px 0 0;
+	border: 1px dotted #a5a5a5;
+	padding: 0 20px 20px;
+	width: 180px;
+	height: 190px;
+}
+
+.contractBox.payment {
+	margin: 0;
+	width: 424px;
+}
+
+.contractBox.payment .left {
+	width: 50%;
+}
+
+.contractBox .headline {
+	border-bottom: 1px dotted #A5A5A5;
+	font-size: 1em;
+	font-weight: bold;
+	height: 30px;
+	line-height: 30px;
+	text-transform: uppercase;
+	margin: 0 0 20px;
+}
+
+.contractItemList {
+	/* 	border: 1px dotted #a5a5a5; */
+	padding: 0 20px 20px;
+	margin: 0 0 20px 0;
+}
+
+.contractItemList .headline {
+	border-bottom: 1px dotted #A5A5A5;
+	font-size: 1em;
+	font-weight: bold;
+	height: 30px;
+	line-height: 30px;
+	text-transform: uppercase;
+	margin: 0 0 20px;
+}
+
+.contractItemList .contractItemListTable {
+	width: 100%;
+}
+
+.contractItemList .contractItemListTable thead th {
+	border-bottom: 1px dotted #a5a5a5;
+	height: 30px;
+	line-height: 30px;
+	text-transform: uppercase;
+	font-weight: bold;
+	font-size: 1em;
+}
+
+.contractItemList .contractItemListTable .item td {
+	vertical-align: top;
+	border-bottom: 1px dotted #a5a5a5;
+	padding: 20px 0 0 0;
+}
+
+.contractItemList .contractItemListTable .item td.thumb {
+	border-bottom: 0;
+	padding-right: 20px;
+	width: 96px;
+}
+
+.contractItemList .contractItemListTable tbody td {
+	vertical-align: top;
+	padding-top: 5px;
+}
+
+.contractItemList .contractItemListTable tbody td p {
+	margin-bottom: 5px;
+}
+
+.contractItemList .contractItemListTable tbody td a {
+	text-decoration: underline;
+}
+
+.ellipses {
+	height: 75%;
+	overflow: auto !important;
+	width: 100%;
+}
+
+.contractBillingPlan {
+	font-size: 1em;
+}

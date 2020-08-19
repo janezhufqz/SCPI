@@ -1,0 +1,535 @@
+.account-contract .account-contract-list .account-contract-list-item .contractHeader
+	{
+	color: white;
+	margin-top: -10px;
+	margin-bottom: -10px;
+	padding: 10px;
+}
+
+/* account-section-content-contract	 */
+
+/* account-contract-pagination */
+.account-section .account-section-header-contract {
+	background: #f2f4f7;
+	padding: 10px;
+	text-transform: uppercase;
+}
+
+.contract-detail-header {
+	padding-bottom: 62px !important;
+}
+
+.contract-detail-renew {
+	padding-right: 5px !important;
+}
+
+.contract-detail-terminate {
+	padding-left: 2px !important;
+}
+
+.account-section .account-section-content-contract {
+	padding: 0px 10px 10px 10px;
+}
+
+.account-section .account-section-content-contract.account-section-content-small-contract
+	{
+	max-width: 600px;
+}
+
+.account-section .account-section-content-contract.account-section-content-small-contract .container
+	{
+	max-width: 600px;
+}
+
+.account-contract .account-contract-pagination {
+	padding-bottom: 10px;
+	padding-top: 0px;
+}
+
+.account-contract .account-contract-pagination .account-contract-pagination-text
+	{
+	line-height: 32px;
+}
+
+.account-contract .account-contract-pagination .pager {
+	margin: 0;
+}
+
+.account-contract .account-contract-sort {
+	background: #f2f4f7;
+	padding: 10px;
+}
+
+.account-contract .account-contract-list {
+}
+
+.account-contract .account-contract-list ul {
+	padding-left: 0;
+	list-style: none;
+	margin: 0;
+}
+
+.account-contract .account-contract-list .account-contract-list-item {
+	padding: 10px;
+}
+
+.account-contract-list-header {
+	color: #ffffff;
+}
+
+.account-contract .account-contract-list .account-contract-list-item .contract-list-id
+	{
+	font-weight: bold;
+}
+
+@media ( max-width : 639px) {
+	.account-contract .account-contract-list .account-contract-list-item .status strong
+		{
+		display: block;
+	}
+}
+
+.account-contract .account-contract-list .account-contract-list-item:nth-child(2n)
+	{
+	background: none repeat scroll 0 0 #F2F4F7;
+}
+
+.account-contract .account-contract-list li+li {
+	border-top: 1px solid #eee;
+}
+
+/* Contract detail page css */
+
+@media ( min-width : 1024px) {
+	.account-contractdetail .text-right-md {
+		text-align: right;
+	}
+}
+
+.account-contractdetail .account-contractdetail-overview {
+	padding-bottom: 20px;
+	padding-top: 20px;
+}
+
+.account-contractdetail .account-contractdetail-overview .account-contract-header_data
+	{
+	font-weight: bold;
+}
+
+@media ( max-width : 1023px) {
+	.account-contractdetail .account-contractdetail-overview .account-contract-header_data .uppercase-sm
+		{
+		text-transform: uppercase;
+	}
+}
+
+.account-contractdetail .account-contractdetail-overview:before,
+	.account-contractdetail .account-contractdetail-overview:after {
+	content: " ";
+	display: table;
+}
+
+.account-contractdetail .account-contractdetail-overview:after {
+	clear: both;
+}
+
+.account-contractdetail .account-contractdetail-overview:before,
+	.account-contractdetail .account-contractdetail-overview:after {
+	content: " ";
+	display: table;
+}
+
+.account-contractdetail .account-contractdetail-overview:after {
+	clear: both;
+}
+
+.account-contractdetail .account-contractdetail-item-section-header.item-box
+	{
+	padding: 10px;
+	margin-bottom: 5px;
+	margin-top: 5px;
+}
+
+.account-contractdetail .account-contractdetail-item-section-header.item-box:before,
+	.account-contractdetail .account-contractdetail-item-section-header.item-box:after
+	{
+	content: " ";
+	display: table;
+}
+
+.account-contractdetail .account-contractdetail-item-section-header.item-box:after
+	{
+	clear: both;
+}
+
+.account-contractdetail .account-contractdetail-item-section-header.item-box:before,
+	.account-contractdetail .account-contractdetail-item-section-header.item-box:after
+	{
+	content: " ";
+	display: table;
+}
+
+.account-contractdetail .account-contractdetail-item-section-header.item-box:after
+	{
+	clear: both;
+}
+
+.account-contractdetail .account-contractdetail-item-section-header.contract-data
+	{
+	padding: 10px;
+}
+
+.account-contractdetail .account-contractdetail-item-section .account-contractdetail-item-section-header .contractDetail_itemHeader
+	{
+	color: white;
+	height: 50px;
+}
+
+.account-contractdetail .account-contractdetail-item-section .account-contractdetail-item-section-header:before,
+	.account-contractdetail .account-contractdetail-item-section .account-contractdetail-item-section-header:after
+	{
+	content: " ";
+	display: table;
+}
+
+.account-contractdetail .account-contractdetail-item-section .account-contractdetail-item-section-header:after
+	{
+	clear: both;
+}
+
+.account-contractdetail .account-contractdetail-item-section .account-contractdetail-item-section-header:before,
+	.account-contractdetail .account-contractdetail-item-section .account-contractdetail-item-section-header:after
+	{
+	content: " ";
+	display: table;
+}
+
+.account-contractdetail .account-contractdetail-item-section .account-contractdetail-item-section-header:after
+	{
+	clear: both;
+}
+
+.account-contractdetail .account-contractdetail-item-section .account-contractdetail-item-section-header .button-panel
+	{
+	float: right;
+	max-width: 200px;
+}
+
+.account-contractdetail .account-contractdetail-item-section .account-contractdetail-item-section-body ul
+	{
+	padding-left: 0;
+	list-style: none;
+	margin: 0;
+}
+
+.account-contractdetail .account-contractdetail-item-section .account-contractdetail-item-section-body ul li
+	{
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #e5e5e5;
+}
+
+.account-contractdetail .account-contractdetail-item-section .account-contractdetail-item-section-body ul li:before,
+	.account-contractdetail .account-contractdetail-item-section .account-contractdetail-item-section-body ul li:after
+	{
+	content: " ";
+	display: table;
+}
+
+.account-contractdetail .account-contractdetail-item-section .account-contractdetail-item-section-body ul li:after
+	{
+	clear: both;
+}
+
+.account-contractdetail .account-contractdetail-item-section .account-contractdetail-item-section-body ul li:before,
+	.account-contractdetail .account-contractdetail-item-section .account-contractdetail-item-section-body ul li:after
+	{
+	content: " ";
+	display: table;
+}
+
+.account-contractdetail .account-contractdetail-item-section .account-contractdetail-item-section-body ul li:after
+	{
+	clear: both;
+}
+
+.account-contractdetail .account-contractdetail-item-section .account-contractdetail-item-section-body ul li+li
+	{
+	border-top: 1px solid #eee;
+}
+
+.account-contractdetail .account-contractdetail-item-section .account-contractdetail-item-section-body ul .thumb
+	{
+	float: left;
+	margin-right: 0px;
+	margin-left: 32px;
+	margin-top: 30px;
+}
+
+.account-contractdetail .account-contractdetail-item-section .account-contractdetail-item-section-body ul .price-total
+	{
+	float: right;
+	padding-right: 10px;
+}
+
+.account-contractdetail .account-contractdetail-item-section .account-contractdetail-item-section-body ul .details .name
+	{
+	font-weight: bold;
+}
+
+.account-contractdetail .account-contractdetail-item-section .account-contractdetail-item-section-body ul .promo
+	{
+	color: #33cc33;
+}
+
+@media ( min-width : 1024px) and (max-width: 1399px) {
+	.account-contractdetail .account-contractdetail-item-section .account-contractdetail-item-section-body ul .promo
+		{
+		padding-left: 22px;
+	}
+}
+
+@media ( min-width : 1400px) {
+	.account-contractdetail .account-contractdetail-item-section .account-contractdetail-item-section-body ul .promo
+		{
+		padding-left: 0px;
+	}
+}
+
+.account-contractdetail .account-contractdetail-item-section .account-contractdetail-item-section-body ul .promo li
+	{
+	border-bottom: 0;
+}
+
+.account-contractdetail .account-contractdetail-item-section .account-contractdetail-item-section-footer .total-headline
+	{
+	font-size: 18px;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+.account-contractdetail .account-contractdetail-item-section .account-contractdetail-item-section-footer .subtotals
+	{
+	padding: 10px;
+	text-align: right;
+	border-top: 1px solid #eee;
+}
+
+.account-contractdetail .account-contractdetail-item-section .account-contractdetail-item-section-footer .subtotals div span
+	{
+	display: inline-block;
+	width: 100px;
+}
+
+.account-contractdetail .account-contractdetail-item-section .account-contractdetail-item-section-footer .subtotals .totals
+	{
+	font-weight: bold;
+}
+
+.account-contractdetail .account-contractdetail-item-section-header .account-contractdetail-item-section-footer
+	{
+	padding-top: 20px;
+}
+
+.account-contractdetail .account-contractdetail-item-section-header .account-contractdetail-item-section-footer .total-headline
+	{
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+.account-contractdetail .account-contractdetail-item-section-header .account-contractdetail-item-section-footer .subtotals
+	{
+	padding: 10px;
+	text-align: right;
+	border-top: 1px solid #eee;
+}
+
+.account-contractdetail .account-contractdetail-item-section-header .account-contractdetail-item-section-footer .subtotals div span
+	{
+	display: inline-block;
+	width: 100px;
+}
+
+.account-contractdetail .account-contractdetail-item-section-header .account-contractdetail-item-section-footer .totals div
+	{
+	font-weight: bold;
+	line-height: 300%;
+}
+
+.account-contractdetail .account-contractdetail-item-section-header .account-contractdetail-item-section-footer:before,
+	.account-contractdetail .account-contractdetail-item-section-header .account-contractdetail-item-section-footer:after
+	{
+	content: " ";
+	display: table;
+}
+
+.account-contractdetail .account-contractdetail-item-section-header .account-contractdetail-item-section-footer:after
+	{
+	clear: both;
+}
+
+.account-contractdetail .account-contractdetail-item-section-header .account-contractdetail-item-section-footer:before,
+	.account-contractdetail .account-contractdetail-item-section-header .account-contractdetail-item-section-footer:after
+	{
+	content: " ";
+	display: table;
+}
+
+.account-contractdetail .account-contractdetail-item-section-header .account-contractdetail-item-section-footer:after
+	{
+	clear: both;
+}
+
+.account-contractdetail .account-contractdetail-item-section-header .account-contractdetail-orderTotalDiscount-section
+	{
+	padding: 20px 0;
+}
+
+.account-contractdetail-item-section-header {
+	display: block !important;
+}
+
+.account-contractdetail-item-section-list-item {
+	display: block !important;
+	padding-bottom: 20px;
+}
+
+.account-contractdetail .account-contractdetail-item-section .account-contractdetail-item-section-body ul .item-status
+	{
+	padding-right: 10px;
+	padding-bottom: 40px;
+}
+
+.contract-separator {
+	border-bottom: 1px solid #eee;
+	margin-bottom: 20px;
+}
+
+.contractbtn-primary:hover, .contractbtn-primary:focus,
+	.contractbtn-primary:active, .contractbtn-primary.active, .open .dropdown-toggle.contractbtn-primary
+	{
+	color: #0068b3;
+	background-color: #ffffff;
+	border-color: #0068b3;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+
+.contractbtn-primary:hover, .contractbtn-primary:focus,
+	.contractbtn-primary:active, .contractbtn-primary.active, .open>.dropdown-toggle.contractbtn-primary
+	{
+	color: #ffffff;
+	background-color: #004a80;
+	border-color: #004476;
+}
+
+.contractbtn:hover, .contractbtn:focus {
+	color: #ffffff !important;
+	text-decoration: none;
+}
+
+.contractbtn-primary {
+	border: 3px solid;
+	color: #ffffff;
+	background-color: #142939;
+	border-color: #142939;
+}
+
+.contractbtn, .contractbtn:active, .contractbtn.active {
+	box-shadow: none;
+}
+
+.contractbtn {
+	font-weight: 400;
+	padding: 7px 10px;
+	font-size: 10px;
+	line-height: 1.375;
+	border-radius: 1px;
+}
+
+.contractbtn {
+	border-radius: 0 !important;
+}
+
+.contractbtn-block {
+	display: block;
+}
+
+.contractbtn-primary {
+	color: #ffffff;
+	background-color: #0068b3;
+	border-color: #0068b3;
+}
+
+.contractbtn {
+	display: inline-block;
+	margin-bottom: 3px;
+	font-weight: normal;
+	text-align: center;
+	vertical-align: middle;
+	cursor: pointer;
+	background-image: none;
+	border: 0 solid transparent;
+	white-space: nowrap;
+	padding: 5px 10px;
+	font-size: 13px;
+	line-height: 1.42857143;
+	border-radius: 3px !important;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+a, button {
+	color: #0068b3;
+	text-decoration: none;
+}
+
+button {
+	font-weight: normal;
+}
+
+#contract-detail-action-btn {
+	height: 60px;
+}
+
+#contractDetailTotal {
+	height: 110px;
+}
+
+.contractRenewBtn {
+	padding: 7px;
+	font-size: 13px;
+}
+
+.contractButtonDisabled {
+  opacity: 0.4 !important; 
+  cursor: not-allowed !important;
+}
+
+.contractButtonDisabled:HOVER:not("disabled"){
+	border: 0
+}
+
+#renewBtnDisable{
+	background-color: gray;
+}
+
+.contractItemRenewBtn{
+	margin-bottom: 5px;
+}
+
+.contractItemBtn{
+	padding: 7px ;
+	font-size: 13px;
+}
+
+.contractEditForm{
+	padding-left: 0px !important;
+}
+
+.contractItemIcon > a > img{		
+		height: 150px;
+		width: 150px;	
+}

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<alias name="defaultSapCrmb2bAgreementPartnerContributor" alias="sapCrmPartnerContributor" />
+    <bean id="defaultSapCrmb2bAgreementPartnerContributor"
+        class="com.sap.hybris.sapbusinessagreement.b2b.outbound.impl.DefaultCRMB2BAgreementPartnerContributor" parent="defaultSapCrmB2BPartnerContributor">
+    </bean>
+    
+    <alias name="defaultB2bBusinessAgreementCreateService" alias="businessAgreementCreateService" />
+    <bean id="defaultB2bBusinessAgreementCreateService"
+		class="com.sap.hybris.sapbusinessagreement.b2b.service.impl.DefaultB2bBusinessAgreementCreateService">
+		<property name="modelService" ref="modelService" />
+		<property name="businessAgreementCreateServiceUtility" ref="businessAgreementCreateServiceUtility" />
+				
+	</bean>
+	
+	<alias name="defaultCRMB2bBusinessAgreementExportService" alias="businessAgreementExportService" />
+	<bean id="defaultCRMB2bBusinessAgreementExportService"
+		class="com.sap.hybris.sapbusinessagreement.b2b.outbound.DefaultCRMB2bBusinessAgreementExportService" parent="defaultCRMBusinessAgreementExportService">
+	</bean>
+	
+	<alias name="defaultB2bBusinessAgreementPartnerInterceptor" alias="businessAgreementPartnerInterceptor"/>
+	<bean id="defaultB2bBusinessAgreementPartnerInterceptor"
+		class="com.sap.hybris.sapbusinessagreement.b2b.interceptor.BusinessAgreementPartnerPrepareInterceptor">
+		<property name="flexibleSearchService" ref="flexibleSearchService" />
+	</bean>		
+	
+	<alias name="defaultB2bBusinessAgreementRelationPartnerInterceptor" alias="businessAgreementRelationPartnerInterceptor"/>
+	<bean id="defaultB2bBusinessAgreementRelationPartnerInterceptor"
+		class="com.sap.hybris.sapbusinessagreement.b2b.interceptor.BusinessAgreementRelationPartnerPrepareInterceptor">
+		<property name="flexibleSearchService" ref="flexibleSearchService" />
+	</bean>
+</beans>

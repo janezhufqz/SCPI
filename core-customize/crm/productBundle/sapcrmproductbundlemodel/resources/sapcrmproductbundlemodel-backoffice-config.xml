@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<config xmlns="http://www.hybris.com/cockpit/config">
+	<context component="base" type="BundleProductGroup" merge-by="type" parent="GenericItem">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:labels>
+				<y:label>code+(description == null ? "": " - "+description)</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+	<context component="base" type="BundleProduct" merge-by="type" parent="GenericItem">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:labels>
+				<y:label>@labelService.getObjectLabel(product)+(bundleGroup == null ? "": " - "+@labelService.getObjectLabel(bundleGroup))</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+	<context component="base" type="BundleTemplate" merge-by="type" parent="GenericItem">
+		<y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:labels>
+				<y:label>id</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+</config>

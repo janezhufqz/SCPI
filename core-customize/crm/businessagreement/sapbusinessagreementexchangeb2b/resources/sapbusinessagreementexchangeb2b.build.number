@@ -1,0 +1,10 @@
+#Ant properties
+#Thu Apr 27 09:56:39 GMT 2017
+builddate=20170427 0956
+description=sapbusinessagreementexchangeb2b
+group.id=de.hybris.platform
+module.name=platform-module
+name=sapbusinessagreementexchangeb2b
+vendor=hybris
+version=6.4.0.0
+version.api=6.4.0

@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- [y] hybris Platform Copyright (c) 2018 SAP SE or an SAP affiliate company. 
+	All rights reserved. This software is the confidential and proprietary information 
+	of SAP ("Confidential Information"). You shall not disclose such Confidential 
+	Information and shall use it only in accordance with the terms of the license 
+	agreement you entered into with SAP. -->
+<!-- ATTENTION: This is just an example file. You have to edit it according 
+	to your needs. -->
+
+<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="items.xsd">
+
+	<itemtypes>
+
+
+		<itemtype code="SAPCpiOutboundServiceTicket"
+			jaloclass="sap.sapcpicrmticketingsystem.jalo.SAPCpiOutboundServiceTicket"
+			extends="GenericItem">
+			<deployment table="SAPCpiOTBSrvTkt" typecode="9122" />
+			<attributes>
+
+				<attribute qualifier="ticketID" type="java.lang.String">
+					<persistence type="property" />
+					<modifiers unique="true" />
+				</attribute>
+
+				<attribute qualifier="category" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="state" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="customer" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="order" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="priority" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="headline" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="modifiedTs" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="isTicketReplicated" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="notes" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="textId" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="baseStore" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="cartId" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="b2bunit" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="installedBaseId" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="componentId" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="responseStatus" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="responseMessage" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+
+
+				<attribute qualifier="sapCpiConfig" type="SAPCpiServiceTicketOutboundConfig">
+					<persistence type="property" />
+				</attribute>
+
+			</attributes>
+
+		</itemtype>
+
+		<!-- Configuration data -->
+
+		<itemtype code="SAPCpiServiceTicketOutboundConfig"
+			jaloclass="sap.sapcpicrmticketingsystem.jalo.SAPCpiServiceTicketOutboundConfig"
+			extends="GenericItem">
+
+			<deployment table="SAPCpiOTBSrvTktCnf" typecode="9123" />
+
+			<attributes>
+
+				<attribute qualifier="sap_serviceOrg" type="java.lang.String">
+					<persistence type="property" />
+					<modifiers unique="true" />
+				</attribute>
+
+				<attribute qualifier="sap_serviceOrgResp" type="java.lang.String">
+					<persistence type="property" />
+					<modifiers unique="true" />
+				</attribute>
+
+				<attribute qualifier="sap_serviceProcessType" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="sap_servOrgShort" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="serviceRequestCatalogName" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="serviceRequestCategorySchemaId"
+					type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="url" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="userName" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="receiverName" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="receiverPort" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="senderName" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="senderPort" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="client" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="salesOrg" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="distributionChannel" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+
+			</attributes>
+
+		</itemtype>
+		
+		<itemtype autocreate="false" code="CsTicket" generate="false"
+            singleton="true">
+            <attributes>
+                <attribute qualifier="cpi_categorizationcode" type="java.lang.String">
+                    <persistence type="property" />
+                    <modifiers read="true" write="true" unique="false" search="false" optional="true"/>
+                </attribute>
+                <attribute qualifier="resolutionData" type="java.lang.String">
+                    <persistence type="property" />
+                    <modifiers read="true" write="true" unique="false" search="false" optional="true"/>
+                </attribute>
+            </attributes>
+        </itemtype>
+
+
+	</itemtypes>
+</items>

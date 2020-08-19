@@ -1,0 +1,22 @@
+.account-ibase-tree .panel-group {
+	margin-bottom: 0px;
+}
+
+.service-ticket-btn {
+	float: right;
+	text-transform: capitalize;
+}
+
+.service-ticket-btn:hover {
+	color: #003c66;
+}
+
+.service-ticket-disable {
+	cursor: default;
+	opacity: 0.5;
+}
+
+.service-contract-disable {
+	cursor: default;
+	opacity: 0.5;
+}

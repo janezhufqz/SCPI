@@ -1,0 +1,76 @@
+INSERT_UPDATE IntegrationObject; code[unique = true]; integrationType(code) 
+; InboundBusinessagreement; INBOUND 
+ 
+INSERT_UPDATE IntegrationObjectItem; integrationObject(code)[unique=true]; code[unique = true]; type(code) 
+; InboundBusinessagreement	; BusinessAgreementRuleHeader            	; BusinessAgreementRuleHeader 
+; InboundBusinessagreement	; CRMBusinessAgreementTermsPayment       	; CRMBusinessAgreementTermsPayment 
+; InboundBusinessagreement	; PartnerFunction                        	; PartnerFunction 
+; InboundBusinessagreement	; CRMBusinessAgreementTaxCategory        	; CRMBusinessAgreementTaxCategory 
+; InboundBusinessagreement	; BusinessAgreement                      	; BusinessAgreement 
+; InboundBusinessagreement	; BusinessAgreementHeader                	; BusinessAgreementHeader 
+; InboundBusinessagreement	; CRMBusinessAgreementPaymentMethod      	; CRMBusinessAgreementPaymentMethod 
+; InboundBusinessagreement	; CRMBusinessAgreementShippingControl    	; CRMBusinessAgreementShippingControl 
+; InboundBusinessagreement	; CRMBusinessAgreementCorrepondingVariant	; CRMBusinessAgreementCorrepondingVariant 
+; InboundBusinessagreement	; BusinessAgreementPartners              	; BusinessAgreementPartners 
+; InboundBusinessagreement	; CRMBusinessAgreementClass              	; CRMBusinessAgreementClass 
+; InboundBusinessagreement	; CRMBusinessAgreementTaxCode            	; CRMBusinessAgreementTaxCode 
+ 
+INSERT_UPDATE IntegrationObjectItemAttribute; integrationObjectItem(integrationObject(code), code)[unique = true]; attributeName[unique = true]; attributeDescriptor(enclosingType(code), qualifier); returnIntegrationObjectItem(integrationObject(code), code); unique[default = false]; autoCreate[default = false] 
+; InboundBusinessagreement:BusinessAgreementRuleHeader            	; paymentmethodout           	; BusinessAgreementRuleHeader:paymentmethodout           	; InboundBusinessagreement:CRMBusinessAgreementPaymentMethod      	; 	;  
+; InboundBusinessagreement:BusinessAgreementRuleHeader            	; replicationNumberRuleHeader	; BusinessAgreementRuleHeader:replicationNumberRuleHeader	;                                                                 	; 	;  
+; InboundBusinessagreement:BusinessAgreementRuleHeader            	; businessruleguid           	; BusinessAgreementRuleHeader:businessruleguid           	;                                                                 	; true	;  
+; InboundBusinessagreement:BusinessAgreementRuleHeader            	; businessagHeader           	; BusinessAgreementRuleHeader:businessagHeader           	; InboundBusinessagreement:BusinessAgreementHeader                	; 	;  
+; InboundBusinessagreement:BusinessAgreementRuleHeader            	; validto                    	; BusinessAgreementRuleHeader:validto                    	;                                                                 	; 	;  
+; InboundBusinessagreement:BusinessAgreementRuleHeader            	; shippingcontrolbr          	; BusinessAgreementRuleHeader:shippingcontrolbr          	; InboundBusinessagreement:CRMBusinessAgreementShippingControl    	; 	;  
+; InboundBusinessagreement:BusinessAgreementRuleHeader            	; shippingcontroldr          	; BusinessAgreementRuleHeader:shippingcontroldr          	; InboundBusinessagreement:CRMBusinessAgreementShippingControl    	; 	;  
+; InboundBusinessagreement:BusinessAgreementRuleHeader            	; correpondencevariant       	; BusinessAgreementRuleHeader:correpondencevariant       	; InboundBusinessagreement:CRMBusinessAgreementCorrepondingVariant	; 	;  
+; InboundBusinessagreement:BusinessAgreementRuleHeader            	; shippingcontrolbp          	; BusinessAgreementRuleHeader:shippingcontrolbp          	; InboundBusinessagreement:CRMBusinessAgreementShippingControl    	; 	;  
+; InboundBusinessagreement:BusinessAgreementRuleHeader            	; paymentmethodinc           	; BusinessAgreementRuleHeader:paymentmethodinc           	; InboundBusinessagreement:CRMBusinessAgreementPaymentMethod      	; 	;  
+; InboundBusinessagreement:BusinessAgreementRuleHeader            	; termofpayment              	; BusinessAgreementRuleHeader:termofpayment              	; InboundBusinessagreement:CRMBusinessAgreementTermsPayment       	; 	;  
+; InboundBusinessagreement:BusinessAgreementRuleHeader            	; text                       	; BusinessAgreementRuleHeader:text                       	;                                                                 	; 	;  
+; InboundBusinessagreement:CRMBusinessAgreementTermsPayment       	; code                       	; CRMBusinessAgreementTermsPayment:code                  	;                                                                 	; true	;  
+; InboundBusinessagreement:PartnerFunction                        	; code                       	; PartnerFunction:code                                   	;                                                                 	; true	;  
+; InboundBusinessagreement:CRMBusinessAgreementTaxCategory        	; code                       	; CRMBusinessAgreementTaxCategory:code                   	;                                                                 	; true	;  
+; InboundBusinessagreement:BusinessAgreement                      	; guid                       	; BusinessAgreement:guid                                 	;                                                                 	; true	;  
+; InboundBusinessagreement:BusinessAgreement                      	; businessagreementheader    	; BusinessAgreement:businessagreementheader              	; InboundBusinessagreement:BusinessAgreementHeader                	; 	;  
+; InboundBusinessagreement:BusinessAgreement                      	; partnerid                  	; BusinessAgreement:partnerid                            	;                                                                 	; 	;  
+; InboundBusinessagreement:BusinessAgreement                      	; id                         	; BusinessAgreement:id                                   	;                                                                 	; 	;  
+; InboundBusinessagreement:BusinessAgreement                      	; replicationNumber          	; BusinessAgreement:replicationNumber                    	;                                                                 	; 	;  
+; InboundBusinessagreement:BusinessAgreement                      	; text                       	; BusinessAgreement:text                                 	;                                                                 	; 	;  
+; InboundBusinessagreement:BusinessAgreement                      	; sapIsReplicated            	; BusinessAgreement:sapIsReplicated                      	;                                                                 	; 	;  
+; InboundBusinessagreement:BusinessAgreementHeader                	; businessagreementclass     	; BusinessAgreementHeader:businessagreementclass         	; InboundBusinessagreement:CRMBusinessAgreementClass              	; 	;  
+; InboundBusinessagreement:BusinessAgreementHeader                	; taxcode                    	; BusinessAgreementHeader:taxcode                        	; InboundBusinessagreement:CRMBusinessAgreementTaxCode            	; 	;  
+; InboundBusinessagreement:BusinessAgreementHeader                	; businessruleHeader         	; BusinessAgreementHeader:businessruleHeader             	; InboundBusinessagreement:BusinessAgreementRuleHeader            	; 	;  
+; InboundBusinessagreement:BusinessAgreementHeader                	; addressrecipientguid       	; BusinessAgreementHeader:addressrecipientguid           	;                                                                 	; 	;  
+; InboundBusinessagreement:BusinessAgreementHeader                	; replicationNumberHeader    	; BusinessAgreementHeader:replicationNumberHeader        	;                                                                 	; 	;  
+; InboundBusinessagreement:BusinessAgreementHeader                	; addresspayerguid           	; BusinessAgreementHeader:addresspayerguid               	;                                                                 	; 	;  
+; InboundBusinessagreement:BusinessAgreementHeader                	; businessagreementpartners  	; BusinessAgreementHeader:businessagreementpartners      	; InboundBusinessagreement:BusinessAgreementPartners              	; 	;  
+; InboundBusinessagreement:BusinessAgreementHeader                	; bankidinc                  	; BusinessAgreementHeader:bankidinc                      	;                                                                 	; 	;  
+; InboundBusinessagreement:BusinessAgreementHeader                	; refnumber                  	; BusinessAgreementHeader:refnumber                      	;                                                                 	; 	;  
+; InboundBusinessagreement:BusinessAgreementHeader                	; addresstaxguid             	; BusinessAgreementHeader:addresstaxguid                 	;                                                                 	; 	;  
+; InboundBusinessagreement:BusinessAgreementHeader                	; businessagreementdefault   	; BusinessAgreementHeader:businessagreementdefault       	;                                                                 	; 	;  
+; InboundBusinessagreement:BusinessAgreementHeader                	; addressirguid              	; BusinessAgreementHeader:addressirguid                  	;                                                                 	; 	;  
+; InboundBusinessagreement:BusinessAgreementHeader                	; creditcardinc              	; BusinessAgreementHeader:creditcardinc                  	;                                                                 	; 	;  
+; InboundBusinessagreement:BusinessAgreementHeader                	; bankidout                  	; BusinessAgreementHeader:bankidout                      	;                                                                 	; 	;  
+; InboundBusinessagreement:BusinessAgreementHeader                	; addressdunningguid         	; BusinessAgreementHeader:addressdunningguid             	;                                                                 	; 	;  
+; InboundBusinessagreement:BusinessAgreementHeader                	; validto                    	; BusinessAgreementHeader:validto                        	;                                                                 	; 	;  
+; InboundBusinessagreement:BusinessAgreementHeader                	; creditcardout              	; BusinessAgreementHeader:creditcardout                  	;                                                                 	; 	;  
+; InboundBusinessagreement:BusinessAgreementHeader                	; businessagreement          	; BusinessAgreementHeader:businessagreement              	; InboundBusinessagreement:BusinessAgreement                      	; true	;  
+; InboundBusinessagreement:BusinessAgreementHeader                	; taxcategory                	; BusinessAgreementHeader:taxcategory                    	; InboundBusinessagreement:CRMBusinessAgreementTaxCategory        	; 	;  
+; InboundBusinessagreement:BusinessAgreementHeader                	; businessagreementpayer     	; BusinessAgreementHeader:businessagreementpayer         	;                                                                 	; 	;  
+; InboundBusinessagreement:BusinessAgreementHeader                	; addresscorrespondenceguid  	; BusinessAgreementHeader:addresscorrespondenceguid      	;                                                                 	; 	;  
+; InboundBusinessagreement:CRMBusinessAgreementPaymentMethod      	; code                       	; CRMBusinessAgreementPaymentMethod:code                 	;                                                                 	; true	;  
+; InboundBusinessagreement:CRMBusinessAgreementPaymentMethod      	; country                    	; CRMBusinessAgreementPaymentMethod:country              	;                                                                 	; true	;  
+; InboundBusinessagreement:CRMBusinessAgreementShippingControl    	; code                       	; CRMBusinessAgreementShippingControl:code               	;                                                                 	; true	;  
+; InboundBusinessagreement:CRMBusinessAgreementCorrepondingVariant	; code                       	; CRMBusinessAgreementCorrepondingVariant:code           	;                                                                 	; true	;  
+; InboundBusinessagreement:BusinessAgreementPartners              	; businessagreementpartnercat	; BusinessAgreementPartners:businessagreementpartnercat  	;                                                                 	; 	;  
+; InboundBusinessagreement:BusinessAgreementPartners              	; replicationNumberPartners  	; BusinessAgreementPartners:replicationNumberPartners    	;                                                                 	; 	;  
+; InboundBusinessagreement:BusinessAgreementPartners              	; partnerfunction            	; BusinessAgreementPartners:partnerfunction              	; InboundBusinessagreement:PartnerFunction                        	; true	;  
+; InboundBusinessagreement:BusinessAgreementPartners              	; partnerguid1               	; BusinessAgreementPartners:partnerguid1                 	;                                                                 	; 	;  
+; InboundBusinessagreement:BusinessAgreementPartners              	; partnerid2                 	; BusinessAgreementPartners:partnerid2                   	;                                                                 	; 	;  
+; InboundBusinessagreement:BusinessAgreementPartners              	; bprelationshipnum          	; BusinessAgreementPartners:bprelationshipnum            	;                                                                 	; 	;  
+; InboundBusinessagreement:BusinessAgreementPartners              	; businesspartnerfunctionguid	; BusinessAgreementPartners:businesspartnerfunctionguid  	;                                                                 	; true	;  
+; InboundBusinessagreement:BusinessAgreementPartners              	; businessagreementheader    	; BusinessAgreementPartners:businessagreementheader      	; InboundBusinessagreement:BusinessAgreementHeader                	; 	;  
+; InboundBusinessagreement:BusinessAgreementPartners              	; relationTask               	; BusinessAgreementPartners:relationTask                 	;                                                                 	; 	;  
+; InboundBusinessagreement:CRMBusinessAgreementClass              	; code                       	; CRMBusinessAgreementClass:code                         	;                                                                 	; true	;  
+; InboundBusinessagreement:CRMBusinessAgreementTaxCode            	; code                       	; CRMBusinessAgreementTaxCode:code                       	;                                                                 	; true	;  

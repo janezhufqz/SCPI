@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- [y] hybris Platform Copyright (c) 2000-2015 hybris AG All rights reserved. 
+	This software is the confidential and proprietary information of hybris ("Confidential 
+	Information"). You shall not disclose such Confidential Information and shall 
+	use it only in accordance with the terms of the license agreement you entered 
+	into with hybris. -->
+
+<!-- ATTENTION: This is just an example file. You have to edit it according 
+	to your needs. -->
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="beans.xsd">
+
+
+	<bean class="com.sap.hybris.crm.sapservicecontract.data.ServiceContractData"
+		extends="de.hybris.platform.commercefacades.order.data.OrderData">
+		<property name="contractId" type="String" />
+		<property name="description" type="String" />
+		<property name="startDate" type="java.util.Date" />
+		<property name="endDate" type="java.util.Date" />
+		<property name="customer"
+			type="de.hybris.platform.commercefacades.user.data.CustomerData" />
+		<property name="netValue" type="java.lang.Double" />
+		<property name="grossValue" type="java.lang.Double" />
+		<property name="contractStatus" type="String" />
+		<property name="items" type="java.util.List&lt;ServiceProductData>" />
+		<property name="notes" type="java.util.List&lt;String>" />
+		<property name="billingPlan"
+			type="com.sap.hybris.crm.sapservicecontract.data.BillPlanData" />
+		<property name="currency"
+			type="de.hybris.platform.commercefacades.storesession.data.CurrencyData" />
+		<property name="contractGuid" type="String" />
+		<property name="isRenewable" type="java.lang.Boolean" />
+		<property name="contractCondensedStatus" type="String" />
+	</bean>
+
+	<bean class="com.sap.hybris.crm.sapservicecontract.data.BillPlanData">
+		<property name="settlementPeriod" type="String" />
+		<property name="billingDate" type="String" />
+		<property name="invoiceCreationDate" type="String" />
+	</bean>
+
+	<bean class="com.sap.hybris.crm.sapservicecontract.data.ServiceProductData"
+		extends="de.hybris.platform.commercefacades.order.data.OrderEntryData">
+		<property name="productId" type="String" />
+		<property name="serviceContractId" type="String" />
+		<property name="itemNumber" type="String" />
+		<property name="description" type="String" />
+		<property name="releasedQuantity" type="java.lang.Integer" />
+		<property name="netValue" type="java.lang.Double" />
+		<property name="expectedValue" type="java.lang.Double" />
+		<property name="targetValue" type="java.lang.Double" />
+		<property name="releasedValue" type="java.lang.Double" />
+		<property name="responseProfile" type="String" />
+		<property name="serviceProfile" type="String" />
+		<property name="currency"
+			type="de.hybris.platform.commercefacades.storesession.data.CurrencyData" />
+		<property name="itemStatus" type="String" />
+		<property name="productUnit" type="String" />
+		<property name="validFrom" type="java.util.Date" />
+		<property name="validTo" type="java.util.Date" />
+		<property name="itemGuid" type="String" />
+		<property name="isTerminable" type="java.lang.Boolean" />
+		<property name="isRenewable" type="java.lang.Boolean" />
+	</bean>
+</beans>

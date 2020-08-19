@@ -1,0 +1,169 @@
+INSERT_UPDATE IntegrationObject; code[unique = true]; 
+; InboundIbase 
+ 
+INSERT_UPDATE IntegrationObjectItem; integrationObject(code)[unique=true]; code[unique = true]; type(code) 
+; InboundIbase	; Language       	; Language 
+; InboundIbase	; ClassType      	; ClassType 
+; InboundIbase	; B2BUnit        	; B2BUnit 
+; InboundIbase	; Catalog        	; Catalog 
+; InboundIbase	; IBaseType      	; IBaseType 
+; InboundIbase	; PermissionGroup	; PermissionGroup 
+; InboundIbase	; Customer       	; Customer 
+; InboundIbase	; Product        	; Product 
+; InboundIbase	; Unit           	; Unit 
+; InboundIbase	; CatalogVersion 	; CatalogVersion 
+; InboundIbase	; FileId         	; FileId 
+; InboundIbase	; InternalState  	; InternalState 
+; InboundIbase	; ValidationType 	; ValidationType 
+; InboundIbase	; PartnerFunction	; PartnerFunction 
+; InboundIbase	; IBase          	; IBase 
+; InboundIbase	; IBaseStatus    	; IBaseStatus 
+; InboundIbase	; IBaseStructure 	; IBaseStructure 
+; InboundIbase	; IBasePartner   	; IBasePartner 
+; InboundIbase	; IBaseComponent 	; IBaseComponent 
+; InboundIbase	; Region         	; Region 
+; InboundIbase	; Country        	; Country 
+; InboundIbase	; IBaseAddress   	; IBaseAddress 
+ 
+INSERT_UPDATE IntegrationObjectItemAttribute; integrationObjectItem(integrationObject(code), code)[unique = true]; attributeName[unique = true]; attributeDescriptor(enclosingType(code), qualifier); returnIntegrationObjectItem(integrationObject(code), code); unique[default = false] 
+; InboundIbase:Language       	; isocode                	; Language:isocode                	;                             	; true 
+; InboundIbase:ClassType      	; code                   	; ClassType:code                  	;                             	; true 
+; InboundIbase:B2BUnit        	; uid                    	; B2BUnit:uid                     	;                             	; true 
+; InboundIbase:IBaseType      	; code                   	; IBaseType:code                  	;                             	; true 
+; InboundIbase:PermissionGroup	; code                   	; PermissionGroup:code            	;                             	; true 
+; InboundIbase:Customer       	; customerID             	; Customer:customerID             	;                             	; true 
+; InboundIbase:Catalog        	; id                     	; Catalog:id                      	;                             	; true 
+; InboundIbase:CatalogVersion 	; version                	; CatalogVersion:version          	;                             	; true 
+; InboundIbase:CatalogVersion 	; catalog                	; CatalogVersion:catalog          	; InboundIbase:Catalog        	; true 
+; InboundIbase:Product        	; catalogVersion         	; Product:catalogVersion          	; InboundIbase:CatalogVersion 	; true 
+; InboundIbase:Product        	; code                   	; Product:code                    	;                             	; true 
+; InboundIbase:Unit           	; code                   	; Unit:code                       	;                             	; true 
+; InboundIbase:FileId         	; code                   	; FileId:code                     	;                             	; true 
+; InboundIbase:InternalState  	; code                   	; InternalState:code              	;                             	; true 
+; InboundIbase:ValidationType 	; code                   	; ValidationType:code             	;                             	; true 
+; InboundIbase:PartnerFunction	; code                   	; PartnerFunction:code            	;                             	; true 
+; InboundIbase:IBaseStatus    	; code                   	; IBaseStatus:code                	;                             	; true 
+; InboundIbase:IBase          	; address                	; IBase:address                   	; InboundIbase:IBaseAddress   	;  
+; InboundIbase:IBase          	; components             	; IBase:components                	; InboundIbase:IBaseComponent 	;  
+; InboundIbase:IBase          	; configLanguage         	; IBase:configLanguage            	; InboundIbase:Language       	;  
+; InboundIbase:IBase          	; configState            	; IBase:configState               	;                             	;  
+; InboundIbase:IBase          	; description            	; IBase:description               	;                             	;  
+; InboundIbase:IBase          	; externalId             	; IBase:externalId                	;                             	;  
+; InboundIbase:IBase          	; fileId                 	; IBase:fileId                    	; InboundIbase:FileId         	;  
+; InboundIbase:IBase          	; guid                   	; IBase:guid                      	;                             	; true 
+; InboundIbase:IBase          	; iBaseType              	; IBase:iBaseType                 	; InboundIbase:IBaseType      	;  
+; InboundIbase:IBase          	; internalState          	; IBase:internalState             	; InboundIbase:InternalState  	;  
+; InboundIbase:IBase          	; number                 	; IBase:number                    	;                             	;  
+; InboundIbase:IBase          	; objectGuid             	; IBase:objectGuid                	;                             	;  
+; InboundIbase:IBase          	; permissionGroup        	; IBase:permissionGroup           	; InboundIbase:PermissionGroup	;  
+; InboundIbase:IBase          	; sapCreatedBy           	; IBase:sapCreatedBy              	;                             	;  
+; InboundIbase:IBase          	; sapCreatedTime         	; IBase:sapCreatedTime            	;                             	;  
+; InboundIbase:IBase          	; sapModifiedBy          	; IBase:sapModifiedBy             	;                             	;  
+; InboundIbase:IBase          	; sapModifiedTime        	; IBase:sapModifiedTime           	;                             	;  
+; InboundIbase:IBase          	; status                 	; IBase:status                    	; InboundIbase:IBaseStatus    	;  
+; InboundIbase:IBase          	; structures             	; IBase:structures                	; InboundIbase:IBaseStructure 	;  
+; InboundIbase:IBase          	; validationType         	; IBase:validationType            	; InboundIbase:ValidationType 	;  
+; InboundIbase:IBaseStructure 	; archiveFlag            	; IBaseStructure:archiveFlag      	;                             	;  
+; InboundIbase:IBaseStructure 	; changeNumber           	; IBaseStructure:changeNumber     	;                             	;  
+; InboundIbase:IBaseStructure 	; guid                   	; IBaseStructure:guid             	;                             	; true 
+; InboundIbase:IBaseStructure 	; instanceNumber         	; IBaseStructure:instanceNumber   	;                             	;  
+; InboundIbase:IBaseStructure 	; justification          	; IBaseStructure:justification    	;                             	;  
+; InboundIbase:IBaseStructure 	; rawObjectGuids         	; IBaseStructure:rawObjectGuids   	;                             	;  
+; InboundIbase:IBaseStructure 	; parent                 	; IBaseStructure:parent           	;                             	;  
+; InboundIbase:IBaseStructure 	; position               	; IBaseStructure:position         	;                             	;  
+; InboundIbase:IBaseStructure 	; root                   	; IBaseStructure:root             	;                             	;  
+; InboundIbase:IBaseStructure 	; sapCreatedBy           	; IBaseStructure:sapCreatedBy     	;                             	;  
+; InboundIbase:IBaseStructure 	; sapCreatedTime         	; IBaseStructure:sapCreatedTime   	;                             	;  
+; InboundIbase:IBaseStructure 	; sapModifiedBy          	; IBaseStructure:sapModifiedBy    	;                             	;  
+; InboundIbase:IBaseStructure 	; sapModifiedTime        	; IBaseStructure:sapModifiedTime  	;                             	;  
+; InboundIbase:IBaseStructure 	; validFrom              	; IBaseStructure:validFrom        	;                             	;  
+; InboundIbase:IBaseStructure 	; validTo                	; IBaseStructure:validTo          	;                             	;  
+; InboundIbase:IBasePartner   	; b2bUnit                	; IBasePartner:b2bUnit            	; InboundIbase:B2BUnit        	;  
+; InboundIbase:IBasePartner   	; displayType            	; IBasePartner:displayType        	;                             	;  
+; InboundIbase:IBasePartner   	; function               	; IBasePartner:function           	; InboundIbase:PartnerFunction	; true 
+; InboundIbase:IBasePartner   	; guid                   	; IBasePartner:guid               	;                             	; true 
+; InboundIbase:IBasePartner   	; iBase                  	; IBasePartner:iBase              	; InboundIbase:IBase          	; true 
+; InboundIbase:IBasePartner   	; mainPartner            	; IBasePartner:mainPartner        	;                             	;  
+; InboundIbase:IBasePartner   	; rawPartnerId           	; IBasePartner:rawPartnerId       	;                             	;  
+; InboundIbase:IBasePartner   	; refPartner             	; IBasePartner:refPartner         	; InboundIbase:Customer       	;  
+; InboundIbase:IBasePartner   	; refPartnerFunction     	; IBasePartner:refPartnerFunction 	; InboundIbase:PartnerFunction	;  
+; InboundIbase:IBasePartner   	; sapCreatedBy           	; IBasePartner:sapCreatedBy       	;                             	;  
+; InboundIbase:IBasePartner   	; sapCreatedTime         	; IBasePartner:sapCreatedTime     	;                             	;  
+; InboundIbase:IBasePartner   	; sapModifiedBy          	; IBasePartner:sapModifiedBy      	;                             	;  
+; InboundIbase:IBasePartner   	; sapModifiedTime        	; IBasePartner:sapModifiedTime    	;                             	;  
+; InboundIbase:IBasePartner   	; validFrom              	; IBasePartner:validFrom          	;                             	;  
+; InboundIbase:IBasePartner   	; validTo                	; IBasePartner:validTo            	;                             	;  
+; InboundIbase:IBaseComponent 	; address                	; IBaseComponent:address          	; InboundIbase:IBaseAddress   	;  
+; InboundIbase:IBaseComponent 	; archiveFlag            	; IBaseComponent:archiveFlag      	;                             	;  
+; InboundIbase:IBaseComponent 	; changeNumber           	; IBaseComponent:changeNumber     	;                             	;  
+; InboundIbase:IBaseComponent 	; classType              	; IBaseComponent:classType        	; InboundIbase:ClassType      	;  
+; InboundIbase:IBaseComponent 	; configState            	; IBaseComponent:configState      	;                             	;  
+; InboundIbase:IBaseComponent 	; counter                	; IBaseComponent:counter          	;                             	;  
+; InboundIbase:IBaseComponent 	; description            	; IBaseComponent:description      	;                             	;  
+; InboundIbase:IBaseComponent 	; expert                 	; IBaseComponent:expert           	;                             	;  
+; InboundIbase:IBaseComponent 	; guid                   	; IBaseComponent:guid             	;                             	; true 
+; InboundIbase:IBaseComponent 	; instanceNumber         	; IBaseComponent:instanceNumber   	;                             	;  
+; InboundIbase:IBaseComponent 	; justification          	; IBaseComponent:justification    	;                             	;  
+; InboundIbase:IBaseComponent 	; rawComponentData       	; IBaseComponent:rawComponentData 	;                             	;  
+; InboundIbase:IBaseComponent 	; objectGuid             	; IBaseComponent:objectGuid       	;                             	;  
+; InboundIbase:IBaseComponent 	; product                	; IBaseComponent:product          	; InboundIbase:Product        	;  
+; InboundIbase:IBaseComponent 	; quantity               	; IBaseComponent:quantity         	;                             	;  
+; InboundIbase:IBaseComponent 	; sapCreatedBy           	; IBaseComponent:sapCreatedBy     	;                             	;  
+; InboundIbase:IBaseComponent 	; sapCreatedTime         	; IBaseComponent:sapCreatedTime   	;                             	;  
+; InboundIbase:IBaseComponent 	; sapModifiedBy          	; IBaseComponent:sapModifiedBy    	;                             	;  
+; InboundIbase:IBaseComponent 	; sapModifiedTime        	; IBaseComponent:sapModifiedTime  	;                             	;  
+; InboundIbase:IBaseComponent 	; sorter                 	; IBaseComponent:sorter           	;                             	;  
+; InboundIbase:IBaseComponent 	; technicalState         	; IBaseComponent:technicalState   	;                             	;  
+; InboundIbase:IBaseComponent 	; unit                   	; IBaseComponent:unit             	; InboundIbase:Unit           	;  
+; InboundIbase:IBaseComponent 	; validFrom              	; IBaseComponent:validFrom        	;                             	;  
+; InboundIbase:IBaseComponent 	; validTo                	; IBaseComponent:validTo          	;                             	;  
+; InboundIbase:IBaseComponent 	; warrantyEndDate        	; IBaseComponent:warrantyEndDate  	;                             	;  
+; InboundIbase:IBaseComponent 	; warrantyStartDate      	; IBaseComponent:warrantyStartDate	;                             	;  
+; InboundIbase:Region      	; isocode      	; Region:isocode            	;                     	; true 
+; InboundIbase:Region      	; country      	; Region:country            	; InboundIbase:Country	; true 
+; InboundIbase:Country     	; isocode      	; Country:isocode           	;                     	; true 
+; InboundIbase:IBaseAddress	; duplicate    	; IBaseAddress:duplicate    	;                     	; true 
+; InboundIbase:IBaseAddress	; publicKey    	; IBaseAddress:publicKey    	;                     	; true 
+; InboundIbase:IBaseAddress	; name         	; IBaseAddress:name         	;                     	;  
+; InboundIbase:IBaseAddress	; name2        	; IBaseAddress:name2        	;                     	;  
+; InboundIbase:IBaseAddress	; name3        	; IBaseAddress:name3        	;                     	;  
+; InboundIbase:IBaseAddress	; name4        	; IBaseAddress:name4        	;                     	;  
+; InboundIbase:IBaseAddress	; coName       	; IBaseAddress:coName       	;                     	;  
+; InboundIbase:IBaseAddress	; roomNo       	; IBaseAddress:roomNo       	;                     	;  
+; InboundIbase:IBaseAddress	; houseNo      	; IBaseAddress:houseNo      	;                     	;  
+; InboundIbase:IBaseAddress	; floor        	; IBaseAddress:floor        	;                     	;  
+; InboundIbase:IBaseAddress	; building     	; IBaseAddress:building     	;                     	;  
+; InboundIbase:IBaseAddress	; streetname   	; IBaseAddress:streetname   	;                     	;  
+; InboundIbase:IBaseAddress	; streetnumber 	; IBaseAddress:streetnumber 	;                     	;  
+; InboundIbase:IBaseAddress	; postalcode   	; IBaseAddress:postalcode   	;                     	;  
+; InboundIbase:IBaseAddress	; postalCode1  	; IBaseAddress:postalCode1  	;                     	;  
+; InboundIbase:IBaseAddress	; postalCode2  	; IBaseAddress:postalCode2  	;                     	;  
+; InboundIbase:IBaseAddress	; postalCode3  	; IBaseAddress:postalCode3  	;                     	;  
+; InboundIbase:IBaseAddress	; city         	; IBaseAddress:city         	;                     	;  
+; InboundIbase:IBaseAddress	; cityNo       	; IBaseAddress:cityNo       	;                     	;  
+; InboundIbase:IBaseAddress	; poBoxCit     	; IBaseAddress:poBoxCit     	;                     	;  
+; InboundIbase:IBaseAddress	; pobox        	; IBaseAddress:pobox        	;                     	;  
+; InboundIbase:IBaseAddress	; deliveryDis  	; IBaseAddress:deliveryDis  	;                     	;  
+; InboundIbase:IBaseAddress	; district     	; IBaseAddress:district     	;                     	;  
+; InboundIbase:IBaseAddress	; region       	; IBaseAddress:region       	; InboundIbase:Region 	;  
+; InboundIbase:IBaseAddress	; country      	; IBaseAddress:country      	; InboundIbase:Country	;  
+; InboundIbase:IBaseAddress	; location     	; IBaseAddress:location     	;                     	;  
+; InboundIbase:IBaseAddress	; timeZone     	; IBaseAddress:timeZone     	;                     	;  
+; InboundIbase:IBaseAddress	; commType     	; IBaseAddress:commType     	;                     	;  
+; InboundIbase:IBaseAddress	; language     	; IBaseAddress:language     	;                     	;  
+; InboundIbase:IBaseAddress	; email        	; IBaseAddress:email        	;                     	;  
+; InboundIbase:IBaseAddress	; telExt1      	; IBaseAddress:telExt1      	;                     	;  
+; InboundIbase:IBaseAddress	; telNumber1   	; IBaseAddress:telNumber1   	;                     	;  
+; InboundIbase:IBaseAddress	; fax          	; IBaseAddress:fax          	;                     	;  
+; InboundIbase:IBaseAddress	; faxExtens    	; IBaseAddress:faxExtens    	;                     	;  
+; InboundIbase:IBaseAddress	; addressNotes 	; IBaseAddress:addressNotes 	;                     	;  
+; InboundIbase:IBaseAddress	; validFrom    	; IBaseAddress:validFrom    	;                     	;  
+; InboundIbase:IBaseAddress	; validTo      	; IBaseAddress:validTo      	;                     	;  
+; InboundIbase:IBaseAddress	; strSupll1    	; IBaseAddress:strSupll1    	;                     	;  
+; InboundIbase:IBaseAddress	; strSupll2    	; IBaseAddress:strSupll2    	;                     	;  
+; InboundIbase:IBaseAddress	; sort1        	; IBaseAddress:sort1        	;                     	;  
+; InboundIbase:IBaseAddress	; sort2        	; IBaseAddress:sort2        	;                     	;  
+; InboundIbase:IBaseAddress	; strAbbr      	; IBaseAddress:strAbbr      	;                     	;  
+; InboundIbase:IBaseAddress	; taxJurCode   	; IBaseAddress:taxJurCode   	;                     	;  
+; InboundIbase:IBaseAddress	; formOfAddress	; IBaseAddress:formOfAddress	;                     	;  
+; InboundIbase:IBaseAddress	; addressType  	; IBaseAddress:addressType  	;                     	;  

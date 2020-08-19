@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2018 SAP SE or an SAP affiliate company. All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<!--
+	ATTENTION: This is just an example file. You have to edit it according to your needs.
+-->
+
+<items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+			xsi:noNamespaceSchemaLocation="items.xsd">
+
+	<enumtypes>
+		<enumtype code="SapSystemType" autocreate="false" generate="false"
+			dynamic="true">
+			<value code="SAP_CRM" />
+		</enumtype>
+	</enumtypes>
+	
+	<relations>
+	<relation code="SAPCpiOutboundCustomer2SAPCpiOutboundContactAddress" localized="false">
+            <sourceElement type="SAPCpiOutboundCustomer" qualifier="sapCpiOutboundCustomer" cardinality="one"/>
+            <targetElement type="SAPCpiOutboundContactAddress" qualifier="sapCpiOutboundContactAddress" cardinality="many"
+                           collectiontype="set">
+                <modifiers partof="true"/>
+            </targetElement>
+        </relation>
+        <relation code="SAPCpiOutboundCustomer2SAPCpiOutboundCreditCard" localized="false">
+            <sourceElement type="SAPCpiOutboundCustomer" qualifier="sapCpiOutboundCustomer" cardinality="one"/>
+            <targetElement type="SAPCpiOutboundCreditCard" qualifier="sapCpiOutboundCreditCard" cardinality="many"
+                           collectiontype="set">
+                <modifiers partof="true"/>
+            </targetElement>
+        </relation>
+        
+	 </relations>
+
+	<itemtypes>
+	
+			<itemtype code="SAPCpiOutboundCustomer"
+                  autocreate="false" generate="false" extends="GenericItem">
+               <attributes>
+
+                <attribute qualifier="crmGuid" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="erpCustomerId" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+
+                <attribute qualifier="defaultB2C" type="java.lang.Boolean">
+                    <persistence type="property"/>
+                </attribute>
+                
+                 <attribute qualifier="centralBlock" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+                 <attribute qualifier="centralArchivingFlag" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+                 <attribute qualifier="notReleased" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+                 <attribute qualifier="isConsentGiven" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+                 <attribute qualifier="channel" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+                 <attribute qualifier="valid_from" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="consent_guid" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="consent_flag" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+                
+                <attribute qualifier="sapSessionLanguage" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+       
+       			<attribute qualifier="b2cFeedType" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+                  
+              </attributes>    
+                  
+           </itemtype>
+           
+           
+           <itemtype code="SAPCpiOutboundContactAddress"
+                  jaloclass="com.sap.hybris.crm.sapcpicrmcustomerexchange.jalo.SAPCpiOutboundContactAddress"
+                  extends="GenericItem">
+
+            <deployment table="SAPCpiContactAddress" typecode="9354"/>
+
+            <attributes>
+            
+            	<attribute qualifier="addressGuid" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+
+				<attribute qualifier="street" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+                
+                <attribute qualifier="streetNumber" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+                
+                <attribute qualifier="town" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+                
+                <attribute qualifier="city" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+                
+                <attribute qualifier="faxNumber" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+								
+				<attribute qualifier="phone" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+
+				<attribute qualifier="postalCode" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+                
+				<attribute qualifier="countryIsoCode" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+                
+          		<attribute qualifier="deleteAddress" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+                
+                <attribute qualifier="region" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+                
+                <attribute qualifier="isDefault" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+
+            </attributes>
+
+        </itemtype>
+        
+        <itemtype code="SAPCpiOutboundCreditCard"
+                  jaloclass="com.sap.hybris.crm.sapcpicrmcustomerexchange.jalo.SAPCpiOutboundCreditCard"
+                  extends="GenericItem">
+
+            <deployment table="SAPCpiCreditCard" typecode="9355"/>
+
+            <attributes>
+            
+            	<attribute qualifier="cardId" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+
+				<attribute qualifier="cardName" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+                
+                <attribute qualifier="cardType" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+                
+                <attribute qualifier="stampName" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+                
+                <attribute qualifier="cardNumber" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+                
+                <attribute qualifier="validTo" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+								
+				<attribute qualifier="isDefault" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+            </attributes>
+
+        </itemtype>
+           
+           
+           
+           
+	</itemtypes>
+</items>

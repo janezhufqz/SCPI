@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- [y] hybris Platform Copyright (c) 2000-2013 hybris AG All rights reserved. 
+	This software is the confidential and proprietary information of hybris ("Confidential 
+	Information"). You shall not disclose such Confidential Information and shall 
+	use it only in accordance with the terms of the license agreement you entered 
+	into with hybris. -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+
+	<alias alias="sapProductAvailabilityBO" name="sapCRMProductAvailabilityBOImpl" />
+	<bean id="sapCRMProductAvailabilityBOImpl" parent="sapProductAvailabilityBOImpl">
+		<property name="backendType"
+			value="#{baseStoreService.getCurrentBaseStore().getSAPConfiguration().getSapproductavailability_RFCDestination()?.getBackendType().getCode()}" />
+	</bean>
+
+
+	<!-- Overwriting the bean ID defaultSapProductAvailabilityBackendERP since 
+		we cannot do a parent bean as it detects multiple backend systems due to 
+		annotation concept . -->
+	<!-- define ERP back-end object -->
+	<alias alias="sapProductAvailabilityBackendCRM" name="defaultSapProductAvailabilityBackendERP" />
+	<bean id="defaultSapProductAvailabilityBackendERP"
+		class="de.hybris.platform.sapcrm.sapcrmproductavailability.backend.impl.SapProductAvailabilityBackendCRM"
+		scope="sapSession" parent="sapCoreBackendObjectJCo">
+		<property name="defaultDestinationName"
+			value="#{baseStoreService.getCurrentBaseStore().getSAPConfiguration().getSapproductavailability_RFCDestination()?.getRfcDestinationName()}" />
+
+	</bean>
+
+
+
+	<!-- AOP CONFIG FOR CHANGING THE METHOD PARAMETERS -->
+	<alias alias="sapProductAvailabilityAspect" name="sapCRMProductAvailabilityAspect" />
+	<bean id="sapCRMProductAvailabilityAspect"
+		class="de.hybris.platform.sapcrm.sapcrmproductavailability.aspect.SapCRMProductAvailabilityAspect">
+		<property name="userService" ref="userService"/>
+	</bean>
+
+
+	<aop:config>
+
+
+		<aop:aspect id="sapProductAvailabilityAspectId" ref="sapProductAvailabilityAspect">
+			
+			<aop:pointcut id="aopAroundProductAvailability"
+				expression="execution(* de.hybris.platform.sap.sapproductavailability.backend.impl.SapProductAvailabilityBackendERP.read*(..))" />
+			<aop:around pointcut-ref="aopAroundProductAvailability"
+				method="changeTheIncomingCustomerId" />
+		</aop:aspect>
+
+
+	</aop:config>
+	
+	<!-- Ensure that commerceStockService is set to defaultSapProductAvailabilityService, as defined in sapproductavailability -->	
+	<alias alias="commerceStockService" name="defaultSapCrmProductAvailabilityService"/>
+	<bean id="defaultSapCrmProductAvailabilityService" parent="defaultSapProductAvailabilityService"/>
+	 
+	<alias alias="futureStockService" name="defaultSapCrmFutureStockService"/>
+	<bean id="defaultSapCrmFutureStockService" parent="defaultSapFutureStockService"/>			
+			
+</beans>

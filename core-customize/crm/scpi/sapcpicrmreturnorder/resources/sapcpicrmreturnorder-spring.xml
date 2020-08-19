@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2018 SAP SE or an SAP affiliate company. All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+	
+	<bean id="sapcpicrmreturnorderSystemSetup" class="sap.sapcpicrmreturnorder.setup.SapcpicrmreturnorderSystemSetup">
+        <!-- constructor arg injection example -->
+        <constructor-arg ref="sapcpicrmreturnorderService"/>
+    </bean>
+
+    <bean id="sapcpicrmreturnorderService" class="sap.sapcpicrmreturnorder.service.impl.DefaultSapcpicrmreturnorderService">
+        <!-- setter injection example -->
+        <property name="modelService" ref="modelService"/>
+        <property name="mediaService" ref="mediaService"/>
+        <property name="flexibleSearchService" ref="flexibleSearchService"/>
+    </bean>
+    
+    
+    <alias name="returnOrderExportService"
+		alias="sapOrderexchangeSendReturnOrderToDataHubHelper" />
+	<bean id="returnOrderExportService"
+		class="sap.sapcpicrmreturnorder.service.impl.SapCpiReturnOrderExportServiceImpl"
+		parent="sapAbstractSendToDataHubHelper">
+		<property name="rawItemBuilder" ref="defaultCRMSapRawHybrisReturnOrderBuilder"></property>
+		<property name="rawItemType"
+			value="${saporderexchange.orderoutbound.datahub.rawOrderItemType}"></property>
+			
+			<property name="returnOrderConversionService" ref="returnOrderConvService"/>
+        <property name="returnOrderOutboundService" ref="returnOrderOutboundService"/>
+	</bean>
+	
+	
+	<alias alias="returnOrderOutboundService" name="sapCpiReturnOrderOutboundService" />
+    <bean id="sapCpiReturnOrderOutboundService"
+          class="sap.sapcpicrmreturnorder.service.impl.SapCpiReturnOrderOutboundServiceImpl" >
+          <property name="outboundServiceFacade" ref="outboundServiceFacade" />
+    </bean>
+    
+    <alias  alias="returnOrderConvService" name="sapCpiReturnOrderConversionService"/>
+    <bean id="sapCpiReturnOrderConversionService"
+          class="sap.sapcpicrmreturnorder.service.impl.SapCpiReturnOrderConversionServiceImpl">
+          
+        <property name="globalConfigurationDAO" ref="sapCoreSAPGlobalConfigurationDAO"/>
+        <property name="modelService" ref="modelService"/>
+        <property name="flexibleSearchService" ref="flexibleSearchService"></property>
+    </bean>
+    
+    <bean id="orderCreationAndPGRDeliveryNotificationHook"
+          class="sap.sapcpicrmreturnorder.service.inbound.SapCpiReturnOrderCreationAndPGRDeliveryNotificationPersistenceHook" >
+          <property name="inboundHelper" ref="sapDataHubInboundReturnOrderHelper"/>
+          <property name="flexibleSearchService" ref="flexibleSearchService"/>
+    </bean>
+    
+    <!-- <bean id="pgrDeliveryNotificationHook"
+          class="sap.sapcpicrmreturnorder.service.inbound.SapCpiReturnOrderPGRDeliveryNotificationPersistenceHook" >
+          <property name="inboundHelper" ref="sapDataHubInboundReturnOrderHelper"/>
+          
+    </bean> -->
+    
+    <bean id="creditMemoNotificationHook"
+          class="sap.sapcpicrmreturnorder.service.inbound.SapCpiReturnOrderCreditMemoNotificationPersistenceHook" >
+          <property name="inboundHelper" ref="sapDataHubInboundReturnOrderHelper"/>
+          
+    </bean>
+    
+			
+</beans>

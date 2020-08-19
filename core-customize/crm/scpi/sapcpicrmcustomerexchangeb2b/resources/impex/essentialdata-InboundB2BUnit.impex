@@ -1,0 +1,63 @@
+INSERT_UPDATE IntegrationObject; code[unique = true]; 
+; InboundB2BUnit 
+ 
+INSERT_UPDATE IntegrationObjectItem; integrationObject(code)[unique=true]; code[unique = true]; type(code) 
+; InboundB2BUnit	; B2BUnit          	; B2BUnit 
+; InboundB2BUnit	; Address          	; Address 
+; InboundB2BUnit	; Country          	; Country 
+; InboundB2BUnit	; Region           	; Region 
+; InboundB2BUnit	; UserPriceGroup   	; UserPriceGroup 
+; InboundB2BUnit	; UserDiscountGroup	; UserDiscountGroup 
+; InboundB2BUnit	; PrincipalGroup   	; PrincipalGroup 
+
+ 
+INSERT_UPDATE IntegrationObjectItemAttribute; integrationObjectItem(integrationObject(code), code)[unique = true]; attributeName[unique = true]; attributeDescriptor(enclosingType(code), qualifier); returnIntegrationObjectItem(integrationObject(code), code); unique[default = false] 
+; InboundB2BUnit:B2BUnit          	; userDiscountGroup     	; B2BUnit:userDiscountGroup     	; InboundB2BUnit:UserDiscountGroup	;  
+; InboundB2BUnit:B2BUnit          	; uid                   	; B2BUnit:uid                   	;                                 	; true 
+; InboundB2BUnit:B2BUnit          	; description           	; B2BUnit:description           	;                                 	;  
+; InboundB2BUnit:B2BUnit          	; name                  	; B2BUnit:name                  	;                                 	;  
+; InboundB2BUnit:B2BUnit          	; erpcustomerid         	; B2BUnit:erpcustomerid         	;                                 	;  
+; InboundB2BUnit:B2BUnit          	; active                	; B2BUnit:active                	;                                 	;  
+; InboundB2BUnit:B2BUnit          	; addresses             	; B2BUnit:addresses             	; InboundB2BUnit:Address          	;  
+; InboundB2BUnit:B2BUnit          	; groups                	; B2BUnit:groups                	; InboundB2BUnit:PrincipalGroup   	;  
+; InboundB2BUnit:B2BUnit          	; userPriceGroup        	; B2BUnit:userPriceGroup        	; InboundB2BUnit:UserPriceGroup   	;  
+; InboundB2BUnit:B2BUnit          	; shippingAddress       	; B2BUnit:shippingAddress       	; InboundB2BUnit:Address          	;  
+; InboundB2BUnit:B2BUnit          	; buyer                 	; B2BUnit:buyer                 	;                                 	;  
+; InboundB2BUnit:B2BUnit          	; b2bunitguid           	; B2BUnit:b2bunitguid           	;                                 	;  
+; InboundB2BUnit:B2BUnit          	; locName               	; B2BUnit:locName               	;                                 	;  
+; InboundB2BUnit:B2BUnit          	; incoterms2            	; B2BUnit:incoterms2            	;                                 	;  
+; InboundB2BUnit:B2BUnit          	; deliverypriority      	; B2BUnit:deliverypriority      	;                                 	;  
+; InboundB2BUnit:B2BUnit          	; termsofpayment        	; B2BUnit:termsofpayment        	;                                 	;  
+; InboundB2BUnit:B2BUnit          	; shippingconditions    	; B2BUnit:shippingconditions    	;                                 	;  
+; InboundB2BUnit:B2BUnit          	; incoterms1            	; B2BUnit:incoterms1            	;                                 	;  
+; InboundB2BUnit:Address          	; streetname            	; Address:streetname            	;                                 	;  
+; InboundB2BUnit:Address          	; company               	; Address:company               	;                                 	;  
+; InboundB2BUnit:Address          	; duplicate             	; Address:duplicate             	;                                 	; true 
+; InboundB2BUnit:Address          	; sapMessageFunction    	; Address:sapMessageFunction    	;                                 	;  
+; InboundB2BUnit:Address          	; streetnumber          	; Address:streetnumber          	;                                 	;  
+; InboundB2BUnit:Address          	; country               	; Address:country               	; InboundB2BUnit:Country          	;  
+; InboundB2BUnit:Address          	; district              	; Address:district              	;                                 	;  
+; InboundB2BUnit:Address          	; phone1                	; Address:phone1                	;                                 	;  
+; InboundB2BUnit:Address          	; sapAddressUsage       	; Address:sapAddressUsage       	;                                 	;  
+; InboundB2BUnit:Address          	; sapCustomerID         	; Address:sapCustomerID         	;                                 	;  
+; InboundB2BUnit:Address          	; region                	; Address:region                	; InboundB2BUnit:Region           	;  
+; InboundB2BUnit:Address          	; sapAddressUsageCounter	; Address:sapAddressUsageCounter	;                                 	;  
+; InboundB2BUnit:Address          	; postalcode            	; Address:postalcode            	;                                 	;  
+; InboundB2BUnit:Address          	; billingAddress        	; Address:billingAddress        	;                                 	;  
+; InboundB2BUnit:Address          	; cellphone             	; Address:cellphone             	;                                 	;  
+; InboundB2BUnit:Address          	; fax                   	; Address:fax                   	;                                 	;  
+; InboundB2BUnit:Address          	; town                  	; Address:town                  	;                                 	;  
+; InboundB2BUnit:Address          	; pobox                 	; Address:pobox                 	;                                 	;  
+; InboundB2BUnit:Address          	; shippingAddress       	; Address:shippingAddress       	;                                 	;  
+; InboundB2BUnit:Address          	; publicKey             	; Address:publicKey             	;                                 	; true 
+; InboundB2BUnit:Country           	; isocode                ; Country:isocode               ;                                  	;
+; InboundB2BUnit:Region           	; isocode               	; Region:isocode                	;                                 	;  
+; InboundB2BUnit:UserPriceGroup   	; code                  	; UserPriceGroup:code           	;                                 	;  
+; InboundB2BUnit:UserDiscountGroup	; code                  	; UserDiscountGroup:code        	;                                 	;  
+; InboundB2BUnit:PrincipalGroup   	; uid                   	; PrincipalGroup:uid            	;                                 	;  
+
+
+
+INSERT_UPDATE IntegrationObjectItemAttribute; integrationObjectItem(integrationObject(code), code)[unique = true]; attributeName[unique = true]; attributeDescriptor(enclosingType(code), qualifier); returnIntegrationObjectItem(integrationObject(code), code); unique[default = false]
+; InboundB2BCustomer:B2BCustomer ; guid      ; B2BCustomer:crmGuid      ;                              ; 
+

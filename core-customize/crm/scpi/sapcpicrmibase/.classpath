@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="lib" path="web/webroot/WEB-INF/lib/javax.servlet.jsp.jstl-1.2.5.jar"/>
+	<classpathentry kind="src" output="eclipsebin/web/classes" path="web/src"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/odata2services"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/odata2webservices"/>
+	<classpathentry kind="src" output="eclipsebin/classes" path="testsrc"/>
+	<classpathentry exported="true" kind="src" path="/sapcrmibasecore"/>
+	<classpathentry exported="true" kind="src" path="/sapcpiadapter"/>
+	<classpathentry exported="true" kind="lib" path="resources"/>
+	<classpathentry kind="src" output="eclipsebin/classes" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="/platform"/>
+	<classpathentry kind="lib" path="web/webroot/WEB-INF/lib/displaytag-1.2.jar"/>
+	<classpathentry kind="src" output="eclipsebin/classes" path="gensrc"/>
+	<classpathentry kind="output" path="eclipsebin/notused"/>
+</classpath>

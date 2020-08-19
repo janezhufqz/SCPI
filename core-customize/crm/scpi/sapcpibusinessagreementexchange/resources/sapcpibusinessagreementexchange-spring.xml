@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2018 SAP SE or an SAP affiliate company. All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<!-- Send BA to SCPI -->
+	<alias name="defaultSapCpiCrmBusinessAgreementExportService" alias="businessAgreementExportService" />
+	<bean id="defaultSapCpiCrmBusinessAgreementExportService"
+		class="com.sap.hybris.sapcpibusinessagreementexchange.outbound.DefaultSapCpiCrmBusinessAgreementExportService" parent="defaultCRMBusinessAgreementExportService">
+		<property name="sapCpiCrmBAConversionService" ref="sapCpiCrmBAConversionService" />
+		<property name="sapCpiCrmBAOutboundService" ref="sapCpiCrmBAOutboundService" />
+		<property name="sapCpiCrmBusinessAgreementService" ref="sapCpiCrmBusinessAgreementService" />
+	</bean>
+	
+	<alias name="defaultSapCpiCrmBusinessAgreementServiceImpl" alias="sapCpiCrmBusinessAgreementService" />
+	<bean id="defaultSapCpiCrmBusinessAgreementServiceImpl"
+		class="com.sap.hybris.sapcpibusinessagreementexchange.service.impl.DefaultSapCpiCrmBusinessAgreementServiceImpl">
+	</bean>
+	
+	<alias name="defaultSapCpiCrmBAConversionServiceImpl" alias="sapCpiCrmBAConversionService" />
+	<bean id="defaultSapCpiCrmBAConversionServiceImpl"
+		class="com.sap.hybris.sapcpibusinessagreementexchange.service.impl.DefaultSapCpiCrmBAConversionServiceImpl">
+		<property name="modelService" ref="modelService" />
+		<property name="globalConfigurationDAO" ref="sapCoreSAPGlobalConfigurationDAO" />
+	</bean>
+	
+	
+	<alias name="defaultSapCpiCrmBAOutboundServiceImpl" alias="sapCpiCrmBAOutboundService" />
+	<bean id="defaultSapCpiCrmBAOutboundServiceImpl"
+		class="com.sap.hybris.sapcpibusinessagreementexchange.service.impl.SapCpiCrmBAOutboundServiceImpl">
+		<property name="outboundServiceFacade" ref="outboundServiceFacade" />
+	</bean>
+	
+	<!-- BA Order Conversion Service -->
+	<alias name="sapCpiCrmBAOrderConversionServiceImpl" alias="sapCpiCrmOrderConversionService" />
+	<bean id="sapCpiCrmBAOrderConversionServiceImpl"
+		class="com.sap.hybris.sapcpibusinessagreementexchange.service.impl.SapCpiCrmBAOrderConversionServiceImpl">
+		<property name="sapOrderContributor" ref="sapCrmOrderContributor"/>
+        <property name="sapOrderEntryContributor" ref="sapCrmOrderEntryContributor"/>
+        <property name="sapPaymentContributor" ref="sapCrmPaymentContributor"/>
+        <property name="sapPartnerContributor" ref="sapCrmPartnerContributor"/>
+        <property name="sapSalesConditionsContributor" ref="sapCrmSalesConditionsContributor"/>
+        <property name="sapOrderCancelRequestContributor" ref="crmOrderCancelRequestContributor"/>
+        <property name="sapCoreSAPGlobalConfigurationDAO" ref="sapCoreSAPGlobalConfigurationDAO"/>
+	</bean>
+	
+	 <!-- BA CRM Order Mapper -->
+    <alias name="sapCpiCrmBAOmmOrderMapperService" alias="sapCpiOrderMapperService"/>
+    <bean id="sapCpiCrmBAOmmOrderMapperService" class="com.sap.hybris.sapcpibusinessagreementexchange.service.impl.SapCpiCrmBAOmmOrderMapperService" parent="sapCpiOmmOrderMapperService">
+        <property name="sapCpiOrderConversionService" ref="sapCpiCrmOrderConversionService"/>
+    </bean>
+	
+			
+</beans>

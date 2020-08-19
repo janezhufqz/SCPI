@@ -1,0 +1,88 @@
+div.tarea {
+	border: 1px inset #ccc;
+	background-color: white;
+	font: small courier, monospace black;
+	width: 400px;
+	height: 300px; /* or whatever measurements you want */
+	overflow: auto;
+	/* in most browsers, this will results in a scrollbar when there's more content than can fit in the dimensions defined above */
+}
+
+div.objectlink {
+	float: right;
+	text-align: left;
+}
+
+.account-section .account-section-right-header {
+	font-size: 14px;
+	font-weight: bold;
+	text-transform: capitalize;
+	border-bottom: 1px solid #cccccc;
+	margin: 24px 0 0 0;
+	margin-top: 38px;
+	padding-bottom: 23px;
+}
+
+.account-section .update-section {
+	padding: 20px 0;
+	margin: 0;
+	padding-left: 33px;
+	padding-right: 26px;
+}
+
+.account-section .buttons {
+	margin-left: 33px;
+}
+
+.account-section-header .create-ticket-options {
+	display: none;
+	z-index: 3;
+	position: absolute;
+	background-color: #d9d9d9;
+	padding: 2px;
+}
+
+.account-section-header-add .create-ticket-button {
+	cursor: pointer;
+}
+
+.account-section-header .create-ticket-options a {
+	font-weight: 400;
+	padding: 4px;
+}
+
+a.selected {
+	background-color: #1F75CC;
+	color: white;
+	z-index: 100;
+}
+
+.messagepop {
+	background-color: #d8d8d8;
+	border: 1px solid #999999;
+	cursor: default;
+	display: none;
+	margin-top: 15px;
+	position: absolute;
+	text-align: left;
+	width: 70%;
+	z-index: 50;
+	padding: 25px 25px 20px;
+	margin-left: 318px;
+}
+
+.messagepop p, .messagepop.div {
+	border-bottom: 1px solid #EFEFEF;
+	margin: 8px 0;
+	padding-bottom: 8px;
+}
+
+.hideCatPopup {
+	width: 25%;
+	margin-left: 14%;
+}
+
+.has-error textarea.form-control {
+	background: #f6e0e0;
+	border-color: #c53131;
+}

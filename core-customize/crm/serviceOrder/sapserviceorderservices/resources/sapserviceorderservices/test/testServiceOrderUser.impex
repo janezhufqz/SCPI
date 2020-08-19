@@ -1,0 +1,6 @@
+$customergroup=customergroup
+$defaultPassword=12341234
+
+# Customers
+INSERT_UPDATE Customer;originalUid[unique=true];uid[unique=true];title(code);name;description;groups(uid);password[default=$defaultPassword];&userId
+;serviceorderuser@sap.com;serviceorderuser@sap.com;;service order user;service order user;customergroup;;serviceorderuser@sap.com

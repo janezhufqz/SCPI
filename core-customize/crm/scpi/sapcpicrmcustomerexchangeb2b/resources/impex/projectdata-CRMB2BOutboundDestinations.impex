@@ -1,0 +1,22 @@
+$iflowURL=https://scpi-tenant-iflmap-gw-url/odata/SAP/REPLICATE-B2B-CUSTOMER-FROM-SAP-COMMERCE-TO-SAP-CRM
+
+#**********************************#
+#************ Credentials *********#
+#**********************************#
+INSERT_UPDATE BasicCredential; id[forceWrite=true,unique=true]; password; username
+;scpiCRM; password; username
+
+#**********************************#
+#************  Endpoints  *********#
+#**********************************#
+INSERT_UPDATE Endpoint; id[unique = true]; version[unique = true]; specUrl; name
+; scpiB2BCustomerEndpoint          ; unknown ; "$iflowURL;v=1/"            ; scpiB2BCustomerEndpoint
+
+INSERT_UPDATE DestinationTarget; id[unique=true]
+; scpiOutboundDestination
+
+#**********************************************#
+#************  Consumed Destinations  *********#
+#**********************************************#
+INSERT_UPDATE ConsumedDestination; id[unique = true]          ; url                                        ; endpoint(id, version)           ; credential(id) ; additionalProperties(key, value)[map-delimiter = |]
+                                 ; scpiB2BCustomerDestination ; "$iflowURL;v=1/SAPCpiOutboundB2BCustomers" ; scpiB2BCustomerEndpoint:unknown ; scpiCRM        ; "csrfURL->$iflowURL;v=1"

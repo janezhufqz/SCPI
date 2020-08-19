@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2018 SAP SE or an SAP affiliate company. All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <bean id="sapcpicrmserviceorderSystemSetup" class="de.hybris.platform.sap.sapcpicrmserviceorder.setup.SapcpicrmserviceorderSystemSetup">
+        <!-- constructor arg injection example -->
+        <constructor-arg ref="sapcpicrmserviceorderService"/>
+    </bean>
+
+    <bean id="sapcpicrmserviceorderService" class="de.hybris.platform.sap.sapcpicrmserviceorder.service.impl.DefaultSapcpicrmserviceorderService">
+        <!-- setter injection example -->
+        <property name="modelService" ref="modelService"/>
+        <property name="mediaService" ref="mediaService"/>
+        <property name="flexibleSearchService" ref="flexibleSearchService"/>
+    </bean>
+    
+    <bean id="serviceOrderB2BUnitDao" class="de.hybris.platform.sap.sapcpicrmserviceorder.dao.ServiceOrderB2BUnitDao" parent="abstractItemDao"/>
+    
+    <bean id="sapCpiCrmServiceOrderPrePersistHook" class="de.hybris.platform.sap.sapcpicrmserviceorder.inbound.events.SapCpiCrmServiceOrderPrePersistHook">
+    	<property name="serviceOrderB2BUnitDao" ref="serviceOrderB2BUnitDao"/>
+    	<property name="modelService" ref="modelService"/>
+    </bean>
+</beans>

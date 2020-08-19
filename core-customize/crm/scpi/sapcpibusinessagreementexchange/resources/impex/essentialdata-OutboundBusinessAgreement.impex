@@ -1,0 +1,66 @@
+#*****************************************
+#******* Businessagreement Outbound     *******
+#*****************************************
+
+INSERT_UPDATE IntegrationObject; code[unique = true];
+                               ; OutboundBusinessagreement
+
+INSERT_UPDATE IntegrationObjectItem; integrationObject(code)[unique = true]; code[unique = true]       ; type(code)
+                                   ; OutboundBusinessagreement                   ; SAPCpiBusinessAgreementOutbound ; SAPCpiBusinessAgreementOutbound
+                                   ; OutboundBusinessagreement                   ; SAPCpiOutboundConfig      ; SAPCpiOutboundConfig
+
+INSERT_UPDATE IntegrationObjectItemAttribute; integrationObjectItem(integrationObject(code), code)[unique = true]; attributeName[unique = true]; attributeDescriptor(enclosingType(code), qualifier) ; returnIntegrationObjectItem(integrationObject(code), code); unique[default = false]
+
+; OutboundBusinessagreement:SAPCpiBusinessAgreementOutbound ; id                       ; SAPCpiBusinessAgreementOutbound:id                       ;                                              ; true
+; OutboundBusinessagreement:SAPCpiBusinessAgreementOutbound ; guid                     ; SAPCpiBusinessAgreementOutbound:guid                     ;                                              ; 
+; OutboundBusinessagreement:SAPCpiBusinessAgreementOutbound ; partnerguid                ; SAPCpiBusinessAgreementOutbound:partnerguid                ;                                              ; 
+; OutboundBusinessagreement:SAPCpiBusinessAgreementOutbound ; partnerid                 ; SAPCpiBusinessAgreementOutbound:partnerid                 ;                                              ;
+; OutboundBusinessagreement:SAPCpiBusinessAgreementOutbound ; text                  ; SAPCpiBusinessAgreementOutbound:text                  ;                                              ;
+; OutboundBusinessagreement:SAPCpiBusinessAgreementOutbound ; validto           ; SAPCpiBusinessAgreementOutbound:validto           ;                                              ;
+; OutboundBusinessagreement:SAPCpiBusinessAgreementOutbound ; validfrom                     ; SAPCpiBusinessAgreementOutbound:validfrom                     ;                                              ;
+; OutboundBusinessagreement:SAPCpiBusinessAgreementOutbound ; businessagreementdefault            ; SAPCpiBusinessAgreementOutbound:businessagreementdefault            ;                                              ;
+; OutboundBusinessagreement:SAPCpiBusinessAgreementOutbound ; businessagreementclass                    ; SAPCpiBusinessAgreementOutbound:businessagreementclass                    ;                                              ;
+; OutboundBusinessagreement:SAPCpiBusinessAgreementOutbound ; bankidinc                   ; SAPCpiBusinessAgreementOutbound:bankidinc                   ;                                              ;
+; OutboundBusinessagreement:SAPCpiBusinessAgreementOutbound ; bankidout                     ; SAPCpiBusinessAgreementOutbound:bankidout                     ;                                              ;
+; OutboundBusinessagreement:SAPCpiBusinessAgreementOutbound ; creditcardinc                       ; SAPCpiBusinessAgreementOutbound:creditcardinc                       ;                                              ;
+; OutboundBusinessagreement:SAPCpiBusinessAgreementOutbound ; creditcardout                   ; SAPCpiBusinessAgreementOutbound:creditcardout                   ;                                              ;
+; OutboundBusinessagreement:SAPCpiBusinessAgreementOutbound ; addresscorrespondenceguid                    ; SAPCpiBusinessAgreementOutbound:addresscorrespondenceguid                    ;                                              ;
+; OutboundBusinessagreement:SAPCpiBusinessAgreementOutbound ; addressdunningguid                      ; SAPCpiBusinessAgreementOutbound:addressdunningguid                      ;                                              ;
+; OutboundBusinessagreement:SAPCpiBusinessAgreementOutbound ; addresspayerguid              ; SAPCpiBusinessAgreementOutbound:addresspayerguid              ;                                              ;
+; OutboundBusinessagreement:SAPCpiBusinessAgreementOutbound ; addressrecipientguid                    ; SAPCpiBusinessAgreementOutbound:addressrecipientguid                    ;                                              ;
+; OutboundBusinessagreement:SAPCpiBusinessAgreementOutbound ; addressirguid                ; SAPCpiBusinessAgreementOutbound:addressirguid                ;                                              ;
+; OutboundBusinessagreement:SAPCpiBusinessAgreementOutbound ; addresstaxguid             ; SAPCpiBusinessAgreementOutbound:addresstaxguid             ;                                          ;
+; OutboundBusinessagreement:SAPCpiBusinessAgreementOutbound ; businessagreementpayer    ; SAPCpiBusinessAgreementOutbound:businessagreementpayer    ;                                          ;
+; OutboundBusinessagreement:SAPCpiBusinessAgreementOutbound ; taxcategory          ; SAPCpiBusinessAgreementOutbound:taxcategory          ;                                          ;
+; OutboundBusinessagreement:SAPCpiBusinessAgreementOutbound ; taxcode      ; SAPCpiBusinessAgreementOutbound:taxcode      ;                                          ; 
+; OutboundBusinessagreement:SAPCpiBusinessAgreementOutbound ; refnumber       ; SAPCpiBusinessAgreementOutbound:refnumber       ;                                          ;
+
+; OutboundBusinessagreement:SAPCpiBusinessAgreementOutbound ; responseStatus            ; SAPCpiBusinessAgreementOutbound:responseStatus            ;                                              ;
+; OutboundBusinessagreement:SAPCpiBusinessAgreementOutbound ; responseMessage           ; SAPCpiBusinessAgreementOutbound:responseMessage           ;                                              ;
+
+
+; OutboundBusinessagreement:SAPCpiBusinessAgreementOutbound ; paymentmethodinc        ; SAPCpiBusinessAgreementOutbound:paymentmethodinc        ;                                          ;
+; OutboundBusinessagreement:SAPCpiBusinessAgreementOutbound ; paymentmethodout           ; SAPCpiBusinessAgreementOutbound:paymentmethodout           ;                                          ;
+; OutboundBusinessagreement:SAPCpiBusinessAgreementOutbound ; shippingcontroldr ; SAPCpiBusinessAgreementOutbound:shippingcontroldr ;                                          ;
+; OutboundBusinessagreement:SAPCpiBusinessAgreementOutbound ; termofpayment       ; SAPCpiBusinessAgreementOutbound:termofpayment       ;                                          ;
+; OutboundBusinessagreement:SAPCpiBusinessAgreementOutbound ; shippingcontrolbr           ; SAPCpiBusinessAgreementOutbound:shippingcontrolbr           ;                                          ;
+; OutboundBusinessagreement:SAPCpiBusinessAgreementOutbound ; correpondencevariant          ; SAPCpiBusinessAgreementOutbound:correpondencevariant          ;                                          ;
+; OutboundBusinessagreement:SAPCpiBusinessAgreementOutbound ; shippingcontrolbp    ; SAPCpiBusinessAgreementOutbound:shippingcontrolbp    ;                                          ;
+
+
+; OutboundBusinessagreement:SAPCpiBusinessAgreementOutbound ; businessagreementpartnercat           ; SAPCpiBusinessAgreementOutbound:businessagreementpartnercat           ;                                          ;
+; OutboundBusinessagreement:SAPCpiBusinessAgreementOutbound ; partnerguid1 ; SAPCpiBusinessAgreementOutbound:partnerguid1 ;                                          ;
+; OutboundBusinessagreement:SAPCpiBusinessAgreementOutbound ; partnerguid2       ; SAPCpiBusinessAgreementOutbound:partnerguid2       ;                                          ;
+; OutboundBusinessagreement:SAPCpiBusinessAgreementOutbound ; bprelationshipnum           ; SAPCpiBusinessAgreementOutbound:bprelationshipnum           ;                                          ;
+; OutboundBusinessagreement:SAPCpiBusinessAgreementOutbound ; partnerfunction          ; SAPCpiBusinessAgreementOutbound:partnerfunction          ;                                          ;
+
+
+; OutboundBusinessagreement:SAPCpiBusinessAgreementOutbound ; sapCpiConfig              ; SAPCpiBusinessAgreementOutbound:sapCpiConfig              ; OutboundBusinessagreement:SAPCpiOutboundConfig     ;
+; OutboundBusinessagreement:SAPCpiOutboundConfig      ; url                       ; SAPCpiOutboundConfig:url                            ;                                              ; true
+; OutboundBusinessagreement:SAPCpiOutboundConfig      ; username                  ; SAPCpiOutboundConfig:username                       ;                                              ; true
+; OutboundBusinessagreement:SAPCpiOutboundConfig      ; client                    ; SAPCpiOutboundConfig:client                         ;                                              ;
+; OutboundBusinessagreement:SAPCpiOutboundConfig      ; senderName                ; SAPCpiOutboundConfig:senderName                     ;                                              ;
+; OutboundBusinessagreement:SAPCpiOutboundConfig      ; senderPort                ; SAPCpiOutboundConfig:senderPort                     ;                                              ;
+; OutboundBusinessagreement:SAPCpiOutboundConfig      ; receiverName              ; SAPCpiOutboundConfig:receiverName                   ;                                              ;
+; OutboundBusinessagreement:SAPCpiOutboundConfig      ; receiverPort              ; SAPCpiOutboundConfig:receiverPort                   ;                                              ;
+

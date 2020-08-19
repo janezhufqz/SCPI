@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- ~ [y] hybris Platform ~ ~ Copyright (c) 2000-2016 SAP SE ~ All rights 
+	reserved. ~ ~ This software is the confidential and proprietary information 
+	of SAP ~ Hybris ("Confidential Information"). You shall not disclose such 
+	~ Confidential Information and shall use it only in accordance with the ~ 
+	terms of the license agreement you entered into with SAP Hybris. -->
+<!-- ATTENTION: This is just an example file. You have to edit it according 
+	to your needs. -->
+
+<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="items.xsd">
+
+	<itemtypes>
+		<itemtype code="CategorySchema" autocreate="true" generate="true"
+			extends="GenericItem">
+			<deployment table="CategorySchema" typecode="9053" />
+			<attributes>
+				<attribute qualifier="code" type="java.lang.String">
+					<description>Determines code for schema</description>
+					<modifiers unique="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="level" type="java.lang.Integer">
+					<description>Category Level</description>
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="sourceCategory" type="CategorizationCategory">
+					<persistence type="property" />
+					<modifiers read="true" write="true" unique="true" search="true" />
+				</attribute>
+				<attribute qualifier="parentCategory" type="CategorizationCategory">
+					<persistence type="property" />
+					<modifiers read="true" write="true" search="true" />
+				</attribute>
+				<attribute qualifier="path" type="java.lang.String">
+					<persistence type="property" />
+					<modifiers read="true" write="true" search="true" />
+				</attribute>
+				<attribute type="java.util.Date" qualifier="validFrom">
+					<persistence type="property" />
+					<modifiers read="true" write="true" search="true" unique="true" />
+				</attribute>
+				<attribute type="java.util.Date" qualifier="validTo">
+					<persistence type="property" />
+					<modifiers read="true" write="true" search="true" unique="true" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="catalogName">
+					<persistence type="property" />
+					<modifiers read="true" write="true" search="true" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		<itemtype code="CategorizationCategory" autocreate="true"
+			generate="true">
+			<deployment table="CategorizationCategory" typecode="19399"/>
+			<attributes>
+				<attribute qualifier="categorizationGuid" type="java.lang.String">
+					<description>Determines category guid</description>
+					<modifiers unique="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="code" type="java.lang.String">
+					<description>Determines category code</description>
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="name" type="localized:java.lang.String">
+					<description>Determines category name</description>
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+	</itemtypes>
+</items>

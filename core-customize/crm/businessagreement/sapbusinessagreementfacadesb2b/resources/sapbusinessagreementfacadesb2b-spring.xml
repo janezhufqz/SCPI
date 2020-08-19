@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<alias name="defaultB2bBusinessAgreementFacade" alias="businessAgreementFacade" />
+	<bean id="defaultB2bBusinessAgreementFacade"
+		class="com.sap.hybris.sapbusinessagreementfacades.b2b.facade.impl.DefaultB2bBusinessAgreementFacade" parent="defaultBusinessAgreementFacade">
+		<property name="businessAgreementB2BConverter" ref="businessAgreementB2BConverter" />
+	</bean>
+	<alias name="defaultBusinessAgreementB2BConverter" alias="businessAgreementB2BConverter" />
+	<bean id="defaultBusinessAgreementB2BConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.sap.hybris.sapbusinessagreementfacades.data.BusinessAgreementDetailsData"></property>
+		<property name="populators">
+			<list>
+				<ref bean="businessAgreementPopulator" />
+			</list>
+		</property>
+	</bean>
+	
+	<alias name="defaultBusinessAgreementPopulator" alias="businessAgreementPopulator"/>
+	<bean id="defaultBusinessAgreementPopulator"
+			class="com.sap.hybris.crm.sapbusinessagreementfacades.b2b.converters.populator.DefaultBusinessAgreementB2BDetailPopulator">
+			<property name="addressConverter" ref="addressConverter"/>
+			<property name="paymentMethodConverter" ref="paymentMethodConverter"/>
+			<property name="creditCardConverter" ref="creditCardConverter"/>
+		
+	</bean>	
+	<alias name="defaultCreditCardConverter" alias="creditCardConverter" />
+	<bean id="defaultCreditCardConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass"
+			value="com.sap.hybris.sapbusinessagreementfacades.data.CreditCardData"></property>
+		<property name="populators">
+			<list>
+				<ref bean="creditCardPopulator" />
+			</list>
+		</property>
+	</bean>
+	
+	<alias name="defaultCreditCardPopulator" alias="creditCardPopulator"/>
+	<bean id="defaultCreditCardPopulator"
+			class="com.sap.hybris.crm.sapbusinessagreementfacades.b2b.converters.populator.DefaultBusinessAgreementCreditCardPopulator">			
+	</bean>	
+</beans>

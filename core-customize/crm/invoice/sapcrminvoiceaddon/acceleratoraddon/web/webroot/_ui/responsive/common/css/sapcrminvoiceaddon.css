@@ -1,0 +1,16 @@
+#errorMessage
+{
+	display: none;
+	color:red;
+}
+.invoice .well-content{
+padding-top: 10px;
+padding-bottom: 15px;
+}
+
+.invoice .well-content a{
+	
+text-decoration: underline;
+    font-weight: 900;
+    font-size:18px;
+}

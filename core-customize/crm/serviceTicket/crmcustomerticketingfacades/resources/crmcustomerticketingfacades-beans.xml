@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- ~ [y] hybris Platform ~ ~ Copyright (c) 2000-2016 SAP SE ~ All rights 
+	reserved. ~ ~ This software is the confidential and proprietary information 
+	of SAP ~ Hybris ("Confidential Information"). You shall not disclose such 
+	~ Confidential Information and shall use it only in accordance with the ~ 
+	terms of the license agreement you entered into with SAP Hybris. -->
+
+<!-- ATTENTION: This is just an example file. You have to edit it according 
+	to your needs. -->
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="beans.xsd">
+
+	<bean class="de.hybris.platform.customerticketingfacades.data.TicketData">
+		<property name="reasonCategoryMap" type="java.util.Map&lt;String,String>" />
+		<property name="subjectCategoryMap" type="java.util.Map&lt;String,String>" />
+		<property name="selectedReasonCat" type="String" />
+		<property name="selectedSubjectCat" type="String" />
+		<property name="associatedOrderCode" type="String" />
+		<property name="associatedOrderEntryCodes" type="java.util.List&lt;String>" />
+	</bean>
+
+	<bean
+		class="com.sap.hybris.crm.crmcustomerticketingaddon.data.RelatedObjectData">
+		<property name="ticketid" type="String" />
+		<property name="objectid" type="String" />
+		<property name="objectType" type="String" />
+	</bean>
+
+	<bean
+		class="com.sap.hybris.crm.crmcustomerticketingfacades.data.ComplaintAssociatedOrderData">
+		<description>This Data Object is used to hold all the objects which can associate with the complaint</description>
+		<property name="code" type="String"></property>
+		<property name="modifiedtime" type="java.util.Date"></property>
+		<property name="totalPrice"
+			type="de.hybris.platform.commercefacades.product.data.PriceData"></property>
+	</bean>
+	<bean
+		class="com.sap.hybris.crm.crmcustomerticketingfacades.data.ComplaintAssociatedOrderEntryData">
+		<description>This Data Object is used to hold all the order entries which can associate with the complaint</description>
+		<property name="entryNumber" type="Integer"></property>
+		<property name="productCode" type="String"></property>
+		<property name="quantity" type="java.lang.Long"></property>
+	</bean>
+</beans>

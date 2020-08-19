@@ -1,0 +1,25 @@
+#*******************************************
+#*** Create SAP Integration User Groups ****
+#*******************************************
+INSERT_UPDATE UserGroup; UID[unique = true]        ; locname[lang = en]            ; description                   ; groups(uid)[mode = append]
+					   ; sapInboundCRMReturnOrderGroup ; SAP Inbound CRM ReturnOrder Group ; SAP Inbound CRM ReturnOrder Group ; integrationusergroup
+#**********************************************************
+#*** Create SAP Integration Flexible Search Restriction ***
+#**********************************************************
+INSERT_UPDATE SearchRestriction; code[unique = true]                    ; name[lang = en]                             ; query                                                                                                                                                                                                                                               ; principal(UID)       ; restrictedType(code); active; generate
+ 								; sapInboundReturnOrderRestriction           ; SAP Inbound CRM ReturnOrder Restriction             ; ({code}='InboundReturnOrder' AND EXISTS ( {{ select {ug:PK} from {UserGroup as ug} where {ug:PK} IN (?session.user.groups) and {ug:uid} = 'sapInboundCRMReturnOrderGroup' }} )) OR ({code}!='InboundReturnOrder')                                                  ; integrationusergroup ; IntegrationObject   ; true  ; true
+ 
+       
+    
+    
+#**********************************
+#*** Reset The Default Password ***
+#**********************************
+$defaultPassword = nimda
+
+#******************************************
+#*** Create SAP Integration Test Users ****
+#******************************************
+INSERT_UPDATE Employee; UID[unique = true]           ; name                            ; groups(uid)[mode = append]                         ; password[default = $defaultPassword]
+                      ; sapInboundCRMReturnOrderUser       ; SAP Inbound CRM ReturnOrder User      ; sapInboundCRMReturnOrderGroup,integrationadmingroup      ;
+              

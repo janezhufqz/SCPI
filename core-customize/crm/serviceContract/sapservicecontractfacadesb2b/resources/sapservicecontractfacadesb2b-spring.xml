@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+   <!-- converter and populator beans -->
+	
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="serviceContractConverter"/>
+		<property name="add" ref="b2bserviceContractPopulator"/>
+	</bean>
+
+	<alias name="defaultB2BServiceContractPopulator" alias="b2bserviceContractPopulator" />
+	<bean id="defaultB2BServiceContractPopulator"
+		class="com.sap.hybris.crm.sapservicecontractfacades.b2b.converters.populator.DefaultB2BServiceContractPopulator">
+		<property name="b2bUnitConverter" ref="b2bUnitConverter" />
+	</bean>
+	
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="serviceContractSearchResultConverter"/>
+		<property name="add" ref="b2bserviceContractSearchResultPopulator"/>
+	</bean>
+
+	<bean id="b2bserviceContractSearchResultPopulator"
+		class="com.sap.hybris.crm.sapservicecontractfacades.b2b.converters.populator.B2BServiceContractSearchResultPopulator">
+		<property name="userService" ref="userService" />
+		<property name="b2bUnitConverter" ref="b2bUnitConverter" />
+	</bean>
+			
+</beans>

@@ -1,0 +1,45 @@
+INSERT_UPDATE IntegrationObjectItem; integrationObject(code)[unique=true]; code[unique = true]; type(code) 
+; InboundProduct	; ClassAttributeAssignment    	; ClassAttributeAssignment 
+; InboundProduct	; ClassificationSystem        	; ClassificationSystem 
+; InboundProduct	; ProductFeature              	; ProductFeature 
+; InboundProduct	; ClassificationSystemVersion 	; ClassificationSystemVersion 
+; InboundProduct	; ClassificationAttributeUnit 	; ClassificationAttributeUnit 
+; InboundProduct	; Language                    	; Language 
+; InboundProduct	; ClassificationClass         	; ClassificationClass 
+; InboundProduct	; ClassificationAttributeValue	; ClassificationAttributeValue 
+; InboundProduct	; ClassificationAttribute     	; ClassificationAttribute 
+ 
+INSERT_UPDATE IntegrationObjectItemAttribute; integrationObjectItem(integrationObject(code), code)[unique = true]; attributeName[unique = true]; attributeDescriptor(enclosingType(code), qualifier); returnIntegrationObjectItem(integrationObject(code), code); unique[default = false] 
+; InboundProduct:ClassAttributeAssignment    	; systemVersion                    	; ClassAttributeAssignment:systemVersion          	; InboundProduct:ClassificationSystemVersion 	; true 
+; InboundProduct:ClassAttributeAssignment    	; classificationAttribute          	; ClassAttributeAssignment:classificationAttribute	; InboundProduct:ClassificationAttribute     	; true 
+; InboundProduct:ClassAttributeAssignment    	; classificationClass              	; ClassAttributeAssignment:classificationClass    	; InboundProduct:ClassificationClass         	; true 
+; InboundProduct:ClassAttributeAssignment    	; attributeValues                  	; ClassAttributeAssignment:attributeValues        	; InboundProduct:ClassificationAttributeValue	;  
+; InboundProduct:ClassificationSystem        	; id                               	; ClassificationSystem:id                         	;                                            	; true 
+; InboundProduct:ProductFeature              	; unit                             	; ProductFeature:unit                             	; InboundProduct:ClassificationAttributeUnit 	; true 
+; InboundProduct:ProductFeature              	; classificationAttributeAssignment	; ProductFeature:classificationAttributeAssignment	; InboundProduct:ClassAttributeAssignment    	; true 
+; InboundProduct:ProductFeature              	; language                         	; ProductFeature:language                         	; InboundProduct:Language                    	; true 
+; InboundProduct:ProductFeature              	; product                          	; ProductFeature:product                          	; InboundProduct:Product                     	; true 
+; InboundProduct:ProductFeature              	; qualifier                        	; ProductFeature:qualifier                        	;                                            	; true 
+; InboundProduct:ProductFeature              	; valueDetails                     	; ProductFeature:valueDetails                     	;                                            	;  
+; InboundProduct:ProductFeature              	; valuePosition                    	; ProductFeature:valuePosition                    	;                                            	; true 
+; InboundProduct:ClassificationSystemVersion 	; catalog                          	; ClassificationSystemVersion:catalog             	; InboundProduct:ClassificationSystem        	; true 
+; InboundProduct:ClassificationSystemVersion 	; version                          	; ClassificationSystemVersion:version             	;                                            	; true 
+; InboundProduct:ClassificationAttributeUnit 	; unitType                         	; ClassificationAttributeUnit:unitType            	;                                            	; true 
+; InboundProduct:ClassificationAttributeUnit 	; systemVersion                    	; ClassificationAttributeUnit:systemVersion       	; InboundProduct:ClassificationSystemVersion 	; true 
+; InboundProduct:ClassificationAttributeUnit 	; code                             	; ClassificationAttributeUnit:code                	;                                            	; true 
+; InboundProduct:Product                     	; features                         	; Product:features                                	; InboundProduct:ProductFeature              	;  
+; InboundProduct:Product                     	; guid                             	; Product:guid                                    	;                                            	;  
+; InboundProduct:Product                     	; description                       ; Product:description                               ;                                            	;
+; InboundProduct:Language                    	; isocode                          	; Language:isocode                                	;                                            	; true 
+; InboundProduct:ClassificationClass         	; code                             	; ClassificationClass:code                        	;                                            	; true 
+; InboundProduct:ClassificationClass         	; catalogVersion                   	; ClassificationClass:catalogVersion              	; InboundProduct:ClassificationSystemVersion 	; true 
+; InboundProduct:ClassificationAttributeValue	; systemVersion                    	; ClassificationAttributeValue:systemVersion      	; InboundProduct:ClassificationSystemVersion 	; true 
+; InboundProduct:ClassificationAttributeValue	; code                             	; ClassificationAttributeValue:code               	;                                            	; true 
+; InboundProduct:ClassificationAttribute     	; systemVersion                    	; ClassificationAttribute:systemVersion           	; InboundProduct:ClassificationSystemVersion 	; true 
+; InboundProduct:ClassificationAttribute     	; code                             	; ClassificationAttribute:code                    	;                                            	; true 
+
+
+
+#ClassificationAttributeUnit data
+INSERT_UPDATE ClassificationAttributeUnit;systemVersion(catalog(id),version)[unique=true];code[unique=true];unitType;symbol
+;CRM_CLASSIFICATION:CRM_IMPORT;001;001;"/nl"

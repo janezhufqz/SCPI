@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- [y] hybris Platform Copyright (c) 2000-2013 hybris AG All rights reserved. 
+	This software is the confidential and proprietary information of hybris ("Confidential 
+	Information"). You shall not disclose such Confidential Information and shall 
+	use it only in accordance with the terms of the license agreement you entered 
+	into with hybris. -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd 
+           http://www.springframework.org/schema/util 
+           http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<!-- The hybris platform provides one single Spring application context 
+		for beans located at the jalo layer. Each extension can add beans to this 
+		context by specifying them at this configuration file. You can use and/or 
+		redefine beans defined at configuration files of other extensions as well 
+		as adding new one. If you want to locate this file at a different location 
+		or want to use several files for better, structuring, please use the '<yourextension>.application-context' 
+		property at your project.properties file. There you can specify a comma separated 
+		list of files where first is tried to find a file per classpath and then 
+		per file system. -->
+
+	<alias name="sapDefaultTicketBusinessService" alias="ticketBusinessService" />
+	<bean id="sapDefaultTicketBusinessService"
+		class="com.sap.hybris.crm.sapcrmticketsystem.service.impl.SapDefaultTicketBusinessService"
+		parent="defaultTicketBusinessService" scope="tenant">
+		<!-- Strategies -->
+		<property name="ticketEventStrategy" ref="ticketEventStrategy" />
+		<property name="ticketEventEmailStrategy" ref="ticketEventEmailStrategy" />
+		<property name="ticketUpdateStrategy" ref="ticketUpdateStrategy" />
+		<property name="ticketExportService" ref="ticketExportService" />
+		<property name="sapCoreSAPGlobalConfigurationService" ref="sapCoreSAPGlobalConfigurationService" />
+		<property name="format" value="__" />
+	</bean>	
+		
+	<!-- Ticket Export -->
+	<alias alias="ticketExportService" name="defaultCsTicketExportService" />
+	<bean id="defaultCsTicketExportService"
+		class="com.sap.hybris.crm.sapcrmticketsystem.outbound.CsTicketExportService">
+		<property name="dataHubOutboundService" ref="dataHubOutboundService" />
+		<property name="feed"
+			value="${sapcrmticketexchange.outbound.datahub.feed}" />
+		<property name="baseStoreService" ref="baseStoreService" />
+	</bean>
+
+	<bean id="CsTicketPrepareInterceptor"
+		class="de.hybris.platform.ticket.interceptors.CsTicketPrepareInterceptor"
+		scope="tenant">
+		<property name="initialTicketState">
+			<util:constant static-field="de.hybris.platform.ticket.enums.CsTicketState.NEW" />
+		</property>
+		<property name="keyGenerator" ref="sapCsTicketCodeGenerator" />
+	</bean>
+
+	<alias name="defaultSapCsTicketCodeGenerator" alias="sapCsTicketCodeGenerator" />
+	<bean id="defaultSapCsTicketCodeGenerator"
+		class="de.hybris.platform.servicelayer.keygenerator.impl.PersistentKeyGenerator"
+		init-method="init" scope="tenant">
+		<property name="key" value="csticket_code" />
+		<property name="digits" value="${keygen.ticket.sap_ticket_id.digits}" />
+		<property name="start" value="${keygen.ticket.sap_ticket_id.start}" />
+		<property name="type" value="${keygen.ticket.sap_ticket_id.type}" />
+		<property name="template" value="${keygen.ticket.sap_ticket_id.template}" />
+	</bean>
+
+	<!-- Ticket import translators -->
+	<alias name="defaultSapDataHubInboundCustomerHelper" alias="sapDataHubInboundCustomerHelper" />
+	<bean id="defaultSapDataHubInboundCustomerHelper"
+		class="com.sap.hybris.crm.sapcrmticketsystem.inbound.impl.DefaultDataHubInboundCustomerHelper">
+		<property name="flexibleSearchService" ref="flexibleSearchService" />
+		<property name="modelService" ref="modelService" />
+	</bean>
+
+	<alias name="defaultSapDataHubInboundCsTicketEventHelper" alias="sapDataHubInboundCsTicketEventHelper" />
+	<bean id="defaultSapDataHubInboundCsTicketEventHelper"
+		class="com.sap.hybris.crm.sapcrmticketsystem.inbound.impl.DefaultDataHubInboundCsTicketEventHelper">
+		<property name="modelService" ref="modelService" />
+		<property name="ticketEventEmailStrategy" ref="ticketEventEmailStrategy" />
+		<property name="ticketEventStrategy" ref="ticketEventStrategy" />
+		<property name="ticketDao" ref="ticketDao" />
+	</bean>
+
+	<alias name="defaultSapDataHubInboundCsTicketReasonCatHelper"
+		alias="sapDataHubInboundCsTicketReasonCatHelper" />
+	<bean id="defaultSapDataHubInboundCsTicketReasonCatHelper"
+		class="com.sap.hybris.crm.sapcrmticketsystem.inbound.impl.DefaultDataHubInboundReasonCatHelper">
+		<property name="sapCategoriesService" ref="sapCategoriesService" />
+		<property name="modelService" ref="modelService" />
+	</bean>
+
+	<alias name="sapDefaultTicketDao" alias="ticketDao" />
+	<bean id="sapDefaultTicketDao"
+		class="com.sap.hybris.crm.sapcrmticketsystem.dao.impl.SapDefaultTicketDao"
+		parent="defaultTicketDao" scope="tenant">
+	</bean>
+
+	<alias name="defaultCrmTicketParameterPopulator" alias="ticketParameterPopulator" />
+	<bean id="defaultCrmTicketParameterPopulator"
+		class="com.sap.hybris.crm.sapcrmticketsystem.converters.populators.CrmCsTicketPopulator"
+		parent="defaultTicketParameterPopulator">
+	</bean>
+	<alias name="sapDefaultTicketService" alias="ticketService" />
+	<bean id="sapDefaultTicketService"
+		class="com.sap.hybris.crm.sapcrmticketsystem.service.impl.SapDefaultTicketService"
+		parent="defaultTicketService" scope="tenant">
+	</bean>
+	
+	<bean id="CsTicketValidateInterceptorMapping"
+		class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor" ref="defaultCsTicketValidateInterceptor" />
+		<property name="typeCode" value="CsTicket" />
+		<!-- <property name="order" value="5071" /> -->
+	</bean>
+	<bean id="defaultCsTicketValidateInterceptor"
+		class="com.sap.hybris.crm.sapcrmticketsystem.interceptor.DefaultCsTicketValidateInterceptor">
+		<property name="isCustomerRequired" value="${sapcrmticketsystem.customer.required}" />
+		
+	</bean>
+	
+</beans>

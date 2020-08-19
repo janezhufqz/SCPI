@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- [y] hybris Platform Copyright (c) 2000-2013 hybris AG All rights reserved. 
+	This software is the confidential and proprietary information of hybris ("Confidential 
+	Information"). You shall not disclose such Confidential Information and shall 
+	use it only in accordance with the terms of the license agreement you entered 
+	into with hybris. -->
+<!-- ATTENTION: This is just an example file. You have to edit it according 
+	to your needs. -->
+
+<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="items.xsd">
+	<relations>
+
+		<relation code="CsTicket2CsTicketRelatedObject" generate="true"
+			localized="false" autocreate="true">
+			<description>This relation links CsTicket with one or more feature components that contain this csTicketRelatedObject.</description>
+			<sourceElement qualifier="CsTicket" type="CsTicket"
+				cardinality="one">
+				<modifiers read="true" write="true" search="true"
+					optional="true" />
+			</sourceElement>
+			<targetElement qualifier="csTicketRelatedObject" type="CsTicketRelatedObject"
+				cardinality="many" collectiontype="list">
+				<modifiers read="true" write="true" search="true"
+					optional="true" />
+			</targetElement>
+		</relation>
+	</relations>
+
+	<itemtypes>
+
+		<itemtype autocreate="false" code="SAPGlobalConfiguration"
+			generate="false" singleton="true">
+			<attributes>
+				<attribute qualifier="replicateserviceticket" type="boolean"
+					autocreate="true">
+					<description>Replicate Service Ticket (CsTicket)</description>
+					<persistence type="property" />
+					<modifiers unique="false" optional="false" read="true"
+						write="true" initial="true" search="true" />
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype autocreate="false" code="CsTicket" generate="false"
+			singleton="true">
+			<attributes>
+				<attribute qualifier="isTicketReplicated" type="boolean"
+					autocreate="true">
+					<description>Service ticket replicated status in CRM.True if replicated</description>
+					<defaultvalue>java.lang.Boolean.FALSE</defaultvalue>
+					<persistence type="property" />
+					<modifiers unique="false" optional="true" read="true"
+						write="true" initial="true" search="true" />
+				</attribute>
+				<attribute type="CategorizationCategory" qualifier="reasonCategory">
+					<persistence type="property" />
+					<modifiers unique="false" optional="true" read="true"
+						write="true"  search="true" />
+				</attribute>
+				<attribute type="java.lang.Integer" qualifier="reasonCategoryLevel">
+					<persistence type="property" />
+					<defaultvalue>1</defaultvalue>
+					<modifiers unique="false" optional="true" read="true"
+						write="true" search="true" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		<itemtype generate="true" code="CsTicketRelatedObject"
+			extends="GenericItem" autocreate="true">
+			<deployment table="CsTicketRelatedObject" typecode="9050" />
+			<attributes>
+				<attribute qualifier="objectId" type="java.lang.String">
+					<description>My Example Initial String Value</description>
+					<modifiers initial="true" />
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="ObjectGuid" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="ObjectType" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<itemtype code="SAPConfiguration" autocreate="false"
+			generate="false">
+			<attributes>
+				<attribute qualifier="serviceRequestCategorySchemaId" generate="true"
+					autocreate="true" type="java.lang.String">
+					<description>Category schema ID for Service Request</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="serviceRequestCatalogName" generate="true"
+					autocreate="true" type="java.lang.String">
+					<description>Crm Catalog name for Service Request</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+	</itemtypes>
+</items>

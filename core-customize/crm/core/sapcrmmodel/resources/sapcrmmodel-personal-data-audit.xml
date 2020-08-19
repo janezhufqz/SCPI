@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<audit-report-config name="PersonalDataReport">
+	<given-root-type>User</given-root-type>
+	<types>
+		<type code="User" mode="append">
+			<atomic-attributes>
+				<atomic-attribute qualifier="erpCustomerId" displayName="ErpCustomerId" />
+			</atomic-attributes>
+		</type>
+		
+		<type code="PaymentInfo" mode="append">
+            <atomic-attributes>
+                <atomic-attribute qualifier="issuer" displayName="Issuer" />
+				<atomic-attribute qualifier="issuingDate" displayName="IssuingDate" />
+				<atomic-attribute qualifier="cardInc" displayName="CreditCardInc" />
+            </atomic-attributes>
+        </type>
+	</types>
+</audit-report-config>

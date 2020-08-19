@@ -1,0 +1,45 @@
+INSERT_UPDATE IntegrationObject; code[unique = true]; 
+; OutboundComplaint 
+ 
+INSERT_UPDATE IntegrationObjectItem; integrationObject(code)[unique=true]; code[unique = true]; type(code) 
+; OutboundComplaint	; SAPCpiOutboundComplaintOrderItem	; SAPCpiOutboundComplaintOrderItem 
+; OutboundComplaint	; SAPCpiOutboundComplaint         	; SAPCpiOutboundComplaint 
+; OutboundComplaint	; SAPCpiOutboundComplaintConfig   	; SAPCpiOutboundComplaintConfig 
+ 
+INSERT_UPDATE IntegrationObjectItemAttribute; integrationObjectItem(integrationObject(code), code)[unique = true]; attributeName[unique = true]; attributeDescriptor(enclosingType(code), qualifier); returnIntegrationObjectItem(integrationObject(code), code); unique[default = false] 
+; OutboundComplaint:SAPCpiOutboundComplaintOrderItem	; quantity                         	; SAPCpiOutboundComplaintOrderItem:quantity                 	;                                                   	;  
+; OutboundComplaint:SAPCpiOutboundComplaintOrderItem	; productId                        	; SAPCpiOutboundComplaintOrderItem:productId                	;                                                   	;  
+; OutboundComplaint:SAPCpiOutboundComplaintOrderItem	; itemNumber                       	; SAPCpiOutboundComplaintOrderItem:itemNumber               	;                                                   	; true 
+; OutboundComplaint:SAPCpiOutboundComplaintOrderItem	; itemUnit                         	; SAPCpiOutboundComplaintOrderItem:itemUnit                 	;                                                   	;  
+; OutboundComplaint:SAPCpiOutboundComplaint         	; customer                         	; SAPCpiOutboundComplaint:customer                          	;                                                   	;  
+; OutboundComplaint:SAPCpiOutboundComplaint         	; sapCpiOutboundComplaintOrderItems	; SAPCpiOutboundComplaint:sapCpiOutboundComplaintOrderItems 	; OutboundComplaint:SAPCpiOutboundComplaintOrderItem	;  
+; OutboundComplaint:SAPCpiOutboundComplaint         	; state                            	; SAPCpiOutboundComplaint:state                             	;                                                   	;  
+; OutboundComplaint:SAPCpiOutboundComplaint         	; category                         	; SAPCpiOutboundComplaint:category                          	;                                                   	;  
+; OutboundComplaint:SAPCpiOutboundComplaint         	; itemNumber                       	; SAPCpiOutboundComplaint:itemNumber                        	;                                                   	;  
+; OutboundComplaint:SAPCpiOutboundComplaint         	; priority                         	; SAPCpiOutboundComplaint:priority                          	;                                                   	;  
+; OutboundComplaint:SAPCpiOutboundComplaint         	; productId                        	; SAPCpiOutboundComplaint:productId                         	;                                                   	;  
+; OutboundComplaint:SAPCpiOutboundComplaint         	; complaintId                      	; SAPCpiOutboundComplaint:complaintId                       	;                                                   	; true 
+; OutboundComplaint:SAPCpiOutboundComplaint         	; headline                         	; SAPCpiOutboundComplaint:headline                          	;                                                   	;  
+; OutboundComplaint:SAPCpiOutboundComplaint         	; isComplaintReplicated            	; SAPCpiOutboundComplaint:isComplaintReplicated             	;                                                   	;  
+; OutboundComplaint:SAPCpiOutboundComplaint         	; sapCpiConfig                     	; SAPCpiOutboundComplaint:sapCpiConfig                      	; OutboundComplaint:SAPCpiOutboundComplaintConfig   	;  
+; OutboundComplaint:SAPCpiOutboundComplaint         	; b2bunit                          	; SAPCpiOutboundComplaint:b2bunit                           	;                                                   	;  
+; OutboundComplaint:SAPCpiOutboundComplaint         	; itemUnit                         	; SAPCpiOutboundComplaint:itemUnit                          	;                                                   	;  
+; OutboundComplaint:SAPCpiOutboundComplaint         	; quantity                         	; SAPCpiOutboundComplaint:quantity                          	;                                                   	;  
+; OutboundComplaint:SAPCpiOutboundComplaint         	; orderId                          	; SAPCpiOutboundComplaint:orderId                           	;                                                   	;  
+; OutboundComplaint:SAPCpiOutboundComplaint         	; responseStatus                   	; SAPCpiOutboundComplaint:responseStatus                    	;                                                   	;  
+; OutboundComplaint:SAPCpiOutboundComplaint         	; responseMessage                  	; SAPCpiOutboundComplaint:responseMessage                   	;                                                   	;  
+; OutboundComplaint:SAPCpiOutboundComplaint         	; notes                            	; SAPCpiOutboundComplaint:notes                             	;                                                   	;  
+; OutboundComplaint:SAPCpiOutboundComplaintConfig   	; senderPort                       	; SAPCpiOutboundComplaintConfig:senderPort                  	;                                                   	;  
+; OutboundComplaint:SAPCpiOutboundComplaintConfig   	; complaintCatagoryCatalogType     	; SAPCpiOutboundComplaintConfig:complaintCatagoryCatalogType	;                                                   	;  
+; OutboundComplaint:SAPCpiOutboundComplaintConfig   	; salesOrg                         	; SAPCpiOutboundComplaintConfig:salesOrg                    	;                                                   	;  
+; OutboundComplaint:SAPCpiOutboundComplaintConfig   	; url                              	; SAPCpiOutboundComplaintConfig:url                         	;                                                   	;  
+; OutboundComplaint:SAPCpiOutboundComplaintConfig   	; comp_serviceOrg                  	; SAPCpiOutboundComplaintConfig:comp_serviceOrg             	;                                                   	; true 
+; OutboundComplaint:SAPCpiOutboundComplaintConfig   	; client                           	; SAPCpiOutboundComplaintConfig:client                      	;                                                   	;  
+; OutboundComplaint:SAPCpiOutboundComplaintConfig   	; distributionChannel              	; SAPCpiOutboundComplaintConfig:distributionChannel         	;                                                   	;  
+; OutboundComplaint:SAPCpiOutboundComplaintConfig   	; senderName                       	; SAPCpiOutboundComplaintConfig:senderName                  	;                                                   	;  
+; OutboundComplaint:SAPCpiOutboundComplaintConfig   	; userName                         	; SAPCpiOutboundComplaintConfig:userName                    	;                                                   	;  
+; OutboundComplaint:SAPCpiOutboundComplaintConfig   	; complaintCatagoryCodeGroup       	; SAPCpiOutboundComplaintConfig:complaintCatagoryCodeGroup  	;                                                   	;  
+; OutboundComplaint:SAPCpiOutboundComplaintConfig   	; comp_servOrgShort                	; SAPCpiOutboundComplaintConfig:comp_servOrgShort           	;                                                   	;  
+; OutboundComplaint:SAPCpiOutboundComplaintConfig   	; receiverName                     	; SAPCpiOutboundComplaintConfig:receiverName                	;                                                   	;  
+; OutboundComplaint:SAPCpiOutboundComplaintConfig   	; comp_ProcessType                 	; SAPCpiOutboundComplaintConfig:comp_ProcessType            	;                                                   	;  
+; OutboundComplaint:SAPCpiOutboundComplaintConfig   	; comp_serviceOrgResp              	; SAPCpiOutboundComplaintConfig:comp_serviceOrgResp         	;                                                   	; true 

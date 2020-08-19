@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2018 SAP SE or an SAP affiliate company. All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<!--
+	ATTENTION: This is just an example file. You have to edit it according to your needs.
+-->
+
+<items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+			xsi:noNamespaceSchemaLocation="items.xsd">
+
+	<itemtypes>
+	
+		 <itemtype autocreate="false" code="SAPCpiOutboundOrder" >
+	        <attributes>
+	           <attribute qualifier="agreementId" type="java.lang.String">
+	                  <persistence type="property"/>
+	           </attribute>
+	        </attributes>
+		 </itemtype>
+		 
+		<itemtype autocreate="true" code="SAPCpiBusinessAgreementOutbound" generate="true"
+					jaloclass="com.sap.hybris.sapcpibusinessagreementexchange.jalo.SAPCpiBusinessAgreementOutbound"
+                  extends="GenericItem">
+             <deployment table="SAPCpiBAOutbound" typecode="9358"/>
+	        <attributes>
+	           <attribute qualifier="id" type="java.lang.String">
+	                  <persistence type="property"/>
+	           </attribute>
+	           <attribute qualifier="guid" type="java.lang.String">
+	                  <persistence type="property"/>
+	           </attribute>
+	           <attribute qualifier="partnerguid" type="java.lang.String">
+	                  <persistence type="property"/>
+	           </attribute>
+	           <attribute qualifier="partnerid" type="java.lang.String">
+	                  <persistence type="property"/>
+	           </attribute>
+	           <attribute qualifier="text" type="java.lang.String">
+	                  <persistence type="property"/>
+	           </attribute>
+	           <attribute qualifier="validto" type="java.lang.String">
+	                  <persistence type="property"/>
+	           </attribute>
+	           <attribute qualifier="validfrom" type="java.lang.String">
+	                  <persistence type="property"/>
+	           </attribute>
+	           <attribute qualifier="businessagreementdefault" type="java.lang.String">
+	                  <persistence type="property"/>
+	           </attribute>
+	           <attribute qualifier="businessagreementclass" type="java.lang.String">
+	                  <persistence type="property"/>
+	           </attribute>
+	           <attribute qualifier="bankidinc" type="java.lang.String">
+	                  <persistence type="property"/>
+	           </attribute>
+	           <attribute qualifier="bankidout" type="java.lang.String">
+	                  <persistence type="property"/>
+	           </attribute>
+	           <attribute qualifier="creditcardinc" type="java.lang.String">
+	                  <persistence type="property"/>
+	           </attribute>
+	           <attribute qualifier="creditcardout" type="java.lang.String">
+	                  <persistence type="property"/>
+	           </attribute>
+	           <attribute qualifier="addresscorrespondenceguid" type="java.lang.String">
+	                  <persistence type="property"/>
+	           </attribute>
+	           <attribute qualifier="addressdunningguid" type="java.lang.String">
+	                  <persistence type="property"/>
+	           </attribute>
+	           <attribute qualifier="addresspayerguid" type="java.lang.String">
+	                  <persistence type="property"/>
+	           </attribute>
+	           <attribute qualifier="addressrecipientguid" type="java.lang.String">
+	                  <persistence type="property"/>
+	           </attribute>
+	           <attribute qualifier="addressirguid" type="java.lang.String">
+	                  <persistence type="property"/>
+	           </attribute>
+	           <attribute qualifier="addresstaxguid" type="java.lang.String">
+	                  <persistence type="property"/>
+	           </attribute>
+	           <attribute qualifier="businessagreementpayer" type="java.lang.String">
+	                  <persistence type="property"/>
+	           </attribute>
+	           <attribute qualifier="taxcategory" type="java.lang.String">
+	                  <persistence type="property"/>
+	           </attribute>
+	           <attribute qualifier="taxcode" type="java.lang.String">
+	                  <persistence type="property"/>
+	           </attribute>
+	           <attribute qualifier="refnumber" type="java.lang.String">
+	                  <persistence type="property"/>
+	           </attribute>
+	          
+	           <!-- BusinessAgreementRuleHeaderOutbound -->  
+	           <attribute qualifier="paymentmethodinc" type="java.lang.String">
+	                  <persistence type="property"/>
+	           </attribute>
+	           <attribute qualifier="paymentmethodout" type="java.lang.String">
+	                  <persistence type="property"/>
+	           </attribute>
+	           <attribute qualifier="shippingcontroldr" type="java.lang.String">
+	                  <persistence type="property"/>
+	           </attribute>
+	           <attribute qualifier="termofpayment" type="java.lang.String">
+	                  <persistence type="property"/>
+	           </attribute>
+	           <attribute qualifier="shippingcontrolbr" type="java.lang.String">
+	                  <persistence type="property"/>
+	           </attribute>
+	           <attribute qualifier="correpondencevariant" type="java.lang.String">
+	                  <persistence type="property"/>
+	           </attribute>
+	           <attribute qualifier="shippingcontrolbp" type="java.lang.String">
+	                  <persistence type="property"/>
+	           </attribute>
+	           
+	           <attribute qualifier="validto1" type="java.lang.String">
+	                  <persistence type="property"/>
+	           </attribute>
+	           <attribute qualifier="validfrom1" type="java.lang.String">
+	                  <persistence type="property"/>
+	           </attribute>
+	           
+	           <attribute qualifier="text1" type="java.lang.String">
+	                  <persistence type="property"/>
+	           </attribute>
+	           
+	          
+	           <!-- BusinessAgreementPartnerRelationOutbound -->
+	           <attribute qualifier="businessagreementpartnercat" type="java.lang.String">
+	                  <persistence type="property"/>
+	           </attribute>
+	           <attribute qualifier="partnerguid1" type="java.lang.String">
+	                  <persistence type="property"/>
+	           </attribute>
+	           <attribute qualifier="partnerguid2" type="java.lang.String">
+	                  <persistence type="property"/>
+	           </attribute>
+	           <attribute qualifier="bprelationshipnum" type="java.lang.String">
+	                  <persistence type="property"/>
+	           </attribute>
+	           <attribute qualifier="partnerfunction" type="java.lang.String">
+	                  <persistence type="property"/>
+	           </attribute>
+	           
+	           <attribute qualifier="responseStatus" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+
+                <attribute qualifier="responseMessage" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+	           <attribute qualifier="hybrisBAType" type="java.lang.String">
+	                  <persistence type="property"/>
+	           </attribute>
+	           
+	           <attribute qualifier="sapCpiConfig" type="SAPCpiOutboundConfig">
+                    <persistence type="property"/>
+                </attribute>
+	           
+	        </attributes>
+		 </itemtype>
+		 
+
+		 
+	
+	
+	</itemtypes>
+</items>

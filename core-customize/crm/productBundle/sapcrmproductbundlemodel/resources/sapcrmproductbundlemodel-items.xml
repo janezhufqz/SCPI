@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+  ~ [y] hybris Platform
+  ~ 
+  ~ Copyright (c) 2000-2016 SAP SE
+  ~ All rights reserved.
+  ~ 
+  ~ This software is the confidential and proprietary information of SAP 
+  ~ Hybris ("Confidential Information"). You shall not disclose such 
+  ~ Confidential Information and shall use it only in accordance with the 
+  ~ terms of the license agreement you entered into with SAP Hybris.
+  -->
+<!--
+	ATTENTION: This is just an example file. You have to edit it according to your needs.
+-->
+
+<items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+			xsi:noNamespaceSchemaLocation="items.xsd">
+
+	<relations>		        
+		<!-- The one-to-many relationship between default Products and dependent BundleTemplates -->
+        <relation
+            generate="true"             
+            localized="false"           
+            code="BundleTemplate2BundleProductRelation"  
+            autocreate="true">
+            <sourceElement type="BundleTemplate" qualifier="bundleTemplate" cardinality="one"/>
+            <targetElement collectiontype="list" type="BundleProduct" qualifier="bundleProducts" cardinality="many"/>
+        </relation>		        
+		<!-- The many-to-many relationship between BundledProduct and BundleProductGroup -->
+        <!-- <relation
+            generate="true"             
+            localized="false"           
+            code="BundleProduct2BundleProductGroupRelation"  
+            autocreate="true">
+            <deployment table="BundProd2BundProdGrpRel" typecode="7046"/>
+            <sourceElement collectiontype="list" type="BundleProductGroup" qualifier="bundleProductGroups" cardinality="many"/>
+            <targetElement collectiontype="list" type="BundleProduct" qualifier="bundledProducts" cardinality="many"/>
+        </relation>	 -->
+	</relations>
+	
+	<itemtypes>
+	
+		<itemtype code="BundleProductGroup" extends="GenericItem" autocreate="true"
+			generate="true">
+			<deployment table="BundleProductGroup" typecode="7045" />
+			<attributes>
+				<attribute type="java.lang.String" qualifier="code">
+					<description>Code</description>
+					<modifiers read="true" write="true" search="true" unique="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="description">
+					<description>Description</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+        <itemtype code="BundleProduct" generate="true"
+            autocreate="true">
+            <deployment table="BundleProduct" typecode="7044"/>            
+            <custom-properties>
+                <property name="catalogItemType"><value>java.lang.Boolean.TRUE</value></property>
+                <property name="catalogVersionAttributeQualifier"><value>"catalogVersion"</value></property>
+                <property name="uniqueKeyAttributeQualifier"><value>"product,bundleTemplate,bundleGroup"</value></property>
+            </custom-properties>
+            <attributes>
+				<attribute type="Product" qualifier="product">
+					<description>Product</description>
+                    <modifiers read="true" write="true" search="true"
+						optional="false" unique="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="BundleTemplate" qualifier="bundleTemplate">
+					<description>Bundle Template</description>
+                    <modifiers read="true" write="true" search="true"
+						optional="false" unique="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="BundleProductGroup" qualifier="bundleGroup">
+					<description>Bundled Product Group</description>
+                    <modifiers read="true" write="true" search="true" unique="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+                <attribute qualifier="catalogVersion" type="CatalogVersion">
+                    <description>Catalog Version</description>
+                    <modifiers initial="false" optional="false" write="true"/>
+                    <persistence type="property"/>
+                </attribute>
+				<attribute type="java.lang.Boolean" qualifier="default">
+					<description>Is Default Product</description>
+                    <modifiers read="true" write="true" search="true"
+						optional="true" />
+					<defaultvalue>java.lang.Boolean.FALSE</defaultvalue>
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.Boolean" qualifier="optional">
+					<description>Is Optional Product</description>
+                    <modifiers read="true" write="true" search="true"
+						optional="true" />
+					<defaultvalue>java.lang.Boolean.TRUE</defaultvalue>
+					<persistence type="property" />
+				</attribute>
+				<attribute type="Product" qualifier="precProduct">
+					<description>Preceding Product</description>
+                    <modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.util.Date" qualifier="validFrom">
+					<description>Bundle Product Validity Start Date</description>
+                    <modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.util.Date" qualifier="validTo">
+					<description>Bundle Product Validity End Date</description>
+                    <modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+            </attributes>
+        </itemtype>
+
+	</itemtypes>
+</items>

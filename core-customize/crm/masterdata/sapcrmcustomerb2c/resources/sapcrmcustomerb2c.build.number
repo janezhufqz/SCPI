@@ -1,0 +1,9 @@
+#Ant properties
+#Fri Jan 15 17:06:20 CET 2016
+builddate=20160115 1705
+description=sapcrmcustomerb2c
+name=sapcrmcustomerb2c
+releasedate=20150915 1445
+vendor=hybris
+version=5.7.0.5
+version.api=5.7.0

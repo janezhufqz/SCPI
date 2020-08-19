@@ -1,0 +1,70 @@
+$contentCatalog=electronicsContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$jarResourceCms=jar:com.sap.hybris.sapservicecontractaddon.constants.sapservicecontractaddonConstants&/sapservicecontractaddon/import/cockpit/cmscockpit
+
+$contentCatalogName=Electronics Content Catalog
+$productCatalog=electronicsProductCatalog
+$productCatalogName=Electronics Product Catalog
+$productCV=catalogVersion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$picture=media(code, $contentCV);
+$image=image(code, $contentCV);
+$media=media(code, $contentCV);
+$page=page(uid, $contentCV);
+$contentPage=contentPage(uid, $contentCV);
+$product=product(code, $productCV)
+$category=category(code, $productCV)
+$addonExtensionName=sapservicecontractaddon
+$lang=en
+
+#cms-content.impex
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false'];previewImage(code, $contentCV)
+;;service-contracts;Service Contract Page;AccountPageTemplate;service-contracts
+
+# ContentSlot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;BodyContent-service-contracts;Body Content Slot for My Account Service Contracts;true;AccountServiceContractComponent;;;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='service-contracts'];contentSlot(uid,$contentCV)[unique=true];;;
+;;BodyContent-service-contracts;BodyContent;;BodyContent-service-contracts;;;
+
+INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;page;&componentRef
+;;AccountServiceContractComponent;Account Service Contracts;/WEB-INF/views/addons/$addonExtensionName/responsive/pages/account/accountServiceContractsPage.jsp;AccountServiceContractComponent
+
+## Service Contract Detail Page
+
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false'];previewImage(code, $contentCV)
+;;service-contract;Service Contract Details;AccountPageTemplate;service-contract
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;BodyContent-service-contract;Body Content Slot for My Account Service Contract Details;true;AccountContractDetailsHeadlineComponent,AccountContractDetailsItemsComponent,AccountContractDetailsGeneralDataComponent,AccountContractNotesComponent,AccountContractDetailsTotalsComponent,AccountContractDetailsActionsComponent;;;
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='service-contract'];contentSlot(uid,$contentCV)[unique=true];;;
+;;BodyContent-service-contract;BodyContent;;BodyContent-service-contract;;;
+
+
+INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;page;actions(uid,$contentCV);&componentRef
+;;AccountContractDetailsHeadlineComponent;Account Contract Details Headline Component;/WEB-INF/views/addons/$addonExtensionName/responsive/pages/account/accountContractDetailHeadline.jsp;;AccountContractDetailsHeadlineComponent
+;;AccountContractDetailsTotalsComponent;Account Contract Details Order Totals Component;/WEB-INF/views/addons/$addonExtensionName/responsive/pages/account/accountContractDetailTotals.jsp;;AccountContractDetailsTotalsComponent
+;;AccountContractDetailsItemsComponent;Account Contract Details Items Info Component;/WEB-INF/views/addons/$addonExtensionName/responsive/pages/account/accountContractDetailItems.jsp;;AccountContractDetailsItemsComponent
+;;AccountContractDetailsActionsComponent;Account Order Details Actions Component;/WEB-INF/views/addons/$addonExtensionName/responsive/pages/account/accountcontractDetailActions.jsp;;AccountContractDetailsActionsComponent
+;;AccountContractDetailsGeneralDataComponent;Account Contract Details General Data Component;/WEB-INF/views/addons/$addonExtensionName/responsive/pages/account/accountContractDetailsGeneralData.jsp;;AccountContractDetailsGeneralDataComponent
+;;AccountContractNotesComponent;Account Contract Notes Component;/WEB-INF/views/addons/$addonExtensionName/responsive/pages/account/accountContractNotes.jsp;;AccountContractNotesComponent
+
+# create cms link components for my account pages
+INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;target(code)[default='sameWindow']
+;;ServiceContractsLink;ServiceContractsLink;/my-account/service-contracts;ServiceContractsLink
+
+# create navigation root node for my account & child nodes for the root node 
+INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);links(&linkRef);&nodeRef
+;ServiceContractsNavNode;;ServiceContractsNavNode;MyAccountNavNode;;ServiceContractsNavNode
+
+# create cms navigation entry for nvaigation child nodes
+INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;navigationNode(&nodeRef);item(&linkRef);
+;ServiceContractsNavNodeEntry;;ServiceContractsNavNodeEntry;ServiceContractsNavNode;ServiceContractsLink
+
+# update linkname
+UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang]
+;;ServiceContractsLink;"Service Contracts"
+

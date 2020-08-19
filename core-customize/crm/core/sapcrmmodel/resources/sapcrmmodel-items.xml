@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- [y] hybris Platform Copyright (c) 2000-2013 hybris AG All rights reserved. 
+	This software is the confidential and proprietary information of hybris ("Confidential 
+	Information"). You shall not disclose such Confidential Information and shall 
+	use it only in accordance with the terms of the license agreement you entered 
+	into with hybris. -->
+<!-- ATTENTION: This is just an example file. You have to edit it according 
+	to your needs. -->
+
+<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="items.xsd">
+
+	<enumtypes>
+		<enumtype autocreate="false" code="BackendType" dynamic="false"
+			generate="true">
+			<description>This type determines the backend type for CRM.
+			</description>
+			<value code="CRM" />
+		</enumtype>
+		<enumtype code="CreditCardType" autocreate="false" generate="false">
+		<value code="mock"/>
+		</enumtype>
+	</enumtypes>
+
+	<itemtypes>
+		<itemtype code="Customer" generate="false" autocreate="false">
+			<attributes>
+				<attribute type="java.lang.String" qualifier="incoterms1">
+					<description>Customer Incoterms 1</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="incoterms2">
+					<description>>Customer Incoterms 2</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		<itemtype code="SapConfiguration" autocreate="false"
+			generate="false">
+			<attributes>
+				<attribute type="java.lang.String" qualifier="incoterms1">
+					<persistence type="property" />
+					<modifiers optional="true" />
+					<description>Incoterms1 for anonymous Customer</description>
+				</attribute>
+				<attribute type="java.lang.String" qualifier="incoterms2">
+					<persistence type="property" />
+					<modifiers optional="true" />
+					<description>Incoterms2 for anonymous Customer</description>
+				</attribute>
+				<attribute type="java.lang.String" qualifier="referenceCustomerguid">
+					<persistence type="property" />
+					<modifiers optional="true" />
+					<description>Reference Customer GUID</description>
+				</attribute>
+			</attributes>
+		</itemtype>
+		<itemtype code="Customer" generate="false" autocreate="false">
+			<attributes>
+
+				<attribute type="java.lang.String" qualifier="crmGuid">
+					<description>Customer GUID </description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		<itemtype code="Product" generate="false" autocreate="false">
+			<attributes>
+				<attribute type="java.lang.String" qualifier="guid">
+					<description>Product GUID </description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		<itemtype code="Category" generate="false" autocreate="false">
+			<attributes>
+				<attribute type="java.lang.String" qualifier="guid">
+					<description>Category GUID </description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype code="SAPConfiguration" autocreate="false"
+			generate="false">
+			<attributes>
+				<attribute qualifier="saperp_salesOrganization" generate="true"
+					autocreate="true" type="java.lang.String">
+					<description>Sales Organization for ERP</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="saperp_distributionChannel"
+					generate="true" autocreate="true" type="java.lang.String">
+					<description>Distribution Channel for Pricing</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="saperp_division" generate="true"
+					autocreate="true" type="java.lang.String">
+					<description>Division for ERP</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="sap_serviceOrg" generate="true"
+					autocreate="true" type="java.lang.String">
+					<description>Service org</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="sap_serviceOrgResp" generate="true"
+					autocreate="true" type="java.lang.String">
+					<description>Service org Responsible</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="sap_serviceProcessType" generate="true"
+					autocreate="true" type="java.lang.String">
+					<description>Service Transaction Type</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="sap_servOrgShort" generate="true"
+					autocreate="true" type="java.lang.String">
+					<description>Service Org Short</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="serviceOrderProcessType" generate="true"
+					autocreate="true" type="java.lang.String">
+					<description>Service Order Type</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		<itemtype code="Customer" generate="false" autocreate="false">
+			<attributes>
+				<attribute qualifier="erpCustomerId" type="java.lang.String">
+					<description>ERP Customer Id</description>
+					<modifiers initial="true" read="true" write="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		<itemtype code="SAPConfiguration" autocreate="false"
+			generate="false">
+			<attributes>
+				<attribute qualifier="sapcommon_salesOrgResponsible" type="java.lang.String">
+					<modifiers read="true" write="true" search="true" />
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		<itemtype code="Order" autocreate="false" generate="false">
+			<attributes>
+				<attribute type="java.lang.Integer" qualifier="invoiceNumber">
+					<persistence type="property" />
+					<description>Saving billing number in order model</description>
+				</attribute>
+			</attributes>
+		</itemtype>
+		<itemtype code="Warehouse" autocreate="false" generate="false">
+			<attributes>
+				<attribute type="java.lang.String" qualifier="sapCrmCode">
+					<persistence type="property" />
+					<description>Saving vendor information from CRM in warehouse model</description>
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype code="Address" generate="false" autocreate="false">
+			<attributes>
+				<attribute qualifier="sapIsReplicated" type="java.lang.Boolean">
+					<description>Indicates if the address has been replicated to the SAP system</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<defaultvalue>Boolean.FALSE</defaultvalue>
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="sapReplicationInfo" type="java.lang.String">
+					<description>Information related to the replication to the SAP system</description>
+					<modifiers initial="true" read="true" write="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype code="CreditCardPaymentInfo" autocreate="false" generate="false">
+			<attributes>
+				<attribute generate="true" autocreate="true" qualifier="issuer"
+					type="java.lang.String">
+					<persistence type="property" qualifier="" />
+					<modifiers read="true" write="true" search="false"
+						encrypted="false" optional="true" removable="true" initial="false"
+						unique="false" private="false" partof="false" />
+				</attribute>
+				<attribute generate="true" autocreate="true" qualifier="issuingDate"
+					type="java.lang.String">
+					<persistence type="property" qualifier="" />
+					<modifiers read="true" write="true" search="false"
+						encrypted="false" optional="true" removable="true" initial="false"
+						unique="false" private="false" partof="false" />
+				</attribute>
+				<attribute generate="true" autocreate="true" qualifier="isDefault"
+					type="java.lang.Boolean">
+					<persistence type="property" qualifier="" />
+					<defaultvalue>java.lang.Boolean.FALSE</defaultvalue>
+					<modifiers read="true" write="true" search="false"
+						encrypted="false" optional="true" removable="true" initial="false"
+						unique="false" private="false" partof="false" />
+				</attribute>
+				<attribute generate="true" autocreate="true" qualifier="cardInc"
+					type="java.lang.String">
+					<persistence type="property" qualifier="" />
+					<modifiers read="true" write="true" search="false"
+						encrypted="false" optional="true" removable="true" initial="false"
+						unique="false" private="false" partof="false" />
+				</attribute>
+				<attribute qualifier="sapIsReplicated" type="java.lang.Boolean">
+					<description>Indicates if the Credit has been replicated to the SAP system</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<defaultvalue>Boolean.FALSE</defaultvalue>
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		<itemtype code="Customer" generate="false" autocreate="false">
+			<attributes>
+				<attribute type="java.lang.Boolean" qualifier="sapIsReplicatedFromHybris">
+					<description>Indicates if the Customer was replicated from Hybris</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<defaultvalue>Boolean.FALSE</defaultvalue>
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		<itemtype code="PartnerFunction" autocreate="true" generate="true">
+			<deployment table="PartnerFunction" typecode="7013" />
+			<attributes>
+				<attribute type="java.lang.String" qualifier="code">
+					<description>Code</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="description">
+					<description>Description</description>
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+	</itemtypes>
+</items>

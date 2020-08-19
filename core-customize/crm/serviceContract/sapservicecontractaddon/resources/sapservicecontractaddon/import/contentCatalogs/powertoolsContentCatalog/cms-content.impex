@@ -1,0 +1,77 @@
+$contentCatalog=powertoolsContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$jarResourceCms=jar:com.sap.hybris.sapservicecontractaddon.constants.sapservicecontractaddonConstants&/sapservicecontractaddon/import/cockpit/cmscockpit
+
+$contentCatalogName=Powertools Content Catalog
+$productCatalog=powertoolsProductCatalog
+$productCatalogName=Powertools Product Catalog
+$productCV=catalogVersion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$picture=media(code, $contentCV);
+$image=image(code, $contentCV);
+$media=media(code, $contentCV);
+$page=page(uid, $contentCV);
+$contentPage=contentPage(uid, $contentCV);
+$product=product(code, $productCV)
+$category=category(code, $productCV)
+$addonExtensionName=sapservicecontractaddon
+$lang=en
+
+# Navigation Bar Component
+INSERT_UPDATE AccountNavigationComponent;$contentCV[unique=true];uid[unique=true];name;navigationNode(&nodeRef);styleClass;&componentRef
+;;AccountServiceContractsNavigationComponent;Account Service Contracts Navigation Component;AccountServiceContractsHistoryNavNode;;AccountServiceContractsNavigationComponent
+
+# CMS Navigation Nodes
+INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);links(&linkRef);&nodeRef
+;AccountServiceContractsHistoryNavNode;;Account Service Contracts;AccountLeftNavNode;AccountServiceContractsLink;AccountServiceContractsHistoryNavNode
+
+# CMS Link Components
+INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;&componentRef;target(code)[default='sameWindow'];$category;$product;
+#;;AccountViewServiceContractsHistoryLink;AccountViewServiceContractsHistoryLink;/my-account/service-contracts;AccountViewServiceContractsHistoryLink;AccountViewServiceContractsHistoryLink;;;;
+;;AccountServiceContractsLink;AccountServiceContractsLink;/my-account/service-contracts;AccountServiceContractsLink;AccountServiceContractsLink;;;;
+
+#cms-content.impex
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false'];previewImage(code, $contentCV)
+;;service-contracts;Service Contract Page;AccountPageTemplate;service-contracts
+
+
+INSERT_UPDATE AccountNavigationComponent;$contentCV[unique=true];uid[unique=true];&componentRef
+;;AccountLeftNavigationComponent;AccountLeftNavigationComponent
+
+# ContentSlot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;SideContent-service-contracts;Side Content Slot for My Account Service Contracts;true;AccountLeftNavigationComponent;;;
+;;BodyContent-service-contracts;Body Content Slot for My Account Service Contracts;true;AccountServiceContractComponent;;;
+
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='service-contracts'];contentSlot(uid,$contentCV)[unique=true];;;
+;;SideContent-service-contracts;SideContent;;SideContent-service-contracts;;;
+;;BodyContent-service-contracts;BodyContent;;BodyContent-service-contracts;;;
+
+INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;page;&componentRef
+;;AccountServiceContractComponent;Account Service Contracts;/WEB-INF/views/addons/$addonExtensionName/desktop/pages/account/accountServiceContractsPage.jsp;AccountServiceContractComponent
+
+
+
+## Service Contract Detail Page
+
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false'];previewImage(code, $contentCV)
+;;service-contract;Service Contract Details;AccountPageTemplate;service-contract
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;SideContent-service-contract;Side Content Slot for My Account Service Contract Details;true;AccountLeftNavigationComponent;;;
+;;BodyContent-service-contract;Body Content Slot for My Account Service Contract Details;true;AccountContractDetailsHeadlineComponent,AccountContractDetailsTotalsComponent,AccountContractDetailsGeneralDataComponent,AccountContractBillingPlanComponent,AccountContractDetailsItemsComponent;;;
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='service-contract'];contentSlot(uid,$contentCV)[unique=true];;;
+;;SideContent-service-contract;SideContent;;SideContent-service-contract;;;
+;;BodyContent-service-contract;BodyContent;;BodyContent-service-contract;;;
+
+
+INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;page;actions(uid,$contentCV);&componentRef
+;;AccountContractDetailsHeadlineComponent;Account Contract Details Headline Component;/WEB-INF/views/addons/$addonExtensionName/desktop/pages/account/accountContractDetailHeadline.jsp;;AccountContractDetailsHeadlineComponent
+;;AccountContractDetailsItemsComponent;Account Contract Details Items Info Component;/WEB-INF/views/addons/$addonExtensionName/desktop/pages/account/accountContractDetailItems.jsp;;AccountContractDetailsItemsComponent
+;;AccountContractDetailsTotalsComponent;Account Contract Details Items Info Component;/WEB-INF/views/addons/$addonExtensionName/desktop/pages/account/accountContractDetailTotals.jsp;;AccountContractDetailsTotalsComponent
+;;AccountContractDetailsGeneralDataComponent;Account Contract Details General Data Component;/WEB-INF/views/addons/$addonExtensionName/desktop/pages/account/accountContractDetailsGeneralData.jsp;;AccountContractDetailsGeneralDataComponent
+;;AccountContractBillingPlanComponent;Account Contract Billing Plan Info Component;/WEB-INF/views/addons/$addonExtensionName/desktop/pages/account/accountContractBilingPlan.jsp;;AccountContractBillingPlanComponent
+

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ~ [y] hybris Platform ~ ~ Copyright (c) 2000-2016 SAP SE ~ All rights 
+	reserved. ~ ~ This software is the confidential and proprietary information 
+	of SAP ~ Hybris ("Confidential Information"). You shall not disclose such 
+	~ Confidential Information and shall use it only in accordance with the ~ 
+	terms of the license agreement you entered into with SAP Hybris. -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<alias name="sapServiceContractConfigurationAccess" alias="sapServiceContractConfigurationAccess" />
+	<bean id="sapServiceContractConfigurationAccess" parent="sapCoreModuleConfigurationAccess">
+		<property name="moduleId" value="sapservicecontractbol" />
+	</bean>
+
+
+	<alias name="defaultSapCRMServiceContractBackend" alias="sapCRMServiceContractBackend" />
+	<bean id="defaultSapCRMServiceContractBackend"
+		class="com.sap.hybris.crm.sapservicecontractbol.service.backend.impl.DefaultSapCRMServiceContractBackend"
+		scope="sapSession" parent="sapCoreBackendObjectJCo">
+		<property name="moduleConfigurationAccess" ref="sapServiceContractConfigurationAccess" />
+		<property name="managedConnectionFactory" ref="sapCoreJCoManagedConnectionFactory" />
+		<property name="defaultConnectionName" value="JCoStatefulServiceUser" />
+		<property name="defaultDestinationName"
+			value="#{baseStoreService.getCurrentBaseStore().getSAPConfiguration().getSapServiceContract_RFCDestination()?.getRfcDestinationName()}" />
+		<property name="userService" ref="userService" />
+		<property name="baseStoreService" ref="baseStoreService" />
+		<property name="i18nService" ref="i18nService" />
+		<property name="jcoFunctionTerminate" value="CRM_HYB_SC_TERMINATE" />
+		<property name="jcoFuntionRenew" value="CRM_HYB_SC_QUOTATION_CREATE" />
+		<property name="jcoFuntionItemRenew" value="CRM_HYB_SC_EXTEND_I" />
+	</bean>
+
+	<alias alias="sapCrmbackendBusinessObject" name="sapCrmbackendBusinessObject" />
+	<bean id="sapCrmbackendBusinessObject" parent="sapCoreBusinessObject"
+		class="com.sap.hybris.crm.sapservicecontractbol.backendbusinessobject.impl.DefaultSapServiceContractBackendBusinessObject"
+		scope="sapSession">
+		<property name="moduleConfigurationAccess" ref="sapServiceContractConfigurationAccess" />
+		<property name="sessionService" ref="sessionService" />
+		<property name="typeService" ref="typeService" />
+		<property name="backendType" value="#{baseStoreService.getCurrentBaseStore().getSAPConfiguration().getSapServiceContract_RFCDestination()?.getBackendType().getCode()}"/>
+	</bean>
+
+	<bean id="sapServiceContractFactory"
+		class="com.sap.hybris.crm.sapservicecontractbol.service.factory.impl.DefaultSapServiceContractFactory">
+		<property name="genericFactory" ref="sapCoreGenericFactory" />
+	</bean>
+
+	<alias alias="sapServiceContractSearchResultList" name="defaultSapServiceContractSearchResultList" />
+	<bean id="defaultSapServiceContractSearchResultList" scope="prototype"
+		class="com.sap.hybris.crm.sapservicecontractbol.service.backend.search.impl.DefaultSearchResultList">
+	</bean>
+
+	<alias alias="sapServiceContractSearchResult" name="defaultSapServiceContractSearchResult" />
+	<bean id="defaultSapServiceContractSearchResult" scope="prototype"
+		class="com.sap.hybris.crm.sapservicecontractbol.service.backend.search.impl.DefaultServiceContractSearchResult">
+	</bean>
+
+	<alias alias="sapServiceContractItemResult" name="defaultSapServiceContractItemResult" />
+	<bean id="defaultSapServiceContractItemResult" scope="prototype"
+		class="com.sap.hybris.crm.sapservicecontractbol.service.backend.search.impl.DefaultServiceContractItemResult">
+	</bean>
+
+	<alias alias="serviceContractGenilContainer" name="defaultServiceContractGenilContainer" />
+	<bean id="defaultServiceContractGenilContainer" scope="prototype"
+		class="com.sap.hybris.crm.sapservicecontractbol.service.backend.search.impl.DefaultServiceContractGenilContainer">
+	</bean>
+
+</beans>

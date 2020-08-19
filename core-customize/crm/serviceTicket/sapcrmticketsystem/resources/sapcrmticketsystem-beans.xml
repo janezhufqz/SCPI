@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- [y] hybris Platform Copyright (c) 2000-2013 hybris AG All rights reserved. 
+	This software is the confidential and proprietary information of hybris ("Confidential 
+	Information"). You shall not disclose such Confidential Information and shall 
+	use it only in accordance with the terms of the license agreement you entered 
+	into with hybris. -->
+
+<!-- ATTENTION: This is just an example file. You have to edit it according 
+	to your needs. -->
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="beans.xsd">
+
+	<!-- Example Data POJO <bean class="com.sap.hybris.sapcrmticketsystem.data.MyPojo"> 
+		<property name="id" type="String"/> <property name="flag" type="boolean"/> 
+		</bean> -->
+	<enum class="de.hybris.platform.customerticketingfacades.data.TicketPriority">
+		<value>LOW</value>
+		<value>MEDIUM</value>
+		<value>HIGH</value>
+	</enum>
+
+	<bean class="de.hybris.platform.customerticketingfacades.data.TicketData">
+		<property name="ticketPriority" type="TicketPriority" />
+		<property name="relatedObjects" type="java.util.List&lt;TicketRelatedObjectData>;" />
+	</bean>
+
+	<bean
+		class="de.hybris.platform.customerticketingfacades.data.TicketRelatedObjectData">
+		<property name="objectId" type="String" />
+		<property name="objectType" type="String" />
+		<property name="objectGuid" type="String" />
+		<property name="objectUrl" type="String" />
+	</bean>
+
+	<bean class="de.hybris.platform.ticketsystem.data.CsTicketParameter">
+		<property name="reasonCategory"
+			type="com.sap.hybris.crm.sapcrmcategoryschema.model.CategorizationCategoryModel" />
+		<property name="subjectCategory"
+			type="de.hybris.platform.category.model.CategoryModel" />
+		<property name="relatedObjects" type="java.util.List&lt;com.sap.hybris.crm.sapcrmticketsystem.model.CsTicketRelatedObjectModel>;" />
+	</bean>
+</beans>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+<bean id="sapPricingConfigurationAccess" parent="sapCoreModuleConfigurationAccess">
+		<property name="moduleId" value="sapcrmpricingbol" />
+	</bean>
+<!-- Adding Backend Type Property for 6.0 Version -->
+	<alias alias="crmPricingBo" name="crmPricingImpl" />
+	<bean id="crmPricingImpl" parent="sapCoreBusinessObject"
+		class="com.sap.hybris.crm.sapcrmpricingbol.businessobject.impl.SapCrmPricingImpl">
+		<property name="moduleConfigurationAccess" ref="sapPricingConfigurationAccess" />
+		<property name="backendType" value="#{baseStoreService.getCurrentBaseStore().getSAPConfiguration().getSappricing_RFCDestination()?.getBackendType().getCode()}"/> 
+	</bean>
+
+	<bean id="sapDefaultSalestransactionsBeCRM"
+		class="com.sap.hybris.crm.sapcrmpricingbol.backend.impl.SapPricingBackendCRM"
+		scope="sapSession" parent="sapCoreBackendObjectJCo">
+		<property name="moduleConfigurationAccess" ref="sapPricingConfigurationAccess" />
+		<property name="defaultConnectionName" value="JCoStatefulServiceUser" />
+		<property name="pricingMapper" ref="sapCrmPricingMapper" />
+		<property name="cacheAccess" ref="sapPricingCachedBackendERP" />
+		<property name="defaultDestinationName" value="#{baseStoreService.getCurrentBaseStore().getSAPConfiguration().getSappricing_RFCDestination()?.getRfcDestinationName()}"/> 
+	</bean>
+	
+	<alias alias="sapCrmPricingHeaderMapper" name="defaultSapCrmPricingHeaderMapper" />
+	<bean id="defaultSapCrmPricingHeaderMapper" class="com.sap.hybris.crm.sapcrmpricingbol.backend.impl.SapCrmPricingHeaderMapper" >
+		<property name="moduleConfigurationAccess" ref="sapPricingConfigurationAccess" />
+		<property name="userService" ref="userService"/>
+	</bean>
+	
+	<alias alias="sapCrmPricingItemMapper" name="defaultSapCrmPricingItemMapper" />
+	<bean id="defaultSapCrmPricingItemMapper" class="com.sap.hybris.crm.sapcrmpricingbol.backend.impl.SapCrmPricingItemMapper" >
+		<property name="moduleConfigurationAccess" ref="sapPricingConfigurationAccess" />
+		<property name="conversionService" ref="sapPricingConversionService" />
+	</bean>
+	
+	<alias alias="sapCrmPricingMapper" name="defaultSapCrmPricingMapper" />
+	<bean id="defaultSapCrmPricingMapper" class="com.sap.hybris.crm.sapcrmpricingbol.backend.impl.SapCrmPricingMapper">
+		<property name="itemMapper" ref="sapCrmPricingItemMapper" />
+		<property name="headerMapper" ref="sapCrmPricingHeaderMapper" />
+	</bean>
+			
+	<alias alias="sapPricingBo" name="sapPricingImpl" />
+	<bean id="sapPricingImpl" parent="sapCoreBusinessObject"
+		class="de.hybris.platform.sap.sappricingbol.businessobject.impl.SapPricingImpl">
+		<property name="moduleConfigurationAccess" ref="sapPricingConfigurationAccess" />
+	</bean>
+			
+</beans>

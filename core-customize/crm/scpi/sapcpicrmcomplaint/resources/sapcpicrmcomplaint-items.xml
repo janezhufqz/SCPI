@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- [y] hybris Platform Copyright (c) 2018 SAP SE or an SAP affiliate company. 
+	All rights reserved. This software is the confidential and proprietary information 
+	of SAP ("Confidential Information"). You shall not disclose such Confidential 
+	Information and shall use it only in accordance with the terms of the license 
+	agreement you entered into with SAP. -->
+<!-- ATTENTION: This is just an example file. You have to edit it according 
+	to your needs. -->
+
+<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="items.xsd">
+
+	<relations>
+
+		<relation code="SAPCpiOutboundComplaint2SAPCpiOutboundComplaintOrderItems"
+			localized="false">
+			<sourceElement type="SAPCpiOutboundComplaint"
+				qualifier="sapCpiOutboundComplaint" cardinality="one" />
+			<targetElement type="SAPCpiOutboundComplaintOrderItem"
+				qualifier="sapCpiOutboundComplaintOrderItems" cardinality="many"
+				collectiontype="set">
+				<modifiers partof="true" />
+			</targetElement>
+		</relation>
+
+	</relations>
+
+
+	<itemtypes>
+
+		<itemtype code="SAPCpiOutboundComplaint"
+			jaloclass="sap.sapcpicrmcomplaint.jalo.SAPCpiOutboundComplaint"
+			extends="GenericItem">
+			<deployment table="SAPCpiOTBComplaint" typecode="9722" />
+			<attributes>
+
+				<attribute qualifier="complaintId" type="java.lang.String">
+					<persistence type="property" />
+					<modifiers unique="true" />
+				</attribute>
+
+				<attribute qualifier="isComplaintReplicated" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="headline" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="customer" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="b2bunit" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="category" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="state" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="orderId" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="priority" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="notes" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="itemNumber" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="productId" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="itemUnit" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="quantity" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="responseStatus" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="responseMessage" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+
+
+				<attribute qualifier="sapCpiConfig" type="SAPCpiOutboundComplaintConfig">
+					<persistence type="property" />
+				</attribute>
+
+			</attributes>
+
+		</itemtype>
+
+		<!-- Configuration data -->
+
+		<itemtype code="SAPCpiOutboundComplaintConfig"
+			jaloclass="sap.sapcpicrmcomplaint.jalo.SAPCpiOutboundComplaintConfig"
+			extends="GenericItem">
+
+			<deployment table="SapCpiOTBComplaintCnf" typecode="9723" />
+
+			<attributes>
+
+				<attribute qualifier="senderPort" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="senderName" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="receiverName" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="comp_ProcessType" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="salesOrg" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="distributionChannel" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="comp_serviceOrg" type="java.lang.String">
+					<persistence type="property" />
+					<modifiers unique="true" />
+				</attribute>
+
+				<attribute qualifier="comp_serviceOrgResp" type="java.lang.String">
+					<persistence type="property" />
+					<modifiers unique="true" />
+				</attribute>
+
+				<attribute qualifier="comp_servOrgShort" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="complaintCatagoryCatalogType" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="complaintCatagoryCodeGroup" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="url" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="userName" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="client" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+
+			</attributes>
+
+		</itemtype>
+
+		<itemtype code="SAPCpiOutboundComplaintOrderItem"
+			jaloclass="sap.sapcpicrmcomplaint.jalo.SAPCpiOutboundComplaintOrderItem"
+			extends="GenericItem">
+
+
+			<deployment table="CpiOTBCmplnt2OrdrItms" typecode="9371" />
+
+			<attributes>
+				<attribute qualifier="productId" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="quantity" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="itemNumber" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+
+				<attribute qualifier="itemUnit" type="java.lang.String">
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+
+	</itemtypes>
+
+</items>
