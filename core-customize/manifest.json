@@ -157,7 +157,32 @@
         "sapbusinessagreementexchangeb2b",
         "sapbusinessagreementservicesb2b",
         
-        "yb2bacceleratorstorefront"
+        "yb2bacceleratorstorefront",
+        "outboundservices",
+"odata2webservices",
+"odata2webservicesfeaturetests",
+"integrationbackoffice",
+"integrationmonitoringbackoffice",
+"sapcpiadapter",
+"sapcpiproductexchange",
+"sapcpicustomerexchange",
+"sapcpiorderexchange",
+"sapcpiorderexchangeb2b",
+"sapcpicrmproductexchange",
+"sapcpicrmproductbundleexchange",
+"sapcpicrmcustomerexchange",
+"sapcpicrmcustomerexchangeb2b",
+"sapcpicrmorderexchange",
+"sapcpicrmorderexchangeb2b",
+"sapcpicrmb2bcomplaint",
+"sapcpicrmb2bticketsystem",
+"sapcpicrmcomplaint",
+"sapcpicrmserviceorder",
+"sapcpicrmticketsystem",
+"sapcpicrmreturnorder",
+"sapcpicrmb2breturnorder",
+"sapcpicrmibase",
+"sapcpicrminvoice"
 
    ],   
 "properties": [
