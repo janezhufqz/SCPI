@@ -155,7 +155,9 @@
         "sapbusinessagreementservices",
         "sapbusinessagreementfacadesb2b",
         "sapbusinessagreementexchangeb2b",
-        "sapbusinessagreementservicesb2b"
+        "sapbusinessagreementservicesb2b",
+        
+        "yb2bacceleratorstorefront"
 
    ],   
 "properties": [
