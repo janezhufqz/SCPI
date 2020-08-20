@@ -38,7 +38,7 @@
 		parent="defaultCustomerPublishAction">
 		<property name="customerExportService" ref="customerExportService" />
 		<property name="storeSessionFacade" ref="storeSessionFacade" />
-		<property name="customerAccountService" ref="customerAccountService" />
+		<!-- <property name="customerAccountService" ref="customerAccountService" />-->
 		<property name="eventService" ref="eventService" />
 	</bean>
 
