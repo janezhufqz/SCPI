@@ -43,7 +43,7 @@ public class DefaultSapCpiCrmCustomerConversionService extends SapCpiCustomerDef
 
 	private static final Logger LOG = LoggerFactory.getLogger(DefaultSapCpiCrmCustomerConversionService.class);
 
-	  private SAPGlobalConfigurationDAO globalConfigurationDAO;
+	private SAPGlobalConfigurationDAO globalConfigurationDAO;
 
 	private Set<SAPCpiOutboundContactAddressModel> mapb2cContactAddresses(final List<Map<String, Object>> b2cCustomerData)
 	{
@@ -182,12 +182,10 @@ public class DefaultSapCpiCrmCustomerConversionService extends SapCpiCustomerDef
 	}
 
 
-	@Override
-	public void SAPGlobalConfigurationDAO getGlobalConfigurationDAO() {
-	    return globalConfigurationDAO;
-	  }
-	@Override
-	  public void setGlobalConfigurationDAO(SAPGlobalConfigurationDAO globalConfigurationDAO) {
-	    this.globalConfigurationDAO = globalConfigurationDAO;
-	  }
+	protected SAPGlobalConfigurationDAO getGlobalConfigurationDAO()
+	{
+		return globalConfigurationDAO;
+	}
+
+
 }

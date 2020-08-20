@@ -504,13 +504,11 @@ public class SapCpiCrmOrderConversionService extends SapCpiOmmOrderConversionSer
 		this.sapSalesConditionsContributor = sapSalesConditionsContributor;
 	}
 
-	@Override
 	protected SAPGlobalConfigurationDAO getSapCoreSAPGlobalConfigurationDAO()
 	{
 		return sapCoreSAPGlobalConfigurationDAO;
 	}
 
-	@Override
 	@Required
 	public void setSapCoreSAPGlobalConfigurationDAO(final SAPGlobalConfigurationDAO sapCoreSAPGlobalConfigurationDAO)
 	{
