@@ -182,13 +182,12 @@ public class DefaultSapCpiCrmCustomerConversionService extends SapCpiCustomerDef
 	}
 
 
-
-	  protected SAPGlobalConfigurationDAO getGlobalConfigurationDAO() {
-		    return globalConfigurationDAO;
-		  }
-
-		  public void setGlobalConfigurationDAO(SAPGlobalConfigurationDAO globalConfigurationDAO) {
-		    this.globalConfigurationDAO = globalConfigurationDAO;
-		  }
-
+	@Override
+	protected SAPGlobalConfigurationDAO getGlobalConfigurationDAO() {
+	    return globalConfigurationDAO;
+	  }
+	@Override
+	  public void setGlobalConfigurationDAO(SAPGlobalConfigurationDAO globalConfigurationDAO) {
+	    this.globalConfigurationDAO = globalConfigurationDAO;
+	  }
 }
