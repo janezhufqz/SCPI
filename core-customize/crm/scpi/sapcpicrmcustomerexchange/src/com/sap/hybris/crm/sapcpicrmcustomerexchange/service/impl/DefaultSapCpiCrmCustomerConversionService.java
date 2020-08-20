@@ -187,7 +187,6 @@ public class DefaultSapCpiCrmCustomerConversionService extends SapCpiCustomerDef
 		    return globalConfigurationDAO;
 		  }
 
-		  @Required
 		  public void setGlobalConfigurationDAO(SAPGlobalConfigurationDAO globalConfigurationDAO) {
 		    this.globalConfigurationDAO = globalConfigurationDAO;
 		  }
