@@ -89,7 +89,7 @@ public class DefaultSapCpiCrmCustomerConversionService extends SapCpiCustomerDef
 	protected SAPLogicalSystemModel readLogicalSystem()
 	{
 
-		final Set<SAPLogicalSystemModel> logicalSystems = getGlobalConfigurationDAO().getSAPGlobalConfiguration()
+		final Set<SAPLogicalSystemModel> logicalSystems = super.getGlobalConfigurationDAO().getSAPGlobalConfiguration()
 				.getSapLogicalSystemGlobalConfig();
 		Objects.requireNonNull(logicalSystems,
 				"The B2B customer cannot be sent to SCPI. There is no SAP logical system maintained in the back office!");
