@@ -31,6 +31,8 @@ import com.sap.hybris.crm.sapcpicrmcustomerexchange.service.SapCpiCrmCustomerCon
 import com.sap.hybris.sapcrmcustomerb2c.constants.Sapcrmcustomerb2cConstants;
 import com.sap.hybris.sapcustomerb2c.constants.Sapcustomerb2cConstants;
 
+import de.hybris.platform.sap.core.configuration.global.dao.SAPGlobalConfigurationDAO;
+
 
 /**
  *
@@ -41,6 +43,7 @@ public class DefaultSapCpiCrmCustomerConversionService extends SapCpiCustomerDef
 
 	private static final Logger LOG = LoggerFactory.getLogger(DefaultSapCpiCrmCustomerConversionService.class);
 
+	  private SAPGlobalConfigurationDAO globalConfigurationDAO;
 
 	private Set<SAPCpiOutboundContactAddressModel> mapb2cContactAddresses(final List<Map<String, Object>> b2cCustomerData)
 	{
@@ -89,7 +92,7 @@ public class DefaultSapCpiCrmCustomerConversionService extends SapCpiCustomerDef
 	protected SAPLogicalSystemModel readLogicalSystem()
 	{
 
-		final Set<SAPLogicalSystemModel> logicalSystems = super.getGlobalConfigurationDAO().getSAPGlobalConfiguration()
+		final Set<SAPLogicalSystemModel> logicalSystems = getGlobalConfigurationDAO().getSAPGlobalConfiguration()
 				.getSapLogicalSystemGlobalConfig();
 		Objects.requireNonNull(logicalSystems,
 				"The B2B customer cannot be sent to SCPI. There is no SAP logical system maintained in the back office!");
@@ -180,6 +183,13 @@ public class DefaultSapCpiCrmCustomerConversionService extends SapCpiCustomerDef
 
 
 
+	  protected SAPGlobalConfigurationDAO getGlobalConfigurationDAO() {
+		    return globalConfigurationDAO;
+		  }
 
+		  @Required
+		  public void setGlobalConfigurationDAO(SAPGlobalConfigurationDAO globalConfigurationDAO) {
+		    this.globalConfigurationDAO = globalConfigurationDAO;
+		  }
 
 }
