@@ -11,6 +11,7 @@
  */
 package com.sap.hybris.crm.sapcpicrmcustomerexchange.service.impl;
 
+import de.hybris.platform.sap.core.configuration.global.dao.SAPGlobalConfigurationDAO;
 import de.hybris.platform.sap.sapcpiadapter.model.SAPCpiOutboundConfigModel;
 import de.hybris.platform.sap.sapcpiadapter.model.SAPCpiOutboundCustomerModel;
 import de.hybris.platform.sap.sapcpicustomerexchange.service.impl.SapCpiCustomerDefaultConversionService;
@@ -31,8 +32,6 @@ import com.sap.hybris.crm.sapcpicrmcustomerexchange.service.SapCpiCrmCustomerCon
 import com.sap.hybris.sapcrmcustomerb2c.constants.Sapcrmcustomerb2cConstants;
 import com.sap.hybris.sapcustomerb2c.constants.Sapcustomerb2cConstants;
 
-import de.hybris.platform.sap.core.configuration.global.dao.SAPGlobalConfigurationDAO;
-
 
 /**
  *
@@ -42,7 +41,6 @@ public class DefaultSapCpiCrmCustomerConversionService extends SapCpiCustomerDef
 {
 
 	private static final Logger LOG = LoggerFactory.getLogger(DefaultSapCpiCrmCustomerConversionService.class);
-
 	private SAPGlobalConfigurationDAO globalConfigurationDAO;
 
 	private Set<SAPCpiOutboundContactAddressModel> mapb2cContactAddresses(final List<Map<String, Object>> b2cCustomerData)
@@ -182,10 +180,28 @@ public class DefaultSapCpiCrmCustomerConversionService extends SapCpiCustomerDef
 	}
 
 
-	protected SAPGlobalConfigurationDAO getGlobalConfigurationDAO()
+
+	/**
+	 * @return the globalConfigurationDAO
+	 */
+	public SAPGlobalConfigurationDAO getGlobalConfigurationDAO()
 	{
 		return globalConfigurationDAO;
 	}
+
+
+
+	/**
+	 * @param globalConfigurationDAO
+	 *           the globalConfigurationDAO to set
+	 */
+	public void setGlobalConfigurationDAO(SAPGlobalConfigurationDAO globalConfigurationDAO)
+	{
+		this.globalConfigurationDAO = globalConfigurationDAO;
+	}
+
+
+
 
 
 }

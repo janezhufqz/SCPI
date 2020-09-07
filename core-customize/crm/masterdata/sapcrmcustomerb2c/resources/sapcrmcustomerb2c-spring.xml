@@ -37,8 +37,6 @@
 		class="com.sap.hybris.sapcrmcustomerb2c.outbound.CRMCustomerPublishAction"
 		parent="defaultCustomerPublishAction">
 		<property name="customerExportService" ref="customerExportService" />
-		<property name="storeSessionFacade" ref="storeSessionFacade" />
-		<!-- <property name="customerAccountService" ref="customerAccountService" />-->
 		<property name="eventService" ref="eventService" />
 	</bean>
 
