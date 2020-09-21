@@ -116,7 +116,16 @@
 
        "yb2bacceleratorstorefront",
         
-        "sapymktdatareplication"
+        "sapymktdatareplication",
+        "sapymktclickstream",
+        "sapymktcommon",
+        "sapymktconsent",
+        "sapymktrecommendation",
+        "sapymktrecommendationaddon",
+        "sapymktrecommendationbuffer",
+        "sapymktrecommendationwebservices",
+        "sapymktsegmentation",
+        "sapymktsegmentationwebservices"
 
    ],   
 "properties": [
@@ -208,7 +217,8 @@
             "textfieldconfiguratortemplateaddon",
             "smarteditaddon",
             "assistedservicestorefront",
-            "personalizationsearchsamplesaddon"]
+            "personalizationsearchsamplesaddon",
+                 "sapymktrecommendationaddon"]
         ,
         "storefronts": ["yb2bacceleratorstorefront","yacceleratorstorefront"],
         "template": "yacceleratorstorefront"
