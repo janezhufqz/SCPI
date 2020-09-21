@@ -1,12 +1,7 @@
 {
     "commerceSuiteVersion": "2005",
     "useCloudExtensionPack":true,
-    "extensionPacks": [
-        {
-            "name": "hybris-commerce-integrations",
-            "version": "2005.0"
-        }
-    ],
+   
     "extensions": [
        "ycommercewebservicestest",
 
