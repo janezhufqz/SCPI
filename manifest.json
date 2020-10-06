@@ -64,7 +64,8 @@
         "odata2webservicesfeaturetests", 
         "kymaintegrationbackoffice", 
         "kymaintegrationsampledata", 
-        "yb2bacceleratorstorefront"
+        "yb2bacceleratorstorefront",
+        "testbackoffice"
 
    ],   
 "properties": [
