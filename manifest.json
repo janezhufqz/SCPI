@@ -64,8 +64,6 @@
        "kymaintegrationservices",
        "kymaintegrationbackoffice",
        "odata2webservices",
-       "outboundsync",
-       "outboundsyncbackoffice",
        "integrationmonitoringbackoffice",
        "integrationbackoffice",
        "sapcoreaddon",
