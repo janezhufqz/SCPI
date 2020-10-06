@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+ Copyright (c) 2020 SAP SE or an SAP affiliate company. All rights reserved
+-->
+<config xmlns="http://www.hybris.com/cockpit/config">
+
+    <!-- testbackoffice UI configuration should be provided here -->
+
+    <!--<context component="component-code" module="testbackoffice">-->
+    <!--Please check documentation for code snippets for specific components-->
+    <!--</context>-->
+    <context merge-by="module" parent="couponbackoffice" type="SingleCodeCoupon" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea" xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <editorArea:essentials>
+                <editorArea:essentialSection description="hmc.text.singlecodecoupon.common" name="text.couponcode.label">
+                    <editorArea:attribute qualifier="couponId" />
+                    <editorArea:attribute qualifier="name" />
+                </editorArea:essentialSection>
+            </editorArea:essentials>
+            <editorArea:tab name="tab.configuration.coupon">
+                <editorArea:section name="sec.configuration.coupon.validity" position="0">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="startDate">
+                        <editorArea:editor-parameter>
+                            <editorArea:name>timeZoneReadOnly</editorArea:name>
+                            <editorArea:value>false</editorArea:value>
+                        </editorArea:editor-parameter>
+                        <editorArea:editor-parameter>
+                            <editorArea:name>selectedTimeZone</editorArea:name>
+                            <editorArea:value>GMT-7</editorArea:value>
+                        </editorArea:editor-parameter>
+                        <editorArea:editor-parameter>
+                            <editorArea:name>displayedTimeZones</editorArea:name>
+                            <editorArea:value>GMT-7,GMT-8</editorArea:value>
+                        </editorArea:editor-parameter>
+                        <editorArea:editor-parameter>
+                            <name>dateFormat</name>
+                            <value>MMM dd, yyyy h:mm a</value>
+                        </editorArea:editor-parameter>
+                    </editorArea:attribute>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="endDate">
+                        <editorArea:editor-parameter>
+                            <editorArea:name>timeZoneReadOnly</editorArea:name>
+                            <editorArea:value>false</editorArea:value>
+                        </editorArea:editor-parameter>
+                        <editorArea:editor-parameter>
+                            <editorArea:name>selectedTimeZone</editorArea:name>
+                            <editorArea:value>GMT-7</editorArea:value>
+                        </editorArea:editor-parameter>
+                        <editorArea:editor-parameter>
+                            <editorArea:name>displayedTimeZones</editorArea:name>
+                            <editorArea:value>GMT-7,GMT-8</editorArea:value>
+                        </editorArea:editor-parameter>
+                        <editorArea:editor-parameter>
+                            <name>dateFormat</name>
+                            <value>MMM dd, yyyy h:mm a</value>
+                        </editorArea:editor-parameter>
+                    </editorArea:attribute>
+                    <editorArea:attribute qualifier="maxRedemptionsPerCustomer" />
+                    <editorArea:attribute qualifier="maxTotalRedemptions" />
+                    <editorArea:attribute qualifier="active" />
+                </editorArea:section>
+            </editorArea:tab>
+            <editorArea:tab name="hmc.administration" position="99">
+                <editorArea:section name="hmc.section.metadata">
+                    <editorArea:attribute qualifier="pk" />
+                    <editorArea:attribute qualifier="itemtype" />
+                    <editorArea:attribute qualifier="creationtime" />
+                    <editorArea:attribute qualifier="modifiedtime" />
+                    <editorArea:attribute qualifier="owner" />
+                </editorArea:section>
+                <editorArea:section name="hmc.section.saved.values">
+                    <editorArea:attribute qualifier="savedValues" />
+                </editorArea:section>
+                <editorArea:customSection name="hmc.unbound" spring-bean="unboundSectionRenderer" />
+                <editorArea:section name="hmc.section.copies">
+                    <editorArea:attribute qualifier="synchronizedCopies" />
+                    <editorArea:attribute qualifier="synchronizationSources" />
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+</config>
