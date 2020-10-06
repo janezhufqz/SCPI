@@ -1,11 +1,11 @@
 {
     "commerceSuiteVersion": "1811",
-    "extensionPacks": [
-        {
-            "name": "hybris-commerce-integrations",
-            "version": "1811.0"
-        }
-    ],
+    //"extensionPacks": [
+        //{
+           // "name": "hybris-commerce-integrations",
+           // "version": "1811.0"
+       // }
+    //],
     "extensions": [
        "ycommercewebservicestest",
 
